@@ -1,0 +1,98 @@
+[gd_scene load_steps=14 format=3 uid="uid://oykp21gpqp0a"]
+
+[ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
+[ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_r62he"]
+[ext_resource type="Texture2D" uid="uid://b113fpldi2ie1" path="res://Graphics/Lain/Lain_Untitled.png" id="3_elq2l"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ywud7"]
+render_priority = 0
+shader = ExtResource("2_r62he")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_elq2l")
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_6w3de"]
+animation = &"Standing"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_g7oe3"]
+animation = &"Run"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_757nv"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_v1cfo"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_7i2o7"]
+
+[sub_resource type="AnimationNodeBlend2" id="AnimationNodeBlend2_p444h"]
+
+[sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_23t5b"]
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4pbav"]
+graph_offset = Vector2(-350.667, -24)
+nodes/Animation/node = SubResource("AnimationNodeAnimation_v1cfo")
+nodes/Animation/position = Vector2(106.667, 346.667)
+"nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_6w3de")
+"nodes/Animation 2/position" = Vector2(186.667, 160)
+"nodes/Animation 3/node" = SubResource("AnimationNodeAnimation_g7oe3")
+"nodes/Animation 3/position" = Vector2(106.667, 480)
+"nodes/Animation 4/node" = SubResource("AnimationNodeAnimation_757nv")
+"nodes/Animation 4/position" = Vector2(186.667, 26.6667)
+nodes/Move/node = SubResource("AnimationNodeBlend3_7i2o7")
+nodes/Move/position = Vector2(533.333, 80)
+nodes/MoveSpeed/node = SubResource("AnimationNodeBlend2_p444h")
+nodes/MoveSpeed/position = Vector2(320, 400)
+nodes/TimeScale/node = SubResource("AnimationNodeTimeScale_23t5b")
+nodes/TimeScale/position = Vector2(373.333, 0)
+nodes/output/position = Vector2(773.333, 80)
+node_connections = [&"Move", 0, &"TimeScale", &"Move", 1, &"Animation 2", &"Move", 2, &"MoveSpeed", &"MoveSpeed", 0, &"Animation", &"MoveSpeed", 1, &"Animation 3", &"TimeScale", 0, &"Animation 4", &"output", 0, &"Move"]
+
+[node name="Lain" node_paths=PackedStringArray("Animator") instance=ExtResource("1_pqum4")]
+script = ExtResource("2_c1pyr")
+Animator = NodePath("AnimationTree")
+
+[node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(-1.01676e-18, 0.888172, -0.0228951)
+bones/0/rotation = Quaternion(-0.126778, 1.25064e-16, 1.25059e-16, 0.991931)
+bones/2/rotation = Quaternion(-0.154098, 4.70313e-17, 5.43705e-17, 0.988056)
+bones/3/rotation = Quaternion(0.174971, -1.1737e-07, -2.08582e-08, 0.984574)
+bones/4/rotation = Quaternion(0.0863994, 7.90057e-15, -2.05992e-08, 0.996261)
+bones/5/rotation = Quaternion(0.783931, 0.187694, -0.584551, -0.0923262)
+bones/6/rotation = Quaternion(0.0734344, -0.00135015, 0.292298, 0.953503)
+bones/7/rotation = Quaternion(0.726805, -0.390664, 0.534969, -0.181504)
+bones/8/rotation = Quaternion(0.178779, 0.000468955, -0.663408, 0.726587)
+bones/9/rotation = Quaternion(0.987657, 0.0308719, -0.142085, -0.0582399)
+bones/9/scale = Vector3(1, 1, 1.00008)
+bones/10/rotation = Quaternion(0.0960072, 0.000985047, -0.0469372, 0.994273)
+bones/10/scale = Vector3(1, 0.999998, 1)
+bones/11/rotation = Quaternion(0.986996, -0.0420845, 0.140635, -0.0655001)
+bones/11/scale = Vector3(1, 1, 1.00008)
+bones/12/rotation = Quaternion(0.0798468, -0.00151516, 0.0432861, 0.995866)
+bones/12/scale = Vector3(1, 0.999997, 1)
+bones/13/position = Vector3(0.182428, 0.893564, -0.014718)
+bones/13/rotation = Quaternion(0.794096, -0.0897036, -0.600874, 0.0177282)
+bones/14/position = Vector3(-0.178399, 1.01207, -0.0388953)
+bones/14/rotation = Quaternion(0.664572, 0.361295, 0.485144, 0.438686)
+bones/15/position = Vector3(0.132761, 0.0961958, -0.0236584)
+bones/15/rotation = Quaternion(0.896791, -0.0597672, -0.127812, 0.419355)
+bones/16/position = Vector3(-0.150345, 0.0961958, -0.0236584)
+bones/16/rotation = Quaternion(0.896791, 0.0597672, 0.127812, 0.419355)
+
+[node name="Cube" parent="Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="3"]
+tree_root = SubResource("AnimationNodeBlendTree_4pbav")
+anim_player = NodePath("../AnimationPlayer")
+parameters/Move/blend_amount = 0.0
+parameters/MoveSpeed/blend_amount = 0.0
+parameters/TimeScale/scale = -1.0
