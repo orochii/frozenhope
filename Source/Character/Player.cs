@@ -1,6 +1,6 @@
 using Godot;
 using System;
-
+//Orochii is a stinky fish
 public partial class Player : CharacterBody3D
 {
 	[Export] CharacterMoveData[] moveStates;
