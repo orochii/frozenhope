@@ -22,7 +22,7 @@ public partial class Player : CharacterBody3D
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
-			//
+			//Orochii is a stinky fish
 			var dir = new Vector3(move.X, 0, -move.Y);
 			float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
 			Rotation = new Vector3(0, angle, 0);

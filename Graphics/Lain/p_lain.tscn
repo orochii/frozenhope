@@ -38,7 +38,6 @@ animation = &"Walk"
 [sub_resource type="AnimationNodeTimeScale" id="AnimationNodeTimeScale_23t5b"]
 
 [sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_4pbav"]
-graph_offset = Vector2(-350.667, -24)
 nodes/Animation/node = SubResource("AnimationNodeAnimation_v1cfo")
 nodes/Animation/position = Vector2(106.667, 346.667)
 "nodes/Animation 2/node" = SubResource("AnimationNodeAnimation_6w3de")
