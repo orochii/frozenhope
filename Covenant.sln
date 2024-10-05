@@ -1,6 +1,6 @@
 ﻿Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covenant", "Covenant.csproj", "{BBA81D15-24E7-4893-A554-6962B67D7E75}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Covenant", "Covenant.csproj", "{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -9,11 +9,11 @@ Global
 	ExportRelease|Any CPU = ExportRelease|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
-		{BBA81D15-24E7-4893-A554-6962B67D7E75}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.ExportDebug|Any CPU.ActiveCfg = ExportDebug|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.ExportDebug|Any CPU.Build.0 = ExportDebug|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.ExportRelease|Any CPU.ActiveCfg = ExportRelease|Any CPU
+		{5B1ED31F-71F6-4C46-A4A3-8765AB5AE99F}.ExportRelease|Any CPU.Build.0 = ExportRelease|Any CPU
 	EndGlobalSection
 EndGlobal

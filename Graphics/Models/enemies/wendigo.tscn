@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://d20qg6jgj3ous"]
+
+[ext_resource type="PackedScene" uid="uid://b24yjc5x15xi7" path="res://Graphics/Models/enemies/Criaturas.fbx" id="1_kefl0"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_nq1uo"]
+[ext_resource type="Texture2D" uid="uid://b4btba14fjui5" path="res://Graphics/Models/enemies/W3.png" id="3_3qe0u"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iaxfo"]
+render_priority = 0
+shader = ExtResource("2_nq1uo")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_3qe0u")
+
+[node name="Criaturas" instance=ExtResource("1_kefl0")]
+
+[node name="W3_001" parent="." index="0"]
+transform = Transform3D(-4.37114e-06, 100, 1.19209e-05, 0, -1.19209e-05, 100, 100, 4.37114e-06, 5.2108e-13, 0.00507498, 4.4216, -1.86051)
+
+[node name="W3" parent="W3_001/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_iaxfo")
