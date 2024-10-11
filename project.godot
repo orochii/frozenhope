@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="FrozenHope"
-run/main_scene="res://Scenes/model_view.tscn"
+run/main_scene="res://Scenes/main.tscn"
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
 config/icon="res://icon.svg"
 
@@ -31,7 +31,7 @@ project/assembly_name="Covenant"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/third-person-camera/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
 
 [input]
 

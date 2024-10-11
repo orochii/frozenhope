@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="Database" load_steps=3 format=3 uid="uid://tidkq4ucvhge"]
+
+[ext_resource type="Resource" uid="uid://d0i50jme2y6h4" path="res://Data/items/glock.tres" id="1_6s61g"]
+[ext_resource type="Script" path="res://Source/Data/Database.cs" id="1_nmb2g"]
+
+[resource]
+script = ExtResource("1_nmb2g")
+StartingItems = Array[Object]([ExtResource("1_6s61g")])
+StartingScene = "model_view"

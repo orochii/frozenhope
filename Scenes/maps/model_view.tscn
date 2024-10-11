@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://dllfhbjwrdnrr"]
+
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_srlpg"]
+[ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="4_2nma4"]
+[ext_resource type="PackedScene" uid="uid://d20qg6jgj3ous" path="res://Graphics/Models/enemies/wendigo.tscn" id="5_oes28"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_c5qte"]
+render_priority = 0
+shader = ExtResource("4_2nma4")
+shader_parameter/size = 1.0
+shader_parameter/color1 = Color(0.384229, 0.384229, 0.384229, 1)
+shader_parameter/color2 = null
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_a6nwm"]
+material = SubResource("ShaderMaterial_c5qte")
+size = Vector2(20, 20)
+
+[node name="Node3D" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, -2.66213e-08, -9.04164e-09, 2.66213e-08, 0.793151, 0.609024, -9.04164e-09, -0.609024, 0.793151, 0, 2.50483, 2.34877)
+
+[node name="Checker" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.852, 0, 0)
+mesh = SubResource("PlaneMesh_a6nwm")
+
+[node name="Criaturas" parent="." instance=ExtResource("5_oes28")]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.265753, 0, -2.11199)
+
+[node name="Node3D" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
+
+[node name="Player" parent="." instance=ExtResource("3_srlpg")]

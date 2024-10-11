@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="BaseItem" load_steps=3 format=3 uid="uid://d0i50jme2y6h4"]
+
+[ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="1_0r2ju"]
+[ext_resource type="Script" path="res://Source/Data/BaseItem.cs" id="1_k4sio"]
+
+[resource]
+script = ExtResource("1_k4sio")
+DisplayName = "Glock G3"
+DisplayDescription = "A 9mm pistol. Third generation from 1996 iirc."
+Icon = ExtResource("1_0r2ju")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1

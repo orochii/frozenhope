@@ -1,0 +1,482 @@
+[gd_scene load_steps=25 format=3 uid="uid://boouo4s50i43s"]
+
+[ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
+[ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="2_l0wdi"]
+[ext_resource type="Texture2D" uid="uid://doq7xs4ba48ms" path="res://Graphics/textures/panel_basic.png" id="2_pttkv"]
+[ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_ptup8"]
+[ext_resource type="Texture2D" uid="uid://dp7c10uedhinj" path="res://Graphics/textures/panel_basic_pressed.png" id="3_saacv"]
+[ext_resource type="Texture2D" uid="uid://cassrevogoc6b" path="res://Graphics/textures/panel_basic_hover.png" id="4_y4wtg"]
+[ext_resource type="Script" path="res://Source/UI/InvSlotButton.cs" id="5_6ag1p"]
+[ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="6_0bwkt"]
+[ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="7_hmgak"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="8_j6fhx"]
+[ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="9_qmx03"]
+[ext_resource type="PackedScene" uid="uid://bf4swyx1qpan5" path="res://Graphics/Models/weapons/p_glock_g3.tscn" id="10_kneks"]
+[ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="11_gq52q"]
+
+[sub_resource type="Gradient" id="Gradient_l1iem"]
+colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_n05je"]
+gradient = SubResource("Gradient_l1iem")
+fill_to = Vector2(0, 1)
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_ufxf2"]
+particle_flag_disable_z = true
+emission_shape = 3
+emission_box_extents = Vector3(160, 16, 1)
+gravity = Vector3(0, 98, 0)
+
+[sub_resource type="ViewportTexture" id="ViewportTexture_vrf3q"]
+viewport_path = NodePath("CanvasLayer/UIParent/Gameplay/SubViewport")
+
+[sub_resource type="Animation" id="Animation_yvov0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, -6.28319, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_fsucn"]
+resource_name = "default"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 6.28319, 0), Vector3(0, -6.28319, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_4aql7"]
+_data = {
+"RESET": SubResource("Animation_yvov0"),
+"default": SubResource("Animation_fsucn")
+}
+
+[sub_resource type="Animation" id="Animation_q138a"]
+resource_name = "show"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_vbsm8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dntsk"]
+resource_name = "hide"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dv4aa"]
+_data = {
+"RESET": SubResource("Animation_vbsm8"),
+"hide": SubResource("Animation_dntsk"),
+"show": SubResource("Animation_q138a")
+}
+
+[node name="Main" type="Node" node_paths=PackedStringArray("WorldParent", "GameplayUI", "Loader")]
+script = ExtResource("1_o1rfr")
+WorldParent = NodePath("WorldParent")
+GameplayUI = NodePath("CanvasLayer/UIParent")
+Loader = NodePath("CanvasLayer/UIParent/Loader")
+
+[node name="WorldParent" type="Node" parent="."]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="UIParent" type="Control" parent="CanvasLayer" node_paths=PackedStringArray("UIs")]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_l0wdi")
+UIs = [NodePath("TitleScreen"), NodePath("Gameplay")]
+
+[node name="TitleScreen" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("buttonList")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("2_ptup8")
+buttonList = [NodePath("VBoxContainer/Start"), NodePath("VBoxContainer/Continue"), NodePath("VBoxContainer/Exit")]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/TitleScreen"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_n05je")
+
+[node name="Control" type="Control" parent="CanvasLayer/UIParent/TitleScreen"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="GPUParticles2D" type="GPUParticles2D" parent="CanvasLayer/UIParent/TitleScreen/Control"]
+position = Vector2(0, -16)
+amount = 64
+process_material = SubResource("ParticleProcessMaterial_ufxf2")
+lifetime = 2.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/TitleScreen"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/TitleScreen/VBoxContainer"]
+layout_mode = 2
+text = "Frozen Hope"
+
+[node name="Start" type="Button" parent="CanvasLayer/UIParent/TitleScreen/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "Start"
+
+[node name="Continue" type="Button" parent="CanvasLayer/UIParent/TitleScreen/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "Continue"
+
+[node name="Exit" type="Button" parent="CanvasLayer/UIParent/TitleScreen/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "Exit"
+
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/TitleScreen"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -23.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("8_j6fhx")
+text = "Spanish Inquisition Software 2024"
+horizontal_alignment = 1
+
+[node name="Gameplay" type="Control" parent="CanvasLayer/UIParent"]
+texture_filter = 1
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIParent/Gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="Inventory" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer"]
+visible = false
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory"]
+layout_mode = 2
+offset_top = 10.0
+offset_right = 304.0
+offset_bottom = 188.0
+
+[node name="InventoryContainer" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
+layout_mode = 2
+
+[node name="InventoryColumn" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="InventoryGrid" type="GridContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn"]
+layout_mode = 2
+columns = 2
+
+[node name="Slot" type="TextureButton" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Icon")]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("2_pttkv")
+texture_pressed = ExtResource("3_saacv")
+texture_hover = ExtResource("4_y4wtg")
+texture_focused = ExtResource("4_y4wtg")
+script = ExtResource("5_6ag1p")
+Icon = NodePath("TextureRect")
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0bwkt")
+expand_mode = 3
+
+[node name="Slot2" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid"]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_pttkv")
+patch_margin_left = 10
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 13
+
+[node name="InfoColumn" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ModelView" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_vrf3q")
+stretch_mode = 3
+
+[node name="TextBox" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
+self_modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+texture = ExtResource("7_hmgak")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn/TextBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn/TextBox/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+bbcode_enabled = true
+text = "[color=#ee8]Glock G3[/color]
+Oh yeah Wesker
+third line"
+
+[node name="Divisor" type="ColorRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="SubMenu" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory"]
+anchors_preset = 0
+offset_top = 42.0
+offset_bottom = 42.0
+
+[node name="Control" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu"]
+anchors_preset = 0
+offset_left = 24.0
+offset_top = 8.0
+offset_right = 24.0
+offset_bottom = 8.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]
+layout_mode = 2
+offset_right = 45.0
+offset_bottom = 42.0
+texture = ExtResource("7_hmgak")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]
+layout_mode = 2
+offset_right = 45.0
+offset_bottom = 42.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Use" type="Button" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "Use"
+
+[node name="Combine" type="Button" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+disabled = true
+text = "Combine"
+
+[node name="Equip" type="Button" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "Equip"
+
+[node name="Stats" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]
+layout_mode = 2
+texture = ExtResource("7_hmgak")
+
+[node name="TextureRect" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats/TextureRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 2.0
+offset_top = 4.0
+offset_right = -2.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("9_qmx03")
+pulseLenght = 1.0
+sampleSpeed = 60.0
+decayLength = 30.0
+
+[node name="Slot" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture = ExtResource("2_pttkv")
+patch_margin_left = 10
+patch_margin_top = 11
+patch_margin_right = 10
+patch_margin_bottom = 13
+
+[node name="SubViewport" type="SubViewport" parent="CanvasLayer/UIParent/Gameplay"]
+own_world_3d = true
+transparent_bg = true
+size = Vector2i(128, 128)
+
+[node name="ItemContainer" type="Node3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
+transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
+
+[node name="glock_g3" parent="CanvasLayer/UIParent/Gameplay/SubViewport/ItemContainer" instance=ExtResource("10_kneks")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UIParent/Gameplay/SubViewport/ItemContainer"]
+libraries = {
+"": SubResource("AnimationLibrary_4aql7")
+}
+autoplay = "default"
+speed_scale = 0.1
+
+[node name="Node3D" type="Node3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 0, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport/Node3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
+
+[node name="Loader" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("Animation")]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("11_gq52q")
+Animation = NodePath("AnimationPlayer")
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer/UIParent/Loader"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UIParent/Loader"]
+libraries = {
+"": SubResource("AnimationLibrary_dv4aa")
+}
+
+[connection signal="pressed" from="CanvasLayer/UIParent/TitleScreen/VBoxContainer/Start" to="CanvasLayer/UIParent/TitleScreen" method="StartGame"]
+[connection signal="pressed" from="CanvasLayer/UIParent/TitleScreen/VBoxContainer/Continue" to="CanvasLayer/UIParent/TitleScreen" method="LoadGame"]
+[connection signal="pressed" from="CanvasLayer/UIParent/TitleScreen/VBoxContainer/Exit" to="CanvasLayer/UIParent/TitleScreen" method="EndGame"]
+[connection signal="animation_finished" from="CanvasLayer/UIParent/Loader/AnimationPlayer" to="CanvasLayer/UIParent/Loader" method="OnAnimationFinished"]
