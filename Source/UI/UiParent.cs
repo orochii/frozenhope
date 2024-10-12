@@ -20,4 +20,12 @@ public partial class UiParent : Control
 			}
 		}
 	}
+	public GameplayUI Gameplay {
+		get {
+			foreach (var c in UIs) {
+				if (c is GameplayUI) return c as GameplayUI;
+			}
+			return null;
+		}
+	}
 }

@@ -1,18 +1,23 @@
-[gd_scene load_steps=25 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=38 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
+[ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
 [ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="2_l0wdi"]
 [ext_resource type="Texture2D" uid="uid://doq7xs4ba48ms" path="res://Graphics/textures/panel_basic.png" id="2_pttkv"]
 [ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_ptup8"]
 [ext_resource type="Texture2D" uid="uid://dp7c10uedhinj" path="res://Graphics/textures/panel_basic_pressed.png" id="3_saacv"]
 [ext_resource type="Texture2D" uid="uid://cassrevogoc6b" path="res://Graphics/textures/panel_basic_hover.png" id="4_y4wtg"]
 [ext_resource type="Script" path="res://Source/UI/InvSlotButton.cs" id="5_6ag1p"]
+[ext_resource type="Shader" path="res://Source/Shaders/menuOverlay.gdshader" id="5_xo37i"]
 [ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="6_0bwkt"]
+[ext_resource type="Script" path="res://Source/UI/GameplayUI.cs" id="6_opeho"]
 [ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="7_hmgak"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="8_j6fhx"]
+[ext_resource type="Script" path="res://Source/UI/Inventory.cs" id="8_yq2xk"]
 [ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="9_qmx03"]
-[ext_resource type="PackedScene" uid="uid://bf4swyx1qpan5" path="res://Graphics/Models/weapons/p_glock_g3.tscn" id="10_kneks"]
+[ext_resource type="Script" path="res://Source/UI/Stats.cs" id="11_ej3np"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="11_gq52q"]
+[ext_resource type="Script" path="res://Source/UI/InfoColumn.cs" id="14_kloei"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -27,8 +32,191 @@ emission_shape = 3
 emission_box_extents = Vector3(160, 16, 1)
 gravity = Vector3(0, 98, 0)
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_tk2hu"]
+shader = ExtResource("5_xo37i")
+shader_parameter/colorTint = Color(0.0155742, 0.0602699, 0.122923, 1)
+shader_parameter/mixAmount = 0.0
+shader_parameter/blurAmountX = 1.49012e-08
+shader_parameter/blurAmountY = 1.49012e-08
+shader_parameter/blurIterations = 0
+
+[sub_resource type="Animation" id="Animation_ud8fr"]
+resource_name = "showMenu"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OverlayRect:material:shader_parameter/mixAmount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, 0.7]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OverlayRect:material:shader_parameter/blurAmountX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.49012e-08, -0.2]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OverlayRect:material:shader_parameter/blurAmountY")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.49012e-08, -0.6]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OverlayRect:material:shader_parameter/blurIterations")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 5]
+}
+
+[sub_resource type="Animation" id="Animation_58wg8"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OverlayRect:material:shader_parameter/mixAmount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OverlayRect:material:shader_parameter/blurAmountX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.49012e-08]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OverlayRect:material:shader_parameter/blurAmountY")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.49012e-08]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OverlayRect:material:shader_parameter/blurIterations")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
+
+[sub_resource type="Animation" id="Animation_sei3n"]
+resource_name = "hideMenu"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OverlayRect:material:shader_parameter/mixAmount")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OverlayRect:material:shader_parameter/blurAmountX")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.2, 1.49012e-08]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OverlayRect:material:shader_parameter/blurAmountY")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-0.6, 1.49012e-08]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OverlayRect:material:shader_parameter/blurIterations")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [5, 5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_y83el"]
+_data = {
+"RESET": SubResource("Animation_58wg8"),
+"hideMenu": SubResource("Animation_sei3n"),
+"showMenu": SubResource("Animation_ud8fr")
+}
+
 [sub_resource type="ViewportTexture" id="ViewportTexture_vrf3q"]
 viewport_path = NodePath("CanvasLayer/UIParent/Gameplay/SubViewport")
+
+[sub_resource type="Gradient" id="Gradient_o0bmw"]
+offsets = PackedFloat32Array(0, 0.5, 1)
+colors = PackedColorArray(1, 0.0625926, 0.129982, 1, 0.75304, 0.575236, 3.85046e-07, 1, 0, 1, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_nwv2s"]
+gradient = SubResource("Gradient_o0bmw")
+
+[sub_resource type="Curve" id="Curve_dn4g1"]
+min_value = -0.5
+max_value = 0.5
+_data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0587393, 0.459152), 0.0, 0.0, 0, 0, Vector2(0.121776, -0.429301), 0.0, 0.0, 0, 0, Vector2(0.190544, 0.193637), 0.0, 0.0, 0, 0, Vector2(0.274, 0), 0.0, 0.0, 0, 0, Vector2(0.376791, -0.000392735), 0.0, 0.0, 0, 0, Vector2(1, 0.00981933), 0.0, 0.0, 0, 0]
+point_count = 7
 
 [sub_resource type="Animation" id="Animation_yvov0"]
 length = 0.001
@@ -119,13 +307,19 @@ _data = {
 "show": SubResource("Animation_q138a")
 }
 
-[node name="Main" type="Node" node_paths=PackedStringArray("WorldParent", "GameplayUI", "Loader")]
+[node name="Main" type="Node" node_paths=PackedStringArray("WorldParent", "UI", "Loader")]
 script = ExtResource("1_o1rfr")
 WorldParent = NodePath("WorldParent")
-GameplayUI = NodePath("CanvasLayer/UIParent")
+UI = NodePath("CanvasLayer/UIParent")
 Loader = NodePath("CanvasLayer/UIParent/Loader")
 
 [node name="WorldParent" type="Node" parent="."]
+
+[node name="REFTest" type="Sprite2D" parent="WorldParent"]
+visible = false
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("2_1l3hs")
+centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
@@ -219,7 +413,8 @@ theme = ExtResource("8_j6fhx")
 text = "Spanish Inquisition Software 2024"
 horizontal_alignment = 1
 
-[node name="Gameplay" type="Control" parent="CanvasLayer/UIParent"]
+[node name="Gameplay" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("OverlayEffect", "Inventory")]
+process_mode = 3
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -227,6 +422,31 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("6_opeho")
+OverlayEffect = NodePath("Overlay/OverlayAnimation")
+Inventory = NodePath("MarginContainer/VBoxContainer/Inventory")
+
+[node name="Overlay" type="Control" parent="CanvasLayer/UIParent/Gameplay"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OverlayRect" type="ColorRect" parent="CanvasLayer/UIParent/Gameplay/Overlay"]
+material = SubResource("ShaderMaterial_tk2hu")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="OverlayAnimation" type="AnimationPlayer" parent="CanvasLayer/UIParent/Gameplay/Overlay"]
+libraries = {
+"": SubResource("AnimationLibrary_y83el")
+}
 
 [node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/UIParent/Gameplay"]
 layout_mode = 1
@@ -244,10 +464,13 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer"]
-visible = false
+[node name="Inventory" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn")]
 layout_mode = 2
 size_flags_vertical = 3
+script = ExtResource("8_yq2xk")
+inventoryGrid = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid")
+invSlotTemplate = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot")
+InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory"]
 layout_mode = 2
@@ -264,9 +487,11 @@ alignment = 2
 
 [node name="InventoryGrid" type="GridContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn"]
 layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="Slot" type="TextureButton" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Icon")]
+[node name="Slot" type="TextureButton" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Icon", "amount")]
 self_modulate = Color(1, 1, 1, 0.752941)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -276,8 +501,10 @@ texture_hover = ExtResource("4_y4wtg")
 texture_focused = ExtResource("4_y4wtg")
 script = ExtResource("5_6ag1p")
 Icon = NodePath("TextureRect")
+amount = NodePath("Label")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -286,21 +513,31 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("6_0bwkt")
 expand_mode = 3
+stretch_mode = 5
 
-[node name="Slot2" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid"]
-self_modulate = Color(1, 1, 1, 0.752941)
-custom_minimum_size = Vector2(32, 32)
-layout_mode = 2
-texture = ExtResource("2_pttkv")
-patch_margin_left = 10
-patch_margin_top = 11
-patch_margin_right = 10
-patch_margin_bottom = 13
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_j6fhx")
+theme_override_constants/outline_size = 2
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
 
-[node name="InfoColumn" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer"]
+[node name="InfoColumn" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer" node_paths=PackedStringArray("ModelParent", "Description")]
 layout_mode = 2
 size_flags_horizontal = 3
 alignment = 2
+script = ExtResource("14_kloei")
+ModelParent = NodePath("../../../../../../SubViewport/ItemContainer")
+Description = NodePath("TextBox/MarginContainer/RichTextLabel")
+DescriptionFormat = "[color=#ee8]{0}[/color]
+{1}"
 
 [node name="ModelView" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
 layout_mode = 2
@@ -342,6 +579,7 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
 [node name="SubMenu" type="Control" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory"]
+visible = false
 anchors_preset = 0
 offset_top = 42.0
 offset_bottom = 42.0
@@ -392,10 +630,16 @@ layout_mode = 2
 theme = ExtResource("8_j6fhx")
 text = "Equip"
 
-[node name="Stats" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer"]
+[node name="Stats" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("Health", "HealthLabel", "EquippedIcon")]
 layout_mode = 2
+script = ExtResource("11_ej3np")
+Health = NodePath("TextureRect/TextureRect")
+HealthLabel = NodePath("TextureRect/Label")
+EquippedIcon = NodePath("Slot/TextureRect")
+HealthColorGradient = SubResource("GradientTexture1D_nwv2s")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]
+self_modulate = Color(1, 1, 1, 0.501961)
 layout_mode = 2
 texture = ExtResource("7_hmgak")
 
@@ -414,9 +658,24 @@ script = ExtResource("9_qmx03")
 pulseLenght = 1.0
 sampleSpeed = 60.0
 decayLength = 30.0
+curve = SubResource("Curve_dn4g1")
+
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats/TextureRect"]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -2.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_j6fhx")
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 2
 
 [node name="Slot" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]
-self_modulate = Color(1, 1, 1, 0.752941)
+self_modulate = Color(1, 1, 1, 0.501961)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
 texture = ExtResource("2_pttkv")
@@ -425,6 +684,16 @@ patch_margin_top = 11
 patch_margin_right = 10
 patch_margin_bottom = 13
 
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats/Slot"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("6_0bwkt")
+expand_mode = 3
+
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/UIParent/Gameplay"]
 own_world_3d = true
 transparent_bg = true
@@ -432,8 +701,6 @@ size = Vector2i(128, 128)
 
 [node name="ItemContainer" type="Node3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
 transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
-
-[node name="glock_g3" parent="CanvasLayer/UIParent/Gameplay/SubViewport/ItemContainer" instance=ExtResource("10_kneks")]
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UIParent/Gameplay/SubViewport/ItemContainer"]
 libraries = {

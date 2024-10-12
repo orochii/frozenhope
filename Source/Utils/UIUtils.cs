@@ -3,6 +3,19 @@ using System.Runtime.InteropServices;
 using Godot;
 
 public static class UIUtils {
+    public static void SetupGridList(Control[] array, int columns) {
+        for (int i = 0; i < array.Length; i++) {
+            var curr = array[i];
+            var t = i - columns >= 0             ? array[i - columns] : curr;
+            var b = i + columns < array.Length  ? array[i + columns] : curr;
+            var l = i - 1       >= 0             ? array[i - 1] : curr;
+            var r = i + 1       < array.Length  ? array[i + 1] : curr;
+            curr.FocusNeighborTop =     t.GetPath();
+            curr.FocusNeighborBottom =  b.GetPath();
+            curr.FocusNeighborLeft =    l.GetPath();
+            curr.FocusNeighborRight =   r.GetPath();
+        }
+    }
     public static void SetupVBoxList(Control[] array) {
         for (int i = 0; i < array.Length; i++) {
             var curr = array[i];

@@ -4,11 +4,11 @@ using System;
 public partial class Main : Node
 {
 	public static Main Instance;
-	[Export] Node WorldParent;
-	[Export] UiParent GameplayUI;
-	[Export] Loader Loader;
-	Database Database;
-	GameState State;
+	[Export] public Node WorldParent;
+	[Export] public UiParent UI;
+	[Export] public Loader Loader;
+	public Database Database;
+	public GameState State;
 	Node3D currentMap;
 	public override void _Ready()
 	{
@@ -22,6 +22,7 @@ public partial class Main : Node
 			State.AddItem(item, 1);
 		}
 		GD.Print(State.ListAllItems());
+		State.SetEquippedItem(0);
 		// Go to scene.
 		ChangeMap(Database.StartingScene);
 	}
@@ -49,10 +50,10 @@ public partial class Main : Node
             currentMap = newMapScene.Instantiate<Node3D>();
             WorldParent.AddChild(currentMap);
 			// Set UI to gameplay mode.
-			GameplayUI.SetUIMode(1);
+			UI.SetUIMode(1);
         } else {
 			// Set UI to title screen.
-			GameplayUI.SetUIMode(0);
+			UI.SetUIMode(0);
 		}
         // Wait for a bit.
         var t = GetTree().CreateTimer(0.1);

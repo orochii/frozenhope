@@ -14,16 +14,18 @@ public class GameState {
     public class PersistentData {
         public string currentMap;
         public string markerId;
+        public Dictionary<string,bool> switches = new Dictionary<string,bool>();
         public int health = 100;
-        public Vector2I inventorySize = new Vector2I(2,4);
+        public int inventorySizeX = 2;
+        public int inventorySizeY = 4;
+        public int EquippedItem = -1;
         public List<ItemEntry> inventory = new List<ItemEntry>();
-        public List<bool> switches = new List<bool>();
         public int[,] GetInvMatrix() {
             // Create inventory matrix
-            int[,] matrix = new int[inventorySize.X,inventorySize.Y];
+            int[,] matrix = new int[inventorySizeX,inventorySizeY];
             // Set all as empty first
-            for (int x = 0; x < inventorySize.X; x++) {
-                for (int y = 0; y < inventorySize.Y; y++) {
+            for (int x = 0; x < inventorySizeX; x++) {
+                for (int y = 0; y < inventorySizeY; y++) {
                     matrix[x,y] = -1;
                 }
             }
@@ -46,6 +48,33 @@ public class GameState {
     public GameState() {
         persistentData = new PersistentData();
     }
+    #region Game
+    public string MapName {
+        get {
+            return persistentData.currentMap;
+        }
+        set {
+            persistentData.currentMap = value;
+        }
+    }
+    public string MarkerId {
+        get {
+            return persistentData.markerId;
+        }
+        set {
+            persistentData.markerId = value;
+        }
+    }
+    public bool GetSwitch(string id) {
+        if (persistentData.switches.TryGetValue(id, out var sw)) {
+            return sw;
+        }
+        return false;
+    }
+    public void SetSwitch(string id, bool value) {
+        persistentData.switches[id] = value;
+    }
+    #endregion
     #region Character status
     public int GetMaxHealth() {
         return 100;
@@ -56,8 +85,31 @@ public class GameState {
     public int GetHealth() {
         return persistentData.health;
     }
+    public float HealthPerc {
+        get {
+            return GetHealth() * 1f / GetMaxHealth();
+        }
+    }
+    public void SetEquippedItem(int idx) {
+        persistentData.EquippedItem = idx;
+    }
+    public BaseItem GetEquippedItem() {
+        if (persistentData.EquippedItem < 0) return null;
+        if (persistentData.EquippedItem >= persistentData.inventory.Count) return null;
+        var entry = persistentData.inventory[persistentData.EquippedItem];
+        return BaseItem.Get(entry.itemID);
+    }
     #endregion
     #region Inventory
+    public Vector2I InventorySize {
+        get {
+            return new Vector2I(persistentData.inventorySizeX, persistentData.inventorySizeY);
+        }
+        set {
+            persistentData.inventorySizeX = value.X;
+            persistentData.inventorySizeY = value.Y;
+        }
+    }
     public bool IsSpaceAvailable(BaseItem item, Vector2I position) {
         var matrix = persistentData.GetInvMatrix();
         return IsThereEnoughSpace(matrix, position.X, position.Y, item.SlotSize.X, item.SlotSize.Y);
@@ -93,6 +145,34 @@ public class GameState {
             }
         }
         return true;
+    }
+    public void RemoveItem(BaseItem item, int amount) {
+        List<ItemEntry> _toDelete = new List<ItemEntry>();
+        // Remove amounts from stacks that correspond.
+        foreach (var entry in persistentData.inventory) {
+            if (entry.itemID == item.ID) {
+                amount -= entry.stackSize;
+                entry.stackSize = -amount;
+                // - Register stacks of 0 or under.
+                if (entry.stackSize <= 0) _toDelete.Add(entry);
+                if (amount <= 0) break;
+            }
+        }
+        // Remove empty stacks.
+        foreach (var e in _toDelete) persistentData.inventory.Remove(e);
+    }
+    public void RemoveFromSlot(Vector2I pos, int amount) {
+        // Invalid positions.
+        if (pos.X < 0 || pos.X >= persistentData.inventorySizeX) return;
+        if (pos.Y < 0 || pos.Y >= persistentData.inventorySizeY) return;
+        // Get matrix
+        var matrix = persistentData.GetInvMatrix();
+        // Cross-ref to slot
+        int idx = matrix[pos.X, pos.Y];
+        // Remove amount from that slot alone.
+        if (idx < 0) return;
+        persistentData.inventory[idx].stackSize -= amount;
+        if (persistentData.inventory[idx].stackSize <= 0) persistentData.inventory.RemoveAt(idx);
     }
     private bool FindAvailableSpace(int[,] matrix, int w, int h, out Vector2I position) {
         for (int x = 0; x < matrix.GetLength(0); x++) {
@@ -132,14 +212,6 @@ public class GameState {
     }
     public List<ItemEntry> GetInventoryEntries() {
         return persistentData.inventory;
-    }
-    public string MapName {
-        get {
-            return persistentData.currentMap;
-        }
-        set {
-            persistentData.currentMap = value;
-        }
     }
     #endregion
 }
