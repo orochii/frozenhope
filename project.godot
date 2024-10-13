@@ -17,8 +17,8 @@ config/icon="res://icon.svg"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=240
+window/size/viewport_width=640
+window/size/viewport_height=480
 window/size/resizable=false
 window/size/window_width_override=640
 window/size/window_height_override=480
@@ -114,6 +114,11 @@ cancel={
 , Object(InputEventJoypadButton,"resource_local_to_scene":false,"resource_name":"","device":-1,"button_index":1,"pressure":0.0,"pressed":true,"script":null)
 ]
 }
+
+[layer_names]
+
+3d_physics/layer_1="Player"
+3d_physics/layer_2="CameraChanger"
 
 [rendering]
 
