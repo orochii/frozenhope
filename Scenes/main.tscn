@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=39 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -17,6 +17,7 @@
 [ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="9_qmx03"]
 [ext_resource type="Script" path="res://Source/UI/Stats.cs" id="11_ej3np"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="11_gq52q"]
+[ext_resource type="Texture2D" uid="uid://cij6odl5wxwc1" path="res://Graphics/textures/panel_invslot.png" id="13_pce12"]
 [ext_resource type="Script" path="res://Source/UI/InfoColumn.cs" id="14_kloei"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
@@ -477,6 +478,7 @@ layout_mode = 2
 offset_top = 10.0
 offset_right = 304.0
 offset_bottom = 188.0
+alignment = 2
 
 [node name="InventoryContainer" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
 layout_mode = 2
@@ -491,7 +493,7 @@ theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
 
-[node name="Slot" type="TextureButton" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Icon", "amount")]
+[node name="Slot" type="TextureButton" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Container", "Icon", "amount")]
 self_modulate = Color(1, 1, 1, 0.752941)
 custom_minimum_size = Vector2(32, 32)
 layout_mode = 2
@@ -500,11 +502,24 @@ texture_pressed = ExtResource("3_saacv")
 texture_hover = ExtResource("4_y4wtg")
 texture_focused = ExtResource("4_y4wtg")
 script = ExtResource("5_6ag1p")
-Icon = NodePath("TextureRect")
-amount = NodePath("Label")
+Container = NodePath("NinePatchRect")
+Icon = NodePath("NinePatchRect/TextureRect")
+amount = NodePath("NinePatchRect/Label")
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
+[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
 z_index = 10
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("13_pce12")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -515,14 +530,17 @@ texture = ExtResource("6_0bwkt")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="Label" type="Label" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
-z_index = 10
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
 layout_mode = 1
-anchors_preset = 15
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
 theme = ExtResource("8_j6fhx")
 theme_override_constants/outline_size = 2
 text = "1"
@@ -573,6 +591,12 @@ bbcode_enabled = true
 text = "[color=#ee8]Glock G3[/color]
 Oh yeah Wesker
 third line"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
+layout_mode = 2
+theme = ExtResource("8_j6fhx")
+text = "(a): use/equip (x): move/combine"
+fit_content = true
 
 [node name="Divisor" type="ColorRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
@@ -697,7 +721,7 @@ expand_mode = 3
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/UIParent/Gameplay"]
 own_world_3d = true
 transparent_bg = true
-size = Vector2i(128, 128)
+size = Vector2i(112, 112)
 
 [node name="ItemContainer" type="Node3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
 transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
