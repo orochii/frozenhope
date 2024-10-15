@@ -3,29 +3,42 @@ using System;
 
 public partial class InvSlotButton : TextureButton
 {
+	[Export] Control Container;
 	[Export] TextureRect Icon;
-	[Export] Label amount;
+	[Export] RichTextLabel Ammo;
+	[Export] Label Quantity;
 	GameState.ItemEntry CurrentEntry;
 	public BaseItem Item = null;
-	public void Setup(GameState.ItemEntry entry, bool setAmount=false, bool ignoreVisuals=false) {
+	public void Setup(GameState.ItemEntry entry, bool ignoreVisuals=false) {
 		CurrentEntry = entry;
-		if (entry == null) {
+		Item = (entry==null) ? null : BaseItem.Get(entry.itemID);
+		if (entry == null || ignoreVisuals) {
+			// Unset
 			Icon.Texture = null;
-			Item = null;
+			Container.Visible = false;
 		} else {
-			Item = BaseItem.Get(entry.itemID);
-			if (!ignoreVisuals) {
-				Icon.Texture = Item.Icon;
-				float sizeX = Math.Max(32, Item.SlotSize.X * 32);
-				float sizeY = Math.Max(32, Item.SlotSize.Y * 32);
-				Icon.Size = new Vector2(sizeX, sizeY);
-			} else {
-				Icon.Texture = null;
+			// Set icon
+			Icon.Texture = Item.Icon;
+			// Resize container
+			float sizeX = Math.Max(32, Item.SlotSize.X * 32);
+			float sizeY = Math.Max(32, Item.SlotSize.Y * 32);
+			Container.Size = new Vector2(sizeX, sizeY);
+			Container.Visible = true;
+			// Show amount only if over 1
+			if (entry.stackSize > 1) Quantity.Text = entry.stackSize.ToString();
+			else Quantity.Text = "";
+			// Show ammo if there's any (might want to show the ammo's icon or something)
+			if (entry.ammoId.Length > 0) {
+				var iconLine = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]";
+				var ammoItem = BaseItem.Get(entry.ammoId) as AmmoItem;
+				if (ammoItem != null && ammoItem.AmmoIcon != null) {
+					iconLine = string.Format("[img]{0}[/img]", ammoItem.AmmoIcon.ResourcePath);
+				}
+				Ammo.Text = iconLine + entry.ammoQty.ToString();
 			}
-		}
-		amount.Text = "";
-		if (setAmount) {
-			if (entry.stackSize > 1) amount.Text = entry.stackSize.ToString();
+			else {
+				Ammo.Text = "";
+			}
 		}
 	}
 }

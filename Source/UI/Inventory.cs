@@ -14,6 +14,7 @@ public partial class Inventory : Control
 	}
 	public void Refresh() {
 		RefreshGrid();
+		RefreshSlots();
 		InfoColumn.Setup(null);
 		_spawnedSlots[0].GrabFocus();
 	}
@@ -29,18 +30,20 @@ public partial class Inventory : Control
 			inventoryGrid.AddChild(_spawnedSlots[i]);
 		}
 		UIUtils.SetupGridList(_spawnedSlots, size.X);
+	}
+	public void RefreshSlots() {
+		var size = Main.Instance.State.InventorySize;
+		// Clear all slots
+		foreach (var slot in _spawnedSlots) slot.Setup(null);
 		// Set each inventory item to their location.
 		var entries = Main.Instance.State.GetInventoryEntries();
 		foreach (var entry in entries) {
-			GD.Print("Setting up ", entry.itemID);
 			var item = BaseItem.Get(entry.itemID);
 			for (int x = 0; x < item.SlotSize.X; x++) {
 				for (int y = 0; y < item.SlotSize.Y; y++) {
-					bool ignoreVisuals = x==0 && y==0; // Only top-left corner
-					bool setAmount = x==(item.SlotSize.X-1) && y==(item.SlotSize.Y-1); // Only bottom-right corner
+					bool ignoreVisuals = !(x==0 && y==0); // Only top-left corner
 					var idx = entry.posX + x + (entry.posY + y) * size.X;
-					_spawnedSlots[idx].Setup(entry, setAmount, !ignoreVisuals);
-					GD.Print("Set slot at ", entry.posX + x, ",", entry.posY + y);
+					_spawnedSlots[idx].Setup(entry, ignoreVisuals);
 				}
 			}
 		}
