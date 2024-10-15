@@ -1,0 +1,73 @@
+[gd_scene load_steps=8 format=3 uid="uid://uvg6gr22vecf"]
+
+[ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="1_n2awy"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_6uh6g"]
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_6e8ly"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_d1sbu"]
+render_priority = 0
+shader = ExtResource("1_n2awy")
+shader_parameter/size = 1.0
+shader_parameter/color1 = null
+shader_parameter/color2 = Color(0.244776, 0.244776, 0.244776, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_yaelk"]
+material = SubResource("ShaderMaterial_d1sbu")
+size = Vector2(20, 20)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_4chml"]
+render_priority = 0
+shader = ExtResource("1_n2awy")
+shader_parameter/size = 1.0
+shader_parameter/color1 = Color(0.294118, 0, 0, 1)
+shader_parameter/color2 = null
+
+[sub_resource type="BoxMesh" id="BoxMesh_51j4y"]
+material = SubResource("ShaderMaterial_4chml")
+
+[node name="CameraTest" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 1.78664, 2.50114, 0)
+shadow_enabled = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 2.84217e-15, 0, -2.84217e-15, 1, 0, 0, 0)
+mesh = SubResource("PlaneMesh_yaelk")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -4.01271e-07, -2.28, 0, 9.18, -9.9662e-08, -3, 1.15307, 0)
+mesh = SubResource("BoxMesh_51j4y")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.5, 0, 0, 0, -4.01271e-07, -2.28, 0, 9.18, -9.9662e-08, -0.2, 1.15307, 2.4)
+mesh = SubResource("BoxMesh_51j4y")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.25, 7.95011, -8.63098e-08, 0, -4.01271e-07, -2.28, -0.433013, 4.59, -4.9831e-08, 3.8, 1.15307, 0.4)
+mesh = SubResource("BoxMesh_51j4y")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(0, -9.18, 9.9662e-08, 0, -4.01271e-07, -2.28, 0.5, 4.76837e-07, -1.77636e-15, 1.3, 1.15307, -5)
+mesh = SubResource("BoxMesh_51j4y")
+
+[node name="Diagonal" type="Camera3D" parent="."]
+transform = Transform3D(-2.98023e-08, 0, 1, 0, 1, 0, -1, 0, -2.98023e-08, 7.22336, 1.6, -2.47244)
+
+[node name="Corner" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.929571, 0.368644, 0, -0.368644, 0.929571, -1.68286, 1.84178, 2.64844)
+current = true
+
+[node name="ViewChanger" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("2_6uh6g")]
+transform = Transform3D(2.44669, 0, 0, 0, 1, 0, 0, 0, 0.625509, -1.65131, 0, -1.86259)
+collision_layer = 2
+Camera = NodePath("../Corner")
+
+[node name="ViewChanger2" parent="." node_paths=PackedStringArray("Camera") instance=ExtResource("2_6uh6g")]
+transform = Transform3D(0.489364, 0, 0, 0, 1, 0, 0, 0, 2.54635, -0.153908, 0, -3.47108)
+collision_layer = 2
+Camera = NodePath("../Diagonal")
+
+[node name="Player" parent="." instance=ExtResource("3_6e8ly")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.4, 0, -3)
+collision_mask = 0
