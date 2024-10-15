@@ -9,6 +9,8 @@ public class GameState {
         public int stackSize;
         public int posX;
         public int posY;
+        public string ammoId = "";
+        public int ammoQty = 0;
     }
     [System.Serializable]
     public class PersistentData {
@@ -114,8 +116,7 @@ public class GameState {
         var matrix = persistentData.GetInvMatrix();
         return IsThereEnoughSpace(matrix, position.X, position.Y, item.SlotSize.X, item.SlotSize.Y);
     }
-    public bool AddItem(BaseItem item, int amount) {
-        
+    public bool AddItem(BaseItem item, int amount, string ammoId="", int ammo=0) {
         // First, look for existing stacks
         foreach (var entry in persistentData.inventory) {
             if (entry.itemID == item.ID) {
@@ -140,6 +141,13 @@ public class GameState {
                 newEntry.posX = position.X;
                 newEntry.posY = position.Y;
                 persistentData.inventory.Add(newEntry);
+                if (item is WeaponItem && ammo > 0) {
+                    var weapon = item as WeaponItem;
+                    if (weapon.IsCompatibleWithAmmo(ammoId)) {
+                        newEntry.ammoId = ammoId;
+                        newEntry.ammoQty = ammo;
+                    }
+                }
             } else {
                 return false;
             }
@@ -175,8 +183,8 @@ public class GameState {
         if (persistentData.inventory[idx].stackSize <= 0) persistentData.inventory.RemoveAt(idx);
     }
     private bool FindAvailableSpace(int[,] matrix, int w, int h, out Vector2I position) {
-        for (int x = 0; x < matrix.GetLength(0); x++) {
-            for (int y = 0; y < matrix.GetLength(1); y++) {
+        for (int y = 0; y < matrix.GetLength(1); y++) {
+            for (int x = 0; x < matrix.GetLength(0); x++) {
                 // We found an empty slot, however...
                 if (matrix[x,y] == -1) {
                     bool validSpace = IsThereEnoughSpace(matrix, x,y, w,h);
