@@ -508,7 +508,7 @@ Ammo = NodePath("NinePatchRect/HBoxContainer/Ammo")
 Quantity = NodePath("NinePatchRect/Quantity")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot"]
-z_index = 10
+show_behind_parent = true
 layout_mode = 0
 offset_right = 32.0
 offset_bottom = 32.0
@@ -521,6 +521,7 @@ axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -532,6 +533,7 @@ expand_mode = 3
 stretch_mode = 5
 
 [node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
 layout_mode = 1
 anchors_preset = -1
 anchor_top = 1.0
@@ -554,6 +556,7 @@ fit_content = true
 scroll_active = false
 
 [node name="Quantity" type="Label" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 1.0

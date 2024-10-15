@@ -9,7 +9,7 @@
 script = ExtResource("1_1v5np")
 AmmoIcon = ExtResource("1_rxbti")
 DisplayName = "9mm Ammo"
-DisplayDescription = ""
+DisplayDescription = "Ammo for 9mm pistols. {0}"
 Icon = ExtResource("2_7ok15")
 Model = ExtResource("2_qtjth")
 SlotSize = Vector2i(1, 1)

@@ -21,7 +21,7 @@ public partial class InfoColumn : VBoxContainer
 		if (item != null) {
 			_spawnedModel = item.Model.Instantiate<Node3D>();
 			ModelParent.AddChild(_spawnedModel);
-			Description.Text = string.Format(DescriptionFormat, item.DisplayName, item.DisplayDescription);
+			Description.Text = string.Format(DescriptionFormat, item.GetItemName(), item.GetDesc());
 		}
 	}
 }

@@ -22,6 +22,8 @@ public partial class BaseItem : Resource {
             return p.Substring(LOCATION.Length, p.Length - LOCATION.Length - EXTENSION.Length);
         }
     }
+    public virtual string GetItemName() { return DisplayName; }
+    public virtual string GetDesc() { return DisplayDescription; }
     public static BaseItem Get(string id) {
         return OZResourceLoader.Load<BaseItem>(LOCATION + id + EXTENSION);
     }
