@@ -1,9 +1,10 @@
-[gd_resource type="Resource" script_class="Database" load_steps=7 format=3 uid="uid://tidkq4ucvhge"]
+[gd_resource type="Resource" script_class="Database" load_steps=9 format=3 uid="uid://tidkq4ucvhge"]
 
 [ext_resource type="Resource" uid="uid://d2gmdj8i5534y" path="res://Data/items/glock.tres" id="1_8biv8"]
 [ext_resource type="Script" path="res://Source/Data/Database.cs" id="1_nmb2g"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="2_dhkgy"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="2_mwwnc"]
+[ext_resource type="Resource" uid="uid://c8wu2brd3rtum" path="res://Data/items/rifle.tres" id="4_a1vb5"]
 
 [sub_resource type="Resource" id="Resource_m1qy0"]
 script = ExtResource("2_mwwnc")
@@ -18,7 +19,14 @@ Item = ExtResource("2_dhkgy")
 Amount = 8
 AmmoQty = 0
 
+[sub_resource type="Resource" id="Resource_qqkkl"]
+script = ExtResource("2_mwwnc")
+Item = ExtResource("4_a1vb5")
+Amount = 1
+AmmoInside = ExtResource("2_dhkgy")
+AmmoQty = 0
+
 [resource]
 script = ExtResource("1_nmb2g")
-StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv")])
+StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_qqkkl")])
 StartingScene = "model_view"

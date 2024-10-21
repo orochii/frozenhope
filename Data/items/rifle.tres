@@ -1,0 +1,16 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=4 format=3 uid="uid://c8wu2brd3rtum"]
+
+[ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="1_nu8vf"]
+[ext_resource type="PackedScene" uid="uid://bf4swyx1qpan5" path="res://Graphics/Models/weapons/p_glock_g3.tscn" id="2_ufsao"]
+[ext_resource type="Script" path="res://Source/Data/WeaponItem.cs" id="3_m5ofe"]
+
+[resource]
+script = ExtResource("3_m5ofe")
+CompatibleAmmo = PackedStringArray("9mm_ammo")
+AmmoMax = 13
+DisplayName = "Glock G3"
+DisplayDescription = "A 9mm pistol. Third generation from 1996 iirc."
+Icon = ExtResource("1_nu8vf")
+Model = ExtResource("2_ufsao")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1
