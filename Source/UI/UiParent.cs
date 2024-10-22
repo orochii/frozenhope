@@ -3,12 +3,16 @@ using System;
 
 public partial class UiParent : Control
 {
+	public enum EModes { TITLE, GAMEPLAY, MESSAGE }
 	[Export] Control[] UIs;
+	private int _mode;
+	public int Mode => _mode;
 	public override void _Ready()
 	{
 		SetUIMode(0);
 	}
 	public void SetUIMode(int idx) {
+		_mode = idx;
 		for (int i = 0; i < UIs.Length; i++) {
 			// Set UI with right index as active. Hide the rest.
 			var ui = UIs[i];
@@ -18,6 +22,14 @@ public partial class UiParent : Control
 				var m = ui.GetType().GetMethod("Refresh");
 				if (m != null) m.Invoke(ui, null);
 			}
+		}
+	}
+	public MessageUI Message {
+		get {
+			foreach (var c in UIs) {
+				if (c is MessageUI) return c as MessageUI;
+			}
+			return null;
 		}
 	}
 	public GameplayUI Gameplay {

@@ -214,7 +214,7 @@ public class GameState {
         foreach (var entry in persistentData.inventory) {
             var data = BaseItem.Get(entry.itemID);
             if (retval.Length > 0) retval += ", ";
-            retval += data.DisplayName;
+            retval += data.GetItemName();
         }
         return retval;
     }
