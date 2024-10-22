@@ -19,7 +19,8 @@ shader_parameter/texture_size = Vector2(1, 1)
 shader_parameter/albedo = ExtResource("3_vvidu")
 
 [node name="9mm_ammo2" instance=ExtResource("1_3bt3y")]
+transform = Transform3D(0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="Cube_005" parent="." index="0"]
-transform = Transform3D(0.476832, 0.150436, 0, -0.150436, 0.476832, 0, 0, 0, 0.5, 0, 0, 0)
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 surface_material_override/0 = SubResource("ShaderMaterial_pf7rk")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=40 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -19,6 +19,7 @@
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="11_gq52q"]
 [ext_resource type="Texture2D" uid="uid://cij6odl5wxwc1" path="res://Graphics/textures/panel_invslot.png" id="13_pce12"]
 [ext_resource type="Script" path="res://Source/UI/InfoColumn.cs" id="14_kloei"]
+[ext_resource type="Texture2D" uid="uid://b3wyfgxsvhv4c" path="res://Graphics/textures/fade_circle.png" id="19_0mrtu"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -333,7 +334,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_l0wdi")
-UIs = [NodePath("TitleScreen"), NodePath("Gameplay")]
+UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message")]
 
 [node name="TitleScreen" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("buttonList")]
 visible = false
@@ -474,10 +475,12 @@ invSlotTemplate = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/Inv
 InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory"]
-layout_mode = 2
-offset_top = 10.0
-offset_right = 304.0
-offset_bottom = 188.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 alignment = 2
 
 [node name="InventoryContainer" type="HBoxContainer" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
@@ -766,6 +769,49 @@ transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
+
+[node name="Message" type="Control" parent="CanvasLayer/UIParent"]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="NinePatchRect" parent="CanvasLayer/UIParent/Message"]
+custom_minimum_size = Vector2(0, 48)
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -32.0
+offset_right = -16.0
+offset_bottom = -16.0
+grow_horizontal = 2
+grow_vertical = 0
+texture = ExtResource("19_0mrtu")
+
+[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/UIParent/Message/TextureRect"]
+clip_contents = false
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.1
+anchor_top = 0.5
+anchor_right = 0.9
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_j6fhx")
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.164706)
+theme_override_constants/outline_size = 1
+bbcode_enabled = true
+text = "[center]You got a [color=#ff8]Hammer[/color]. It allows you to hammer things.
+Fancy, innit? Eyyyyy. You know you like eet, bruv."
+fit_content = true
+scroll_active = false
 
 [node name="Loader" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("Animation")]
 visible = false
