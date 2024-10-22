@@ -1,4 +1,4 @@
-[gd_scene load_steps=40 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=41 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -20,6 +20,7 @@
 [ext_resource type="Texture2D" uid="uid://cij6odl5wxwc1" path="res://Graphics/textures/panel_invslot.png" id="13_pce12"]
 [ext_resource type="Script" path="res://Source/UI/InfoColumn.cs" id="14_kloei"]
 [ext_resource type="Texture2D" uid="uid://b3wyfgxsvhv4c" path="res://Graphics/textures/fade_circle.png" id="19_0mrtu"]
+[ext_resource type="Script" path="res://Source/UI/MessageUI.cs" id="19_3o8s3"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -750,7 +751,7 @@ expand_mode = 3
 [node name="SubViewport" type="SubViewport" parent="CanvasLayer/UIParent/Gameplay"]
 own_world_3d = true
 transparent_bg = true
-size = Vector2i(112, 112)
+size = Vector2i(192, 120)
 
 [node name="ItemContainer" type="Node3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
 transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
@@ -770,7 +771,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="CanvasLayer/UIParent/Gameplay/SubViewport"]
 
-[node name="Message" type="Control" parent="CanvasLayer/UIParent"]
+[node name="Message" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("MessageLabel", "Background")]
 visible = false
 layout_mode = 1
 anchors_preset = 15
@@ -778,6 +779,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("19_3o8s3")
+MessageLabel = NodePath("TextureRect/RichTextLabel")
+Background = NodePath("TextureRect")
 
 [node name="TextureRect" type="NinePatchRect" parent="CanvasLayer/UIParent/Message"]
 custom_minimum_size = Vector2(0, 48)

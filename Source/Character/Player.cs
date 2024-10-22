@@ -11,13 +11,27 @@ public partial class Player : CharacterBody3D
 
 	public override void _Process(double delta)
 	{
+		var canMove = (Main.Instance.UI.Mode != (int)UiParent.EModes.GAMEPLAY);
 		// Cast to float because working with doubles sucks when everything is using floats.
 		var d = (float)delta;
-		// Get input direction and dash
-		var move = Input.GetVector("move_left","move_right","move_up","move_down");
-		var dash = Input.IsActionPressed("dash");
+		if (canMove) {
+			// Get input direction and dash
+			var move = Input.GetVector("move_left","move_right","move_up","move_down");
+			var dash = Input.IsActionPressed("dash");
+			ProcessMove(d,move,dash);
+		}
+		else {
+			//
+			ProcessMove(d,Vector2.Zero,false);
+		}
+	}
+	private void ProcessMove(float d, Vector2 move, bool dash) {
 		// Get current move state properties
 		var currMoveState = dash ? moveStates[1] : moveStates[0];
+		// Apply gravity
+		var v = Velocity;
+		v += GetGravity();
+		Velocity = v;
 		// Quick check for if we're moving or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals

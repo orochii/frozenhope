@@ -1,13 +1,25 @@
-[gd_scene load_steps=4 format=3 uid="uid://byv536umv87bc"]
+[gd_scene load_steps=5 format=3 uid="uid://byv536umv87bc"]
 
 [ext_resource type="PackedScene" uid="uid://de3f35fve3bqd" path="res://Graphics/Models/weapons/Rifle.fbx" id="1_vl60d"]
 [ext_resource type="Texture2D" uid="uid://ceo2ho4u40qbb" path="res://Graphics/Models/weapons/Rifle_PS1.png" id="2_5iux5"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_yurh0"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_brmu5"]
-cull_mode = 2
-albedo_texture = ExtResource("2_5iux5")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_wg82q"]
+render_priority = 0
+shader = ExtResource("2_yurh0")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_5iux5")
 
 [node name="Rifle" instance=ExtResource("1_vl60d")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Rifle" parent="." index="0"]
-surface_material_override/0 = SubResource("StandardMaterial3D_brmu5")
+surface_material_override/0 = SubResource("ShaderMaterial_wg82q")
