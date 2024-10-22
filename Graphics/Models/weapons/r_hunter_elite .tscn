@@ -2,19 +2,11 @@
 
 [ext_resource type="PackedScene" uid="uid://de3f35fve3bqd" path="res://Graphics/Models/weapons/Rifle.fbx" id="1_vl60d"]
 [ext_resource type="Texture2D" uid="uid://ceo2ho4u40qbb" path="res://Graphics/Models/weapons/Rifle_PS1.png" id="2_5iux5"]
-<<<<<<< HEAD
-[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_upuih"]
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_c3t58"]
-render_priority = 0
-shader = ExtResource("2_upuih")
-=======
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_yurh0"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wg82q"]
 render_priority = 0
 shader = ExtResource("2_yurh0")
->>>>>>> main
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -30,8 +22,4 @@ shader_parameter/albedo = ExtResource("2_5iux5")
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 
 [node name="Rifle" parent="." index="0"]
-<<<<<<< HEAD
-surface_material_override/0 = SubResource("ShaderMaterial_c3t58")
-=======
 surface_material_override/0 = SubResource("ShaderMaterial_wg82q")
->>>>>>> main
