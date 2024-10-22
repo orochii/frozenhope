@@ -1,0 +1,233 @@
+[gd_scene load_steps=18 format=3 uid="uid://cvdgpuc2x1i1w"]
+
+[ext_resource type="PackedScene" uid="uid://cqcph5dtc8hof" path="res://Graphics/Models/vehicles/RedTruckTM/suvinterior.fbx" id="1_nbgyj"]
+[ext_resource type="Texture2D" uid="uid://beq5v4k0ulv6k" path="res://Graphics/Models/vehicles/RedTruckTM/pixelated.png" id="2_dvpqh"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_p5ti2"]
+[ext_resource type="Material" uid="uid://bqj2lwnseyfim" path="res://Graphics/Models/vehicles/RedTruckTM/redSUVWindow.tres" id="4_buwrr"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_v3n3i"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ruo8q"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p33de"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_2qdbq"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_ybnmg"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_1w1mg"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_33k4n"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_txmpi"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_eyobb"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3dbsb"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_6oc3r"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_p0b60"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_vfyef"]
+render_priority = 0
+shader = ExtResource("2_p5ti2")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("2_dvpqh")
+
+[node name="suvinterior" instance=ExtResource("1_nbgyj")]
+
+[node name="FLWheel" parent="." index="2"]
+surface_material_override/0 = SubResource("ShaderMaterial_v3n3i")
+
+[node name="FRWheel" parent="." index="3"]
+surface_material_override/0 = SubResource("ShaderMaterial_ruo8q")
+
+[node name="Hood" parent="." index="4"]
+surface_material_override/0 = SubResource("ShaderMaterial_p33de")
+
+[node name="Interior" parent="." index="5"]
+surface_material_override/0 = SubResource("ShaderMaterial_2qdbq")
+
+[node name="LDoor" parent="." index="6"]
+transform = Transform3D(100, 0, 0, 0, -4.37114e-06, 100, 0, -100, -4.37114e-06, 0.626342, 0.594915, 0.645325)
+surface_material_override/0 = SubResource("ShaderMaterial_ybnmg")
+surface_material_override/1 = ExtResource("4_buwrr")
+
+[node name="RDoor" parent="." index="8"]
+surface_material_override/0 = SubResource("ShaderMaterial_1w1mg")
+surface_material_override/1 = ExtResource("4_buwrr")
+
+[node name="RLWheel" parent="." index="9"]
+surface_material_override/0 = SubResource("ShaderMaterial_33k4n")
+
+[node name="RRWheel" parent="." index="10"]
+surface_material_override/0 = SubResource("ShaderMaterial_txmpi")
+
+[node name="SteeringWheel" parent="." index="12"]
+surface_material_override/0 = SubResource("ShaderMaterial_eyobb")
+
+[node name="Throttle" parent="." index="13"]
+surface_material_override/0 = SubResource("ShaderMaterial_3dbsb")
+
+[node name="TransfercaseShifter" parent="." index="14"]
+surface_material_override/0 = SubResource("ShaderMaterial_6oc3r")
+
+[node name="Trunk" parent="." index="15"]
+surface_material_override/0 = SubResource("ShaderMaterial_p0b60")
+
+[node name="Body" parent="." index="16"]
+surface_material_override/0 = SubResource("ShaderMaterial_vfyef")
+surface_material_override/1 = ExtResource("4_buwrr")
