@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="WeaponItem" load_steps=4 format=3 uid="uid://c8wu2brd3rtum"]
 
-[ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="1_nu8vf"]
+[ext_resource type="Texture2D" uid="uid://bsotilsb3q3ii" path="res://Graphics/textures/icons/scout_render.png" id="1_b65t7"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="2_5waef"]
 [ext_resource type="Script" path="res://Source/Data/WeaponItem.cs" id="3_m5ofe"]
 
@@ -10,7 +10,7 @@ CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 10
 DisplayName = "Hunter Elite"
 DisplayDescription = "Customized rifle designed in Europe. Chambered in .308."
-Icon = ExtResource("1_nu8vf")
+Icon = ExtResource("1_b65t7")
 Model = ExtResource("2_5waef")
 SlotSize = Vector2i(2, 1)
 MaxStack = 1
