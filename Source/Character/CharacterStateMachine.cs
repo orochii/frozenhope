@@ -9,6 +9,7 @@ public partial class CharacterStateMachine : Node
 	[Export] public CharacterAnimState.EModeState ModeState;
 	[Export] public CharacterAnimState.EActionState ActionState;
 	[Export] public string VariationId = "";
+	CharacterAnimState _lastState = null;
     public override void _Ready()
     {
         Animator.AnimationFinished += OnAnimationFinished;
@@ -16,11 +17,22 @@ public partial class CharacterStateMachine : Node
     public override void _Process(double delta)
     {
         base._Process(delta);
-		var a = GetCurrentAnimation();
-		if (a != Animator.CurrentAnimation) {
-			Animator.CurrentAnimation = a;
-			Animator.Play(a);
-		}
+        float blend = _lastState == null ? 0 : 0.1f;
+        var currentState = GetCurrentState();
+        GoToState(currentState, blend);
+    }
+    private void GoToState(CharacterAnimState currentState, float blend)
+    {
+        if (_lastState != currentState)
+        {
+            var stateVariation = currentState.Get(VariationId);
+            var currentAnimationId = stateVariation.AnimationId;
+            if (stateVariation.PlayBackwards)
+                Animator.PlayBackwards(currentAnimationId, blend);
+            else
+                Animator.Play(currentAnimationId, blend);
+        }
+        _lastState = currentState;
     }
     private void OnAnimationFinished(StringName animationName) {
 		if (ActionState != CharacterAnimState.EActionState.NONE) {
@@ -29,14 +41,10 @@ public partial class CharacterStateMachine : Node
 			if (variation.AnimationId != animationName) return;
 			if (state.ActionState == ActionState) {
 				ActionState = CharacterAnimState.EActionState.NONE;
-				Animator.CurrentAnimation = GetCurrentAnimation();
+				var currentState = GetCurrentState();
+				GoToState(currentState, 0);
 			}
 		}
-	}
-    public string GetCurrentAnimation() {
-		var state = GetCurrentState();
-		var variation = state.Get(VariationId);
-		return variation.AnimationId;
 	}
 	private CharacterAnimState GetCurrentState() {
 		// Idea here is: pick a state that doesn't fully 
