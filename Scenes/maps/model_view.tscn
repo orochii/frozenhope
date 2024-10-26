@@ -36,7 +36,36 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
 shape = SubResource("BoxShape3D_dfo3p")
 
 [node name="Criaturas" parent="." instance=ExtResource("5_oes28")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.265753, 0, -2.11199)
+transform = Transform3D(0.224683, 0, 0.109624, 0, 0.25, 0, -0.109624, 0, 0.224683, -0.646435, -0.198156, 0.818763)
+
+[node name="Skeleton3D" parent="Criaturas/W3_001" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.27771e-22, 0, 2.27771e-22, 1, -0.0418421, -1.86265e-09, 0)
+bones/0/rotation = Quaternion(0.820475, 0.050475, -0.170525, 0.770475)
+bones/1/rotation = Quaternion(-0.079525, 0.015475, 0.00147497, 0.965475)
+bones/2/rotation = Quaternion(0.000474975, 0.000474975, -0.293525, 0.997475)
+bones/3/rotation = Quaternion(0.000474975, 0.000474975, -0.328525, 0.996475)
+bones/5/rotation = Quaternion(0.000474975, 0.000474975, -0.215525, 0.994475)
+bones/7/rotation = Quaternion(0.000474975, 0.000474975, -0.119525, 0.996475)
+bones/9/rotation = Quaternion(-0.194525, 0.065475, -0.176525, 0.995475)
+bones/10/rotation = Quaternion(0.000474975, 0.000474975, -0.129525, 0.999475)
+bones/11/rotation = Quaternion(0.000474975, 0.000474975, -0.333525, 1.00048)
+bones/13/rotation = Quaternion(-0.547525, 0.045475, -0.201525, 0.559475)
+bones/14/rotation = Quaternion(1.09248, -0.508525, -0.225525, 0.974475)
+bones/15/rotation = Quaternion(0.263475, -1.11953, -0.062525, 0.982475)
+bones/16/rotation = Quaternion(-0.608525, -1.02253, -0.070525, 0.998475)
+bones/17/rotation = Quaternion(-0.558525, -0.039525, 0.117475, 0.990475)
+bones/18/rotation = Quaternion(-0.864525, 0.029475, 0.00547497, 0.943475)
+bones/20/rotation = Quaternion(-0.782525, -0.017525, 0.086475, 0.983475)
+bones/21/rotation = Quaternion(-0.722525, 0.00847497, -0.010525, 0.984475)
+bones/24/rotation = Quaternion(-0.021525, 0.00647497, 0.020475, 0.990475)
+bones/26/rotation = Quaternion(-1.10653, 0.270475, -0.039525, 0.992475)
+bones/27/rotation = Quaternion(-0.634525, 0.00147497, 0.123475, 0.953475)
+bones/29/rotation = Quaternion(-0.036525, -0.040525, -0.354525, 0.886475)
+bones/30/rotation = Quaternion(-1.30353, -0.074525, 0.734475, 0.962475)
+bones/51/rotation = Quaternion(0.303475, 0.216475, -0.215525, 0.123475)
+bones/52/rotation = Quaternion(-0.044525, 0.107475, -0.172525, 0.864475)
+bones/55/rotation = Quaternion(0.493475, 0.456475, -0.585525, 0.553475)
+bones/56/rotation = Quaternion(0.072475, -0.884525, -0.494525, 0.866475)
 
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
@@ -47,5 +76,48 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 [node name="Player" parent="." instance=ExtResource("3_srlpg")]
 collision_mask = 4
 
-[node name="suvinterior" parent="." instance=ExtResource("4_hcm5j")]
-transform = Transform3D(1.34088, 0, -0.672341, 0, 1.5, 0, 0.672341, 0, 1.34088, -1.95972, 0, -1.83851)
+[node name="RedSUVtm" parent="." instance=ExtResource("4_hcm5j")]
+transform = Transform3D(1.3481, 0, 0.657745, 0, 1.5, 0, -0.657745, 0, 1.3481, -1.74212, 0, -0.4785)
+
+[node name="FLWheel" parent="RedSUVtm" index="2"]
+surface_material_override/0 = null
+
+[node name="FRWheel" parent="RedSUVtm" index="3"]
+surface_material_override/0 = null
+
+[node name="Hood" parent="RedSUVtm" index="4"]
+surface_material_override/0 = null
+
+[node name="LDoor" parent="RedSUVtm" index="6"]
+transform = Transform3D(47.5409, 87.9765, 3.84557e-06, 1.95053e-13, -4.37114e-06, 100, 87.9765, -47.5409, -2.07808e-06, 0.626342, 0.594915, 0.645325)
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="RDoor" parent="RedSUVtm" index="8"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="RLWheel" parent="RedSUVtm" index="9"]
+surface_material_override/0 = null
+
+[node name="RRWheel" parent="RedSUVtm" index="10"]
+surface_material_override/0 = null
+
+[node name="SteeringWheel" parent="RedSUVtm" index="12"]
+surface_material_override/0 = null
+
+[node name="Throttle" parent="RedSUVtm" index="13"]
+surface_material_override/0 = null
+
+[node name="TransfercaseShifter" parent="RedSUVtm" index="14"]
+surface_material_override/0 = null
+
+[node name="Trunk" parent="RedSUVtm" index="15"]
+surface_material_override/0 = null
+
+[node name="Body" parent="RedSUVtm" index="16"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[editable path="Criaturas"]
+[editable path="RedSUVtm"]
