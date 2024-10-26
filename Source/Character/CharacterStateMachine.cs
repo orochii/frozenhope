@@ -61,10 +61,10 @@ public partial class CharacterStateMachine : Node
 	}
 	private int IsStateValid(CharacterAnimState state) {
 		// It is imperative that the movestate is correct.
-		if (state.MoveState != MoveState) return 0;
 		if (state.ActionState != ActionState) return 0;
 		// And this for some that can use alternates.
 		int retVal = 1;
+		if (state.MoveState != MoveState) retVal = 2;
 		if (state.ModeState != ModeState) retVal = 2;
 		return retVal;
 	}

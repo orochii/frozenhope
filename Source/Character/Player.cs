@@ -4,6 +4,7 @@ using System.Collections.Generic;
 
 public partial class Player : CharacterBody3D
 {
+	public static Player Instance;
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
@@ -11,9 +12,11 @@ public partial class Player : CharacterBody3D
 	private bool holsterMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
+	public Targettable CurrentTarget => currentTarget;
 	private float previousTargetRotation;
 	public override void _Ready()
 	{
+		Instance = this;
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
