@@ -120,6 +120,9 @@ public partial class Player : CharacterBody3D
 
     private void ExecuteHitscan(AmmoItem ammo)
     {
+		//First of all, we play the Sound Effect of the ammo type
+		
+
         var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
         var target = origin + (GlobalTransform.Basis.Z * 10f);
         var spaceState = GetWorld3D().DirectSpaceState;

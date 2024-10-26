@@ -1,0 +1,19 @@
+[remap]
+
+importer="oggvorbisstr"
+type="AudioStreamOggVorbis"
+uid="uid://c5ym1i1xw55go"
+path="res://.godot/imported/testTing.ogg-13fe6710a843c9862980feb4415787ca.oggvorbisstr"
+
+[deps]
+
+source_file="res://Sound/Sound Effects/testTing.ogg"
+dest_files=["res://.godot/imported/testTing.ogg-13fe6710a843c9862980feb4415787ca.oggvorbisstr"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4
