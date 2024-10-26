@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dllfhbjwrdnrr"]
+[gd_scene load_steps=9 format=3 uid="uid://dllfhbjwrdnrr"]
 
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="3_4fksl"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_srlpg"]
@@ -17,6 +17,12 @@ size = Vector2(20, 20)
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_0t151"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_t06iu"]
+size = Vector3(4, 3, 0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_fvvdp"]
+data = PackedVector3Array(-2, 1.5, 0.25, 2, 1.5, 0.25, -2, -1.5, 0.25, 2, 1.5, 0.25, 2, -1.5, 0.25, -2, -1.5, 0.25, 2, 1.5, -0.25, -2, 1.5, -0.25, 2, -1.5, -0.25, -2, 1.5, -0.25, -2, -1.5, -0.25, 2, -1.5, -0.25, 2, 1.5, 0.25, 2, 1.5, -0.25, 2, -1.5, 0.25, 2, 1.5, -0.25, 2, -1.5, -0.25, 2, -1.5, 0.25, -2, 1.5, -0.25, -2, 1.5, 0.25, -2, -1.5, -0.25, -2, 1.5, 0.25, -2, -1.5, 0.25, -2, -1.5, -0.25, 2, 1.5, 0.25, -2, 1.5, 0.25, 2, 1.5, -0.25, -2, 1.5, 0.25, -2, 1.5, -0.25, 2, 1.5, -0.25, -2, -1.5, 0.25, 2, -1.5, 0.25, -2, -1.5, -0.25, 2, -1.5, 0.25, 2, -1.5, -0.25, -2, -1.5, -0.25)
 
 [node name="Node3D" type="Node3D"]
 
@@ -44,3 +50,14 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
 [node name="Wendigo2" parent="." instance=ExtResource("3_4fksl")]
 transform = Transform3D(0.445307, 0, 0.895378, 0, 1, 0, -0.895378, 0, 0.445307, -2.78159, 0, -0.467391)
+
+[node name="Scenario" type="Node3D" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Scenario"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.46338, -3.73495)
+mesh = SubResource("BoxMesh_t06iu")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenario/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenario/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_fvvdp")
