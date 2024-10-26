@@ -12,7 +12,7 @@ public partial class CharacterStateMachine : Node
 	CharacterAnimState _lastState = null;
     public override void _Ready()
     {
-        Animator.AnimationFinished += OnAnimationFinished;
+        if (Animator != null) Animator.AnimationFinished += OnAnimationFinished;
     }
     public override void _Process(double delta)
     {
@@ -27,10 +27,12 @@ public partial class CharacterStateMachine : Node
         {
             var stateVariation = currentState.Get(VariationId);
             var currentAnimationId = stateVariation.AnimationId;
-            if (stateVariation.PlayBackwards)
-                Animator.PlayBackwards(currentAnimationId, blend);
-            else
-                Animator.Play(currentAnimationId, blend);
+            if (stateVariation.PlayBackwards) {
+				if (Animator != null) Animator.PlayBackwards(currentAnimationId, blend);
+			}
+            else {
+				if (Animator != null) Animator.Play(currentAnimationId, blend);
+			}
         }
         _lastState = currentState;
     }

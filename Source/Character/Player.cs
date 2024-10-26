@@ -11,6 +11,7 @@ public partial class Player : CharacterBody3D
 	private bool holsterMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
+	private float previousTargetRotation;
 	public override void _Ready()
 	{
 		RefreshEquippedModel();
@@ -39,21 +40,32 @@ public partial class Player : CharacterBody3D
 			var move = Input.GetVector("move_left","move_right","move_up","move_down");
 			var run = Input.IsActionPressed("run");
 			var holster = Input.IsActionJustPressed("holster");
+			var cycleLeft = Input.IsActionJustPressed("cycle_left");
+			var cycleRight = Input.IsActionJustPressed("cycle_right");
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (holster) {
 				holsterMode = !holsterMode;
 				if (holsterMode) {
 					currentTarget = PickClosestTarget();
+					previousTargetRotation = Rotation.Y;
 				} else {
 					currentTarget = null;
 				}
+			}
+			if (currentTarget != null) {
+				var dir = cycleLeft ? -1 : cycleRight ? 1 : 0;
+				var newTarget = PickNextTarget(dir);
+				if (newTarget != null) currentTarget = newTarget;
 			}
 			ProcessMove(d,move,run,holsterMode);
 			// Rotate towards target.
 			if (currentTarget != null) {
 				Vector3 dir = (currentTarget.GetPivotPosition() - GlobalPosition).Normalized();
 				float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
-				Rotation = new Vector3(0, (Mathf.DegToRad(180))-angle, 0);
+				float newRotation = Mathf.DegToRad(180) - angle;
+				float r = Mathf.LerpAngle(previousTargetRotation, newRotation, 0.4f);
+				Rotation = new Vector3(0, r, 0);
+				previousTargetRotation = r;
 			}
 		}
 		else {

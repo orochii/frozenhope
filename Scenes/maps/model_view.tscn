@@ -41,3 +41,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 [node name="Player" parent="." instance=ExtResource("3_srlpg")]
 
 [node name="Wendigo" parent="." instance=ExtResource("3_4fksl")]
+
+[node name="Wendigo2" parent="." instance=ExtResource("3_4fksl")]
+transform = Transform3D(0.445307, 0, 0.895378, 0, 1, 0, -0.895378, 0, 0.445307, -2.78159, 0, -0.467391)
