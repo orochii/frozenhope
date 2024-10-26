@@ -1,14 +1,21 @@
 using Godot;
 using System;
+using System.Collections.Generic;
 
 public partial class Player : CharacterBody3D
 {
-	[Export] CharacterMoveData[] moveStates;
+	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
+	[Export] private Area3D DetectionArea;
+	[Export] private float MaxFocusAngle = 45f;
 	private bool holsterMode = false;
+	private List<Targettable> nearbyTargets = new List<Targettable>();
+	private Targettable currentTarget;
 	public override void _Ready()
 	{
 		RefreshEquippedModel();
+		DetectionArea.BodyEntered += OnBodyEntered;
+		DetectionArea.BodyExited += OnbodyExited;
 	}
 	private void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -33,8 +40,21 @@ public partial class Player : CharacterBody3D
 			var run = Input.IsActionPressed("run");
 			var holster = Input.IsActionJustPressed("holster");
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
-			if (holster) holsterMode = !holsterMode;
+			if (holster) {
+				holsterMode = !holsterMode;
+				if (holsterMode) {
+					currentTarget = PickClosestTarget();
+				} else {
+					currentTarget = null;
+				}
+			}
 			ProcessMove(d,move,run,holsterMode);
+			// Rotate towards target.
+			if (currentTarget != null) {
+				Vector3 dir = (currentTarget.GetPivotPosition() - GlobalPosition).Normalized();
+				float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
+				Rotation = new Vector3(0, (Mathf.DegToRad(180))-angle, 0);
+			}
 		}
 		else {
 			//
@@ -75,5 +95,61 @@ public partial class Player : CharacterBody3D
 		}
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
 		MoveAndSlide();
+	}
+	private Targettable PickClosestTarget() {
+		Targettable closest = null;
+		float closestDst = 0;
+		var forward = Transform.Basis.Z;
+		foreach (var target in nearbyTargets) {
+			// Get relative position
+			Vector3 targetPos = target.GetPivotPosition();
+			Vector3 targetRelativePos = targetPos - GlobalPosition;
+			// Check if it's in front of player
+			float angle = targetRelativePos.Normalized().AngleTo(forward);
+			if (angle < Mathf.DegToRad(MaxFocusAngle)) {
+				// Check if it's the closest enemy.
+				float dst = targetRelativePos.Length();
+				if (closest == null || dst < closestDst) {
+					closest = target;
+					closestDst = dst;
+				}
+			}
+		}
+		return closest;
+	}
+	private Targettable PickNextTarget(int dir) {
+		if (currentTarget == null) return null;
+		Targettable closest = null;
+		float closestDst = 0;
+		Vector3 forward = currentTarget.GetPivotPosition() - GlobalPosition;
+		foreach (var target in nearbyTargets) {
+			// Get relative position
+			Vector3 targetPos = target.GetPivotPosition();
+			Vector3 targetRelativePos = targetPos - GlobalPosition;
+			// Check angle
+			float angle = targetRelativePos.Normalized().SignedAngleTo(forward, Vector3.Up);
+			bool valid = (dir>0 && angle>0) || (dir<0 && angle<0);
+			if (valid) {
+				// Check if it's the closest enemy.
+				float dst = targetRelativePos.Length();
+				if (closest == null || dst < closestDst) {
+					closest = target;
+					closestDst = dst;
+				}
+			}
+		}
+		return closest;
+	}
+	private void OnBodyEntered(Node3D body) {
+		if (body is Targettable) {
+			var target = body as Targettable;
+			if (!nearbyTargets.Contains(target)) nearbyTargets.Add(target);
+		}
+	}
+	private void OnbodyExited(Node3D body) {
+		if (body is Targettable) {
+			var target = body as Targettable;
+			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
+		}
 	}
 }

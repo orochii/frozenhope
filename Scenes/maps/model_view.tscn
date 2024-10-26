@@ -1,8 +1,8 @@
 [gd_scene load_steps=7 format=3 uid="uid://dllfhbjwrdnrr"]
 
+[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="3_4fksl"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_srlpg"]
 [ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="4_2nma4"]
-[ext_resource type="PackedScene" uid="uid://d20qg6jgj3ous" path="res://Graphics/Models/enemies/wendigo.tscn" id="5_oes28"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5qte"]
 render_priority = 0
@@ -32,9 +32,6 @@ mesh = SubResource("PlaneMesh_a6nwm")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Checker/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_0t151")
 
-[node name="Criaturas" parent="." instance=ExtResource("5_oes28")]
-transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0.265753, 0, -2.11199)
-
 [node name="Node3D" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 0, 0, 0)
 
@@ -42,3 +39,5 @@ transform = Transform3D(1, 0, 0, 0, 0.707107, 0.707107, 0, -0.707107, 0.707107, 
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 3)
 
 [node name="Player" parent="." instance=ExtResource("3_srlpg")]
+
+[node name="Wendigo" parent="." instance=ExtResource("3_4fksl")]

@@ -3,7 +3,6 @@ using System;
 
 public partial class CharacterGraphic : Node3D
 {
-	[Export] AnimationTree Animator;
 	[Export] public CharacterStateMachine StateMachine;
 	[Export] Skeleton3D Armature;
 	[Export] string WeaponBoneName;
@@ -36,7 +35,7 @@ public partial class CharacterGraphic : Node3D
     }
     public override void _Process(double delta)
     {
-        WeaponSlot.Transform = GetWeaponBonePose();
+        if (WeaponSlot != null) WeaponSlot.Transform = GetWeaponBonePose();
     }
     private void InitializeBones() {
 		if (initializedBones) return;
