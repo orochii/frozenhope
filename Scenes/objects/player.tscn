@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bwuhe8d2c7xau"]
+[gd_scene load_steps=8 format=3 uid="uid://bwuhe8d2c7xau"]
 
 [ext_resource type="Script" path="res://Source/Character/Player.cs" id="1_hl4ia"]
 [ext_resource type="Script" path="res://Source/Character/CharacterMoveData.cs" id="2_ee1yy"]
@@ -20,13 +20,22 @@ Deacceleration = 25.0
 radius = 0.3
 height = 1.7
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_anvua"]
+radius = 3.0
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea")]
 script = ExtResource("1_hl4ia")
 moveStates = Array[Object]([SubResource("Resource_ojy2r"), SubResource("Resource_h88q8")])
 Graphic = NodePath("Lain")
+DetectionArea = NodePath("Area3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 shape = SubResource("CapsuleShape3D_xvsrg")
 
 [node name="Lain" parent="." instance=ExtResource("3_8fjv8")]
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_anvua")

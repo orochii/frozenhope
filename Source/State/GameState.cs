@@ -96,10 +96,14 @@ public class GameState {
         persistentData.EquippedItem = idx;
     }
     public BaseItem GetEquippedItem() {
+        var entry = GetEquippedItemEntry();
+        if (entry == null) return null;
+        return BaseItem.Get(entry.itemID);
+    }
+    public ItemEntry GetEquippedItemEntry() {
         if (persistentData.EquippedItem < 0) return null;
         if (persistentData.EquippedItem >= persistentData.inventory.Count) return null;
-        var entry = persistentData.inventory[persistentData.EquippedItem];
-        return BaseItem.Get(entry.itemID);
+        return persistentData.inventory[persistentData.EquippedItem];
     }
     #endregion
     #region Inventory

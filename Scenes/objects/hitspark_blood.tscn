@@ -1,0 +1,93 @@
+[gd_scene load_steps=9 format=3 uid="uid://bvedlftr3otom"]
+
+[sub_resource type="Curve" id="Curve_grikw"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.93924, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_gc486"]
+curve = SubResource("Curve_grikw")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_r6hy3"]
+spread = 180.0
+radial_velocity_min = 0.499978
+radial_velocity_max = 1.49998
+alpha_curve = SubResource("CurveTexture_gc486")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_po124"]
+transparency = 1
+shading_mode = 0
+vertex_color_use_as_albedo = true
+albedo_color = Color(0.293325, 0, 0.0216151, 1)
+use_particle_trails = true
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_sxlnc"]
+material = SubResource("StandardMaterial3D_po124")
+radius = 0.01
+section_length = 0.01
+
+[sub_resource type="Animation" id="Animation_ivtdy"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jlo57"]
+resource_name = "start"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:emitting")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "method"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"queue_free"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_e3k81"]
+_data = {
+"RESET": SubResource("Animation_ivtdy"),
+"start": SubResource("Animation_jlo57")
+}
+
+[node name="hitspark_default" type="GPUParticles3D"]
+emitting = false
+lifetime = 0.2
+one_shot = true
+speed_scale = 0.5
+explosiveness = 1.0
+trail_enabled = true
+trail_lifetime = 0.1
+process_material = SubResource("ParticleProcessMaterial_r6hy3")
+draw_pass_1 = SubResource("TubeTrailMesh_sxlnc")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_e3k81")
+}
+autoplay = "start"

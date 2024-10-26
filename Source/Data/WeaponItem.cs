@@ -4,6 +4,8 @@ using Godot;
 public partial class WeaponItem : BaseItem {
     [Export] public string[] CompatibleAmmo;
     [Export] public int AmmoMax;
+    [Export] public PackedScene EquippedModel;
+    [Export] public string AnimationSet = "";
     // Action when not holding ammo
     public bool IsCompatibleWithAmmo(string id) {
         foreach (var a in CompatibleAmmo) {
