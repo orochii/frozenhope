@@ -17,11 +17,6 @@ public partial class Stats : Control
 	}
 	public override void _Process(double delta)
 	{
-		//
-		var vert = Mathf.RoundToInt(Input.GetAxis("cycle_left","cycle_right"));
-		if (vert != 0) {
-			Main.Instance.State.ChangeHealth(vert);
-		}
 		// 
 		if (Main.Instance == null) return;
 		if (Main.Instance.State == null) return;

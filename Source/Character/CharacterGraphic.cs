@@ -14,6 +14,23 @@ public partial class CharacterGraphic : Node3D
 	private Node3D currentWeaponModel;
 	private PackedScene lastModelScene = null;
     //
+	public Node3D GetWeaponSpawnPoint() {
+		if (currentWeaponModel != null) {
+			if (currentWeaponModel is WeaponGraphic) {
+				var weapon = currentWeaponModel as WeaponGraphic;
+				return weapon.SpawnPoint;
+			}
+		}
+		return currentWeaponModel;
+	}
+	public void SetWeaponAnimation(string animId) {
+		if (currentWeaponModel != null) {
+			if (currentWeaponModel is WeaponGraphic) {
+				var weapon = currentWeaponModel as WeaponGraphic;
+				weapon.Play(animId);
+			}
+		}
+	}
 	public void SetWeaponModel(PackedScene model) {
 		if (model == lastModelScene) return;
 		if (currentWeaponModel != null) {

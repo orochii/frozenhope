@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cg2r5xf7ubfeb"]
+[gd_scene load_steps=10 format=3 uid="uid://cg2r5xf7ubfeb"]
 
 [ext_resource type="PackedScene" uid="uid://b34m6sp7487jy" path="res://Graphics/Models/weapons/glock_g3.glb" id="1_yw55t"]
+[ext_resource type="Script" path="res://Source/Objects/WeaponGraphic.cs" id="2_i0ygo"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_mntjy"]
 [ext_resource type="Texture2D" uid="uid://bakob26g2mnjh" path="res://Graphics/Models/weapons/glock_tex.png" id="3_mtolq"]
+[ext_resource type="PackedScene" uid="uid://cbfi7ijxpa15g" path="res://Graphics/Models/weapons/p_muzzle_1.tscn" id="4_ljq16"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfb60"]
 render_priority = 0
@@ -18,8 +20,65 @@ shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
 shader_parameter/albedo = ExtResource("3_mtolq")
 
-[node name="glock_g3" instance=ExtResource("1_yw55t")]
+[sub_resource type="Animation" id="Animation_jgmlb"]
+resource_name = "muzzle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzle1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="Animation" id="Animation_xtqsd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzle1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1ebp"]
+_data = {
+"RESET": SubResource("Animation_xtqsd"),
+"muzzle": SubResource("Animation_jgmlb")
+}
+
+[node name="glock_g3" node_paths=PackedStringArray("Animator", "SpawnPoint") instance=ExtResource("1_yw55t")]
 transform = Transform3D(-6.55671e-09, 0.15, 6.55671e-09, 0, -6.55671e-09, 0.15, 0.15, 6.55671e-09, 2.86603e-16, 0.0284089, 0.106533, 0)
+script = ExtResource("2_i0ygo")
+Animator = NodePath("WeaponAnim")
+SpawnPoint = NodePath("SpawnPoint")
 
 [node name="Plane" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_yfb60")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." index="2"]
+
+[node name="muzzle1" parent="." index="3" instance=ExtResource("4_ljq16")]
+transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, -2.18557e-08, 2.18557e-08, 2.18557e-08, 0.5, -2.18557e-08, 0.0212223, 0.35204, 0.928376)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="muzzle1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257772, -1.11759e-08)
+
+[node name="SpawnPoint" type="Node3D" parent="." index="4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.40945e-08, 0.322446, 0.983986)
+
+[node name="WeaponAnim" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_w1ebp")
+}

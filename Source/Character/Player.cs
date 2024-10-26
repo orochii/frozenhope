@@ -32,16 +32,17 @@ public partial class Player : CharacterBody3D
 	public override void _Process(double delta)
 	{
 		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
-		GD.Print("canMove=",canMove);
 		// Cast to float because working with doubles sucks when everything is using floats.
 		var d = (float)delta;
 		if (canMove) {
+			var isIdling = Graphic.StateMachine.ActionState == CharacterAnimState.EActionState.NONE;
 			// Get input direction and dash
-			var move = Input.GetVector("move_left","move_right","move_up","move_down");
-			var run = Input.IsActionPressed("run");
-			var holster = Input.IsActionJustPressed("holster");
-			var cycleLeft = Input.IsActionJustPressed("cycle_left");
-			var cycleRight = Input.IsActionJustPressed("cycle_right");
+			var move = isIdling ? Input.GetVector("move_left","move_right","move_up","move_down") : Vector2.Zero;
+			var run = isIdling ? Input.IsActionPressed("run") : false;
+			var interact = isIdling ? Input.IsActionJustPressed("interact") : false;
+			var holster = isIdling ? Input.IsActionJustPressed("holster") : false;
+			var cycleLeft = isIdling ? Input.IsActionJustPressed("cycle_left") : false;
+			var cycleRight = isIdling ? Input.IsActionJustPressed("cycle_right") : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (holster) {
 				holsterMode = !holsterMode;
@@ -58,6 +59,15 @@ public partial class Player : CharacterBody3D
 				if (newTarget != null) currentTarget = newTarget;
 			}
 			ProcessMove(d,move,run,holsterMode);
+			// Execute attack.
+			if (interact) {
+				if (holsterMode) {
+					// Attack with held weapon.
+					ExecuteAttack();
+				} else {
+					// Interact with environment.
+				}
+			}
 			// Rotate towards target.
 			if (currentTarget != null) {
 				Vector3 dir = (currentTarget.GetPivotPosition() - GlobalPosition).Normalized();
@@ -72,6 +82,74 @@ public partial class Player : CharacterBody3D
 			//
 			ProcessMove(d,Vector2.Zero,false,false);
 		}
+	}
+	private void ExecuteAttack() {
+		var equip = Main.Instance.State.GetEquippedItemEntry();
+		var item = BaseItem.Get(equip.itemID);
+		if (item != null && item is WeaponItem) {
+			var wpn = item as WeaponItem;
+			// Set Fire state.
+			Graphic.StateMachine.ActionState = CharacterAnimState.EActionState.ATTACK;
+			// Check for ammo.
+			if (equip.ammoQty > 0 && equip.ammoId.Length > 0) {
+				// Get ammo item
+				var ammo = BaseItem.Get(equip.ammoId) as AmmoItem;
+				// Muzzle in weapon.
+				Graphic.SetWeaponAnimation("muzzle");
+				// Check if should do hitscan or spawn projectile.
+				if (ammo.Projectile != null) {
+					// Spawn projectile.
+					// TODO.
+				} else
+                {
+                    // Execute hitscan.
+                    ExecuteHitscan(ammo);
+                }
+                // Spend ammo
+                equip.ammoQty -= 1;
+				if (equip.ammoQty == 0) equip.ammoId = "";
+			} else {
+				// Attack for no ammo (if possible).
+				// TODO.
+			}
+		}
+	}
+
+    private void ExecuteHitscan(AmmoItem ammo)
+    {
+        var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
+        var target = origin + (GlobalTransform.Basis.Z * 10f);
+        var spaceState = GetWorld3D().DirectSpaceState;
+        var query = PhysicsRayQueryParameters3D.Create(origin, target);
+        query.Exclude = new Godot.Collections.Array<Rid> { GetRid() };
+        var result = spaceState.IntersectRay(query);
+        if (result.Count > 0)
+        {
+            var hitPoint = result["position"].As<Vector3>();
+            var hitNormal = result["normal"].As<Vector3>();
+            var hitObject = result["collider"].As<Node3D>();
+            if (hitObject is Targettable)
+            {
+                var hitTarget = hitObject as Targettable;
+				// Spawn hit spark.
+                var sparkSrc = hitTarget.CanBleed() ? ammo.HitSparkBlood : ammo.HitSparkObject;
+                SpawnHitSpark(sparkSrc, hitPoint);
+				// Execute damage.
+				hitTarget.Damage(ammo.HitscanDamageType, ammo.HitscanDamage);
+            }
+            else
+            {
+				// Spawn hit spark.
+                SpawnHitSpark(ammo.HitSparkObject, hitPoint);
+            }
+        }
+    }
+
+    private void SpawnHitSpark(PackedScene src, Vector3 pos) {
+		if (src==null) return;
+		var hitSpark = src.Instantiate<Node3D>();
+		GetParent().AddChild(hitSpark);
+		hitSpark.GlobalPosition = pos;
 	}
 	private void ProcessMove(float d, Vector2 move, bool run, bool holstering) {
 		// You can't run and holster, because I say so! (less animations :P)

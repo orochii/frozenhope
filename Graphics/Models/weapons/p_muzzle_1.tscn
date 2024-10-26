@@ -1,0 +1,24 @@
+[gd_scene load_steps=5 format=3 uid="uid://cbfi7ijxpa15g"]
+
+[ext_resource type="PackedScene" uid="uid://cqh0yfuq4tpg8" path="res://Graphics/Models/weapons/muzzle1.glb" id="1_t8qhh"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_unlit_nocull.gdshader" id="2_pfavp"]
+[ext_resource type="Texture2D" uid="uid://bvg0g72wvioys" path="res://Graphics/Models/weapons/muzzleFlash.png" id="3_405xo"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nu2el"]
+render_priority = 0
+shader = ExtResource("2_pfavp")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 0.852838, 0.544177, 1)
+shader_parameter/emission_color = Color(0.937255, 0.792157, 0.258824, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_405xo")
+
+[node name="muzzle1" instance=ExtResource("1_t8qhh")]
+
+[node name="Cube" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_nu2el")

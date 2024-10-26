@@ -22,7 +22,7 @@ window/size/viewport_height=240
 window/size/resizable=false
 window/size/window_width_override=640
 window/size/window_height_override=480
-window/stretch/mode="canvas_items"
+window/stretch/mode="viewport"
 window/stretch/aspect="keep_height"
 
 [dotnet]
@@ -122,5 +122,4 @@ cancel={
 
 [rendering]
 
-renderer/rendering_method="gl_compatibility"
-renderer/rendering_method.mobile="gl_compatibility"
+renderer/rendering_method="mobile"

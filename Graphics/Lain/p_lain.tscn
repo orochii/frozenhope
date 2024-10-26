@@ -119,14 +119,14 @@ PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_i2p28"]
 script = ExtResource("6_nl2me")
-Id = ""
+Id = "pistol"
 AnimationId = "Standing_FireSmallWeapon"
 PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_o8hx8"]
 script = ExtResource("7_oke14")
 MoveState = 0
-ModeState = 0
+ModeState = 1
 ActionState = 1
 AnimEntries = Array[Object]([SubResource("Resource_34y5d"), SubResource("Resource_i2p28")])
 
