@@ -29,4 +29,4 @@ AmmoQty = 0
 [resource]
 script = ExtResource("1_nmb2g")
 StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_qqkkl")])
-StartingScene = "model_view"
+StartingScene = "testing_level"

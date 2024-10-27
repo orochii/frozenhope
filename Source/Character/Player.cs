@@ -14,6 +14,18 @@ public partial class Player : CharacterBody3D
 	private Targettable currentTarget;
 	public Targettable CurrentTarget => currentTarget;
 	private float previousTargetRotation;
+
+	//Cache the inputs in order to save on memory by avoiding constant conversions from String to Stringname
+	StringName MoveLeft = "move_left";
+	StringName MoveRight = "move_right";
+	StringName MoveUp = "move_up";
+	StringName MoveDown = "move_down";
+	StringName Sprint = "run";
+	StringName Interact = "interact";
+	StringName Holster = "holster";
+	StringName CycleLeft = "cycle_left";
+	StringName CycleRight = "cycle_right";
+
 	public override void _Ready()
 	{
 		Instance = this;
@@ -40,12 +52,12 @@ public partial class Player : CharacterBody3D
 		if (canMove) {
 			var isIdling = Graphic.StateMachine.ActionState == CharacterAnimState.EActionState.NONE;
 			// Get input direction and dash
-			var move = isIdling ? Input.GetVector("move_left","move_right","move_up","move_down") : Vector2.Zero;
-			var run = isIdling ? Input.IsActionPressed("run") : false;
-			var interact = isIdling ? Input.IsActionJustPressed("interact") : false;
-			var holster = isIdling ? Input.IsActionJustPressed("holster") : false;
-			var cycleLeft = isIdling ? Input.IsActionJustPressed("cycle_left") : false;
-			var cycleRight = isIdling ? Input.IsActionJustPressed("cycle_right") : false;
+			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
+			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
+			var interact = isIdling ? Input.IsActionJustPressed(Interact) : false;
+			var holster = isIdling ? Input.IsActionJustPressed(Holster) : false;
+			var cycleLeft = isIdling ? Input.IsActionJustPressed(CycleLeft) : false;
+			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (holster) {
 				holsterMode = !holsterMode;
@@ -61,7 +73,7 @@ public partial class Player : CharacterBody3D
 				var newTarget = PickNextTarget(dir);
 				if (newTarget != null) currentTarget = newTarget;
 			}
-			ProcessMove(d,move,run,holsterMode);
+			ProcessTankMove(d,move,run,holsterMode);
 			// Execute attack.
 			if (interact) {
 				if (holsterMode) {
@@ -83,7 +95,7 @@ public partial class Player : CharacterBody3D
 		}
 		else {
 			//
-			ProcessMove(d,Vector2.Zero,false,false);
+			ProcessTankMove(d,Vector2.Zero,false,false);
 		}
 	}
 	private void ExecuteAttack() {
@@ -157,6 +169,51 @@ public partial class Player : CharacterBody3D
 		GetParent().AddChild(hitSpark);
 		hitSpark.GlobalPosition = pos;
 	}
+
+	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
+	private void ProcessTankMove(float d, Vector2 move, bool run, bool holstering) {
+		// You can't run and holster, because I say so! (less animations :P)
+		if (holstering==true) run = false;
+		Graphic.StateMachine.ModeState = holstering ? CharacterAnimState.EModeState.HOLSTER : CharacterAnimState.EModeState.IDLE;
+		// Get current move state properties
+		var currMoveState = run ? moveStates[1] : moveStates[0];
+		// Apply gravity
+		var v = Velocity;
+		v += GetGravity();
+		Velocity = v;
+		// Quick check for if we're moving or not
+		if (move.LengthSquared() > 0) {
+			// Set character visuals
+			Graphic.StateMachine.MoveState = run ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
+			var targetVelocity = (Transform.Basis.Z * -move.Y) * currMoveState.Speed;
+			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
+			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
+			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
+			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
+			// We rotate the character
+			var RotationY = GlobalRotation.Y;
+    		RotationY = Mathf.Wrap(RotationY + -move.X * d * 3, 0, Mathf.Tau);
+    		GlobalRotation = new Vector3(0, RotationY, 0);
+
+			/*
+			// Rotate character towards the direction we're moving to
+			var dir = new Vector3(move.X, 0, -move.Y);
+			float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
+			Rotation = new Vector3(0, angle, 0); */
+		} else {
+			// Set character visuals to not moving
+			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
+			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
+			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
+			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
+			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
+		}
+		// This single, built-in function does all the magic regarding collision, slopes, etc.
+		MoveAndSlide();
+	}
+
+	//Defualt Move Processing
 	private void ProcessMove(float d, Vector2 move, bool run, bool holstering) {
 		// You can't run and holster, because I say so! (less animations :P)
 		if (holstering==true) run = false;
