@@ -8,7 +8,9 @@ public partial class InvSlotButton : TextureButton
 	[Export] RichTextLabel Ammo;
 	[Export] Label Quantity;
 	GameState.ItemEntry CurrentEntry;
+	public int Index;
 	public BaseItem Item = null;
+	public Inventory ParentInventory;
 	public void Setup(GameState.ItemEntry entry, bool ignoreVisuals=false) {
 		CurrentEntry = entry;
 		Item = (entry==null) ? null : BaseItem.Get(entry.itemID);
@@ -39,6 +41,22 @@ public partial class InvSlotButton : TextureButton
 			else {
 				Ammo.Text = "";
 			}
+		}
+	}
+    public override void _Ready()
+    {
+        Pressed += OnInventorySelected;
+    }
+	private void OnInventorySelected() {
+		switch (Item) {
+			case WeaponItem:
+				Main.Instance.State.SetEquippedItem(Index);
+				Player.Instance.RefreshEquippedModel();
+				ParentInventory.RefreshSlots();
+				break;
+			case UseableItem:
+				ParentInventory.RefreshSlots();
+				break;
 		}
 	}
 }

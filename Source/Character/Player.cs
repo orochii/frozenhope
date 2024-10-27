@@ -21,7 +21,7 @@ public partial class Player : CharacterBody3D
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
 	}
-	private void RefreshEquippedModel() {
+	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
 		if (item != null && item is WeaponItem) {
 			var wpn = item as WeaponItem;

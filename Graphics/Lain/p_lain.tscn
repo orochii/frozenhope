@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://oykp21gpqp0a"]
+[gd_scene load_steps=31 format=3 uid="uid://oykp21gpqp0a"]
 
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
 [ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
@@ -34,12 +34,18 @@ Id = "pistol"
 AnimationId = "Stand_HoldSmallWeapon"
 PlayBackwards = false
 
+[sub_resource type="Resource" id="Resource_iyqc0"]
+script = ExtResource("6_nl2me")
+Id = "rifle"
+AnimationId = "Stand_HoldRifleWeapon"
+PlayBackwards = false
+
 [sub_resource type="Resource" id="Resource_1cesr"]
 script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 0
 ActionState = 0
-AnimEntries = Array[Object]([SubResource("Resource_fbyn7"), SubResource("Resource_1l34e")])
+AnimEntries = Array[Object]([SubResource("Resource_fbyn7"), SubResource("Resource_1l34e"), SubResource("Resource_iyqc0")])
 
 [sub_resource type="Resource" id="Resource_g5lm1"]
 script = ExtResource("6_nl2me")
@@ -53,12 +59,18 @@ Id = "pistol"
 AnimationId = "Walk_HoldSmallWeapon"
 PlayBackwards = false
 
+[sub_resource type="Resource" id="Resource_8ybfn"]
+script = ExtResource("6_nl2me")
+Id = "rifle"
+AnimationId = "Walk_HoldRifleWeapon"
+PlayBackwards = false
+
 [sub_resource type="Resource" id="Resource_33pw3"]
 script = ExtResource("7_oke14")
 MoveState = 1
 ModeState = 0
 ActionState = 0
-AnimEntries = Array[Object]([SubResource("Resource_g5lm1"), SubResource("Resource_jgbhn")])
+AnimEntries = Array[Object]([SubResource("Resource_g5lm1"), SubResource("Resource_jgbhn"), SubResource("Resource_8ybfn")])
 
 [sub_resource type="Resource" id="Resource_db1dw"]
 script = ExtResource("6_nl2me")
@@ -85,12 +97,18 @@ Id = "pistol"
 AnimationId = "Standing_HolsterSmallWeapon"
 PlayBackwards = false
 
+[sub_resource type="Resource" id="Resource_rm26b"]
+script = ExtResource("6_nl2me")
+Id = "rifle"
+AnimationId = "Standing_HolsterRifleWeapon"
+PlayBackwards = false
+
 [sub_resource type="Resource" id="Resource_wen4n"]
 script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 1
 ActionState = 0
-AnimEntries = Array[Object]([SubResource("Resource_e7vvv"), SubResource("Resource_brsv7")])
+AnimEntries = Array[Object]([SubResource("Resource_e7vvv"), SubResource("Resource_brsv7"), SubResource("Resource_rm26b")])
 
 [sub_resource type="Resource" id="Resource_g6prs"]
 script = ExtResource("6_nl2me")
@@ -104,12 +122,18 @@ Id = "pistol"
 AnimationId = "Walk_HolsterSmallWeapon"
 PlayBackwards = false
 
+[sub_resource type="Resource" id="Resource_pfjn7"]
+script = ExtResource("6_nl2me")
+Id = "rifle"
+AnimationId = "Walk_HolsterRifleWeapon"
+PlayBackwards = false
+
 [sub_resource type="Resource" id="Resource_3akkj"]
 script = ExtResource("7_oke14")
 MoveState = 1
 ModeState = 1
 ActionState = 0
-AnimEntries = Array[Object]([SubResource("Resource_g6prs"), SubResource("Resource_umejs")])
+AnimEntries = Array[Object]([SubResource("Resource_g6prs"), SubResource("Resource_umejs"), SubResource("Resource_pfjn7")])
 
 [sub_resource type="Resource" id="Resource_34y5d"]
 script = ExtResource("6_nl2me")
@@ -123,16 +147,22 @@ Id = "pistol"
 AnimationId = "Standing_FireSmallWeapon"
 PlayBackwards = false
 
+[sub_resource type="Resource" id="Resource_i05wv"]
+script = ExtResource("6_nl2me")
+Id = "rifle"
+AnimationId = "Standing_FireRifleWeapon"
+PlayBackwards = false
+
 [sub_resource type="Resource" id="Resource_o8hx8"]
 script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 1
 ActionState = 1
-AnimEntries = Array[Object]([SubResource("Resource_34y5d"), SubResource("Resource_i2p28")])
+AnimEntries = Array[Object]([SubResource("Resource_34y5d"), SubResource("Resource_i2p28"), SubResource("Resource_i05wv")])
 
 [node name="Lain" node_paths=PackedStringArray("StateMachine", "Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
 script = ExtResource("2_c1pyr")
-StateMachine = NodePath("Node")
+StateMachine = NodePath("StateMachine")
 Armature = NodePath("Armature/Skeleton3D")
 WeaponBoneName = "Hand.R"
 WeaponSlot = NodePath("WeaponSlot")
@@ -167,7 +197,7 @@ surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 
 [node name="WeaponSlot" type="Node3D" parent="." index="3"]
 
-[node name="Node" type="Node" parent="." index="4" node_paths=PackedStringArray("Animator")]
+[node name="StateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
 AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8")])

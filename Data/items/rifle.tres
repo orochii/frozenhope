@@ -1,6 +1,7 @@
-[gd_resource type="Resource" script_class="WeaponItem" load_steps=4 format=3 uid="uid://c8wu2brd3rtum"]
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://c8wu2brd3rtum"]
 
 [ext_resource type="Texture2D" uid="uid://bsotilsb3q3ii" path="res://Graphics/textures/icons/scout_render.png" id="1_b65t7"]
+[ext_resource type="PackedScene" uid="uid://blvo27p6s7te0" path="res://Graphics/Models/weapons/equip_r_hunter_elite.tscn" id="1_sgdl2"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="2_5waef"]
 [ext_resource type="Script" path="res://Source/Data/WeaponItem.cs" id="3_m5ofe"]
 
@@ -8,6 +9,8 @@
 script = ExtResource("3_m5ofe")
 CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 10
+EquippedModel = ExtResource("1_sgdl2")
+AnimationSet = "rifle"
 DisplayName = "Hunter Elite"
 DisplayDescription = "Customized rifle designed in Europe. Chambered in .308."
 Icon = ExtResource("1_b65t7")
