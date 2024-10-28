@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
 
 public partial class Player : CharacterBody3D
 {
@@ -9,7 +10,7 @@ public partial class Player : CharacterBody3D
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
 	[Export] private float MaxFocusAngle = 45f;
-	private bool holsterMode = false;
+	private bool aimMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
 	public Targettable CurrentTarget => currentTarget;
@@ -22,7 +23,7 @@ public partial class Player : CharacterBody3D
 	StringName MoveDown = "move_down";
 	StringName Sprint = "run";
 	StringName Interact = "interact";
-	StringName Holster = "holster";
+	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
 
@@ -55,13 +56,13 @@ public partial class Player : CharacterBody3D
 			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
 			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
 			var interact = isIdling ? Input.IsActionJustPressed(Interact) : false;
-			var holster = isIdling ? Input.IsActionJustPressed(Holster) : false;
+			var aim = isIdling ? Input.IsActionJustPressed(Aim) : false;
 			var cycleLeft = isIdling ? Input.IsActionJustPressed(CycleLeft) : false;
 			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
-			if (holster) {
-				holsterMode = !holsterMode;
-				if (holsterMode) {
+			if (aim) {
+				aimMode = !aimMode;
+				if (aimMode) {
 					currentTarget = PickClosestTarget();
 					previousTargetRotation = Rotation.Y;
 				} else {
@@ -73,10 +74,10 @@ public partial class Player : CharacterBody3D
 				var newTarget = PickNextTarget(dir);
 				if (newTarget != null) currentTarget = newTarget;
 			}
-			ProcessTankMove(d,move,run,holsterMode);
+			ProcessTankMove(d,move,run,aimMode);
 			// Execute attack.
 			if (interact) {
-				if (holsterMode) {
+				if (aimMode) {
 					// Attack with held weapon.
 					ExecuteAttack();
 				} else {
@@ -171,10 +172,10 @@ public partial class Player : CharacterBody3D
 	}
 
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
-	private void ProcessTankMove(float d, Vector2 move, bool run, bool holstering) {
-		// You can't run and holster, because I say so! (less animations :P)
-		if (holstering==true) run = false;
-		Graphic.StateMachine.ModeState = holstering ? CharacterAnimState.EModeState.HOLSTER : CharacterAnimState.EModeState.IDLE;
+	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
+		// You can't run and aim, because I say so! (less animations :P)
+		if (aiming==true) run = false;
+		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -184,18 +185,24 @@ public partial class Player : CharacterBody3D
 		// Quick check for if we're moving or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = run ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y>0) ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			var targetVelocity = (Transform.Basis.Z * -move.Y);
+			// Are we in aim mode?
+			if (aiming) {
+				// When aiming, left/right strafe the character around the target instead.
+				targetVelocity += (Transform.Basis.X * -move.X);
+			} else {
+				// We rotate the character
+				var RotationY = GlobalRotation.Y;
+    			RotationY = Mathf.Wrap(RotationY + -move.X * d * 3, 0, Mathf.Tau);
+    			GlobalRotation = new Vector3(0, RotationY, 0);
+			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
-			var targetVelocity = (Transform.Basis.Z * -move.Y) * currMoveState.Speed;
+			targetVelocity = targetVelocity * currMoveState.Speed;
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
-			// We rotate the character
-			var RotationY = GlobalRotation.Y;
-    		RotationY = Mathf.Wrap(RotationY + -move.X * d * 3, 0, Mathf.Tau);
-    		GlobalRotation = new Vector3(0, RotationY, 0);
-
 			/*
 			// Rotate character towards the direction we're moving to
 			var dir = new Vector3(move.X, 0, -move.Y);
@@ -214,10 +221,10 @@ public partial class Player : CharacterBody3D
 	}
 
 	//Defualt Move Processing
-	private void ProcessMove(float d, Vector2 move, bool run, bool holstering) {
-		// You can't run and holster, because I say so! (less animations :P)
-		if (holstering==true) run = false;
-		Graphic.StateMachine.ModeState = holstering ? CharacterAnimState.EModeState.HOLSTER : CharacterAnimState.EModeState.IDLE;
+	private void ProcessMove(float d, Vector2 move, bool run, bool aiming) {
+		// You can't run and aim, because I say so! (less animations :P)
+		if (aiming==true) run = false;
+		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity

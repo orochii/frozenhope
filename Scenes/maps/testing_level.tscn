@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://c321lwlgeuc66"]
+[gd_scene load_steps=70 format=4 uid="uid://cf700lsruy1ct"]
 
 [ext_resource type="Texture2D" uid="uid://cemex2v4b7ef7" path="res://Graphics/Models/scenery/Metal.jpg" id="1_h8jye"]
 [ext_resource type="Texture2D" uid="uid://gxlq3ywrskt4" path="res://Graphics/Models/scenery/Asphalt.png" id="2_u2oi7"]
@@ -15,6 +15,7 @@
 [ext_resource type="Texture2D" uid="uid://dcfbiq0gmhim3" path="res://Graphics/Models/scenery/Shelf_Store_11.png" id="13_4mxar"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="14_38mrm"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="15_43oa2"]
+[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="15_y7hpa"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="16_ygq0g"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sh2gk"]
@@ -37,7 +38,6 @@ data = PackedVector3Array(0.1148, -0.0448, -0.0357, 0.1148, -0.0448, 0.015, 0.11
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tktjl"]
 resource_name = "Metal"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("1_h8jye")
 emission_enabled = true
 
@@ -50,7 +50,6 @@ emission_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syxh8"]
 resource_name = "Asphalt"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("2_u2oi7")
 emission_enabled = true
 
@@ -63,21 +62,18 @@ emission_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1l5ov"]
 resource_name = "brick_02"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("3_ac52t")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqrqa"]
 resource_name = "Tiles_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("4_n750d")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65ran"]
 resource_name = "ceiling"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("5_4pm73")
 emission_enabled = true
 
@@ -248,14 +244,12 @@ shadow_mesh = SubResource("ArrayMesh_kqvch")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4ocw"]
 resource_name = "Metal_15"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("6_fdhak")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ouddq"]
 resource_name = "Cardboard"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("7_ei6ts")
 emission_enabled = true
 
@@ -319,7 +313,6 @@ points = PackedVector3Array(0.00617511, 0.00349873, 0.0282226, 0.00717427, 0.025
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5fw6"]
 resource_name = "Wood_05"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("8_rngqa")
 emission_enabled = true
 
@@ -361,7 +354,6 @@ points = PackedVector3Array(0.0178891, 0.0113614, 0.00218363, 0.0178891, -0.0113
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tooh"]
 resource_name = "Fabric"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("9_wudox")
 emission_enabled = true
 
@@ -424,14 +416,12 @@ shadow_mesh = SubResource("ArrayMesh_1utiy")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thplv"]
 resource_name = "Tiles"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("10_3ed5v")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdw3e"]
 resource_name = "Metal_04"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("11_ragd8")
 emission_enabled = true
 
@@ -816,7 +806,6 @@ points = PackedVector3Array(0.00705434, 0.00705427, 0.0307167, -0.00705434, 0.00
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_naq7s"]
 resource_name = "Door_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("12_eeaun")
 emission_enabled = true
 
@@ -855,7 +844,6 @@ shadow_mesh = SubResource("ArrayMesh_6yem5")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1teip"]
 resource_name = "Shelf_Store_11"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("13_4mxar")
 emission_enabled = true
 
@@ -1200,3 +1188,6 @@ transform = Transform3D(-0.694737, -0.391258, 0.603537, 0, 0.839105, 0.54397, -0
 [node name="Player" parent="." instance=ExtResource("16_ygq0g")]
 transform = Transform3D(-1.81865, 0, 1.05, 0, 2.1, 0, -1.05, 0, -1.81865, -5.472, 0, 4.377)
 collision_mask = 12
+
+[node name="Wendigo" parent="." instance=ExtResource("15_y7hpa")]
+transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 3.83345, 0.0213833, 0.910252)

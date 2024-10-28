@@ -7,11 +7,11 @@ public partial class CharacterAnimState : Resource
 {
 	/*
 	MoveState: STAND,WALK,RUN
-	ActionState: IDLE,HOLSTER,ATTACK
+	ActionState: IDLE,AIMING,ATTACK
 	Variation: *held weapon animation id* (pistol, rifle, etc)
 	*/
 	public enum EMoveState { STAND, WALK, RUN }
-	public enum EModeState { IDLE, HOLSTER }
+	public enum EModeState { IDLE, AIMING }
 	public enum EActionState { NONE, ATTACK }
 	//
 	[Export] public EMoveState MoveState;
