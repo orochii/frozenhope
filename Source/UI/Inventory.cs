@@ -27,6 +27,8 @@ public partial class Inventory : Control
 			_spawnedSlots[i] = invSlotTemplate.Duplicate() as InvSlotButton;
 			_spawnedSlots[i].Visible = true;
 			_spawnedSlots[i].Setup(null);
+			_spawnedSlots[i].Index = -1;
+			_spawnedSlots[i].ParentInventory = this;
 			inventoryGrid.AddChild(_spawnedSlots[i]);
 		}
 		UIUtils.SetupGridList(_spawnedSlots, size.X);
@@ -37,13 +39,15 @@ public partial class Inventory : Control
 		foreach (var slot in _spawnedSlots) slot.Setup(null);
 		// Set each inventory item to their location.
 		var entries = Main.Instance.State.GetInventoryEntries();
-		foreach (var entry in entries) {
+		for (int idx = 0; idx < entries.Count; idx++) {
+			var entry = entries[idx];
 			var item = BaseItem.Get(entry.itemID);
 			for (int x = 0; x < item.SlotSize.X; x++) {
 				for (int y = 0; y < item.SlotSize.Y; y++) {
 					bool ignoreVisuals = !(x==0 && y==0); // Only top-left corner
-					var idx = entry.posX + x + (entry.posY + y) * size.X;
-					_spawnedSlots[idx].Setup(entry, ignoreVisuals);
+					var idxSlot = entry.posX + x + (entry.posY + y) * size.X;
+					_spawnedSlots[idxSlot].Setup(entry, ignoreVisuals);
+					_spawnedSlots[idxSlot].Index = idx;
 				}
 			}
 		}
