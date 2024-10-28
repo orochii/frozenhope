@@ -1,17 +1,32 @@
 using Godot;
 using System;
+using System.Transactions;
 
 public partial class Crosshair : Control
 {
+	[Export] public Sprite2D StartAim;
+	[Export] public Sprite2D EndAim;
+	public int Time;
 	public override void _Ready()
 	{
+		EndAim.Visible = false;
 		Visible = false;
 	}
+
 	public override void _Process(double delta)
 	{
 		if (IsInstanceValid(Player.Instance)) {
 			var t = Player.Instance.CurrentTarget;
+			if (Visible == false) Time = Player.Instance.AimTimer;
 			if (t != null) {
+				//Reticle aim timer processing
+				if (Time <= 0) {
+					EndAim.Visible = true;
+					Time = 0;
+				} else {
+					EndAim.Visible = false;
+					Time -= 5;
+				}
 				var reticleWorldPosition = t.GetReticlePosition();
 				var vpt = GetViewport();
 				var cam = vpt.GetCamera3D();

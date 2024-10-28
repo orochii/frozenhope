@@ -11,6 +11,7 @@
 script = ExtResource("1_1v5np")
 AmmoIcon = ExtResource("1_rxbti")
 HitscanDamage = 2
+DamagePartial = 1
 HitscanDamageType = 1
 HitscanShots = 1
 HitscanSpread = 0.0

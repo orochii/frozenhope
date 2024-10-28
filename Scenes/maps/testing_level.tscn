@@ -1,4 +1,4 @@
-[gd_scene load_steps=69 format=4 uid="uid://c321lwlgeuc66"]
+[gd_scene load_steps=71 format=4 uid="uid://c321lwlgeuc66"]
 
 [ext_resource type="Texture2D" uid="uid://cemex2v4b7ef7" path="res://Graphics/Models/scenery/Metal.jpg" id="1_h8jye"]
 [ext_resource type="Texture2D" uid="uid://gxlq3ywrskt4" path="res://Graphics/Models/scenery/Asphalt.png" id="2_u2oi7"]
@@ -16,6 +16,7 @@
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="14_38mrm"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="15_43oa2"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="16_ygq0g"]
+[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="17_35xgy"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sh2gk"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -37,7 +38,6 @@ data = PackedVector3Array(0.1148, -0.0448, -0.0357, 0.1148, -0.0448, 0.015, 0.11
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tktjl"]
 resource_name = "Metal"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("1_h8jye")
 emission_enabled = true
 
@@ -50,7 +50,6 @@ emission_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_syxh8"]
 resource_name = "Asphalt"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("2_u2oi7")
 emission_enabled = true
 
@@ -63,21 +62,18 @@ emission_enabled = true
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1l5ov"]
 resource_name = "brick_02"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("3_ac52t")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uqrqa"]
 resource_name = "Tiles_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("4_n750d")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_65ran"]
 resource_name = "ceiling"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("5_4pm73")
 emission_enabled = true
 
@@ -248,14 +244,12 @@ shadow_mesh = SubResource("ArrayMesh_kqvch")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_a4ocw"]
 resource_name = "Metal_15"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("6_fdhak")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ouddq"]
 resource_name = "Cardboard"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("7_ei6ts")
 emission_enabled = true
 
@@ -319,7 +313,6 @@ points = PackedVector3Array(0.00617511, 0.00349873, 0.0282226, 0.00717427, 0.025
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u5fw6"]
 resource_name = "Wood_05"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("8_rngqa")
 emission_enabled = true
 
@@ -361,7 +354,6 @@ points = PackedVector3Array(0.0178891, 0.0113614, 0.00218363, 0.0178891, -0.0113
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6tooh"]
 resource_name = "Fabric"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("9_wudox")
 emission_enabled = true
 
@@ -424,14 +416,12 @@ shadow_mesh = SubResource("ArrayMesh_1utiy")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_thplv"]
 resource_name = "Tiles"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("10_3ed5v")
 emission_enabled = true
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rdw3e"]
 resource_name = "Metal_04"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("11_ragd8")
 emission_enabled = true
 
@@ -816,7 +806,6 @@ points = PackedVector3Array(0.00705434, 0.00705427, 0.0307167, -0.00705434, 0.00
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_naq7s"]
 resource_name = "Door_01"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("12_eeaun")
 emission_enabled = true
 
@@ -852,10 +841,12 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_6yem5")
 
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ptnkg"]
+points = PackedVector3Array(0.018866, 0.000560065, 0.0215153, 0.018866, -0.000560067, 0.0215153, 0.018866, 0.000560065, -0.0221207, -0.00037249, 0.000560065, 0.0215153, -0.00037249, -0.000560067, 0.0215153, 0.018866, -0.000560067, -0.0221207, -0.00037249, 0.000560065, -0.0221207, -0.00037249, -0.000560067, -0.0221207)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1teip"]
 resource_name = "Shelf_Store_11"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("13_4mxar")
 emission_enabled = true
 
@@ -990,10 +981,13 @@ light_energy = 0.01
 
 [node name="Lights" type="Node" parent="."]
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+[node name="LightKitchen" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 5.2, 0)
 light_energy = 4.0
 shadow_enabled = true
+distance_fade_enabled = true
+distance_fade_begin = 10.0
+distance_fade_shadow = 20.0
 omni_range = 10.6
 omni_attenuation = 2.4
 
@@ -1081,7 +1075,7 @@ collision_layer = 8
 shape = SubResource("ConcavePolygonShape3D_g6j3q")
 
 [node name="Fridge" type="MeshInstance3D" parent="Scenery/Cafeteria"]
-transform = Transform3D(-1.33514e-07, -1, -1.99013e-07, 1, -7.6294e-08, -2.063e-07, 2.063e-07, -1.99013e-07, 1, -0.00800002, -0.00300003, -0.038)
+transform = Transform3D(-1.33514e-07, -1, -1.99013e-07, 1, -7.6294e-08, -2.063e-07, 2.063e-07, -1.99013e-07, 1, -0.00800002, -0.00100003, -0.038)
 mesh = SubResource("ArrayMesh_gqs65")
 skeleton = NodePath("")
 
@@ -1105,6 +1099,23 @@ shape = SubResource("ConvexPolygonShape3D_pjn4d")
 transform = Transform3D(-4.01339e-05, 100, -3.17865e-06, -7.5498e-06, 3.17865e-06, 100, 100, 4.01339e-05, 7.5498e-06, -8.1, 2.2, 4.65)
 mesh = SubResource("ArrayMesh_kjy4q")
 skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/BackDoor"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/BackDoor/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ptnkg")
+
+[node name="BackDoor2" type="MeshInstance3D" parent="Scenery"]
+transform = Transform3D(-7.36046e-05, 100, -3.17865e-06, -1.38461e-05, 3.17865e-06, 100, 183.398, 4.01339e-05, 7.5498e-06, 11.6, 2.2, -0.75)
+mesh = SubResource("ArrayMesh_kjy4q")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Scenery/BackDoor2"]
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/BackDoor2/StaticBody3D"]
+shape = SubResource("ConvexPolygonShape3D_ptnkg")
 
 [node name="Counter 1" type="MeshInstance3D" parent="Scenery"]
 transform = Transform3D(-100, 8.74228e-06, 1.04216e-12, 0, -1.19209e-05, 100, 8.74228e-06, 100, 1.19209e-05, 2, 0.8, -6.2)
@@ -1196,7 +1207,11 @@ Camera = NodePath("../CamKitchen2")
 
 [node name="CamCafeteria" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.694737, -0.391258, 0.603537, 0, 0.839105, 0.54397, -0.719264, 0.377916, -0.582957, 10.8879, 6.11039, -6.57781)
+current = true
 
 [node name="Player" parent="." instance=ExtResource("16_ygq0g")]
-transform = Transform3D(-1.81865, 0, 1.05, 0, 2.1, 0, -1.05, 0, -1.81865, -5.472, 0, 4.377)
+transform = Transform3D(2.1, 0, 0, 0, 2.1, 0, 0, 0, 2.1, 3.19181, 0, -2.99385)
 collision_mask = 12
+
+[node name="Wendigo" parent="." instance=ExtResource("17_35xgy")]
+transform = Transform3D(-2.1, 0, -1.83588e-07, 0, 2.1, 0, 1.83588e-07, 0, -2.1, 2.6, 0, 5)

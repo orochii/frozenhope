@@ -96,5 +96,6 @@ autoplay = "start"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("1_ar1s7")
+volume_db = -5.0
 pitch_scale = 0.5
 autoplay = true
