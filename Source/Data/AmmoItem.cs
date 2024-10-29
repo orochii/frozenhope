@@ -6,6 +6,7 @@ public partial class AmmoItem : BaseItem {
     [Export] public Texture2D AmmoIcon;
     [Export] public PackedScene Projectile;
     [Export] public int HitscanDamage;
+    [Export] public int DamagePartial;
     [Export] public EDamageType HitscanDamageType;
     [Export] public int HitscanShots;
     [Export] public float HitscanSpread;

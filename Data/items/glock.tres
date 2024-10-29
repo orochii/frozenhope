@@ -9,6 +9,7 @@
 script = ExtResource("1_ymyrp")
 CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 17
+AimTime = 200
 EquippedModel = ExtResource("1_qrxqs")
 AnimationSet = "pistol"
 DisplayName = "Gl 17"

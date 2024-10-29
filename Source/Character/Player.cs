@@ -9,14 +9,19 @@ public partial class Player : CharacterBody3D
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
+	[Export] private Area3D ItemDetectionArea;
+	[Export] private float RotateSpeed = 4;
 	[Export] private float MaxFocusAngle = 45f;
+	public int AimTimer;
+	public int AimTimer2 = 0; //Electic Boogaloo
 	private bool aimMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
 	public Targettable CurrentTarget => currentTarget;
 	private float previousTargetRotation;
+	private WorldItem NearbyItem;
 
-	//Cache the inputs in order to save on memory by avoiding constant conversions from String to Stringname
+	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
 	StringName MoveLeft = "move_left";
 	StringName MoveRight = "move_right";
 	StringName MoveUp = "move_up";
@@ -33,14 +38,22 @@ public partial class Player : CharacterBody3D
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
+		//Item in range
+		ItemDetectionArea.BodyEntered += OnItemInRange;
+		ItemDetectionArea.BodyExited += OnItemOutOfRange;
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
 		if (item != null && item is WeaponItem) {
 			var wpn = item as WeaponItem;
+			//We assign the equipped weapons AimTime to the player's AimTimer Timer
+			AimTimer = wpn.AimTime;
+			GD.Print("AimTimer Assigned: " + AimTimer);
+			// Orochii will explain this
 			Graphic.SetWeaponModel(wpn.EquippedModel);
 			Graphic.SetVariationId(wpn.AnimationSet);
 		} else {
+			AimTimer = 0;
 			Graphic.SetWeaponModel(null);
 			Graphic.SetVariationId("");
 		}
@@ -63,12 +76,22 @@ public partial class Player : CharacterBody3D
 			if (aim) {
 				aimMode = !aimMode;
 				if (aimMode) {
+					//Whenever we draw the weapon, we assign the equipped weapon's AimTimer to AimTimer2
+					AimTimer2 = AimTimer;
 					currentTarget = PickClosestTarget();
 					previousTargetRotation = Rotation.Y;
 				} else {
 					currentTarget = null;
 				}
+				
 			}
+			//We reduce the AimTimer for damage calculation later on
+			if (AimTimer2 > 0) {
+				AimTimer2 -= 5;
+			} else {
+				AimTimer2 = 0;
+			}
+			
 			if (currentTarget != null) {
 				var dir = cycleLeft ? -1 : cycleRight ? 1 : 0;
 				var newTarget = PickNextTarget(dir);
@@ -82,6 +105,7 @@ public partial class Player : CharacterBody3D
 					ExecuteAttack();
 				} else {
 					// Interact with environment.
+					if (NearbyItem != null) NearbyItem.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -133,9 +157,6 @@ public partial class Player : CharacterBody3D
 
     private void ExecuteHitscan(AmmoItem ammo)
     {
-		//First of all, we play the Sound Effect of the ammo type
-		
-
         var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
         var target = origin + (GlobalTransform.Basis.Z * 10f);
         var spaceState = GetWorld3D().DirectSpaceState;
@@ -153,8 +174,13 @@ public partial class Player : CharacterBody3D
 				// Spawn hit spark.
                 var sparkSrc = hitTarget.CanBleed() ? ammo.HitSparkBlood : ammo.HitSparkObject;
                 SpawnHitSpark(sparkSrc, hitPoint);
-				// Execute damage.
-				hitTarget.Damage(ammo.HitscanDamageType, ammo.HitscanDamage);
+				// Execute damage based on AimTimer2
+				if (AimTimer2 > 0) {
+					hitTarget.Damage(ammo.HitscanDamageType, ammo.DamagePartial);
+				} else {
+					hitTarget.Damage(ammo.HitscanDamageType, ammo.HitscanDamage);
+				}
+				
             }
             else
             {
@@ -174,6 +200,7 @@ public partial class Player : CharacterBody3D
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
+		//Agreed (Ozzy)
 		if (aiming==true) run = false;
 		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
 		// Get current move state properties
@@ -182,7 +209,7 @@ public partial class Player : CharacterBody3D
 		var v = Velocity;
 		v += GetGravity();
 		Velocity = v;
-		// Quick check for if we're moving or not
+		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
 			Graphic.StateMachine.MoveState = (run && move.Y>0) ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
@@ -194,7 +221,7 @@ public partial class Player : CharacterBody3D
 			} else {
 				// We rotate the character
 				var RotationY = GlobalRotation.Y;
-    			RotationY = Mathf.Wrap(RotationY + -move.X * d * 3, 0, Mathf.Tau);
+    			RotationY = Mathf.Wrap(RotationY + -move.X * d * RotateSpeed, 0, Mathf.Tau);
     			GlobalRotation = new Vector3(0, RotationY, 0);
 			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
@@ -203,11 +230,6 @@ public partial class Player : CharacterBody3D
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
-			/*
-			// Rotate character towards the direction we're moving to
-			var dir = new Vector3(move.X, 0, -move.Y);
-			float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
-			Rotation = new Vector3(0, angle, 0); */
 		} else {
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
@@ -219,8 +241,7 @@ public partial class Player : CharacterBody3D
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
 		MoveAndSlide();
 	}
-
-	//Defualt Move Processing
+	//Default Move Processing
 	private void ProcessMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
 		if (aiming==true) run = false;
@@ -311,5 +332,17 @@ public partial class Player : CharacterBody3D
 			var target = body as Targettable;
 			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
 		}
+	}
+	private void OnItemInRange(Node3D Body) {
+		GD.Print("Item Entered" + Body.ToString());
+		var itemObject = Body as WorldItem;
+		itemObject.ShowInterface();
+		NearbyItem = itemObject;
+	}
+	private void OnItemOutOfRange(Node3D Body) {
+		GD.Print("Item Left" + Body.ToString());
+		var itemObject = Body as WorldItem;
+		itemObject.HideInterface();
+		NearbyItem = null;
 	}
 }

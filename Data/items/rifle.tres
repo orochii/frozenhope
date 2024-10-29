@@ -9,6 +9,7 @@
 script = ExtResource("3_m5ofe")
 CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 10
+AimTime = 1000
 EquippedModel = ExtResource("1_sgdl2")
 AnimationSet = "rifle"
 DisplayName = "Hunter Elite"

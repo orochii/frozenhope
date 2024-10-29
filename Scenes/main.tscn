@@ -1,4 +1,4 @@
-[gd_scene load_steps=44 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=45 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -17,6 +17,7 @@
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="8_j6fhx"]
 [ext_resource type="FontFile" uid="uid://c31vqtlawalb4" path="res://Graphics/fonts/m3x6oz.ttf" id="8_x6jpu"]
 [ext_resource type="Script" path="res://Source/UI/Inventory.cs" id="8_yq2xk"]
+[ext_resource type="Texture2D" uid="uid://ca32g5oy71di5" path="res://Graphics/textures/crosshair.png" id="9_fx00b"]
 [ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="9_qmx03"]
 [ext_resource type="Script" path="res://Source/UI/Stats.cs" id="11_ej3np"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="11_gq52q"]
@@ -432,7 +433,7 @@ script = ExtResource("6_opeho")
 OverlayEffect = NodePath("Overlay/OverlayAnimation")
 Inventory = NodePath("MarginContainer/VBoxContainer/Inventory")
 
-[node name="Crosshair" type="Control" parent="CanvasLayer/UIParent/Gameplay"]
+[node name="Crosshair" type="Control" parent="CanvasLayer/UIParent/Gameplay" node_paths=PackedStringArray("StartAim", "EndAim")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -440,9 +441,14 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_vysdj")
+StartAim = NodePath("Crosshair")
+EndAim = NodePath("Target")
 
 [node name="Crosshair" type="Sprite2D" parent="CanvasLayer/UIParent/Gameplay/Crosshair"]
 texture = ExtResource("7_cwps4")
+
+[node name="Target" type="Sprite2D" parent="CanvasLayer/UIParent/Gameplay/Crosshair"]
+texture = ExtResource("9_fx00b")
 
 [node name="Label" type="Label" parent="CanvasLayer/UIParent/Gameplay/Crosshair"]
 layout_mode = 0
