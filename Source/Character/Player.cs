@@ -8,6 +8,7 @@ public partial class Player : CharacterBody3D
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
+	[Export] private Area3D ItemDetectionArea;
 	[Export] private float MaxFocusAngle = 45f;
 	public int AimTimer;
 	public int AimTimer2 = 0; //Electic Boogaloo
@@ -16,6 +17,7 @@ public partial class Player : CharacterBody3D
 	private Targettable currentTarget;
 	public Targettable CurrentTarget => currentTarget;
 	private float previousTargetRotation;
+	private WorldItem NearbyItem;
 
 	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
 	StringName MoveLeft = "move_left";
@@ -34,6 +36,9 @@ public partial class Player : CharacterBody3D
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
+		//Item in range
+		ItemDetectionArea.BodyEntered += OnItemInRange;
+		ItemDetectionArea.BodyExited += OnItemOutOfRange;
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -41,6 +46,7 @@ public partial class Player : CharacterBody3D
 			var wpn = item as WeaponItem;
 			//We assign the equipped weapons AimTime to the player's AimTimer Timer
 			AimTimer = wpn.AimTime;
+			GD.Print("AimTimer Assigned: " + AimTimer);
 			// Orochii will explain this
 			Graphic.SetWeaponModel(wpn.EquippedModel);
 			Graphic.SetVariationId(wpn.AnimationSet);
@@ -97,6 +103,7 @@ public partial class Player : CharacterBody3D
 					ExecuteAttack();
 				} else {
 					// Interact with environment.
+					if (NearbyItem != null) NearbyItem.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -214,6 +221,7 @@ public partial class Player : CharacterBody3D
 			var RotationY = GlobalRotation.Y;
     		RotationY = Mathf.Wrap(RotationY + -move.X * d * 4, 0, Mathf.Tau);
     		GlobalRotation = new Vector3(0, RotationY, 0);
+			
 		} else {
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
@@ -317,5 +325,19 @@ public partial class Player : CharacterBody3D
 			var target = body as Targettable;
 			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
 		}
+	}
+
+	private void OnItemInRange(Node3D Body) {
+		GD.Print("Item Entered" + Body.ToString());
+		var itemObject = Body as WorldItem;
+		itemObject.ShowInterface();
+		NearbyItem = itemObject;
+	}
+
+	private void OnItemOutOfRange(Node3D Body) {
+		GD.Print("Item Left" + Body.ToString());
+		var itemObject = Body as WorldItem;
+		itemObject.HideInterface();
+		NearbyItem = null;
 	}
 }
