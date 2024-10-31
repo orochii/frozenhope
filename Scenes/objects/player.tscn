@@ -25,12 +25,11 @@ radius = 3.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k7rh0"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea", "ItemDetectionArea")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea")]
 script = ExtResource("1_hl4ia")
 moveStates = Array[Object]([SubResource("Resource_ojy2r"), SubResource("Resource_h88q8")])
 Graphic = NodePath("Lain")
 DetectionArea = NodePath("Area3D")
-ItemDetectionArea = NodePath("ItemDetector")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
