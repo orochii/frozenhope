@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cygnhseocxq75"]
+[gd_scene load_steps=15 format=3 uid="uid://cygnhseocxq75"]
 
 [ext_resource type="PackedScene" uid="uid://cfc6nqpkm4weq" path="res://Graphics/Models/enemies/wendigo.glb" id="1_34xsw"]
 [ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_2ru4x"]
@@ -33,6 +33,7 @@ script = ExtResource("6_mjcu4")
 MoveState = 0
 ModeState = 0
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_1tt66")])
 
 [sub_resource type="Resource" id="Resource_6wjt6"]
@@ -46,7 +47,22 @@ script = ExtResource("6_mjcu4")
 MoveState = 1
 ModeState = 0
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_6wjt6")])
+
+[sub_resource type="Resource" id="Resource_wfjdu"]
+script = ExtResource("6_5kaw0")
+Id = ""
+AnimationId = "Death"
+PlayBackwards = false
+
+[sub_resource type="Resource" id="Resource_e65md"]
+script = ExtResource("6_mjcu4")
+MoveState = 0
+ModeState = 0
+ActionState = 2
+IgnoreActionExit = true
+AnimEntries = Array[Object]([SubResource("Resource_wfjdu")])
 
 [node name="Wendigo" node_paths=PackedStringArray("StateMachine") instance=ExtResource("1_34xsw")]
 script = ExtResource("2_2ru4x")
@@ -85,4 +101,4 @@ surface_material_override/0 = SubResource("ShaderMaterial_utryq")
 [node name="StateMachine" type="Node" parent="." index="2" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_kgtku")
 Animator = NodePath("../AnimationPlayer")
-AnimStates = Array[Object]([SubResource("Resource_kql5x"), SubResource("Resource_u7vew")])
+AnimStates = Array[Object]([SubResource("Resource_kql5x"), SubResource("Resource_u7vew"), SubResource("Resource_e65md")])

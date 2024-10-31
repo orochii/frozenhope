@@ -6,8 +6,9 @@
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gv0e4"]
 radius = 0.8
 
-[node name="Wendigo" type="CharacterBody3D" node_paths=PackedStringArray("TargetPivot")]
+[node name="Wendigo" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "TargetPivot")]
 script = ExtResource("1_asm3r")
+Graphic = NodePath("Wendigo")
 TargetPivot = NodePath("TargetPivot")
 MaxHealth = 7
 

@@ -12,11 +12,12 @@ public partial class CharacterAnimState : Resource
 	*/
 	public enum EMoveState { STAND, WALK, RUN }
 	public enum EModeState { IDLE, AIMING }
-	public enum EActionState { NONE, ATTACK }
+	public enum EActionState { NONE, ATTACK, DEATH, REVIVE }
 	//
 	[Export] public EMoveState MoveState;
 	[Export] public EModeState ModeState;
 	[Export] public EActionState ActionState;
+	[Export] public bool IgnoreActionExit;
 	[Export] CharacterAnimStateEntry[] AnimEntries;
 	private Dictionary<string,CharacterAnimStateEntry> animEntriesDictionary;
 	public CharacterAnimStateEntry Get(string id) {
