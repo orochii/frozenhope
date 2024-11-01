@@ -93,19 +93,8 @@ public partial class Enemy : CharacterBody3D, Targettable
 			}
 		}
 		// Execute move
-		//WritePursueStatus();
 		ProcessTankMove((float)delta, move, run, false);
     }
-	private void WritePursueStatus() {
-		var format = "currTarget:{0},count:{1},\npos:{2},timer:{3},\nangle:{4},signed:{5}";
-		var angle = GetYAngle(GetPivotPosition(),Navigator.TargetPosition);
-		var signedAngle = GetSignedYAngle(GetPivotPosition(),Navigator.TargetPosition);
-		PursueStatus = string.Format(format, 
-			currentTarget, detectedTargets.Count,
-			currentTargetMemoryLastPosition,currentTargetMemoryTimer,
-			angle,signedAngle);
-		GD.Print(PursueStatus);
-	}
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
@@ -159,7 +148,6 @@ public partial class Enemy : CharacterBody3D, Targettable
 		if (absAngle > PursueSteerWhenHigherThan) {
 			move.X = -Math.Sign(angle);
 		}
-		GD.Print("absAngle",absAngle," angle:",angle);
 		return move;
 	}
 	private bool CanSeeTarget(Targettable t) {

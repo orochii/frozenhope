@@ -22,7 +22,6 @@ public partial class Main : Node
 			string ammoId = e.AmmoInside==null ? "" : e.AmmoInside.ID;
 			State.AddItem(e.Item, e.Amount, ammoId, e.AmmoQty);
 		}
-		GD.Print(State.ListAllItems());
 		State.SetEquippedItem(0);
 		// Go to scene.
 		ChangeMap(Database.StartingScene);
