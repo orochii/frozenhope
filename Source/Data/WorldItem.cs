@@ -4,8 +4,7 @@ using System.Runtime.CompilerServices;
 
 public partial class WorldItem : StaticBody3D, Interactable
 {
-    [Export] public BaseItem Container;
-    [Export] public int Amount;
+    [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
     private string PickedUpFlag {
         get {
@@ -36,7 +35,7 @@ public partial class WorldItem : StaticBody3D, Interactable
     public void InteractItem() {
         if (!IsVisibleInTree()) return;
         //Add to inventory
-        Main.Instance.State.AddItem(Container,Amount);
+        Main.Instance.State.AddItem(Item);
         //We remove the item (I suspect we'll need to add a permant removal flag)
         Main.Instance.State.SetSwitch(PickedUpFlag,true);
         Hide();

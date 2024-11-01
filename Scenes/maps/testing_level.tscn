@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://c321lwlgeuc66"]
+[gd_scene load_steps=79 format=4 uid="uid://c321lwlgeuc66"]
 
 [ext_resource type="Texture2D" uid="uid://cemex2v4b7ef7" path="res://Graphics/Models/scenery/Metal.jpg" id="1_h8jye"]
 [ext_resource type="Texture2D" uid="uid://gxlq3ywrskt4" path="res://Graphics/Models/scenery/Asphalt.png" id="2_u2oi7"]
@@ -20,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Graphics/Models/items/world_item.tscn" id="18_rod0i"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="19_qlfiv"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="20_a3kyn"]
+[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="21_ysje2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sh2gk"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -977,6 +978,24 @@ size = Vector3(20, 1, 20)
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_owtdl"]
 data = PackedVector3Array(10, 0, 10, -10, 0, 10, 10, 0, -10, -10, 0, 10, -10, 0, -10, 10, 0, -10)
 
+[sub_resource type="Resource" id="Resource_ihrjk"]
+script = ExtResource("21_ysje2")
+Item = ExtResource("19_qlfiv")
+Amount = 8
+AmmoQty = 0
+
+[sub_resource type="Resource" id="Resource_4ov63"]
+script = ExtResource("21_ysje2")
+Item = ExtResource("19_qlfiv")
+Amount = 8
+AmmoQty = 0
+
+[sub_resource type="Resource" id="Resource_waolk"]
+script = ExtResource("21_ysje2")
+Item = ExtResource("19_qlfiv")
+Amount = 8
+AmmoQty = 0
+
 [node name="testing_level" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -1222,6 +1241,7 @@ shape = SubResource("ConcavePolygonShape3D_owtdl")
 
 [node name="WorldItem3" parent="." instance=ExtResource("18_rod0i")]
 transform = Transform3D(0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, 0.258819, -6.94014, 2.06, 1.14226)
+Item = SubResource("Resource_ihrjk")
 
 [node name="9mm_ammo2" parent="WorldItem3" instance=ExtResource("20_a3kyn")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
@@ -1234,16 +1254,14 @@ transform = Transform3D(-2.1, 0, -1.83588e-07, 0, 2.1, 0, 1.83588e-07, 0, -2.1, 
 
 [node name="WorldItem" parent="." instance=ExtResource("18_rod0i")]
 transform = Transform3D(0.819152, 0, 0.573576, 0, 1, 0, -0.573576, 0, 0.819152, 6.3525, 1.51836, 3.10753)
-Container = ExtResource("19_qlfiv")
-Amount = 10
+Item = SubResource("Resource_4ov63")
 
 [node name="9mm_ammo2" parent="WorldItem" instance=ExtResource("20_a3kyn")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
 
 [node name="WorldItem2" parent="." instance=ExtResource("18_rod0i")]
 transform = Transform3D(0.939693, 0, -0.34202, 0, 1, 0, 0.34202, 0, 0.939693, 10.7525, 0.0183635, 6.00753)
-Container = ExtResource("19_qlfiv")
-Amount = 10
+Item = SubResource("Resource_waolk")
 
 [node name="9mm_ammo2" parent="WorldItem2" instance=ExtResource("20_a3kyn")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
