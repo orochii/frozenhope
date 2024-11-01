@@ -122,3 +122,4 @@ cancel={
 3d_physics/layer_3="Ground"
 3d_physics/layer_4="Building"
 3d_physics/layer_5="Interactable"
+3d_physics/layer_6="Enemy"

@@ -1,16 +1,40 @@
-[gd_scene load_steps=4 format=3 uid="uid://2dgsibr5j3yl"]
+[gd_scene load_steps=8 format=3 uid="uid://2dgsibr5j3yl"]
 
 [ext_resource type="Script" path="res://Source/Character/Enemy.cs" id="1_asm3r"]
 [ext_resource type="PackedScene" uid="uid://cygnhseocxq75" path="res://Graphics/Models/enemies/p_wendigo.tscn" id="1_pwnnu"]
+[ext_resource type="Script" path="res://Source/Character/CharacterMoveData.cs" id="2_uphy6"]
+
+[sub_resource type="Resource" id="Resource_rw4xw"]
+script = ExtResource("2_uphy6")
+Speed = 0.5
+Acceleration = 80.0
+Deacceleration = 20.0
+
+[sub_resource type="Resource" id="Resource_ugone"]
+script = ExtResource("2_uphy6")
+Speed = 1.2
+Acceleration = 100.0
+Deacceleration = 20.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_gv0e4"]
 radius = 0.8
 
-[node name="Wendigo" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "TargetPivot")]
+[sub_resource type="SphereShape3D" id="SphereShape3D_4tb6i"]
+radius = 8.0
+
+[node name="Wendigo" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "TargetPivot", "Navigator", "PatrolPoints", "DetectionArea")]
+collision_layer = 32
+collision_mask = 13
 script = ExtResource("1_asm3r")
+moveStates = Array[Object]([SubResource("Resource_rw4xw"), SubResource("Resource_ugone")])
+RotateSpeed = 1.0
 Graphic = NodePath("Wendigo")
 TargetPivot = NodePath("TargetPivot")
 MaxHealth = 7
+Navigator = NodePath("NavigationAgent3D")
+PatrolPoints = []
+DetectionArea = NodePath("DetectionArea")
+PursueSteerWhenHigherThan = 1.0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -21,3 +45,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.43638, 0.509861)
 
 [node name="Wendigo" parent="." instance=ExtResource("1_pwnnu")]
 transform = Transform3D(0.3, 0, 0, 0, 0.3, 0, 0, 0, 0.3, 0, 0, 0)
+
+[node name="DetectionArea" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DetectionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.871481, 0)
+shape = SubResource("SphereShape3D_4tb6i")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

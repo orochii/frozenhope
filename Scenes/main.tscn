@@ -433,7 +433,7 @@ script = ExtResource("6_opeho")
 OverlayEffect = NodePath("Overlay/OverlayAnimation")
 Inventory = NodePath("MarginContainer/VBoxContainer/Inventory")
 
-[node name="Crosshair" type="Control" parent="CanvasLayer/UIParent/Gameplay"]
+[node name="Crosshair" type="Control" parent="CanvasLayer/UIParent/Gameplay" node_paths=PackedStringArray("StartAim", "EndAim")]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -441,6 +441,8 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("7_vysdj")
+StartAim = NodePath("Crosshair")
+EndAim = NodePath("Target")
 
 [node name="Crosshair" type="Sprite2D" parent="CanvasLayer/UIParent/Gameplay/Crosshair"]
 texture = ExtResource("7_cwps4")

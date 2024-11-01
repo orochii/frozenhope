@@ -1,9 +1,10 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net;
 using System.Runtime.InteropServices;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, Targettable
 {
 	public static Player Instance;
 	[Export] private CharacterMoveData[] moveStates;
@@ -31,7 +32,6 @@ public partial class Player : CharacterBody3D
 	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
-
 	public override void _Ready()
 	{
 		Instance = this;
@@ -154,7 +154,6 @@ public partial class Player : CharacterBody3D
 			}
 		}
 	}
-
     private void ExecuteHitscan(AmmoItem ammo)
     {
         var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
@@ -189,14 +188,12 @@ public partial class Player : CharacterBody3D
             }
         }
     }
-
     private void SpawnHitSpark(PackedScene src, Vector3 pos) {
 		if (src==null) return;
 		var hitSpark = src.Instantiate<Node3D>();
 		GetParent().AddChild(hitSpark);
 		hitSpark.GlobalPosition = pos;
 	}
-
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
@@ -322,12 +319,14 @@ public partial class Player : CharacterBody3D
 		return closest;
 	}
 	private void OnBodyEntered(Node3D body) {
+		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
 			if (!nearbyTargets.Contains(target)) nearbyTargets.Add(target);
 		}
 	}
 	private void OnbodyExited(Node3D body) {
+		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
 			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
@@ -344,5 +343,24 @@ public partial class Player : CharacterBody3D
 		var itemObject = Body as WorldItem;
 		itemObject.HideInterface();
 		NearbyItem = null;
+	}
+    public Vector3 GetPivotPosition()
+    {
+        return GlobalPosition;
+    }
+    public Vector3 GetReticlePosition()
+    {
+        return GlobalPosition + new Vector3(0, 2, 0);
+    }
+    public bool CanBleed()
+    {
+        return true;
+    }
+    public void Damage(EDamageType damageType, int damage)
+    {
+        //
+    }
+	public ETargetFaction GetTargetFaction() {
+		return ETargetFaction.PLAYER;
 	}
 }
