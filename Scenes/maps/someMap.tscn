@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://dn8ysadkabc0n"]
 
 [ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="4_q2q7b"]
-[ext_resource type="PackedScene" uid="uid://d20qg6jgj3ous" path="res://Graphics/Models/enemies/p_wendigo.tscn" id="5_gp37i"]
+[ext_resource type="PackedScene" uid="uid://d20qg6jgj3ous" path="res://Graphics/Models/enemies/p_wendigo_old.tscn" id="5_gp37i"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5qte"]
 render_priority = 0

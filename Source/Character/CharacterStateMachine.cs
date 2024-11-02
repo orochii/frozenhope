@@ -42,9 +42,11 @@ public partial class CharacterStateMachine : Node
 			var variation = state.Get(VariationId);
 			if (variation.AnimationId != animationName) return;
 			if (state.ActionState == ActionState) {
-				ActionState = CharacterAnimState.EActionState.NONE;
-				var currentState = GetCurrentState();
-				GoToState(currentState, 0);
+				if (!state.IgnoreActionExit) {
+					ActionState = CharacterAnimState.EActionState.NONE;
+					var currentState = GetCurrentState();
+					GoToState(currentState, 0);
+				}
 			}
 		}
 	}
@@ -56,11 +58,11 @@ public partial class CharacterStateMachine : Node
 			if (valid==1) return state;
 			else if (valid==2) altState = state;
 		}
-		if (altState==null) return altState;
+		if (altState != null) return altState;
 		return AnimStates[0];
 	}
 	private int IsStateValid(CharacterAnimState state) {
-		// It is imperative that the movestate is correct.
+		// It is imperative that the action state is correct.
 		if (state.ActionState != ActionState) return 0;
 		// And this for some that can use alternates.
 		int retVal = 1;

@@ -12,7 +12,6 @@ public partial class Crosshair : Control
 		EndAim.Visible = false;
 		Visible = false;
 	}
-
 	public override void _Process(double delta)
 	{
 		if (IsInstanceValid(Player.Instance)) {

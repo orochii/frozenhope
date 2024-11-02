@@ -1,18 +1,21 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Net;
+using System.Runtime.InteropServices;
 
-public partial class Player : CharacterBody3D
+public partial class Player : CharacterBody3D, Targettable
 {
 	public static Player Instance;
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
 	[Export] private Area3D ItemDetectionArea;
+	[Export] private float RotateSpeed = 4;
 	[Export] private float MaxFocusAngle = 45f;
 	public int AimTimer;
-	public int AimTimer2 = 0; //Electric Boogaloo
-	private bool holsterMode = false;
+	public int AimTimer2 = 0; //Electic Boogaloo
+	private bool aimMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
 	public Targettable CurrentTarget => currentTarget;
@@ -26,10 +29,9 @@ public partial class Player : CharacterBody3D
 	StringName MoveDown = "move_down";
 	StringName Sprint = "run";
 	StringName Interact = "interact";
-	StringName Holster = "holster";
+	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
-
 	public override void _Ready()
 	{
 		Instance = this;
@@ -68,13 +70,13 @@ public partial class Player : CharacterBody3D
 			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
 			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
 			var interact = isIdling ? Input.IsActionJustPressed(Interact) : false;
-			var holster = isIdling ? Input.IsActionJustPressed(Holster) : false;
+			var aim = isIdling ? Input.IsActionJustPressed(Aim) : false;
 			var cycleLeft = isIdling ? Input.IsActionJustPressed(CycleLeft) : false;
 			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
-			if (holster) {
-				holsterMode = !holsterMode;
-				if (holsterMode) {
+			if (aim) {
+				aimMode = !aimMode;
+				if (aimMode) {
 					//Whenever we draw the weapon, we assign the equipped weapon's AimTimer to AimTimer2
 					RefreshWeaponTimer();
 					currentTarget = PickClosestTarget();
@@ -96,10 +98,10 @@ public partial class Player : CharacterBody3D
 				var newTarget = PickNextTarget(dir);
 				if (newTarget != null) currentTarget = newTarget;
 			}
-			ProcessTankMove(d,move,run,holsterMode);
+			ProcessTankMove(d,move,run,aimMode);
 			// Execute attack.
 			if (interact) {
-				if (holsterMode) {
+				if (aimMode) {
 					// Attack with held weapon.
 					ExecuteAttack();
 				} else {
@@ -153,7 +155,6 @@ public partial class Player : CharacterBody3D
 			}
 		}
 	}
-
     private void ExecuteHitscan(AmmoItem ammo)
     {
         var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
@@ -188,20 +189,18 @@ public partial class Player : CharacterBody3D
             }
         }
     }
-
     private void SpawnHitSpark(PackedScene src, Vector3 pos) {
 		if (src==null) return;
 		var hitSpark = src.Instantiate<Node3D>();
 		GetParent().AddChild(hitSpark);
 		hitSpark.GlobalPosition = pos;
 	}
-
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
-	private void ProcessTankMove(float d, Vector2 move, bool run, bool holstering) {
-		// You can't run and holster, because I say so! (less animations :P)
+	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
+		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
-		if (holstering==true) run = false;
-		Graphic.StateMachine.ModeState = holstering ? CharacterAnimState.EModeState.HOLSTER : CharacterAnimState.EModeState.IDLE;
+		if (aiming==true) run = false;
+		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -211,18 +210,24 @@ public partial class Player : CharacterBody3D
 		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = run ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y>0) ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			var targetVelocity = (Transform.Basis.Z * -move.Y);
+			// Are we in aim mode?
+			if (aiming) {
+				// When aiming, left/right strafe the character around the target instead.
+				targetVelocity += (Transform.Basis.X * -move.X);
+			} else {
+				// We rotate the character
+				var RotationY = GlobalRotation.Y;
+    			RotationY = Mathf.Wrap(RotationY + -move.X * d * RotateSpeed, 0, Mathf.Tau);
+    			GlobalRotation = new Vector3(0, RotationY, 0);
+			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
-			var targetVelocity = (Transform.Basis.Z * -move.Y) * currMoveState.Speed;
+			targetVelocity = targetVelocity * currMoveState.Speed;
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
-			// We rotate the character
-			var RotationY = GlobalRotation.Y;
-    		RotationY = Mathf.Wrap(RotationY + -move.X * d * 4, 0, Mathf.Tau);
-    		GlobalRotation = new Vector3(0, RotationY, 0);
-			
 		} else {
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
@@ -234,12 +239,11 @@ public partial class Player : CharacterBody3D
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
 		MoveAndSlide();
 	}
-
-	//Defualt Move Processing
-	private void ProcessMove(float d, Vector2 move, bool run, bool holstering) {
-		// You can't run and holster, because I say so! (less animations :P)
-		if (holstering==true) run = false;
-		Graphic.StateMachine.ModeState = holstering ? CharacterAnimState.EModeState.HOLSTER : CharacterAnimState.EModeState.IDLE;
+	//Default Move Processing
+	private void ProcessMove(float d, Vector2 move, bool run, bool aiming) {
+		// You can't run and aim, because I say so! (less animations :P)
+		if (aiming==true) run = false;
+		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -316,30 +320,49 @@ public partial class Player : CharacterBody3D
 		return closest;
 	}
 	private void OnBodyEntered(Node3D body) {
+		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
 			if (!nearbyTargets.Contains(target)) nearbyTargets.Add(target);
 		}
 	}
 	private void OnbodyExited(Node3D body) {
+		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
 			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
 		}
 	}
-
 	private void OnItemInRange(Node3D Body) {
 		GD.Print("Item Entered" + Body.ToString());
 		var itemObject = Body as WorldItem;
 		itemObject.ShowInterface();
 		NearbyItem = itemObject;
 	}
-
 	private void OnItemOutOfRange(Node3D Body) {
 		GD.Print("Item Left" + Body.ToString());
 		var itemObject = Body as WorldItem;
 		itemObject.HideInterface();
 		NearbyItem = null;
+	}
+    public Vector3 GetPivotPosition()
+    {
+        return GlobalPosition;
+    }
+    public Vector3 GetReticlePosition()
+    {
+        return GlobalPosition + new Vector3(0, 2, 0);
+    }
+    public bool CanBleed()
+    {
+        return true;
+    }
+    public void Damage(EDamageType damageType, int damage)
+    {
+        //
+    }
+	public ETargetFaction GetTargetFaction() {
+		return ETargetFaction.PLAYER;
 	}
 
 	private void RefreshWeaponTimer() {

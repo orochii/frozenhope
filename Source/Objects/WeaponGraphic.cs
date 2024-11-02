@@ -7,7 +7,7 @@ public partial class WeaponGraphic : Node3D
 	[Export] public AudioStreamPlayer SoundEffect;
 	[Export] public Node3D SpawnPoint;
 	public void Play(string animation) {
-		Animator.Play(animation);
-		SoundEffect.Play();
+		if (Animator != null) Animator.Play(animation);
+		if (SoundEffect != null) SoundEffect.Play();
 	}
 }

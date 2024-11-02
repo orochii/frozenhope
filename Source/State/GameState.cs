@@ -120,6 +120,13 @@ public class GameState {
         var matrix = persistentData.GetInvMatrix();
         return IsThereEnoughSpace(matrix, position.X, position.Y, item.SlotSize.X, item.SlotSize.Y);
     }
+    public bool AddItem(ItemAddEntry item) {
+        if (item==null) return false;
+        if (item.Item==null) return false;
+        if (item.AmmoInside != null)
+            return AddItem(item.Item,item.Amount, item.AmmoInside.ID, item.AmmoQty);
+        return AddItem(item.Item,item.Amount);
+    }
     public bool AddItem(BaseItem item, int amount, string ammoId="", int ammo=0) {
         // First, look for existing stacks
         foreach (var entry in persistentData.inventory) {

@@ -17,12 +17,9 @@ public partial class Main : Node
 	}
 	public void StartGame() {
 		State = new GameState();
-		//State.AddItem();
 		foreach(var e in Database.StartingItems) {
-			string ammoId = e.AmmoInside==null ? "" : e.AmmoInside.ID;
-			State.AddItem(e.Item, e.Amount, ammoId, e.AmmoQty);
+			State.AddItem(e);
 		}
-		GD.Print(State.ListAllItems());
 		State.SetEquippedItem(0);
 		// Go to scene.
 		ChangeMap(Database.StartingScene);
