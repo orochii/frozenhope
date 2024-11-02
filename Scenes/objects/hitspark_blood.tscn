@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bvedlftr3otom"]
 
-[ext_resource type="AudioStream" uid="uid://dh18w34fv7ici" path="res://Sound/Sound Effects/testOw.ogg" id="1_ar1s7"]
+[ext_resource type="AudioStream" uid="uid://dh18w34fv7ici" path="res://Audio/Sound Effects/testOw.ogg" id="1_ar1s7"]
 
 [sub_resource type="Curve" id="Curve_grikw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.93924, 0.0, 0, 0]

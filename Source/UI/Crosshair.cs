@@ -17,7 +17,11 @@ public partial class Crosshair : Control
 	{
 		if (IsInstanceValid(Player.Instance)) {
 			var t = Player.Instance.CurrentTarget;
+			//If the Crosshair is not visible, assign the Player's equipped weapon AimTimer
 			if (Visible == false) Time = Player.Instance.AimTimer;
+			if (Player.Instance.AimTimer2 == -10) {
+				Time = Player.Instance.AimTimer;
+			}
 			if (t != null) {
 				//Reticle aim timer processing
 				if (Time <= 0) {

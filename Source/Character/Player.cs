@@ -11,7 +11,7 @@ public partial class Player : CharacterBody3D
 	[Export] private Area3D ItemDetectionArea;
 	[Export] private float MaxFocusAngle = 45f;
 	public int AimTimer;
-	public int AimTimer2 = 0; //Electic Boogaloo
+	public int AimTimer2 = 0; //Electric Boogaloo
 	private bool holsterMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
@@ -52,6 +52,7 @@ public partial class Player : CharacterBody3D
 			Graphic.SetVariationId(wpn.AnimationSet);
 		} else {
 			AimTimer = 0;
+			GD.Print("AimTimer Zero? " + AimTimer);
 			Graphic.SetWeaponModel(null);
 			Graphic.SetVariationId("");
 		}
@@ -75,7 +76,7 @@ public partial class Player : CharacterBody3D
 				holsterMode = !holsterMode;
 				if (holsterMode) {
 					//Whenever we draw the weapon, we assign the equipped weapon's AimTimer to AimTimer2
-					AimTimer2 = AimTimer;
+					RefreshWeaponTimer();
 					currentTarget = PickClosestTarget();
 					previousTargetRotation = Rotation.Y;
 				} else {
@@ -339,5 +340,9 @@ public partial class Player : CharacterBody3D
 		var itemObject = Body as WorldItem;
 		itemObject.HideInterface();
 		NearbyItem = null;
+	}
+
+	private void RefreshWeaponTimer() {
+		AimTimer2 = AimTimer;
 	}
 }
