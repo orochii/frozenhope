@@ -30,7 +30,7 @@ collision_mask = 44
 script = ExtResource("1_hl4ia")
 moveStates = Array[Object]([SubResource("Resource_ojy2r"), SubResource("Resource_h88q8")])
 Graphic = NodePath("Lain")
-DetectionArea = NodePath("Area3D")
+DetectionArea = NodePath("TargettingArea")
 ItemDetectionArea = NodePath("ItemDetector")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
@@ -39,9 +39,11 @@ shape = SubResource("CapsuleShape3D_xvsrg")
 
 [node name="Lain" parent="." instance=ExtResource("3_8fjv8")]
 
-[node name="Area3D" type="Area3D" parent="."]
+[node name="TargettingArea" type="Area3D" parent="."]
+collision_layer = 0
+collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="TargettingArea"]
 shape = SubResource("SphereShape3D_anvua")
 
 [node name="ItemDetector" type="Area3D" parent="."]

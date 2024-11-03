@@ -263,6 +263,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 		ChangeHealth(-damage);
 	}
 	public void ForceActionState(EActionState state) {
+		if (Dead) return;
 		//
 		Graphic.StateMachine.ActionState = state;
 	}

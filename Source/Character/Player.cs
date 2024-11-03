@@ -66,6 +66,7 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	public override void _Process(double delta)
 	{
+		if (Dead) return;
 		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
 		// Cast to float because working with doubles sucks when everything is using floats.
 		var d = (float)delta;
@@ -392,6 +393,7 @@ public partial class Player : CharacterBody3D, Targettable
 		Graphic.StateMachine.ActionState = EActionState.REVIVE;
 	}
 	public void ForceActionState(EActionState state) {
+		if (Dead) return;
 		//
 		Graphic.StateMachine.ActionState = state;
 	}
