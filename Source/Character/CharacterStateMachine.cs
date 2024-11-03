@@ -5,9 +5,9 @@ public partial class CharacterStateMachine : Node
 {
 	[Export] AnimationPlayer Animator;
 	[Export] CharacterAnimState[] AnimStates;
-	[Export] public CharacterAnimState.EMoveState MoveState;
-	[Export] public CharacterAnimState.EModeState ModeState;
-	[Export] public CharacterAnimState.EActionState ActionState;
+	[Export] public EMoveState MoveState;
+	[Export] public EModeState ModeState;
+	[Export] public EActionState ActionState;
 	[Export] public string VariationId = "";
 	CharacterAnimState _lastState = null;
     public override void _Ready()
@@ -37,13 +37,13 @@ public partial class CharacterStateMachine : Node
         _lastState = currentState;
     }
     private void OnAnimationFinished(StringName animationName) {
-		if (ActionState != CharacterAnimState.EActionState.NONE) {
+		if (ActionState != EActionState.NONE) {
 			var state = GetCurrentState();
 			var variation = state.Get(VariationId);
 			if (variation.AnimationId != animationName) return;
 			if (state.ActionState == ActionState) {
 				if (!state.IgnoreActionExit) {
-					ActionState = CharacterAnimState.EActionState.NONE;
+					ActionState = EActionState.NONE;
 					var currentState = GetCurrentState();
 					GoToState(currentState, 0);
 				}

@@ -64,7 +64,7 @@ public partial class Player : CharacterBody3D, Targettable
 		// Cast to float because working with doubles sucks when everything is using floats.
 		var d = (float)delta;
 		if (canMove) {
-			var isIdling = Graphic.StateMachine.ActionState == CharacterAnimState.EActionState.NONE;
+			var isIdling = Graphic.StateMachine.ActionState == EActionState.NONE;
 			// Get input direction and dash
 			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
 			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
@@ -129,7 +129,7 @@ public partial class Player : CharacterBody3D, Targettable
 		if (item != null && item is WeaponItem) {
 			var wpn = item as WeaponItem;
 			// Set Fire state.
-			Graphic.StateMachine.ActionState = CharacterAnimState.EActionState.ATTACK;
+			Graphic.StateMachine.ActionState = EActionState.ATTACK;
 			// Check for ammo.
 			if (equip.ammoQty > 0 && equip.ammoId.Length > 0) {
 				// Get ammo item
@@ -199,7 +199,7 @@ public partial class Player : CharacterBody3D, Targettable
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
 		if (aiming==true) run = false;
-		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
+		Graphic.StateMachine.ModeState = aiming ? EModeState.AIMING : EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -209,7 +209,7 @@ public partial class Player : CharacterBody3D, Targettable
 		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = (run && move.Y>0) ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y>0) ? EMoveState.RUN : EMoveState.WALK;
 			var targetVelocity = (Transform.Basis.Z * -move.Y);
 			// Are we in aim mode?
 			if (aiming) {
@@ -229,7 +229,7 @@ public partial class Player : CharacterBody3D, Targettable
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
 		} else {
 			// Set character visuals to not moving
-			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
+			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
@@ -242,7 +242,7 @@ public partial class Player : CharacterBody3D, Targettable
 	private void ProcessMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
 		if (aiming==true) run = false;
-		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
+		Graphic.StateMachine.ModeState = aiming ? EModeState.AIMING : EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -252,7 +252,7 @@ public partial class Player : CharacterBody3D, Targettable
 		// Quick check for if we're moving or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = run ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			Graphic.StateMachine.MoveState = run ? EMoveState.RUN : EMoveState.WALK;
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
 			var targetVelocity = new Vector3(move.X, 0, move.Y) * currMoveState.Speed;
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
@@ -265,7 +265,7 @@ public partial class Player : CharacterBody3D, Targettable
 			Rotation = new Vector3(0, angle, 0);
 		} else {
 			// Set character visuals to not moving
-			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
+			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
@@ -360,6 +360,10 @@ public partial class Player : CharacterBody3D, Targettable
     {
         //
     }
+	public void ForceActionState(EActionState state) {
+		//
+		Graphic.StateMachine.ActionState = state;
+	}
 	public ETargetFaction GetTargetFaction() {
 		return ETargetFaction.PLAYER;
 	}

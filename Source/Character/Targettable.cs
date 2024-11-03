@@ -10,5 +10,6 @@ public partial interface Targettable {
     //
     public bool CanBleed();
     public void Damage(EDamageType damageType, int damage);
+    public void ForceActionState(EActionState state);
     public ETargetFaction GetTargetFaction();
 }

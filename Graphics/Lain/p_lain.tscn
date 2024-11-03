@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://oykp21gpqp0a"]
+[gd_scene load_steps=35 format=3 uid="uid://oykp21gpqp0a"]
 
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
 [ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
@@ -45,6 +45,7 @@ script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 0
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_fbyn7"), SubResource("Resource_1l34e"), SubResource("Resource_iyqc0")])
 
 [sub_resource type="Resource" id="Resource_g5lm1"]
@@ -70,6 +71,7 @@ script = ExtResource("7_oke14")
 MoveState = 1
 ModeState = 0
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_g5lm1"), SubResource("Resource_jgbhn"), SubResource("Resource_8ybfn")])
 
 [sub_resource type="Resource" id="Resource_db1dw"]
@@ -83,6 +85,7 @@ script = ExtResource("7_oke14")
 MoveState = 2
 ModeState = 0
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_db1dw")])
 
 [sub_resource type="Resource" id="Resource_e7vvv"]
@@ -108,6 +111,7 @@ script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 1
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_e7vvv"), SubResource("Resource_brsv7"), SubResource("Resource_rm26b")])
 
 [sub_resource type="Resource" id="Resource_g6prs"]
@@ -133,6 +137,7 @@ script = ExtResource("7_oke14")
 MoveState = 1
 ModeState = 1
 ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_g6prs"), SubResource("Resource_umejs"), SubResource("Resource_pfjn7")])
 
 [sub_resource type="Resource" id="Resource_34y5d"]
@@ -158,7 +163,36 @@ script = ExtResource("7_oke14")
 MoveState = 0
 ModeState = 1
 ActionState = 1
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_34y5d"), SubResource("Resource_i2p28"), SubResource("Resource_i05wv")])
+
+[sub_resource type="Resource" id="Resource_cutmo"]
+script = ExtResource("6_nl2me")
+Id = ""
+AnimationId = "Damage"
+PlayBackwards = false
+
+[sub_resource type="Resource" id="Resource_fgyqo"]
+script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
+ActionState = 4
+IgnoreActionExit = false
+AnimEntries = Array[Object]([SubResource("Resource_cutmo")])
+
+[sub_resource type="Resource" id="Resource_bhtwa"]
+script = ExtResource("6_nl2me")
+Id = ""
+AnimationId = "KockedDown"
+PlayBackwards = false
+
+[sub_resource type="Resource" id="Resource_s5umi"]
+script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
+ActionState = 5
+IgnoreActionExit = false
+AnimEntries = Array[Object]([SubResource("Resource_bhtwa")])
 
 [node name="Lain" node_paths=PackedStringArray("StateMachine", "Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
 script = ExtResource("2_c1pyr")
@@ -200,4 +234,4 @@ surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 [node name="StateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
-AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8")])
+AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi")])

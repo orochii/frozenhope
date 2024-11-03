@@ -20,7 +20,9 @@ public partial class Enemy : CharacterBody3D, Targettable
 	[Export] float PursueSteerWhenHigherThan = 2f;
 	[Export] Godot.Collections.Array<ETargetFaction> DetectedFactions = new Godot.Collections.Array<ETargetFaction> {ETargetFaction.PLAYER};
 	[Export] private float MemoryCooldown = 1f;
-	[Export(PropertyHint.MultilineText)] private string PursueStatus;
+	[ExportGroup("Attack Patterns")]
+	[Export] AttackArea[] AttackAreas;
+	[Export] EnemyAttackPattern[] AttackPatterns;
 	private int CurrentHealth;
 	private uint OriginalCollisionLayer;
 	private uint OriginalCollisionMask;
@@ -29,6 +31,8 @@ public partial class Enemy : CharacterBody3D, Targettable
 	private float currentTargetMemoryTimer;
 	private Vector3 currentTargetMemoryLastPosition;
 	private int currentPatrolPoint;
+	private int currentAttackPatternIdx;
+	private float currentAttackTimer = 0;
 	// Will look as a property but it's just like a getter method. 
 	// Usually do these for very common conditions, like checking if character is dead.
 	public bool Dead => CurrentHealth <= 0;
@@ -46,60 +50,118 @@ public partial class Enemy : CharacterBody3D, Targettable
     public override void _Process(double delta)
     {
 		if (Dead) return;
+		var isIdling = Graphic.StateMachine.ActionState == EActionState.NONE;
+		var isAttacking = Graphic.StateMachine.ActionState == EActionState.ATTACK;
 		Vector2 move = new Vector2();
 		bool run = false;
-        // If is not paying attention to something specific.
-		if (currentTarget == null) {
-			// Check detected bodies.
-			foreach (var target in detectedTargets) {
-				// Is seeing target?
-				if (CanSeeTarget(target)) {
-					currentTarget = target;
-				}
-			}
-			// If no target was found.
+		if (isIdling) {
+			// If is not paying attention to something specific.
 			if (currentTarget == null) {
-				// Patrol?
-				if (PatrolPoints.Length > 0) {
-					var currPoint = PatrolPoints[currentPatrolPoint];
-					var dst = currPoint.GlobalPosition.DistanceSquaredTo(GlobalPosition);
-					if (dst < 0.01f) {
-						currentPatrolPoint = (currentPatrolPoint + 1) % PatrolPoints.Length;
-						Navigator.TargetPosition = PatrolPoints[currentPatrolPoint].GlobalPosition;
-					}
-					else {
-						var pos = Navigator.GetNextPathPosition();
-						move = ComputeMovementTowards(pos);
+				// Check detected bodies.
+				foreach (var target in detectedTargets) {
+					// Is seeing target?
+					if (CanSeeTarget(target)) {
+						currentTarget = target;
 					}
 				}
+				// If no target was found.
+				if (currentTarget == null) {
+					// Patrol?
+					if (PatrolPoints.Length > 0) {
+						var currPoint = PatrolPoints[currentPatrolPoint];
+						var dst = currPoint.GlobalPosition.DistanceSquaredTo(GlobalPosition);
+						if (dst < 0.01f) {
+							currentPatrolPoint = (currentPatrolPoint + 1) % PatrolPoints.Length;
+							Navigator.TargetPosition = PatrolPoints[currentPatrolPoint].GlobalPosition;
+						}
+						else {
+							var pos = Navigator.GetNextPathPosition();
+							move = ComputeMovementTowards(pos);
+						}
+					}
+				}
+				// If target found
+				else {
+					RerollNewAttackPattern();
+				}
 			}
+			// If has its attention focused.
+			else {
+				run = true;
+				// Can see target?
+				if (CanSeeTarget(currentTarget)) {
+					currentTargetMemoryLastPosition = currentTarget.GetPivotPosition();
+					currentTargetMemoryTimer = MemoryCooldown;
+				}
+				// Pursue target.
+				Navigator.TargetPosition = currentTargetMemoryLastPosition;
+				var pos = Navigator.GetNextPathPosition();
+				move = ComputeMovementTowards(pos);
+				// If target is within range, attack!
+				if (TargetWithinRange(currentAttackPatternIdx)) {
+					ExecuteAttack(currentAttackPatternIdx);
+				} else {
+					currentAttackTimer -= (float)delta;
+					if (currentAttackTimer < 0) {
+						RerollNewAttackPattern();
+					}
+				}
+				// Should forget target?
+				currentTargetMemoryTimer -= (float)delta;
+				if (currentTargetMemoryTimer < 0) {
+					currentTarget = null;
+				}
+			}
+		} else if (isAttacking) {
+			// Update attack state.
+			UpdateAttackState((float)delta);
 		}
-		// If has its attention focused.
-		else {
-			run = true;
-			// Can see target?
-			if (CanSeeTarget(currentTarget)) {
-				currentTargetMemoryLastPosition = currentTarget.GetPivotPosition();
-				currentTargetMemoryTimer = MemoryCooldown;
-			}
-			// Pursue target.
-			Navigator.TargetPosition = currentTargetMemoryLastPosition;
-			var pos = Navigator.GetNextPathPosition();
-			move = ComputeMovementTowards(pos);
-			// Should forget target?
-			currentTargetMemoryTimer -= (float)delta;
-			if (currentTargetMemoryTimer < 0) {
-				currentTarget = null;
-			}
-		}
-		// Execute move
+        // Execute move
 		ProcessTankMove((float)delta, move, run, false);
     }
+	private void RerollNewAttackPattern() {
+		currentAttackPatternIdx = GD.RandRange(0, AttackPatterns.Length-1);
+		currentAttackTimer = 1f;
+	}
+	private bool TargetWithinRange(int idx) {
+		if (currentTarget == null) return false;
+		EnemyAttackPattern pattern = AttackPatterns[idx];
+		AttackArea area = AttackAreas[pattern.AttackAreaIdx];
+		return area.BodiesInsideArea.Contains(currentTarget);
+	}
+	private void ExecuteAttack(int idx) {
+		currentAttackPatternIdx = idx;
+		EnemyAttackPattern pattern = AttackPatterns[currentAttackPatternIdx];
+		Graphic.StateMachine.ActionState = EActionState.ATTACK;
+		Graphic.StateMachine.VariationId = pattern.AnimationVariationId;
+		currentAttackTimer = 0;
+	}
+	private void UpdateAttackState(float d) {
+		// Advance timer
+		var prevTimer = currentAttackTimer;
+		currentAttackTimer += d;
+		// Get pattern
+		EnemyAttackPattern pattern = AttackPatterns[currentAttackPatternIdx];
+		// Compute if this is an attack frame.
+		foreach (var f in pattern.DamageFrames) {
+			if (f > prevTimer && f <= currentAttackTimer) {
+				// It is a valid attack frame at this time.
+				AttackArea area = AttackAreas[pattern.AttackAreaIdx];
+				// Apply damage to all targets in area.
+				foreach (var b in area.BodiesInsideArea) {
+					b.Damage(EDamageType.NONE, pattern.Damage);
+					if (pattern.TargetActionState != EActionState.NONE) {
+						b.ForceActionState(pattern.TargetActionState);
+					}
+				}
+			}
+		}
+	}
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
 		if (aiming==true) run = false;
-		Graphic.StateMachine.ModeState = aiming ? CharacterAnimState.EModeState.AIMING : CharacterAnimState.EModeState.IDLE;
+		Graphic.StateMachine.ModeState = aiming ? EModeState.AIMING : EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Apply gravity
@@ -109,7 +171,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 		// Quick check for if we're moving forward or not
 		if (move.X != 0 || move.Y != 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = (run && move.Y>0) ? CharacterAnimState.EMoveState.RUN : CharacterAnimState.EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y>0) ? EMoveState.RUN : EMoveState.WALK;
 			var targetVelocity = Transform.Basis.Z * -move.Y;
 			// Are we in aim mode?
 			if (aiming) {
@@ -129,7 +191,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
 		} else {
 			// Set character visuals to not moving
-			Graphic.StateMachine.MoveState = CharacterAnimState.EMoveState.STAND;
+			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
 			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
@@ -197,6 +259,10 @@ public partial class Enemy : CharacterBody3D, Targettable
 	public void Damage(EDamageType damageType, int damage) {
 		ChangeHealth(-damage);
 	}
+	public void ForceActionState(EActionState state) {
+		//
+		Graphic.StateMachine.ActionState = state;
+	}
 	public ETargetFaction GetTargetFaction() {
 		return ETargetFaction.ENEMY;
 	}
@@ -205,14 +271,14 @@ public partial class Enemy : CharacterBody3D, Targettable
 		CollisionLayer = 0;
 		CollisionMask = 0;
 		// Show animation.
-		Graphic.StateMachine.ActionState = CharacterAnimState.EActionState.DEATH;
+		Graphic.StateMachine.ActionState = EActionState.DEATH;
 	}
 	public void Revive() {
 		// Disable movement/collision.
 		CollisionLayer = OriginalCollisionLayer;
 		CollisionMask = OriginalCollisionMask;
 		// Show animation.
-		Graphic.StateMachine.ActionState = CharacterAnimState.EActionState.REVIVE;
+		Graphic.StateMachine.ActionState = EActionState.REVIVE;
 	}
 	public void ChangeHealth(int amount) {
 		bool _dead = Dead;

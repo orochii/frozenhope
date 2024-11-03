@@ -2,17 +2,18 @@ using Godot;
 using System;
 using System.Collections.Generic;
 
+/*
+MoveState: STAND,WALK,RUN
+ActionState: IDLE,AIMING,ATTACK
+Variation: *held weapon animation id* (pistol, rifle, etc)
+*/
+public enum EMoveState { STAND, WALK, RUN }
+public enum EModeState { IDLE, AIMING }
+public enum EActionState { NONE, ATTACK, DEATH, REVIVE, DAMAGE, KNOCKED_DOWN }
+
 [GlobalClass]
 public partial class CharacterAnimState : Resource
 {
-	/*
-	MoveState: STAND,WALK,RUN
-	ActionState: IDLE,AIMING,ATTACK
-	Variation: *held weapon animation id* (pistol, rifle, etc)
-	*/
-	public enum EMoveState { STAND, WALK, RUN }
-	public enum EModeState { IDLE, AIMING }
-	public enum EActionState { NONE, ATTACK, DEATH, REVIVE }
 	//
 	[Export] public EMoveState MoveState;
 	[Export] public EModeState ModeState;
