@@ -60,6 +60,7 @@ public partial class Player : CharacterBody3D, Targettable
 			Graphic.SetVariationId(wpn.AnimationSet);
 		} else {
 			AimTimer = 0;
+			GD.Print("AimTimer Zero? " + AimTimer);
 			Graphic.SetWeaponModel(null);
 			Graphic.SetVariationId("");
 		}
@@ -84,7 +85,7 @@ public partial class Player : CharacterBody3D, Targettable
 				aimMode = !aimMode;
 				if (aimMode) {
 					//Whenever we draw the weapon, we assign the equipped weapon's AimTimer to AimTimer2
-					AimTimer2 = AimTimer;
+					RefreshWeaponTimer();
 					currentTarget = PickClosestTarget();
 					previousTargetRotation = Rotation.Y;
 				} else {
@@ -400,5 +401,9 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	public ETargetFaction GetTargetFaction() {
 		return ETargetFaction.PLAYER;
+	}
+
+	private void RefreshWeaponTimer() {
+		AimTimer2 = AimTimer;
 	}
 }
