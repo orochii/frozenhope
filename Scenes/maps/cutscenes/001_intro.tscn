@@ -490,12 +490,14 @@ transform = Transform3D(0.00746581, 0.146821, -0.989135, 0.00301702, 0.989155, 0
 
 [node name="AudioLeona" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.463636, 1.29159, 0.178778)
+bus = &"Voices"
 
 [node name="AudioGeorge" type="AudioStreamPlayer3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600391, 1.09687, 0.707127)
 volume_db = -8.0
 max_db = 1.0
 pitch_scale = 0.95
+bus = &"VoiceRadio"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
