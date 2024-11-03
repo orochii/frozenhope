@@ -33,6 +33,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 	private int currentPatrolPoint;
 	private int currentAttackPatternIdx;
 	private float currentAttackTimer = 0;
+	private float currentAttackReroll = 0;
 	// Will look as a property but it's just like a getter method. 
 	// Usually do these for very common conditions, like checking if character is dead.
 	public bool Dead => CurrentHealth <= 0;
@@ -101,8 +102,8 @@ public partial class Enemy : CharacterBody3D, Targettable
 				if (TargetWithinRange(currentAttackPatternIdx)) {
 					ExecuteAttack(currentAttackPatternIdx);
 				} else {
-					currentAttackTimer -= (float)delta;
-					if (currentAttackTimer < 0) {
+					currentAttackReroll -= (float)delta;
+					if (currentAttackReroll < 0) {
 						RerollNewAttackPattern();
 					}
 				}
@@ -121,7 +122,8 @@ public partial class Enemy : CharacterBody3D, Targettable
     }
 	private void RerollNewAttackPattern() {
 		currentAttackPatternIdx = GD.RandRange(0, AttackPatterns.Length-1);
-		currentAttackTimer = 1f;
+		GD.Print("currentAttackPatternIdx:",currentAttackPatternIdx);
+		currentAttackReroll = 1f;
 	}
 	private bool TargetWithinRange(int idx) {
 		if (currentTarget == null) return false;
@@ -135,6 +137,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 		Graphic.StateMachine.ActionState = EActionState.ATTACK;
 		Graphic.StateMachine.VariationId = pattern.AnimationVariationId;
 		currentAttackTimer = 0;
+		currentAttackReroll = 0;
 	}
 	private void UpdateAttackState(float d) {
 		// Advance timer

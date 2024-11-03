@@ -1,4 +1,4 @@
-[gd_scene load_steps=35 format=3 uid="uid://oykp21gpqp0a"]
+[gd_scene load_steps=37 format=3 uid="uid://oykp21gpqp0a"]
 
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
 [ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
@@ -183,7 +183,7 @@ AnimEntries = Array[Object]([SubResource("Resource_cutmo")])
 [sub_resource type="Resource" id="Resource_bhtwa"]
 script = ExtResource("6_nl2me")
 Id = ""
-AnimationId = "KockedDown"
+AnimationId = "KnockedDown"
 PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_s5umi"]
@@ -193,6 +193,20 @@ ModeState = 0
 ActionState = 5
 IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_bhtwa")])
+
+[sub_resource type="Resource" id="Resource_h28se"]
+script = ExtResource("6_nl2me")
+Id = ""
+AnimationId = "Death"
+PlayBackwards = false
+
+[sub_resource type="Resource" id="Resource_jwc5k"]
+script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
+ActionState = 2
+IgnoreActionExit = true
+AnimEntries = Array[Object]([SubResource("Resource_h28se")])
 
 [node name="Lain" node_paths=PackedStringArray("StateMachine", "Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
 script = ExtResource("2_c1pyr")
@@ -234,4 +248,4 @@ surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 [node name="StateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
-AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi")])
+AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi"), SubResource("Resource_jwc5k")])

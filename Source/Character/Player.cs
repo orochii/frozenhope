@@ -32,9 +32,15 @@ public partial class Player : CharacterBody3D, Targettable
 	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
+	public bool Dead => Main.Instance.State.GetHealth() <= 0;
+	private uint OriginalCollisionLayer;
+	private uint OriginalCollisionMask;
 	public override void _Ready()
 	{
 		Instance = this;
+		// In case uh... revive? lol
+		OriginalCollisionLayer = CollisionLayer;
+		OriginalCollisionMask = CollisionMask;
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
@@ -358,8 +364,33 @@ public partial class Player : CharacterBody3D, Targettable
     }
     public void Damage(EDamageType damageType, int damage)
     {
-        //
+        ChangeHealth(damage);
     }
+	private void ChangeHealth(int v) {
+		bool _dead = Dead;
+		Main.Instance.State.ChangeHealth(-v);
+		if (Dead != _dead) {
+			if (Dead) {
+				Die();
+			} else {
+				Revive();
+			}
+		}
+	}
+	public void Die() {
+		// Disable movement/collision.
+		CollisionLayer = 0;
+		CollisionMask = 0;
+		// Show animation.
+		Graphic.StateMachine.ActionState = EActionState.DEATH;
+	}
+	public void Revive() {
+		// Disable movement/collision.
+		CollisionLayer = OriginalCollisionLayer;
+		CollisionMask = OriginalCollisionMask;
+		// Show animation.
+		Graphic.StateMachine.ActionState = EActionState.REVIVE;
+	}
 	public void ForceActionState(EActionState state) {
 		//
 		Graphic.StateMachine.ActionState = state;
