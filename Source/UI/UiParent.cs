@@ -3,13 +3,13 @@ using System;
 
 public partial class UiParent : Control
 {
-	public enum EModes { TITLE, GAMEPLAY, MESSAGE }
+	public enum EModes { TITLE, GAMEPLAY, MESSAGE, CUTSCENE, SPLASH }
 	[Export] Control[] UIs;
 	private int _mode;
 	public int Mode => _mode;
 	public override void _Ready()
 	{
-		SetUIMode(0);
+		SetUIMode((int)EModes.SPLASH);
 	}
 	public void SetUIMode(int idx) {
 		_mode = idx;

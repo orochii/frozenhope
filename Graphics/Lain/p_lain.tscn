@@ -243,9 +243,9 @@ bones/16/scale = Vector3(1, 1, 1)
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 
-[node name="WeaponSlot" type="Node3D" parent="." index="3"]
+[node name="WeaponSlot" type="Node3D" parent="." index="2"]
 
-[node name="StateMachine" type="Node" parent="." index="4" node_paths=PackedStringArray("Animator")]
+[node name="StateMachine" type="Node" parent="." index="3" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
 AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi"), SubResource("Resource_jwc5k")])

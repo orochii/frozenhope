@@ -1,4 +1,4 @@
-[gd_scene load_steps=45 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=48 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -262,6 +262,82 @@ _data = {
 "default": SubResource("Animation_fsucn")
 }
 
+[sub_resource type="Animation" id="Animation_dmkrl"]
+resource_name = "new_animation"
+length = 3.0
+step = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 0.7, 1.2, 1.5),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../..")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(1.2),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"LoadIntroMap"
+}]
+}
+
+[sub_resource type="Animation" id="Animation_tcf0y"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Label:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Label:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o57qm"]
+_data = {
+"RESET": SubResource("Animation_tcf0y"),
+"new_animation": SubResource("Animation_dmkrl")
+}
+
 [sub_resource type="Animation" id="Animation_vbsm8"]
 length = 0.001
 tracks/0/type = "value"
@@ -339,7 +415,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_l0wdi")
-UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message")]
+UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodePath("Cutscene"), NodePath("Splash")]
 
 [node name="TitleScreen" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("buttonList")]
 visible = false
@@ -353,6 +429,7 @@ script = ExtResource("2_ptup8")
 buttonList = [NodePath("VBoxContainer/Start"), NodePath("VBoxContainer/Continue"), NodePath("VBoxContainer/Exit")]
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/TitleScreen"]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -422,6 +499,7 @@ horizontal_alignment = 1
 
 [node name="Gameplay" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("OverlayEffect", "Inventory")]
 process_mode = 3
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -849,6 +927,58 @@ text = "[center]You got a [color=#ff8]Hammer[/color]. It allows you to hammer th
 Fancy, innit? Eyyyyy. You know you like eet, bruv."
 fit_content = true
 scroll_active = false
+
+[node name="Cutscene" type="Control" parent="CanvasLayer/UIParent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Splash" type="Control" parent="CanvasLayer/UIParent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Splash"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("GradientTexture2D_n05je")
+
+[node name="Label" type="Label" parent="CanvasLayer/UIParent/Splash"]
+visible = false
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -65.0
+offset_top = -11.5
+offset_right = 65.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("8_j6fhx")
+text = "Spanish Inquisition Software 2024
+presents..."
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/UIParent/Splash"]
+libraries = {
+"": SubResource("AnimationLibrary_o57qm")
+}
+autoplay = "new_animation"
 
 [node name="Loader" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("Animation")]
 visible = false

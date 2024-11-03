@@ -1,0 +1,308 @@
+[gd_scene load_steps=17 format=3 uid="uid://ccn55toql5a6v"]
+
+[ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
+[ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
+[ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
+[ext_resource type="Material" uid="uid://jeg6842m148g" path="res://Graphics/Models/vehicles/RedTruckTM/suv_psxmat.tres" id="3_yjtyc"]
+[ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="3_ykbs4"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
+[ext_resource type="Texture2D" uid="uid://b113fpldi2ie1" path="res://Graphics/Lain/Lain_Untitled.png" id="5_cfdmu"]
+
+[sub_resource type="Animation" id="Animation_oinct"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingGround/ScenarioPivot/Cam1Moving:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera2:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera3:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_xj7n8"]
+resource_name = "new_animation"
+length = 8.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingGround/ScenarioPivot/Cam1Moving:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MovingGround")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("new_animation"),
+"times": PackedFloat32Array(0)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Camera2:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("Camera3:current")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/4/type = "animation"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lain/AnimationPlayer")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"clips": PackedStringArray("Driving", "Driving_RadioGet"),
+"times": PackedFloat32Array(0, 4.99749)
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
+_data = {
+"RESET": SubResource("Animation_oinct"),
+"new_animation": SubResource("Animation_xj7n8")
+}
+
+[sub_resource type="Animation" id="Animation_yxi8j"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingGround/ScenarioPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, -200)]
+}
+
+[sub_resource type="Animation" id="Animation_mb5jv"]
+resource_name = "new_animation"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MovingGround/ScenarioPivot:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -200)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_h0fy0"]
+_data = {
+"RESET": SubResource("Animation_yxi8j"),
+"new_animation": SubResource("Animation_mb5jv")
+}
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_g3fhg"]
+render_priority = 0
+shader = ExtResource("2_klldf")
+shader_parameter/local = true
+shader_parameter/size = 5.0
+shader_parameter/color1 = null
+shader_parameter/color2 = Color(0.245984, 0.245984, 0.245984, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_j6jht"]
+material = SubResource("ShaderMaterial_g3fhg")
+size = Vector2(1000, 1000)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_qe421"]
+render_priority = 0
+shader = ExtResource("4_vpk3l")
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("5_cfdmu")
+
+[node name="intro" type="Node3D" node_paths=PackedStringArray("Animation")]
+script = ExtResource("1_x8eer")
+Animation = NodePath("AnimationPlayer")
+metadata/uiMode = 0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_rgc1v")
+}
+
+[node name="MovingGround" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_h0fy0")
+}
+
+[node name="ScenarioPivot" type="Node3D" parent="MovingGround"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
+
+[node name="Scenario" type="MeshInstance3D" parent="MovingGround/ScenarioPivot"]
+mesh = SubResource("PlaneMesh_j6jht")
+skeleton = NodePath("../..")
+
+[node name="Cam1Moving" type="Camera3D" parent="MovingGround/ScenarioPivot"]
+transform = Transform3D(0.418802, 0, -0.908077, 0, 1, 0, 0.908077, 0, 0.418802, -9.26461, 0.717, 33.2614)
+current = true
+
+[node name="RedSUVtm" parent="." instance=ExtResource("1_l1bfu")]
+transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
+
+[node name="Brake" parent="RedSUVtm" index="0"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Clutch" parent="RedSUVtm" index="1"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="FLWheel" parent="RedSUVtm" index="2"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="FRWheel" parent="RedSUVtm" index="3"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Hood" parent="RedSUVtm" index="4"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Interior" parent="RedSUVtm" index="5"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="LDoor" parent="RedSUVtm" index="6"]
+transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="PBrake" parent="RedSUVtm" index="7"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="RDoor" parent="RedSUVtm" index="8"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="RLWheel" parent="RedSUVtm" index="9"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="RRWheel" parent="RedSUVtm" index="10"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Shifter" parent="RedSUVtm" index="11"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="SteeringWheel" parent="RedSUVtm" index="12"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Throttle" parent="RedSUVtm" index="13"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="TransfercaseShifter" parent="RedSUVtm" index="14"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Trunk" parent="RedSUVtm" index="15"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Body" parent="RedSUVtm" index="16"]
+surface_material_override/0 = ExtResource("3_yjtyc")
+
+[node name="Lain" parent="." instance=ExtResource("3_ykbs4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460924, 0, 0.496816)
+
+[node name="Skeleton3D" parent="Lain/Armature" index="0"]
+bones/0/position = Vector3(-3.88016e-17, 0.718004, -0.405773)
+bones/0/rotation = Quaternion(-0.256162, 1.36725e-16, 1.36494e-16, 0.966634)
+bones/1/rotation = Quaternion(0.1943, -1.74381e-16, -1.68267e-16, 0.980942)
+bones/2/rotation = Quaternion(0.103854, 5.83262e-17, -1.42947e-17, 0.994593)
+bones/3/rotation = Quaternion(0.177396, -1.18857e-07, -9.1567e-09, 0.98414)
+bones/4/rotation = Quaternion(0.0863994, 1.68157e-14, -2.05992e-08, 0.996261)
+bones/5/rotation = Quaternion(0.761178, 0.0216219, -0.590451, 0.26741)
+bones/6/rotation = Quaternion(-0.113596, -0.0244109, 0.638198, 0.761054)
+bones/6/scale = Vector3(1, 1, 1)
+bones/7/rotation = Quaternion(0.721346, 0.162045, 0.535668, 0.407996)
+bones/8/rotation = Quaternion(-0.0785896, 0.0344582, -0.63989, 0.76366)
+bones/8/scale = Vector3(0.999995, 1, 1)
+bones/9/rotation = Quaternion(0.200653, -0.521009, -0.697235, 0.449613)
+bones/9/scale = Vector3(0.999996, 1.00009, 1.00001)
+bones/10/rotation = Quaternion(-0.0852828, 0.0242935, -0.65639, 0.749192)
+bones/10/scale = Vector3(0.9999, 1.0001, 0.999998)
+bones/11/rotation = Quaternion(0.691488, -0.41845, -0.046406, 0.587018)
+bones/11/scale = Vector3(0.999999, 1.00007, 1.00002)
+bones/12/rotation = Quaternion(0.252872, 0.0072308, -0.60444, 0.755418)
+bones/12/scale = Vector3(0.99994, 1.00009, 0.999979)
+bones/13/position = Vector3(0.242567, 1.01512, -0.106698)
+bones/13/rotation = Quaternion(0.554216, -0.4759, -0.467211, 0.498075)
+bones/13/scale = Vector3(1, 1, 1)
+bones/14/position = Vector3(-0.171118, 1.17541, -0.0417157)
+bones/14/rotation = Quaternion(0.553005, 0.368224, 0.0204187, 0.747114)
+bones/14/scale = Vector3(1, 1, 1)
+bones/15/position = Vector3(0.0953964, 0.592716, 0.172967)
+bones/15/rotation = Quaternion(0.814608, -0.0801812, -0.1161, 0.562588)
+bones/15/scale = Vector3(1, 1, 1)
+bones/16/position = Vector3(-0.146043, 0.665964, 0.187178)
+bones/16/rotation = Quaternion(0.622501, 0.152305, 0.180087, 0.746234)
+bones/16/scale = Vector3(1, 1, 1)
+
+[node name="Cube" parent="Lain/Armature/Skeleton3D" index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_qe421")
+
+[node name="Camera2" type="Camera3D" parent="."]
+transform = Transform3D(-0.999789, 9.71925e-10, 0.0205411, 0.00935037, 0.890388, 0.455107, -0.0182895, 0.455203, -0.8902, 0.370958, 1.54168, 0.149549)
+
+[node name="Camera3" type="Camera3D" parent="."]
+transform = Transform3D(0.00746581, 0.146821, -0.989135, 0.00301702, 0.989155, 0.146846, 0.999968, -0.00408057, 0.00694188, -0.0480176, 1.25546, 0.239901)
+
+[editable path="RedSUVtm"]
+[editable path="Lain"]

@@ -1,11 +1,16 @@
 shader_type spatial;
 
+uniform bool local = false;
 uniform float size = 1.0;
 uniform vec3 color1 : source_color;
 uniform vec3 color2 : source_color;
 
 void fragment() {
 	vec4 wrld_vertex = INV_VIEW_MATRIX * vec4(VERTEX, 1.0);
+	if (local) {
+		mat4 invModel = inverse(MODEL_MATRIX);
+		wrld_vertex = invModel * wrld_vertex;
+	}
 	float x = 0.0;
 	if (wrld_vertex.x != 0.0) x = mod(wrld_vertex.x, size*2.0);
 	float z = 0.0;

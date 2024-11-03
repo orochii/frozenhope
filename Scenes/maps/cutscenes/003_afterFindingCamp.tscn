@@ -1,0 +1,351 @@
+[gd_scene load_steps=8 format=3 uid="uid://dils84k0c8f82"]
+
+[ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_3e7da"]
+[ext_resource type="PackedScene" uid="uid://cfc6nqpkm4weq" path="res://Graphics/Models/enemies/wendigo.glb" id="2_tsh2c"]
+[ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="3_kr6sa"]
+
+[sub_resource type="Animation" id="Animation_cqowx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("OnSceneCamera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.28833, 0.946838, 0.533037)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("OnSceneCamera3D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.262096, 0.239616, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("RedSUVtm:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-46.1785, 0.0114846, -46.1467)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("RedSUVtm:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.757508, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Lain:visible")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lain:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-2.89985, 0, -0.831121)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Lain:rotation")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.801909, 0)]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("RedSUVtm/LDoor:rotation")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("OnSceneCamera3D:current")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_sikoi"]
+resource_name = "new_animation"
+length = 30.0
+tracks/0/type = "animation"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Lain/AnimationPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": PackedStringArray("Stand_HoldSmallWeapon", "Walk", "Walk_HoldSmallWeapon", "Stand_HoldSmallWeapon"),
+"times": PackedFloat32Array(9.77007, 18.5987, 20.1989, 24.0935)
+}
+tracks/1/type = "animation"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("wendigo/AnimationPlayer")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"clips": PackedStringArray("Standing", "Death"),
+"times": PackedFloat32Array(9.77007, 10.2417)
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("OnSceneCamera3D:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10.2644, 10.2913, 15.0317, 19.0261, 24.7585, 26.1102, 29.3399),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-357.96, 1.28753, -315.071), Vector3(-2.32873, 1.28753, 1.54168), Vector3(-2.4601, 1.28753, 1.50585), Vector3(-2.32873, 1.28753, 1.54168), Vector3(-1.96385, 1.27976, -0.253958), Vector3(-1.235, 0.88, 0.572), Vector3(-1.235, 0.88, 0.572), Vector3(-1.235, 1.405, 0.572)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("OnSceneCamera3D:rotation")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(19.0261, 21.2877, 24.7585),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(-0.262096, 0.239616, 0), Vector3(-0.262096, -1.31587, -3.66154e-09), Vector3(-0.262096, -2.79665, 1.44907e-08)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("RedSUVtm:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 10.2419),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-358.266, 0.0114846, -317.797), Vector3(-3.30309, 0.0114846, -0.810326)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("RedSUVtm:rotation")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.757508, 0)]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Lain:visible")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(9.77007, 15.2366),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [false, true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Lain:position")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(15.2366, 15.9279, 16.6448, 19.0178, 20.3399, 21.6833, 24.0977),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(-2.89985, 0, -0.831121), Vector3(-2.66829, 0, -1.06912), Vector3(-2.55251, 0, -1.21063), Vector3(-2.3724, 0, -1.63516), Vector3(-1.51393, 0, -1.58656), Vector3(-0.209446, 0, -0.330687), Vector3(-0.623059, 0, 1.11844)]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Lain:rotation")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(15.2366, 15.9279, 16.6448, 19.0175, 20.2657, 20.5424, 22.0372),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.801909, 0), Vector3(0, 0.67923, 0), Vector3(0, 0.530632, 0), Vector3(0, 0.250961, 0), Vector3(0, 0.313666, 0), Vector3(0, 1.25472, 0), Vector3(0, -0.303234, 0)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("RedSUVtm/LDoor:rotation")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(15.2366, 15.9279),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-1.5708, 0, 0), Vector3(-1.5708, -1.16541, 0)]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("OnSceneCamera3D:current")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_maeak"]
+_data = {
+"RESET": SubResource("Animation_cqowx"),
+"new_animation": SubResource("Animation_sikoi")
+}
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_mtsrs"]
+size = Vector2(1000, 1000)
+
+[node name="AfterFindingCamp" type="Node3D"]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_maeak")
+}
+
+[node name="OnSceneCamera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.971429, -0.0614934, 0.229225, 0, 0.965849, 0.259106, -0.23733, -0.251703, 0.938254, 0.28833, 0.946838, 0.533037)
+current = true
+
+[node name="Lain" parent="." instance=ExtResource("1_3e7da")]
+transform = Transform3D(0.695336, 0, 0.718685, 0, 1, 0, -0.718685, 0, 0.695336, -2.89985, 0, -0.831121)
+visible = false
+
+[node name="Skeleton3D" parent="Lain/Armature" index="0"]
+bones/0/position = Vector3(-4.6948e-18, 0.871608, -0.0252615)
+bones/0/rotation = Quaternion(-0.126778, 1.25064e-16, 1.25059e-16, 0.991931)
+bones/1/rotation = Quaternion(0.1943, -1.74381e-16, -1.68267e-16, 0.980942)
+bones/2/rotation = Quaternion(-0.154098, 4.70313e-17, 5.43705e-17, 0.988056)
+bones/3/rotation = Quaternion(0.174971, -1.1737e-07, -2.08582e-08, 0.984574)
+bones/4/rotation = Quaternion(0.0863994, 7.90057e-15, -2.05992e-08, 0.996261)
+bones/5/rotation = Quaternion(0.811675, -0.000822857, -0.582517, -0.0430977)
+bones/6/rotation = Quaternion(0.151063, 0.00412279, 0.500607, 0.852382)
+bones/7/rotation = Quaternion(0.785597, -0.178349, 0.590418, -0.0493557)
+bones/8/rotation = Quaternion(0.0805673, 0.00255473, -0.78361, 0.616002)
+bones/8/scale = Vector3(0.999995, 1, 0.999997)
+bones/9/rotation = Quaternion(0.989976, 0.0264525, -0.138739, -0.000392194)
+bones/9/scale = Vector3(1, 0.999999, 1.00008)
+bones/10/rotation = Quaternion(0.188249, 0.00198317, -0.101091, 0.976903)
+bones/10/scale = Vector3(0.999999, 1, 1)
+bones/11/rotation = Quaternion(0.989957, -0.0210139, 0.139783, 0.00226715)
+bones/11/scale = Vector3(1, 0.999999, 1.00008)
+bones/12/rotation = Quaternion(0.1951, -0.00163268, 0.100016, 0.975669)
+bones/12/scale = Vector3(0.999999, 1, 1)
+bones/13/position = Vector3(0.00934216, 1.01805, 0.178706)
+bones/13/rotation = Quaternion(0.462094, -0.675064, -0.465663, -0.337515)
+bones/14/position = Vector3(-0.12706, 1.12474, 0.158002)
+bones/14/rotation = Quaternion(0.755622, 0.449594, 0.325664, 0.347627)
+bones/15/position = Vector3(0.161158, 0.0961958, -0.0236584)
+bones/15/rotation = Quaternion(0.896791, -0.0597672, -0.127812, 0.419355)
+bones/16/position = Vector3(-0.150345, 0.0961958, -0.0236584)
+bones/16/rotation = Quaternion(0.896791, 0.0597672, 0.127812, 0.419355)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.691286, 0, -0.722581, 0, 1, 0, 0.722581, 0, 0.691286, 0, 0, 0)
+mesh = SubResource("PlaneMesh_mtsrs")
+
+[node name="wendigo" parent="." instance=ExtResource("2_tsh2c")]
+transform = Transform3D(0.256373, 0, 0.155798, 0, 0.3, 0, -0.155798, 0, 0.256373, -1.70815, 0, 1.13262)
+
+[node name="Skeleton3D" parent="wendigo/W3_001" index="0"]
+bones/0/position = Vector3(-2.94882, 0.568417, -0.784846)
+bones/0/rotation = Quaternion(0.27341, 0.132859, -0.778811, -0.548679)
+bones/1/position = Vector3(-3.21255, 0.515671, 1.17063)
+bones/1/rotation = Quaternion(-0.0824198, -0.456732, -0.841016, 0.27802)
+bones/2/position = Vector3(0.566175, 0.232203, 0.31648)
+bones/2/rotation = Quaternion(-3.73885e-08, 1.94194e-07, -0.746116, 0.665816)
+bones/3/rotation = Quaternion(-0.157213, -0.0175775, 0.00225073, 0.987406)
+bones/4/rotation = Quaternion(-0.134143, -0.00714495, 0.0553168, 0.989391)
+bones/5/rotation = Quaternion(0.0894126, -0.0052168, 0.0553914, 0.99444)
+bones/6/rotation = Quaternion(0.0873351, -0.00747283, -0.028458, 0.995744)
+bones/7/rotation = Quaternion(0.0899545, -0.00758751, 0.0272519, 0.995544)
+bones/9/rotation = Quaternion(1.25785e-08, 3.36787e-07, 0.0319763, 0.999489)
+bones/10/rotation = Quaternion(-0.143112, -0.0248236, -0.0878504, 0.985487)
+bones/11/rotation = Quaternion(-0.123901, -0.038139, -0.0376262, 0.990847)
+bones/12/rotation = Quaternion(2.18227e-07, 2.63629e-07, -0.143844, 0.9896)
+bones/13/rotation = Quaternion(-0.268629, -0.570189, -0.00802483, 0.776311)
+bones/14/rotation = Quaternion(0.131596, -0.15654, -0.22225, 0.953301)
+bones/15/rotation = Quaternion(0.12927, -0.0504484, -0.0264676, 0.989972)
+bones/16/rotation = Quaternion(0.127439, 0.907973, 0.360488, -0.171441)
+bones/17/rotation = Quaternion(0.310725, 0.274872, 0.0928266, 0.90514)
+bones/18/rotation = Quaternion(0.220565, 0.0685988, -0.030934, 0.972465)
+bones/19/rotation = Quaternion(0.632625, -0.374642, 0.546487, -0.400975)
+bones/20/rotation = Quaternion(-0.0585904, 0.0452163, -0.662189, 0.745673)
+bones/21/rotation = Quaternion(-0.682978, 0.318589, 0.557598, -0.348033)
+bones/22/rotation = Quaternion(0.0876178, -0.0130308, -0.600903, 0.794399)
+bones/23/position = Vector3(7.89266, 0.320403, -3.1425)
+bones/23/rotation = Quaternion(0.54113, 0.578536, 0.394564, -0.465611)
+bones/34/position = Vector3(8.34571, 0.410646, -0.109636)
+bones/34/rotation = Quaternion(0.510686, 0.606021, 0.415379, -0.446542)
+bones/45/position = Vector3(-0.257279, 0.210011, -2.18359)
+bones/46/position = Vector3(0.0240362, 0.210009, 3.16527)
+
+[node name="RedSUVtm" parent="." instance=ExtResource("3_kr6sa")]
+transform = Transform3D(0.726551, 0, 0.687113, 0, 1, 0, -0.687113, 0, 0.726551, -46.1785, 0.0114846, -46.1467)
+
+[node name="LDoor" parent="RedSUVtm" index="6"]
+transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
+
+[editable path="Lain"]
+[editable path="wendigo"]
+[editable path="RedSUVtm"]

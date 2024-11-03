@@ -185,6 +185,7 @@ public partial class Player : CharacterBody3D, Targettable
 					hitTarget.Damage(ammo.HitscanDamageType, ammo.DamagePartial);
 				} else {
 					hitTarget.Damage(ammo.HitscanDamageType, ammo.HitscanDamage);
+					hitTarget.ForceActionState(EActionState.DAMAGE);
 				}
 				
             }
