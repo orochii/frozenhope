@@ -11,6 +11,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywud7"]
 render_priority = 0
 shader = ExtResource("2_r62he")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -208,11 +209,10 @@ ActionState = 2
 IgnoreActionExit = true
 AnimEntries = Array[Object]([SubResource("Resource_h28se")])
 
-[node name="Lain" node_paths=PackedStringArray("StateMachine", "Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
+[node name="Lain" node_paths=PackedStringArray("Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
 script = ExtResource("2_c1pyr")
-StateMachine = NodePath("StateMachine")
 Armature = NodePath("Armature/Skeleton3D")
-WeaponBoneName = "Hand.R"
+WeaponBoneNames = PackedStringArray("Hand.R", "Hand.L")
 WeaponSlot = NodePath("WeaponSlot")
 
 [node name="Skeleton3D" parent="Armature" index="0"]

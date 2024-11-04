@@ -56,7 +56,7 @@ public partial class Player : CharacterBody3D, Targettable
 			AimTimer = wpn.AimTime;
 			GD.Print("AimTimer Assigned: " + AimTimer);
 			// Orochii will explain this
-			Graphic.SetWeaponModel(wpn.EquippedModel);
+			Graphic.SetWeaponModel(wpn.EquippedModel, wpn.WeaponBoneIdx);
 			Graphic.SetVariationId(wpn.AnimationSet);
 		} else {
 			AimTimer = 0;

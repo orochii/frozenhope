@@ -3,7 +3,7 @@ using System;
 
 public partial class MaterialSwitch : MeshInstance3D
 {
-	const float FLAP_DURATION = 0.2f;
+	const float FLAP_DURATION = 0.1f;
 	[Export] public int MaterialOverrideIdx;
 	[Export] public int SurfaceOverrideIdx;
 	[Export] Material[] AlternateMaterials;

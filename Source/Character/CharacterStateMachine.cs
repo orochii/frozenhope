@@ -12,11 +12,12 @@ public partial class CharacterStateMachine : Node
 	CharacterAnimState _lastState = null;
     public override void _Ready()
     {
+		if (Engine.IsEditorHint()) return;
         if (Animator != null) Animator.AnimationFinished += OnAnimationFinished;
     }
     public override void _Process(double delta)
     {
-        base._Process(delta);
+		if (Engine.IsEditorHint()) return;
         float blend = _lastState == null ? 0 : 0.1f;
         var currentState = GetCurrentState();
         GoToState(currentState, blend);

@@ -43,6 +43,7 @@ uniform sampler2D albedo: hint_default_black, filter_nearest;
 uniform sampler2D specular: hint_default_black, filter_nearest;
 uniform sampler2D emission: hint_default_black, filter_nearest;
 
+uniform bool vertex_color;
 // The "jumpiness" of vertices.
 uniform float jitter: hint_range(0.0, 1.0) = 0.5;
 
@@ -96,6 +97,7 @@ void vertex() {
 }
 
 void fragment() {
+	vec3 vCol = COLOR.rgb;
 	vec2 uv = UV;
 
 	if (affine_texture_mapping) {
@@ -107,6 +109,9 @@ void fragment() {
 
 	// Overlay albedo color with the albedo texture.
 	ALBEDO = albedo_color.rgb * texture(albedo, uv).rgb;
+	if (vertex_color) {
+		ALBEDO = ALBEDO * vCol;
+	}
 
 	ALPHA = texture(albedo, uv).a;
 	ALPHA_SCISSOR_THRESHOLD = alpha_scissor;

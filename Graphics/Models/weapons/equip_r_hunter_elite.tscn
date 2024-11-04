@@ -9,6 +9,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wg82q"]
 render_priority = 0
 shader = ExtResource("2_o5ll5")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -58,7 +59,7 @@ _data = {
 }
 
 [node name="Rifle" node_paths=PackedStringArray("Animator", "SpawnPoint") instance=ExtResource("1_mp0kl")]
-transform = Transform3D(6.55671e-09, 0.15, -1.31134e-08, 0.15, -6.55671e-09, 1.31134e-08, 1.31134e-08, -1.31134e-08, -0.15, 0.0606207, 0.208317, 0)
+transform = Transform3D(0.0261336, -0.140024, 0.047013, 0.147534, 0.027047, -0.00145411, -0.00711966, 0.0464935, 0.142435, -0.00938976, 0.0420531, 0.0186634)
 script = ExtResource("2_8e50y")
 Animator = NodePath("WeaponAnim")
 SpawnPoint = NodePath("SpawnPoint")

@@ -1,0 +1,44 @@
+[gd_scene load_steps=3 format=3 uid="uid://cnemqynlmtc0y"]
+
+[ext_resource type="PackedScene" uid="uid://oykp21gpqp0a" path="res://Graphics/Lain/p_lain.tscn" id="1_th0la"]
+[ext_resource type="PackedScene" uid="uid://blvo27p6s7te0" path="res://Graphics/Models/weapons/equip_r_hunter_elite.tscn" id="2_ktx0g"]
+
+[node name="Node3D" type="Node3D"]
+
+[node name="Lain" parent="." instance=ExtResource("1_th0la")]
+CurrentWeaponBoneIdx = 1
+ReplicateInEditor = true
+
+[node name="Skeleton3D" parent="Lain/Armature" index="0"]
+bones/0/rotation = Quaternion(-0.126413, -0.0751345, -0.00960286, 0.989082)
+bones/1/rotation = Quaternion(0.186609, -0.278098, -0.0163418, 0.94211)
+bones/2/rotation = Quaternion(-0.152231, -0.155166, -0.00277248, 0.976085)
+bones/3/rotation = Quaternion(0.265302, 0.152684, -0.0152016, 0.951878)
+bones/4/rotation = Quaternion(0.084969, 0.16257, -0.0800512, 0.979767)
+bones/5/rotation = Quaternion(0.710825, 0.130812, -0.598666, 0.345275)
+bones/6/rotation = Quaternion(-0.249723, -0.0449664, 0.695758, 0.671966)
+bones/7/rotation = Quaternion(0.791025, 0.298454, 0.533145, -0.0310138)
+bones/8/rotation = Quaternion(0.243524, -0.0251577, -0.631021, 0.736122)
+bones/8/scale = Vector3(1.00001, 0.999986, 0.999996)
+bones/9/rotation = Quaternion(0.986891, 0.0319091, -0.142248, -0.0692329)
+bones/10/rotation = Quaternion(0.0984655, 0.000885009, -0.0469526, 0.994032)
+bones/11/rotation = Quaternion(0.982351, -0.0527177, 0.140458, -0.111709)
+bones/12/rotation = Quaternion(0.0629603, -0.0014013, 0.0324658, 0.997487)
+bones/12/scale = Vector3(1, 0.999996, 0.999999)
+bones/13/position = Vector3(-0.085937, 1.38378, 0.412252)
+bones/13/rotation = Quaternion(0.288454, -0.648172, -0.583248, 0.395588)
+bones/14/position = Vector3(-0.138403, 1.33289, 0.207935)
+bones/14/rotation = Quaternion(0.538069, 0.480876, 0.370236, 0.58495)
+bones/16/position = Vector3(-0.140485, 0.0961958, -0.106481)
+bones/16/rotation = Quaternion(0.834311, -0.0494306, 0.352837, 0.420698)
+
+[node name="WeaponSlot" parent="Lain" index="2"]
+transform = Transform3D(-0.520609, 0.0875162, -0.849298, -0.835387, 0.153233, 0.527872, 0.176338, 0.984307, -0.00666451, -0.085937, 1.38378, 0.412252)
+
+[node name="Rifle" parent="Lain/WeaponSlot" index="0" instance=ExtResource("2_ktx0g")]
+transform = Transform3D(0.0261336, -0.140025, 0.0470128, 0.147534, 0.0270471, -0.00145406, -0.00711967, 0.0464936, 0.142435, -0.00938976, 0.0420531, 0.0186634)
+
+[node name="StateMachine" parent="Lain" index="3"]
+AnimStates = Array[Object]([])
+
+[editable path="Lain"]

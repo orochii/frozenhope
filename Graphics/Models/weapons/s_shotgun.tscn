@@ -1,0 +1,26 @@
+[gd_scene load_steps=5 format=3 uid="uid://dh4lfwi1ahn3l"]
+
+[ext_resource type="PackedScene" uid="uid://dsp6fh5oilw2" path="res://Graphics/Models/weapons/Shotgun.fbx" id="1_651wx"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_81rcb"]
+[ext_resource type="Texture2D" uid="uid://ch4n8i7bpi6f1" path="res://Graphics/Models/weapons/Shotgun_Texture.png" id="3_dm2ph"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_q1upp"]
+render_priority = 0
+shader = ExtResource("2_81rcb")
+shader_parameter/vertex_color = null
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_dm2ph")
+
+[node name="Shotgun" instance=ExtResource("1_651wx")]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+
+[node name="Shotgun" parent="." index="0"]
+surface_material_override/0 = SubResource("ShaderMaterial_q1upp")

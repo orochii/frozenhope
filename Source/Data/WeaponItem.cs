@@ -6,6 +6,7 @@ public partial class WeaponItem : BaseItem {
     [Export] public int AmmoMax;
     [Export] public int AimTime;
     [Export] public PackedScene EquippedModel;
+    [Export] public int WeaponBoneIdx;
     [Export] public string AnimationSet = "";
     // Action when not holding ammo
     public bool IsCompatibleWithAmmo(string id) {

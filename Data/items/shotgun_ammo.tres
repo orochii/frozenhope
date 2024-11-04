@@ -1,0 +1,25 @@
+[gd_resource type="Resource" script_class="AmmoItem" load_steps=7 format=3 uid="uid://clmdgvx3o1ef6"]
+
+[ext_resource type="Texture2D" uid="uid://cwornwt81ljbc" path="res://Graphics/textures/icons/ammo_bullet.png" id="1_md1vo"]
+[ext_resource type="Script" path="res://Source/Data/AmmoItem.cs" id="1_okel0"]
+[ext_resource type="PackedScene" uid="uid://bvedlftr3otom" path="res://Scenes/objects/hitspark_blood.tscn" id="2_7cpde"]
+[ext_resource type="PackedScene" uid="uid://b7cp1mhvqm6po" path="res://Scenes/objects/hitspark_default.tscn" id="3_tbotw"]
+[ext_resource type="Texture2D" uid="uid://dq8k0igdwg0op" path="res://Graphics/Models/items/shotgun_ammo_render.png" id="4_ol7pe"]
+[ext_resource type="PackedScene" uid="uid://ny7cmjt27adb" path="res://Graphics/Models/items/s_shotgun_ammo.tscn" id="5_abyld"]
+
+[resource]
+script = ExtResource("1_okel0")
+AmmoIcon = ExtResource("1_md1vo")
+HitscanDamage = 18
+DamagePartial = 15
+HitscanDamageType = 1
+HitscanShots = 6
+HitscanSpread = 30.0
+HitSparkObject = ExtResource("3_tbotw")
+HitSparkBlood = ExtResource("2_7cpde")
+DisplayName = "Shotgun Ammo"
+DisplayDescription = "Ammo for 12 gauge shotgun."
+Icon = ExtResource("4_ol7pe")
+Model = ExtResource("5_abyld")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1

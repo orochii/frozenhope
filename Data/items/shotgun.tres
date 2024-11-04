@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="WeaponItem" load_steps=5 format=3 uid="uid://cxathawwalwmv"]
+
+[ext_resource type="Texture2D" uid="uid://bknam37m5t8q3" path="res://Graphics/Models/weapons/shotgun_render2.png" id="1_mnpcb"]
+[ext_resource type="Script" path="res://Source/Data/WeaponItem.cs" id="1_ugih7"]
+[ext_resource type="PackedScene" uid="uid://bqoua20h4vkeg" path="res://Graphics/Models/weapons/equip_s_shotgun.tscn" id="1_yxpvg"]
+[ext_resource type="PackedScene" uid="uid://dh4lfwi1ahn3l" path="res://Graphics/Models/weapons/s_shotgun.tscn" id="3_3tvwt"]
+
+[resource]
+script = ExtResource("1_ugih7")
+CompatibleAmmo = PackedStringArray("shotgun_ammo")
+AmmoMax = 2
+AimTime = 1
+EquippedModel = ExtResource("1_yxpvg")
+AnimationSet = "rifle"
+DisplayName = "Shotgun"
+DisplayDescription = "12 gauge shotgun"
+Icon = ExtResource("1_mnpcb")
+Model = ExtResource("3_3tvwt")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1

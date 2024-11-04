@@ -6,6 +6,7 @@
 [resource]
 render_priority = 0
 shader = ExtResource("1_7bjy7")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true

@@ -1,23 +1,24 @@
-[gd_scene load_steps=30 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=32 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
 [ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
-[ext_resource type="AudioStream" uid="uid://js5rkurdy8m0" path="res://Audio/Voice/geeorg01.wav" id="2_v22qd"]
 [ext_resource type="AudioStream" uid="uid://bg4pctxpob14g" path="res://Audio/Voice/01.wav" id="3_14hch"]
 [ext_resource type="Material" uid="uid://jeg6842m148g" path="res://Graphics/Models/vehicles/RedTruckTM/suv_psxmat.tres" id="3_yjtyc"]
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="3_ykbs4"]
-[ext_resource type="AudioStream" uid="uid://bpw3ugwovcic3" path="res://Audio/Voice/geeorg02.wav" id="4_b21aa"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
 [ext_resource type="AudioStream" uid="uid://c0oo14ke6b0md" path="res://Audio/Voice/02.wav" id="5_6sasq"]
 [ext_resource type="Texture2D" uid="uid://b113fpldi2ie1" path="res://Graphics/Lain/Lain_Untitled.png" id="5_cfdmu"]
-[ext_resource type="AudioStream" uid="uid://dpy5xysd2ftg5" path="res://Audio/Voice/geeorg03.wav" id="6_mnwwt"]
+[ext_resource type="AudioStream" uid="uid://d1rmmchi04mjn" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit.wav" id="6_p8u00"]
+[ext_resource type="AudioStream" uid="uid://by67k7todn08c" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit2.wav" id="7_6ebk4"]
 [ext_resource type="AudioStream" uid="uid://2twd7dqrig25" path="res://Audio/Voice/03.wav" id="7_f5flu"]
 [ext_resource type="Script" path="res://Source/Character/MaterialSwitch.cs" id="8_gelcu"]
-[ext_resource type="AudioStream" uid="uid://cyvgnxqry8ov" path="res://Audio/Voice/geeorg04.wav" id="8_r7tm1"]
+[ext_resource type="AudioStream" uid="uid://d2v84xkqd0frv" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit3.wav" id="8_k3iyy"]
 [ext_resource type="Texture2D" uid="uid://bd2qm06kxa2ht" path="res://Graphics/Lain/Lain_Untitled_mouthOpen.png" id="9_di4ly"]
+[ext_resource type="AudioStream" uid="uid://ccj46bjppvrvw" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit4.wav" id="9_ej8x5"]
 [ext_resource type="AudioStream" uid="uid://c5j7uj4sr53yk" path="res://Audio/Voice/04.wav" id="9_rx3xp"]
 [ext_resource type="Texture2D" uid="uid://bln84ym8y5h17" path="res://Graphics/Lain/Lain_Untitled_surprise.png" id="10_kgplf"]
+[ext_resource type="Texture2D" uid="uid://bge8ysqqpjjck" path="res://Graphics/Lain/Lain_Untitled_gasp.png" id="19_cukto"]
 
 [sub_resource type="Animation" id="Animation_oinct"]
 length = 0.001
@@ -81,10 +82,22 @@ tracks/4/keys = {
 "update": 0,
 "values": [Color(1, 1, 1, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Lain/Armature/Skeleton3D/Cube:MaterialOverrideIdx")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0]
+}
 
 [sub_resource type="Animation" id="Animation_xj7n8"]
 resource_name = "new_animation"
-length = 45.0
+length = 60.0
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -114,10 +127,10 @@ tracks/2/path = NodePath("Camera2:current")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 2),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 2, 12.5667, 16.7333),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, true, false, true]
 }
 tracks/3/type = "value"
 tracks/3/imported = false
@@ -126,10 +139,10 @@ tracks/3/path = NodePath("Camera3:current")
 tracks/3/interp = 1
 tracks/3/loop_wrap = true
 tracks/3/keys = {
-"times": PackedFloat32Array(0, 9.4),
-"transitions": PackedFloat32Array(1, 1),
+"times": PackedFloat32Array(0, 12.4333, 16.7667, 26.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [false, true]
+"values": [false, true, false, true]
 }
 tracks/4/type = "animation"
 tracks/4/imported = false
@@ -138,8 +151,8 @@ tracks/4/path = NodePath("Lain/AnimationPlayer")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
-"clips": PackedStringArray("Driving", "Driving_RadioGet", "Driving_RadioReturn"),
-"times": PackedFloat32Array(0, 8.93333, 39.7)
+"clips": PackedStringArray("Driving", "Driving_RadioGet", "Driving_RadioTalk", "Driving_RadioNope", "Driving_RadioTalk", "Driving_RadioReturn"),
+"times": PackedFloat32Array(0, 12.2667, 26.6, 37.1, 45.1, 55.3)
 }
 tracks/5/type = "value"
 tracks/5/imported = false
@@ -148,7 +161,7 @@ tracks/5/path = NodePath("MovingGround/ScenarioPivot/Cam4Moving:current")
 tracks/5/interp = 1
 tracks/5/loop_wrap = true
 tracks/5/keys = {
-"times": PackedFloat32Array(0, 40.6),
+"times": PackedFloat32Array(0, 56.2),
 "transitions": PackedFloat32Array(1, 1),
 "update": 1,
 "values": [false, true]
@@ -160,7 +173,7 @@ tracks/6/path = NodePath("Control/ColorRect:modulate")
 tracks/6/interp = 1
 tracks/6/loop_wrap = true
 tracks/6/keys = {
-"times": PackedFloat32Array(0, 41.9, 43.8),
+"times": PackedFloat32Array(0, 57.5, 59.4),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
 "values": [Color(1, 1, 1, 0), Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
@@ -189,7 +202,7 @@ tracks/7/keys = {
 "start_offset": 0.0,
 "stream": ExtResource("9_rx3xp")
 }],
-"times": PackedFloat32Array(9.13333, 20, 26.7333, 37.5)
+"times": PackedFloat32Array(12.3333, 26.7333, 37.1, 52.8)
 }
 tracks/7/use_blend = true
 tracks/8/type = "audio"
@@ -200,23 +213,23 @@ tracks/8/interp = 1
 tracks/8/loop_wrap = true
 tracks/8/keys = {
 "clips": [{
-"end_offset": 0.623048,
+"end_offset": 0.0,
 "start_offset": 0.0,
-"stream": ExtResource("2_v22qd")
+"stream": ExtResource("6_p8u00")
 }, {
-"end_offset": 1.57896,
-"start_offset": 0.409675,
-"stream": ExtResource("4_b21aa")
+"end_offset": 0.391266,
+"start_offset": 0.950216,
+"stream": ExtResource("7_6ebk4")
 }, {
-"end_offset": 0.46942,
-"start_offset": 0.460885,
-"stream": ExtResource("6_mnwwt")
+"end_offset": 0.391266,
+"start_offset": 0.0,
+"stream": ExtResource("8_k3iyy")
 }, {
 "end_offset": 0.0,
-"start_offset": 0.213373,
-"stream": ExtResource("8_r7tm1")
+"start_offset": 0.0,
+"stream": ExtResource("9_ej8x5")
 }],
-"times": PackedFloat32Array(2, 12.8237, 23.9667, 32.92)
+"times": PackedFloat32Array(2.03333, 16.1169, 31.3667, 44.1)
 }
 tracks/8/use_blend = true
 tracks/9/type = "method"
@@ -226,8 +239,8 @@ tracks/9/path = NodePath("Lain/Armature/Skeleton3D/Cube")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
-"times": PackedFloat32Array(9.23333, 12.5667, 20.3667, 23.9333, 27, 32.9, 37.9, 39.5333),
-"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1),
+"times": PackedFloat32Array(12.5667, 13.4333, 13.8333, 14.5667, 15.0333, 15.7, 27.1, 28.8333, 29.3, 30.4333, 38.4333, 41.1, 41.6667, 43.2667, 53.3667, 54.6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
 "values": [{
 "args": [],
 "method": &"SetFlapping"
@@ -252,7 +265,43 @@ tracks/9/keys = {
 }, {
 "args": [],
 "method": &"UnsetFlapping"
+}, {
+"args": [],
+"method": &"SetFlapping"
+}, {
+"args": [],
+"method": &"UnsetFlapping"
+}, {
+"args": [],
+"method": &"SetFlapping"
+}, {
+"args": [],
+"method": &"UnsetFlapping"
+}, {
+"args": [],
+"method": &"SetFlapping"
+}, {
+"args": [],
+"method": &"UnsetFlapping"
+}, {
+"args": [],
+"method": &"SetFlapping"
+}, {
+"args": [],
+"method": &"UnsetFlapping"
 }]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("Lain/Armature/Skeleton3D/Cube:MaterialOverrideIdx")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(37.4667, 38.1667),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [3, 0]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
@@ -314,6 +363,7 @@ size = Vector2(1000, 1000)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe421"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -328,6 +378,7 @@ shader_parameter/albedo = ExtResource("5_cfdmu")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r3dyy"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -342,6 +393,7 @@ shader_parameter/albedo = ExtResource("9_di4ly")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14gni"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -352,6 +404,21 @@ shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
 shader_parameter/albedo = ExtResource("10_kgplf")
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_3gxto"]
+render_priority = 0
+shader = ExtResource("4_vpk3l")
+shader_parameter/vertex_color = null
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("19_cukto")
 
 [node name="intro" type="Node3D" node_paths=PackedStringArray("Animation")]
 script = ExtResource("1_x8eer")
@@ -445,10 +512,10 @@ bones/0/position = Vector3(-3.88016e-17, 0.718004, -0.405773)
 bones/0/rotation = Quaternion(-0.256162, 1.36725e-16, 1.36494e-16, 0.966634)
 bones/1/rotation = Quaternion(0.1943, -1.74381e-16, -1.68267e-16, 0.980942)
 bones/2/rotation = Quaternion(0.103854, 5.83262e-17, -1.42947e-17, 0.994593)
-bones/3/rotation = Quaternion(0.174971, -1.1737e-07, -2.08582e-08, 0.984574)
-bones/4/rotation = Quaternion(0.0990376, -0.0304521, -0.0414665, 0.993753)
-bones/5/rotation = Quaternion(0.798876, -0.0366494, -0.591291, 0.104063)
-bones/6/rotation = Quaternion(0.070596, -0.00568465, 0.925543, 0.37196)
+bones/3/rotation = Quaternion(0.177396, -1.18857e-07, -9.1567e-09, 0.98414)
+bones/4/rotation = Quaternion(0.0863994, 1.68157e-14, -2.05992e-08, 0.996261)
+bones/5/rotation = Quaternion(0.761178, 0.0216219, -0.590451, 0.26741)
+bones/6/rotation = Quaternion(-0.113596, -0.0244109, 0.638198, 0.761054)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/rotation = Quaternion(0.721346, 0.162045, 0.535668, 0.407996)
 bones/8/rotation = Quaternion(-0.0785896, 0.0344582, -0.63989, 0.76366)
@@ -461,8 +528,8 @@ bones/11/rotation = Quaternion(0.691488, -0.41845, -0.046406, 0.587018)
 bones/11/scale = Vector3(0.999999, 1.00007, 1.00002)
 bones/12/rotation = Quaternion(0.252872, 0.0072308, -0.60444, 0.755418)
 bones/12/scale = Vector3(0.99994, 1.00009, 0.999979)
-bones/13/position = Vector3(0.104904, 1.1479, -0.267429)
-bones/13/rotation = Quaternion(0.276298, -0.918002, -0.127015, 0.254558)
+bones/13/position = Vector3(0.242567, 1.01512, -0.106698)
+bones/13/rotation = Quaternion(0.554216, -0.4759, -0.467211, 0.498075)
 bones/13/scale = Vector3(1, 1, 1)
 bones/14/position = Vector3(-0.171118, 1.17541, -0.0417157)
 bones/14/rotation = Quaternion(0.553005, 0.368224, 0.0204187, 0.747114)
@@ -477,7 +544,7 @@ bones/16/scale = Vector3(1, 1, 1)
 [node name="Cube" parent="Lain/Armature/Skeleton3D" index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_qe421")
 script = ExtResource("8_gelcu")
-AlternateMaterials = Array[Material]([SubResource("ShaderMaterial_qe421"), SubResource("ShaderMaterial_r3dyy"), SubResource("ShaderMaterial_14gni")])
+AlternateMaterials = Array[Material]([SubResource("ShaderMaterial_qe421"), SubResource("ShaderMaterial_r3dyy"), SubResource("ShaderMaterial_14gni"), SubResource("ShaderMaterial_3gxto")])
 
 [node name="AudioListener3D" type="AudioListener3D" parent="Lain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34359, -0.367344)
@@ -497,7 +564,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.600391, 1.09687, 0.707127)
 volume_db = -8.0
 max_db = 1.0
 pitch_scale = 0.95
-bus = &"VoiceRadio"
 
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
