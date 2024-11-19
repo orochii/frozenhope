@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://djmrglnnrjo3p"
+path="res://.godot/imported/SFX_WALK_SNOW_JDY.wav-62ae626a9d3d32fcf4103e05c5aca3b6.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Characters/SFX_WALK_SNOW_JDY.wav"
+dest_files=["res://.godot/imported/SFX_WALK_SNOW_JDY.wav-62ae626a9d3d32fcf4103e05c5aca3b6.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

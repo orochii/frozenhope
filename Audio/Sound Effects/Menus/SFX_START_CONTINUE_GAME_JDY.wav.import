@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://dbdm7uv3345jf"
+path="res://.godot/imported/SFX_START_CONTINUE_GAME_JDY.wav-9dcf5a61cd2b031aa379fef7e1b4cd39.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Menus/SFX_START_CONTINUE_GAME_JDY.wav"
+dest_files=["res://.godot/imported/SFX_START_CONTINUE_GAME_JDY.wav-9dcf5a61cd2b031aa379fef7e1b4cd39.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

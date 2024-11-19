@@ -7,6 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c5qte"]
 render_priority = 0
 shader = ExtResource("4_2nma4")
+shader_parameter/local = false
 shader_parameter/size = 1.0
 shader_parameter/color1 = Color(0.384229, 0.384229, 0.384229, 1)
 shader_parameter/color2 = null

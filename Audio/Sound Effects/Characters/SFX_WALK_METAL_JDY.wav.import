@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bl4xa7oct01mh"
+path="res://.godot/imported/SFX_WALK_METAL_JDY.wav-d6ec6a2f30259d9a671384f16c75fa6c.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Characters/SFX_WALK_METAL_JDY.wav"
+dest_files=["res://.godot/imported/SFX_WALK_METAL_JDY.wav-d6ec6a2f30259d9a671384f16c75fa6c.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

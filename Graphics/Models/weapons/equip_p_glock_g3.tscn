@@ -1,15 +1,17 @@
-[gd_scene load_steps=11 format=3 uid="uid://cg2r5xf7ubfeb"]
+[gd_scene load_steps=12 format=3 uid="uid://cg2r5xf7ubfeb"]
 
 [ext_resource type="PackedScene" uid="uid://b34m6sp7487jy" path="res://Graphics/Models/weapons/glock_g3.glb" id="1_yw55t"]
 [ext_resource type="Script" path="res://Source/Objects/WeaponGraphic.cs" id="2_i0ygo"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_mntjy"]
 [ext_resource type="Texture2D" uid="uid://bakob26g2mnjh" path="res://Graphics/Models/weapons/glock_tex.png" id="3_mtolq"]
 [ext_resource type="PackedScene" uid="uid://cbfi7ijxpa15g" path="res://Graphics/Models/weapons/p_muzzle_1.tscn" id="4_ljq16"]
-[ext_resource type="AudioStream" uid="uid://2ps5is5ighrh" path="res://Audio/Sound Effects/testPew.ogg" id="6_dpayh"]
+[ext_resource type="AudioStream" uid="uid://cr81uhyts55hf" path="res://Audio/Sound Effects/Weapons/SFX_HANDGUN_FIRE_JDY.wav" id="6_bnkob"]
+[ext_resource type="AudioStream" uid="uid://bqfhpqloj8h0u" path="res://Audio/Sound Effects/Weapons/SFX_HANDGUN_LOAD_JDY.wav" id="7_05gwy"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_yfb60"]
 render_priority = 0
 shader = ExtResource("2_mntjy")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -58,11 +60,12 @@ _data = {
 "muzzle": SubResource("Animation_jgmlb")
 }
 
-[node name="glock_g3" node_paths=PackedStringArray("Animator", "SoundEffect", "SpawnPoint") instance=ExtResource("1_yw55t")]
+[node name="glock_g3" node_paths=PackedStringArray("Animator", "SoundEffect", "Reload", "SpawnPoint") instance=ExtResource("1_yw55t")]
 transform = Transform3D(-6.55671e-09, 0.15, 6.55671e-09, 0, -6.55671e-09, 0.15, 0.15, 6.55671e-09, 2.86603e-16, 0.0284089, 0.106533, 0)
 script = ExtResource("2_i0ygo")
 Animator = NodePath("WeaponAnim")
 SoundEffect = NodePath("WeaponSFX")
+Reload = NodePath("ReloadSFX")
 SpawnPoint = NodePath("SpawnPoint")
 
 [node name="Plane" parent="." index="0"]
@@ -86,5 +89,7 @@ libraries = {
 }
 
 [node name="WeaponSFX" type="AudioStreamPlayer" parent="." index="6"]
-stream = ExtResource("6_dpayh")
-volume_db = 15.0
+stream = ExtResource("6_bnkob")
+
+[node name="ReloadSFX" type="AudioStreamPlayer" parent="." index="7"]
+stream = ExtResource("7_05gwy")

@@ -7,6 +7,7 @@
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_d1sbu"]
 render_priority = 0
 shader = ExtResource("1_n2awy")
+shader_parameter/local = false
 shader_parameter/size = 1.0
 shader_parameter/color1 = null
 shader_parameter/color2 = Color(0.244776, 0.244776, 0.244776, 1)
@@ -18,6 +19,7 @@ size = Vector2(20, 20)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_4chml"]
 render_priority = 0
 shader = ExtResource("1_n2awy")
+shader_parameter/local = false
 shader_parameter/size = 1.0
 shader_parameter/color1 = Color(0.294118, 0, 0, 1)
 shader_parameter/color2 = null

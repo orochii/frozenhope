@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://c1v0cv83rpmkl"
+path="res://.godot/imported/SFX_CAR_DOOR_CLOSE_JDY.wav-3901e73e58e73028f6596c02ba2a69cb.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Environment/SFX_CAR_DOOR_CLOSE_JDY.wav"
+dest_files=["res://.godot/imported/SFX_CAR_DOOR_CLOSE_JDY.wav-3901e73e58e73028f6596c02ba2a69cb.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://b8jld3re3fhmc"
+path="res://.godot/imported/SFX_RIFLE_FIRE_JDY.wav-f623a1713e3d494166fbc50c7b29dd90.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Weapons/SFX_RIFLE_FIRE_JDY.wav"
+dest_files=["res://.godot/imported/SFX_RIFLE_FIRE_JDY.wav-f623a1713e3d494166fbc50c7b29dd90.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

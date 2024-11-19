@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://bh4mqgfuuat5"
+path="res://.godot/imported/SFX_RADIO_PING_JDY.wav-e06b1252487c5f50a4d8d8f2d7edf7ea.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/SFX_RADIO_PING_JDY.wav"
+dest_files=["res://.godot/imported/SFX_RADIO_PING_JDY.wav-e06b1252487c5f50a4d8d8f2d7edf7ea.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0
