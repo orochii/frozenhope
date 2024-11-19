@@ -1,4 +1,4 @@
-[gd_scene load_steps=32 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=39 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
@@ -19,6 +19,26 @@
 [ext_resource type="AudioStream" uid="uid://c5j7uj4sr53yk" path="res://Audio/Voice/04.wav" id="9_rx3xp"]
 [ext_resource type="Texture2D" uid="uid://bln84ym8y5h17" path="res://Graphics/Lain/Lain_Untitled_surprise.png" id="10_kgplf"]
 [ext_resource type="Texture2D" uid="uid://bge8ysqqpjjck" path="res://Graphics/Lain/Lain_Untitled_gasp.png" id="19_cukto"]
+[ext_resource type="PackedScene" uid="uid://babtkorew36j3" path="res://Graphics/Models/scenery/materials_trees/tree1.glb" id="20_cmv1y"]
+[ext_resource type="PackedScene" uid="uid://lkvxlooxa6x" path="res://Graphics/Models/scenery/materials_trees/tree2.glb" id="21_mmq22"]
+[ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="22_ub1n4"]
+[ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wyt56"]
+sky_top_color = Color(0.680522, 0.735972, 0.81331, 1)
+sky_horizon_color = Color(0.837937, 0.834755, 0.834467, 1)
+sky_energy_multiplier = 0.9
+ground_bottom_color = Color(0.671227, 0.603047, 0.524558, 1)
+ground_horizon_color = Color(0.837937, 0.834755, 0.834467, 1)
+
+[sub_resource type="Sky" id="Sky_s043u"]
+sky_material = SubResource("ProceduralSkyMaterial_wyt56")
+
+[sub_resource type="Environment" id="Environment_mf2hf"]
+background_mode = 2
+sky = SubResource("Sky_s043u")
+fog_enabled = true
+fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 
 [sub_resource type="Animation" id="Animation_oinct"]
 length = 0.001
@@ -425,6 +445,15 @@ script = ExtResource("1_x8eer")
 Animation = NodePath("AnimationPlayer")
 metadata/uiMode = 0
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_mf2hf")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.371368, 0.743468, -0.556185, 0, 0.599024, 0.800731, 0.928486, -0.297366, 0.222458, 0, 0, 0)
+light_color = Color(0.973963, 0.913969, 0.847604, 1)
+light_energy = 0.65
+shadow_enabled = true
+
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
 "": SubResource("AnimationLibrary_rgc1v")
@@ -448,6 +477,1883 @@ current = true
 
 [node name="Cam4Moving" type="Camera3D" parent="MovingGround/ScenarioPivot"]
 transform = Transform3D(-0.994288, 0, -0.106732, 0, 1, 0, 0.106732, 0, -0.994288, -3.49129, 0.717, 31.8183)
+
+[node name="treesRight" type="Node3D" parent="MovingGround/ScenarioPivot"]
+
+[node name="trees" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 200)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees2" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 0)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees3" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 400)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees4" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -200)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees5" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -400)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees6" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 600)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesRight/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="treesLeft" type="Node3D" parent="MovingGround/ScenarioPivot"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 600)
+
+[node name="trees" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 200)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees2" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 0)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees2" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees3" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 400)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees3" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees4" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -200)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees4" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees5" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, -400)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees5" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
+
+[node name="trees6" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 600)
+
+[node name="tree1" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 119.116, 0, 244.89)
+
+[node name="tree2" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 93.2742, 0, 215.451)
+
+[node name="tree18" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 149.237, 0, 155.784)
+
+[node name="tree19" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 167.891, 0, 83.032)
+
+[node name="tree20" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 113.794, 0, 211.747)
+
+[node name="tree21" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 141.775, 0, 272.373)
+
+[node name="tree22" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 145.506, 0, 167.883)
+
+[node name="tree23" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 143.641, 0, 264.265)
+
+[node name="tree24" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 217.325, 0, 82.0728)
+
+[node name="tree25" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 61.5531)
+
+[node name="tree26" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 221.989, 0, 210.167)
+
+[node name="tree27" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 186.546, 0, 135.55)
+
+[node name="tree28" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.383, 0, 105.703)
+
+[node name="tree29" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 177.219, 0, 294.085)
+
+[node name="tree30" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 223.219, 0, 194.085)
+
+[node name="tree31" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 193.372, 0, 116.67)
+
+[node name="tree32" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 275.372, 0, 265.67)
+
+[node name="tree3" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 95.9509, 0, 231.676)
+
+[node name="tree33" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 162.322, 0, 274.857)
+
+[node name="tree34" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 159.923, 0, 211.685)
+
+[node name="tree35" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 203.904, 0, 141.315)
+
+[node name="tree36" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 197.904, 0, 129.98)
+
+[node name="tree37" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 160.32, 0, 199.55)
+
+[node name="tree38" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 213.897, 0, 259.524)
+
+[node name="tree39" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 228.291, 0, 233.982)
+
+[node name="tree40" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 230.69, 0, 274.35)
+
+[node name="tree41" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 241.085, 0, 50.4477)
+
+[node name="tree42" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 257.878, 0, 140.056)
+
+[node name="tree43" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 293.063, 0, 211.226)
+
+[node name="tree4" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 97.8976, 0, 58.4648)
+
+[node name="tree44" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 206.65, 0, 194.406)
+
+[node name="tree45" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 163.469, 0, 111.242)
+
+[node name="tree46" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 239.436, 0, 121.685)
+
+[node name="tree47" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 208.25, 0, 303.592)
+
+[node name="tree48" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 200.253, 0, 244.417)
+
+[node name="tree49" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 211.448, 0, 166.851)
+
+[node name="tree50" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 233.839, 0, 237.268)
+
+[node name="tree51" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(-0.728885, 0, -0.684636, 0, 1, 0, 0.684636, 0, -0.728885, 249.832, 0, 167.698)
+
+[node name="tree5" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 78.3775, 0, 48.6538)
+
+[node name="tree6" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("21_mmq22")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 82.5615, 0, 41.1285)
+
+[node name="tree7" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("22_ub1n4")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 91.7187, 0, 285.805)
+
+[node name="tree8" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("23_y36gp")]
+transform = Transform3D(0.847937, 0, 0.530097, 0, 1, 0, -0.530097, 0, 0.847937, 87.2129, 0, 271.525)
+
+[node name="tree9" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(-0.992176, 0, 0.124848, 0, 1, 0, -0.124848, 0, -0.992176, 101.967, 0, 249.775)
+
+[node name="tree10" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.637707, 0, -0.770279, 0, 1, 0, 0.770279, 0, 0.637707, 85.5776, 0, 177.565)
+
+[node name="tree11" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 97.7163, 0, 110.128)
+
+[node name="tree12" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 86.0616, 0, 102.461)
+
+[node name="tree13" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 143.65, 0, 322.17)
+
+[node name="tree14" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 176.557, 0, 186.426)
+
+[node name="tree15" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 128.567, 0, 102.101)
+
+[node name="tree16" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 164.902, 0, 245.946)
+
+[node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
+transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
 
 [node name="RedSUVtm" parent="." instance=ExtResource("1_l1bfu")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
