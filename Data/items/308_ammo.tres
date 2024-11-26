@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AmmoItem" load_steps=7 format=3 uid="uid://bgqsqi23jbqjc"]
 
 [ext_resource type="Script" path="res://Source/Data/AmmoItem.cs" id="1_be48d"]
-[ext_resource type="Texture2D" uid="uid://cwornwt81ljbc" path="res://Graphics/textures/icons/ammo_bullet.png" id="1_qs0ns"]
+[ext_resource type="Texture2D" uid="uid://bui2q0mti17mi" path="res://Graphics/textures/icons/ammo_rifle.png" id="1_c882c"]
 [ext_resource type="Texture2D" uid="uid://c2vo8qpu8jlcj" path="res://Graphics/Models/items/308_ammo_render.png" id="2_13bxy"]
 [ext_resource type="PackedScene" uid="uid://t5r6pv0lmg2y" path="res://Graphics/Models/items/r_308_ammo_can.tscn" id="2_62pfo"]
 [ext_resource type="PackedScene" uid="uid://bvedlftr3otom" path="res://Scenes/objects/hitspark_blood.tscn" id="2_c2w05"]
@@ -9,7 +9,7 @@
 
 [resource]
 script = ExtResource("1_be48d")
-AmmoIcon = ExtResource("1_qs0ns")
+AmmoIcon = ExtResource("1_c882c")
 HitscanDamage = 60
 DamagePartial = 40
 HitscanDamageType = 1

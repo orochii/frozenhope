@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=4 uid="uid://cvlldg12ng2p"]
+
+[ext_resource type="Texture2D" uid="uid://uvslexoex4kq" path="res://Graphics/Models/scenery/Rocas/R.jpg" id="1_ixshl"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_himbm"]
+resource_name = "Material.008"
+cull_mode = 2
+albedo_texture = ExtResource("1_ixshl")
+roughness = 0.0764706
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s4612"]
+_surfaces = [{
+"aabb": AABB(-0.919656, -0.385325, -1.00082, 2.56106, 1.20353, 2.27598),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AAACAAEAAQAEAAMAAgAAAAMAAQACAAQAAAAFAAMAAAABAAUAAQADAAUAAgADAAQA"),
+"name": "Material.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 6,
+"vertex_data": PackedByteArray("vi+AouTKAAAAAI0WAAAAANIQtAH//wAAe5Ml7jZyAAD//wAAZ04AAH02//+kOgAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ma11o"]
+resource_name = "Cube.013"
+_surfaces = [{
+"aabb": AABB(-0.919656, -0.385325, -1.00082, 2.56106, 1.20353, 2.27598),
+"attribute_data": PackedByteArray("kcbD+AW4QNxOuP//a7c24J7PIciRu0e2O5fBmw/bYKrPwMuK1JGlwf7BpbYAlbKd//9cpG/vibDz/Ty5Lc505GvNPNc+stnB"),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQABgAIAAcACQALAAoADAAOAA0AAAABAA8AAwAEABAABgAHABEA"),
+"material": SubResource("StandardMaterial3D_himbm"),
+"name": "Material.008",
+"primitive": 3,
+"uv_scale": Vector4(1.70114, 2.02613, 0, 0),
+"vertex_count": 18,
+"vertex_data": PackedByteArray("vi+AouTKrbIAAI0WAACBydIQtAH//6bJAACNFgAAC/97kyXuNnIb/P//AABnTkL40hC0Af//Mq97kyXuNnIzzr4vgKLkyqy3AACNFgAAqsH//wAAZ06qwdIQtAH//6rBvi+AouTK0/d7kyXuNnLT8X02//+kOqH3fTb//6Q6xdV9Nv//pDrk2f//AABnTiK0rvlhOwfdbcmC3efIorf1szWfM6pqt56z68oZACDB2hbq9fQ0sAPlgbAD5YGwA+WBeXaDox41GRLiedrNrdS7pIa5YrPrL0UD")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_s4612")
+
+[node name="Rock2" type="Node3D"]
+
+[node name="Rock2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1.96934, 0, 0, 0, 1.96934, 0, 0, 0, 1.96934, 0, 0.55, 0)
+mesh = SubResource("ArrayMesh_ma11o")
+skeleton = NodePath("")

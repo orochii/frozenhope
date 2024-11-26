@@ -31,12 +31,12 @@ sky_energy_multiplier = 0.9
 ground_bottom_color = Color(0.671227, 0.603047, 0.524558, 1)
 ground_horizon_color = Color(0.837937, 0.834755, 0.834467, 1)
 
-[sub_resource type="Sky" id="Sky_s043u"]
+[sub_resource type="Sky" id="Sky_4jowo"]
 sky_material = SubResource("ProceduralSkyMaterial_wyt56")
 
 [sub_resource type="Environment" id="Environment_mf2hf"]
 background_mode = 2
-sky = SubResource("Sky_s043u")
+sky = SubResource("Sky_4jowo")
 fog_enabled = true
 fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 

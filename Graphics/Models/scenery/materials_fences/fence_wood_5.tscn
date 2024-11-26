@@ -1,0 +1,49 @@
+[gd_scene load_steps=5 format=4 uid="uid://boakb4pjekpxx"]
+
+[ext_resource type="Texture2D" uid="uid://cgdthk0u56682" path="res://Graphics/Models/scenery/Wood_02.jpg" id="1_n7i2w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_cbbo1"]
+resource_name = "Wood_02"
+vertex_color_use_as_albedo = true
+albedo_color = Color(1, 1, 1, 1)
+albedo_texture = ExtResource("1_n7i2w")
+emission_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_bvsg0"]
+_surfaces = [{
+"aabb": AABB(-0.00135766, -0.00142752, -0.0113417, 0.00271532, 0.00258242, 0.0221206),
+"format": 34359742465,
+"index_count": 39,
+"index_data": PackedByteArray("AAABAAIAAgADAAAAAwAEAAAABQAGAAQAAwAFAAQABQAHAAgACAAGAAUABAAJAAEAAQAAAAQAAwACAAcABwAFAAMABgAIAAkACQAEAAYA"),
+"name": "Wood_02",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 10,
+"vertex_data": PackedByteArray("AAAAAIUbu7oXmjA8AAAAAIUbu7pz0jm8hfOxuq5H57lz0jm8hfOxuq5H57kXmjA8XPOxOq5H57kXmjA8w/VbugBglzoXmjA8cfVbOgBglzoXmjA8w/VbugBglzpz0jm8cfVbOgBglzpz0jm8XPOxOq5H57lz0jm8")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_htj3h"]
+resource_name = "Cylinder_089"
+_surfaces = [{
+"aabb": AABB(-0.00135766, -0.00142752, -0.0113417, 0.00271532, 0.00258242, 0.0221206),
+"attribute_data": PackedByteArray("AACAPwEAAD8AAAAzAAAAPwAAAABKtg8/AACAP0u2Dz/sGgU/SrYPP+0aBT9uk+A+SIUQPwAAAD/hROU+6rUJP+JE5T4ulOw+AACAP+q1CT8AAIAz6bUJPwAAADMulOw+AACAPzCU7D4AAIA/bpPgPgAAADNuk+A+AACAP+0aBT8AAAAA7BoFPwAAADPgROU+AACAP+JE5T4AAIA/4kTlPgAAADPiROU+AAAAAOwaBT8AAIA/7RoFPw=="),
+"format": 34359742487,
+"index_count": 39,
+"index_data": PackedByteArray("AAABAAIAAgADAAAABAAFAAYABwAIAAUABAAHAAUACQAKAAsACwAMAAkADQAOAAEAAQAAAA0ADwAQABEAEQASAA8AEwAUABUAFQAWABMA"),
+"material": SubResource("StandardMaterial3D_cbbo1"),
+"name": "Wood_02",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 23,
+"vertex_data": PackedByteArray("AAAAAIUbu7oXmjA8AAAAAIUbu7pz0jm8hfOxuq5H57lz0jm8hfOxuq5H57kXmjA8hfOxuq5H57kXmjA8XPOxOq5H57kXmjA8AAAAAIUbu7oXmjA8w/VbugBglzoXmjA8cfVbOgBglzoXmjA8w/VbugBglzoXmjA8w/VbugBglzpz0jm8cfVbOgBglzpz0jm8cfVbOgBglzoXmjA8XPOxOq5H57kXmjA8XPOxOq5H57lz0jm8hfOxuq5H57kXmjA8hfOxuq5H57lz0jm8w/VbugBglzpz0jm8w/VbugBglzoXmjA8cfVbOgBglzoXmjA8cfVbOgBglzpz0jm8XPOxOq5H57lz0jm8XPOxOq5H57kXmjA8/38AAP9//z//fwAA/3//P2Mfm2D/f/8/Yx+bYP9//z//f/9//38AgP9//3//fwCA/3//f/9/AID/f/9//38AgP9//3//fwCAIkoiyv9//78iSiLK/3//v9y1Isr/f/+/3LUiyv9//7+b4Jtg/3//P5vgm2D/f/8/Yx+bYP9//79jH5tg/3//vyJKIsr/f/+/Ikoiyv9//7/ctSLK/3//P9y1Isr/f/8/m+CbYP9//z+b4Jtg/3//Pw==")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_bvsg0")
+
+[node name="Fence_Wood5" type="Node3D"]
+
+[node name="C5" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 1.1, 0)
+mesh = SubResource("ArrayMesh_htj3h")
+skeleton = NodePath("")

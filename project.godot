@@ -31,7 +31,7 @@ project/assembly_name="Covenant"
 
 [editor_plugins]
 
-enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg")
+enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/terrabrush/plugin.cfg")
 
 [input]
 
@@ -123,3 +123,7 @@ cancel={
 3d_physics/layer_4="Building"
 3d_physics/layer_5="Interactable"
 3d_physics/layer_6="Enemy"
+
+[terraBrush]
+
+brushes/decal_color=Color(0.890196, 0.666667, 0, 0.929412)

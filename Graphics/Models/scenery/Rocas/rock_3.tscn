@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=4 uid="uid://b6dttfd8i7c06"]
+
+[ext_resource type="Texture2D" uid="uid://uvslexoex4kq" path="res://Graphics/Models/scenery/Rocas/R.jpg" id="1_87hqw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_himbm"]
+resource_name = "Material.008"
+cull_mode = 2
+albedo_texture = ExtResource("1_87hqw")
+roughness = 0.0764706
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_cm3ji"]
+_surfaces = [{
+"aabb": AABB(-0.98605, -0.284954, -1.02714, 2, 1.05615, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAACAAEAAgAEAAMAAwAEAAUABgAFAAAABAACAAAAAQADAAYAAAABAAcAAgADAAEAAwAFAAYABgAAAAcABAAAAAUAAQAGAAcA"),
+"name": "Material.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAlRNzNikYAAAAAAAAAAAAAK7gGqxBHAAD//wAAAAAAAP//AAD//wAA2bsp3XS5AADTR///7rgAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s4a4q"]
+resource_name = "Cube.014"
+_surfaces = [{
+"aabb": AABB(-0.98605, -0.284954, -1.02714, 2, 1.05615, 2),
+"attribute_data": PackedByteArray("u5FVbQJjPse7kfj/u5H4/7IzlM0zApT/BgDVcOw5ZJ+7kVVtBgDVcMmR+P/4/8mRyZHJkaFcq6P4//j/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAACAAEAAwAFAAQABAAFAAYABwAJAAgACgAMAAsAAQAEAAcAAAABAA0AAwAEAAEABAAGAAcABwAIAA0ACgALAA4AAQAHAA0A"),
+"material": SubResource("StandardMaterial3D_himbm"),
+"name": "Material.008",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 15,
+"vertex_data": PackedByteArray("AAAAAP//yuUlRNzNikYk9wAAAAAAAMTdAAAAAAAAb/4ruAarEEek8///AAAAAIzx//8AAP//L+bZuynddLno8gAAAAD//zf+//8AAP//dP7//wAAAABU1QAAAAD//1TVAAAAAAAAVNXTR///7rjF+f//AAD//1TVaGBir6px48bCaI63IWHIAMBGDw5UR4YPITJhHU0ufg//GfsAOuSLAKoqVNWqKlTVqipU1WNyUa6qKlTV")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_cm3ji")
+
+[node name="Rock3" type="Node3D"]
+
+[node name="Rock3" type="MeshInstance3D" parent="."]
+transform = Transform3D(2.59806, 0, 0, 0, 2.59806, 0, 0, 0, 2.59806, 0, 0.7, 0)
+mesh = SubResource("ArrayMesh_s4a4q")
+skeleton = NodePath("")
