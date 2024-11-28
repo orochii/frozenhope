@@ -7,6 +7,7 @@ public partial class Main : Node
 	[Export] public Node WorldParent;
 	[Export] public UiParent UI;
 	[Export] public Loader Loader;
+	[Export] public Boolean SkipIntro;
 	public Database Database;
 	public GameState State;
 	Node3D currentScene;
@@ -68,6 +69,8 @@ public partial class Main : Node
     }
 	public Node3D CurrentScene => currentScene;
 	public void LoadIntroMap() {
-		ChangeMap(Database.IntroScene);
+		if (SkipIntro) Main.Instance.StartGame();
+		else ChangeMap(Database.IntroScene);
 	}
+		
 }

@@ -1039,24 +1039,32 @@ omni_attenuation = 2.4
 
 [node name="Cameras" type="Node" parent="."]
 
-[node name="ViewKitchen-Storage" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewKitchen-Storage" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(0.51985, 0, 0, 0, 1, 0, 0, 0, 2.08634, -4.41322, 0, -3.82008)
 Camera = NodePath("../CamStorage")
+Deactivate = []
+Activate = []
 
 [node name="CamStorage" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.766044, -0.55667, 0.321394, -3.78552e-08, 0.5, 0.866025, -0.642788, 0.663414, -0.383022, -5.09209, 5.87233, -6.05171)
 
-[node name="ViewStorage-Kitchen" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewStorage-Kitchen" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(0.54559, 0, 0, 0, 1, 0, 0, 0, 2.21312, -3.15985, 0, -3.73147)
 Camera = NodePath("../CamKitchen2")
+Deactivate = []
+Activate = []
 
-[node name="ViewKitchen1-Kitchen2" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewKitchen1-Kitchen2" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(-0.0393503, 0, -3.57592, 0, 1, 0, 0.544169, 0, -0.258584, -1.92959, 0, -2.03313)
 Camera = NodePath("../CamKitchen2")
+Deactivate = []
+Activate = []
 
-[node name="ViewKitchen2-Kitchen1" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewKitchen2-Kitchen1" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(-0.217142, 0, -3.07624, 0, 1, 0, 0.596594, 0, -1.11966, -3.15004, 0, 0.0571776)
 Camera = NodePath("../CamKitchen1")
+Deactivate = []
+Activate = []
 
 [node name="CamKitchen2" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.99692, 0.0460463, -0.0634835, 0, 0.809485, 0.587141, 0.0784247, -0.585333, 0.806992, -1.88414, 6.131, 0.0830301)
@@ -1065,13 +1073,17 @@ transform = Transform3D(0.99692, 0.0460463, -0.0634835, 0, 0.809485, 0.587141, 0
 transform = Transform3D(-0.795972, 0.283762, -0.534703, 0, 0.883321, 0.468769, 0.605333, 0.373127, -0.703099, -7.61932, 5.58939, -1.08873)
 current = true
 
-[node name="ViewKitchen2-Cafeteria" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewKitchen2-Cafeteria" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(0.54559, 0, 0, 0, 1, 0, 0, 0, 2.21312, 1.0316, 0, -3.40527)
 Camera = NodePath("../CamCafeteria")
+Deactivate = []
+Activate = []
 
-[node name="ViewKitchen2-Cafeteria2" parent="Cameras" node_paths=PackedStringArray("Camera") instance=ExtResource("15_43oa2")]
+[node name="ViewKitchen2-Cafeteria2" parent="Cameras" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("15_43oa2")]
 transform = Transform3D(0.54559, 0, 0, 0, 1, 0, 0, 0, 2.21312, -0.328885, 0, -3.49494)
 Camera = NodePath("../CamKitchen2")
+Deactivate = []
+Activate = []
 
 [node name="CamCafeteria" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.694737, -0.391258, 0.603537, 0, 0.839105, 0.54397, -0.719264, 0.377916, -0.582957, 10.8879, 6.11039, -6.57781)

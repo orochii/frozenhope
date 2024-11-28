@@ -4,9 +4,11 @@
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wurr"]
 
-[node name="ViewChanger" type="Area3D"]
+[node name="ViewChanger" type="Area3D" node_paths=PackedStringArray("Deactivate", "Activate")]
 collision_layer = 0
 script = ExtResource("1_rc6d8")
+Deactivate = []
+Activate = []
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
