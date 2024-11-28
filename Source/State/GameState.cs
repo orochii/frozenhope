@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.Tracing;
 using Godot;
 
 public class GameState {
@@ -18,6 +19,8 @@ public class GameState {
         public string markerId;
         public Dictionary<string,bool> switches = new Dictionary<string,bool>();
         public int health = 100;
+        public int level = 1;
+        public int exp = 0;
         public int inventorySizeX = 2;
         public int inventorySizeY = 4;
         public int EquippedItem = -1;
@@ -78,8 +81,31 @@ public class GameState {
     }
     #endregion
     #region Character status
+    const int HEALTH_BASE = 100;
+    const int HEALTH_INCREASE = 10;
+    const float EXP_LVLGAIN_RATIO = 2.4f;
+    const int EXP_PER_LEVEL = 100;
+    const int VARIANCE_REDUCTION_LEVEL = 2;
+    public void AddExp(int gain) {
+        int reduction = (int)Math.Pow(persistentData.level, EXP_LVLGAIN_RATIO);
+        int gainAdjusted = gain - reduction;
+        if (gainAdjusted < 1) gainAdjusted = 1;
+        persistentData.exp += gainAdjusted;
+        while (persistentData.exp > NextLevelExp()) persistentData.level++;
+    }
+    public int NextLevelExp() {
+        return persistentData.level * EXP_PER_LEVEL;
+    }
+    public int NextLevelRemainder() {
+        return EXP_PER_LEVEL - (persistentData.exp % EXP_PER_LEVEL);
+    }
     public int GetMaxHealth() {
-        return 100;
+        return HEALTH_BASE + (persistentData.level - 1) * HEALTH_INCREASE;
+    }
+    public int GetDamageVariance(int baseVariance) {
+        int varianceDecrease = VARIANCE_REDUCTION_LEVEL * (persistentData.level - 1);
+        int varianceTotal = Math.Max(baseVariance - varianceDecrease, 0);
+        return varianceTotal;
     }
     public void ChangeHealth(int v) {
         persistentData.health = Math.Clamp(persistentData.health + v, 0, GetMaxHealth());
