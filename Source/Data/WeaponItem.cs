@@ -5,6 +5,7 @@ public partial class WeaponItem : BaseItem {
     [Export] public string[] CompatibleAmmo;
     [Export] public int AmmoMax;
     [Export] public int AimTime;
+    [Export] public int DamageBaseVariance = 15;
     [Export] public PackedScene EquippedModel;
     [Export] public int WeaponBoneIdx;
     [Export] public string AnimationSet = "";

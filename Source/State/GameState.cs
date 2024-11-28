@@ -85,7 +85,7 @@ public class GameState {
     const int HEALTH_INCREASE = 10;
     const float EXP_LVLGAIN_RATIO = 2.4f;
     const int EXP_PER_LEVEL = 100;
-    const int VARIANCE_REDUCTION_LEVEL = 2;
+    const int VARIANCE_REDUCTION_LEVEL = 5;
     public void AddExp(int gain) {
         int reduction = (int)Math.Pow(persistentData.level, EXP_LVLGAIN_RATIO);
         int gainAdjusted = gain - reduction;
@@ -106,6 +106,12 @@ public class GameState {
         int varianceDecrease = VARIANCE_REDUCTION_LEVEL * (persistentData.level - 1);
         int varianceTotal = Math.Max(baseVariance - varianceDecrease, 0);
         return varianceTotal;
+    }
+    public int CalculateDamage(int baseDmg, int baseVariance) {
+        var variance = GetDamageVariance(baseVariance);
+        var minDmgPerc = Math.Max(10, 100 - variance);
+        var minDmg = (baseDmg * minDmgPerc) / 100;
+        return GD.RandRange(minDmg, baseDmg);
     }
     public void ChangeHealth(int v) {
         persistentData.health = Math.Clamp(persistentData.health + v, 0, GetMaxHealth());

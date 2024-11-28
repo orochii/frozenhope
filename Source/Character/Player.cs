@@ -151,7 +151,7 @@ public partial class Player : CharacterBody3D, Targettable
 				} else
                 {
                     // Execute hitscan.
-                    ExecuteHitscan(ammo);
+                    ExecuteHitscan(wpn, ammo);
                 }
                 // Spend ammo
                 equip.ammoQty -= 1;
@@ -162,7 +162,7 @@ public partial class Player : CharacterBody3D, Targettable
 			}
 		}
 	}
-    private void ExecuteHitscan(AmmoItem ammo)
+    private void ExecuteHitscan(WeaponItem weapon, AmmoItem ammo)
     {
         var origin = Graphic.GetWeaponSpawnPoint().GlobalPosition;
         var target = origin + (GlobalTransform.Basis.Z * 10f);
@@ -183,12 +183,13 @@ public partial class Player : CharacterBody3D, Targettable
                 SpawnHitSpark(sparkSrc, hitPoint);
 				// Execute damage based on AimTimer2
 				if (AimTimer2 > 0) {
-					hitTarget.Damage(ammo.HitscanDamageType, ammo.DamagePartial);
+					var dmg = Main.Instance.State.CalculateDamage(ammo.DamagePartial, weapon.DamageBaseVariance);
+					hitTarget.Damage(ammo.HitscanDamageType, dmg);
 				} else {
-					hitTarget.Damage(ammo.HitscanDamageType, ammo.HitscanDamage);
+					var dmg = Main.Instance.State.CalculateDamage(ammo.HitscanDamage, weapon.DamageBaseVariance);
+					hitTarget.Damage(ammo.HitscanDamageType, dmg);
 					hitTarget.ForceActionState(EActionState.DAMAGE);
 				}
-				
             }
             else
             {
