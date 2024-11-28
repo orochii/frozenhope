@@ -261,6 +261,7 @@ public partial class Enemy : CharacterBody3D, Targettable
 	}
 	public void Damage(EDamageType damageType, int damage) {
 		ChangeHealth(-damage);
+		Main.Instance.UI.Gameplay.SpawnPopup(this, damage);
 	}
 	public void ForceActionState(EActionState state) {
 		if (Dead) return;

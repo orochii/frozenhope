@@ -369,6 +369,7 @@ public partial class Player : CharacterBody3D, Targettable
     public void Damage(EDamageType damageType, int damage)
     {
         ChangeHealth(damage);
+		Main.Instance.UI.Gameplay.SpawnPopup(this, damage);
     }
 	private void ChangeHealth(int v) {
 		bool _dead = Dead;

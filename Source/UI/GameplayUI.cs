@@ -29,4 +29,8 @@ public partial class GameplayUI : Control
 			if (!Inventory.Visible) OpenMenu();
 		}
     }
+
+	public void SpawnPopup(Targettable obj, int damage) {
+		//
+	}
 }
