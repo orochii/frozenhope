@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://3v43icnmbhp5"]
+[gd_scene load_steps=6 format=4 uid="uid://3v43icnmbhp5"]
 
 [ext_resource type="Texture2D" uid="uid://duq5dx6msra3n" path="res://Graphics/Models/scenery/Survival/bonfire.png" id="1_ktvgk"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_iufq2"]
 resource_name = "bonfire"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("1_ktvgk")
 emission_enabled = true
 
@@ -41,9 +40,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_r157e")
 
-[node name="Camp_bonfire" type="Node3D"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_vp0o7"]
+height = 0.516869
+
+[node name="Camp_bonfire" type="StaticBody3D"]
 
 [node name="bonfire" type="MeshInstance3D" parent="."]
 transform = Transform3D(15.1392, -1.68139, -6.44165, 6.49552, 0.222405, 15.2077, -1.45949, -16.4511, 0.863966, 0, 0.05, 0)
 mesh = SubResource("ArrayMesh_dyjin")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.160533, 0)
+shape = SubResource("CylinderShape3D_vp0o7")

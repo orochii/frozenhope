@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=3 uid="uid://oykp21gpqp0a"]
+[gd_scene load_steps=40 format=3 uid="uid://oykp21gpqp0a"]
 
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
 [ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://Source/Character/CharacterStateMachine.cs" id="5_1mcn7"]
 [ext_resource type="Script" path="res://Source/Character/CharacterAnimStateEntry.cs" id="6_nl2me"]
 [ext_resource type="Script" path="res://Source/Character/CharacterAnimState.cs" id="7_oke14"]
+[ext_resource type="AudioStream" uid="uid://djmrglnnrjo3p" path="res://Audio/Sound Effects/Characters/SFX_WALK_SNOW_JDY.wav" id="8_xm0ba"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywud7"]
 render_priority = 0
@@ -209,6 +210,33 @@ ActionState = 2
 IgnoreActionExit = true
 AnimEntries = Array[Object]([SubResource("Resource_h28se")])
 
+[sub_resource type="Animation" id="Animation_1p3lw"]
+resource_name = "sound_animation"
+tracks/0/type = "audio"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Footsteps")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"clips": [{
+"end_offset": 0.659775,
+"start_offset": 0.0,
+"stream": ExtResource("8_xm0ba")
+}, {
+"end_offset": 0.263378,
+"start_offset": 0.478868,
+"stream": ExtResource("8_xm0ba")
+}],
+"times": PackedFloat32Array(0.166667, 0.6)
+}
+tracks/0/use_blend = true
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_x3wo7"]
+_data = {
+"sound_animation": SubResource("Animation_1p3lw")
+}
+
 [node name="Lain" node_paths=PackedStringArray("Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
 script = ExtResource("2_c1pyr")
 Armature = NodePath("Armature/Skeleton3D")
@@ -216,28 +244,37 @@ WeaponBoneNames = PackedStringArray("Hand.R", "Hand.L")
 WeaponSlot = NodePath("WeaponSlot")
 
 [node name="Skeleton3D" parent="Armature" index="0"]
+bones/0/position = Vector3(9.90155e-18, 0.800312, -0.0228951)
 bones/0/rotation = Quaternion(-0.1238, 1.24773e-16, 1.24773e-16, 0.992307)
 bones/1/rotation = Quaternion(0.1943, -1.74381e-16, -1.68267e-16, 0.980942)
-bones/2/rotation = Quaternion(-0.154098, 4.70313e-17, 5.43705e-17, 0.988056)
+bones/2/rotation = Quaternion(-0.149386, -0.0842303, -0.000245043, 0.985185)
 bones/3/rotation = Quaternion(0.174971, -1.1737e-07, -2.08582e-08, 0.984574)
-bones/4/rotation = Quaternion(0.0863994, 1.87775e-14, -2.05992e-08, 0.996261)
-bones/5/rotation = Quaternion(0.795654, 0.119145, -0.593779, -0.0128332)
-bones/6/rotation = Quaternion(0.0127057, -0.00421012, 0.125318, 0.992026)
+bones/4/rotation = Quaternion(0.0863994, 1.55453e-14, -2.05992e-08, 0.996261)
+bones/5/rotation = Quaternion(0.785581, 0.175284, -0.592945, -0.0235536)
+bones/6/rotation = Quaternion(0.00802479, -0.00561174, 0.301946, 0.953275)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(0.795654, -0.119145, 0.593779, -0.0128332)
-bones/8/rotation = Quaternion(0.0127057, 0.00421012, -0.125318, 0.992026)
-bones/8/scale = Vector3(1, 1, 1)
-bones/9/rotation = Quaternion(0.98809, 0.0106608, -0.145281, -0.0495771)
-bones/10/rotation = Quaternion(0.11351, -0.000153549, -0.0445669, 0.992537)
-bones/11/rotation = Quaternion(0.98809, -0.0106608, 0.145281, -0.0495771)
-bones/12/rotation = Quaternion(0.11351, 0.000153549, 0.0445669, 0.992537)
-bones/13/rotation = Quaternion(0.796195, -0.044278, -0.603273, 0.0132174)
+bones/7/rotation = Quaternion(0.74758, -0.314269, 0.565493, -0.150255)
+bones/8/rotation = Quaternion(0.0646906, 0.00229749, -0.24641, 0.967002)
+bones/8/scale = Vector3(0.999999, 1, 1)
+bones/9/rotation = Quaternion(0.978419, 0.0213472, -0.146895, -0.143746)
+bones/9/scale = Vector3(1, 0.999999, 1.00008)
+bones/10/rotation = Quaternion(0.365709, -0.00110437, -0.131411, 0.921405)
+bones/10/scale = Vector3(0.999996, 0.999955, 1.00005)
+bones/11/rotation = Quaternion(0.957755, 0.0601933, 0.136291, 0.245982)
+bones/11/scale = Vector3(1, 1, 1.00008)
+bones/12/rotation = Quaternion(0.355261, -0.000545619, 0.169038, 0.919356)
+bones/12/scale = Vector3(1, 0.999995, 0.999997)
+bones/13/position = Vector3(0.228974, 0.820935, 0.0985054)
+bones/13/rotation = Quaternion(0.767176, -0.194855, -0.572652, 0.213407)
 bones/13/scale = Vector3(1, 1, 1)
-bones/14/rotation = Quaternion(0.796195, 0.044278, 0.603273, 0.0132174)
+bones/14/position = Vector3(-0.228934, 0.82496, -0.20769)
+bones/14/rotation = Quaternion(0.791235, -0.0339972, 0.60394, -0.089711)
 bones/14/scale = Vector3(1, 1, 1)
-bones/15/rotation = Quaternion(0.896791, -0.0597673, -0.127812, 0.419355)
+bones/15/position = Vector3(0.0953964, 0.148203, -0.379332)
+bones/15/rotation = Quaternion(0.969264, -0.0287243, -0.138141, 0.201543)
 bones/15/scale = Vector3(1, 1, 1)
-bones/16/rotation = Quaternion(0.896791, 0.0597673, 0.127812, 0.419355)
+bones/16/position = Vector3(-0.0953964, 0.108836, 0.206674)
+bones/16/rotation = Quaternion(0.860217, 0.0698386, 0.1226, 0.490019)
 bones/16/scale = Vector3(1, 1, 1)
 
 [node name="Cube" parent="Armature/Skeleton3D" index="0"]
@@ -249,3 +286,10 @@ surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
 AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi"), SubResource("Resource_jwc5k")])
+
+[node name="Footsteps" type="AudioStreamPlayer3D" parent="." index="4"]
+
+[node name="SoundPlayer" type="AnimationPlayer" parent="." index="5"]
+libraries = {
+"": SubResource("AnimationLibrary_x3wo7")
+}

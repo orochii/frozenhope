@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://bmnyl4mluqoxj"]
+[gd_scene load_steps=6 format=4 uid="uid://bmnyl4mluqoxj"]
 
 [ext_resource type="Texture2D" uid="uid://uvslexoex4kq" path="res://Graphics/Models/scenery/Rocas/R.jpg" id="1_hxr80"]
 
@@ -42,9 +42,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_7csyw")
 
-[node name="Rock4" type="Node3D"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_prhm5"]
+points = PackedVector3Array(-1.01291, -0.50425, -0.978655, -1.01291, -0.50425, 1.02135, -0.686168, 0.836098, 0.295816, -0.785619, 0.255916, -0.519375, 0.137834, 1.07506, -0.465538, 0.732196, 0.64826, -0.791693, 0.98709, -0.50425, -0.978655, 0.98709, -0.50425, 1.02135, 0.794059, 0.132828, 0.837124, -0.0890651, 1.00038, 0.472794, -0.809895, 0.00493145, 0.823812, -0.686168, 0.812377, 0.424047, -0.0485404, 1.13308, -0.198702)
+
+[node name="Rock4" type="StaticBody3D"]
 
 [node name="Rock4" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.28365, 0, 0, 0, 2.28365, 0, 0, 0, 2.28365, 0, 1.1, 0)
 mesh = SubResource("ArrayMesh_7j6eh")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(2.28365, 0, 0, 0, 2.28365, 0, 0, 0, 2.28365, 0, 1.1, 0)
+shape = SubResource("ConvexPolygonShape3D_prhm5")

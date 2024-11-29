@@ -1,11 +1,10 @@
-[gd_scene load_steps=5 format=4 uid="uid://2n4sgmke4akl"]
+[gd_scene load_steps=6 format=4 uid="uid://2n4sgmke4akl"]
 
 [ext_resource type="Texture2D" uid="uid://bo5y133ctlpsm" path="res://Graphics/Models/scenery/Wood_03.jpg" id="1_rx53b"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_40fc1"]
 resource_name = "Wood_03"
 vertex_color_use_as_albedo = true
-albedo_color = Color(1, 1, 1, 1)
 albedo_texture = ExtResource("1_rx53b")
 emission_enabled = true
 
@@ -41,9 +40,17 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_e7n38")
 
-[node name="Fence_Wood1" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_jjm7h"]
+size = Vector3(1.02301, 1.01196, 1.06396)
+
+[node name="Fence_Wood1" type="StaticBody3D"]
+collision_layer = 8
 
 [node name="V3" type="MeshInstance3D" parent="."]
 transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 1.15, 0)
 mesh = SubResource("ArrayMesh_7p31e")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3.5744, 0, 0, 0, 1.79108, 0, 0, 0, 0.275151, 0.0011999, 1.13787, 0.0547778)
+shape = SubResource("BoxShape3D_jjm7h")

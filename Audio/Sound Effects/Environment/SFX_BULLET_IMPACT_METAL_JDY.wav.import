@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://471rusisx3t7"
+path="res://.godot/imported/SFX_BULLET_IMPACT_METAL_JDY.wav-c3165b8c532df107eab8abfe17f1cef5.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Environment/SFX_BULLET_IMPACT_METAL_JDY.wav"
+dest_files=["res://.godot/imported/SFX_BULLET_IMPACT_METAL_JDY.wav-c3165b8c532df107eab8abfe17f1cef5.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=0
+edit/loop_begin=0
+edit/loop_end=-1
+compress/mode=0

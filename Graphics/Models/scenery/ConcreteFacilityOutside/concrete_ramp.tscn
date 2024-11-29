@@ -1,0 +1,58 @@
+[gd_scene load_steps=7 format=4 uid="uid://bdfrm2g7rihud"]
+
+[ext_resource type="Texture2D" uid="uid://c6bfog3lu2d0r" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Concrete Floor Texture.png" id="1_ss1le"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_xrgij"]
+resource_name = "Color_M01.001"
+cull_mode = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_kfmui"]
+_surfaces = [{
+"aabb": AABB(0, -5, -2, 5, 5, 2),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AgABAAAAAgAHAAEABQAAAAMABQACAAAAAAAEAAMAAAABAAQABAAHAAYABAABAAcABQAHAAIABQAGAAcAAwAGAAUAAwAEAAYA"),
+"name": "Color_M01.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAD///7/AAAAAP7/AAAAAAAAAAD//wAA//////7/AABPXv7/AAAAAP//AAD//wAAT14AAAAAAAAAAAAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_7fjm5"]
+resource_name = "Concrete Ramps_ID4_001"
+_surfaces = [{
+"aabb": AABB(0, -5, -2, 5, 5, 2),
+"attribute_data": PackedByteArray("D4AbgOKze63YfySCD4DQsRuKseDYf+O0IMAbgNR/o3+3inut4rP//4xAJIJMPyGDG4q6/4do47RMP/vhh0Cjf7eK//8AACGDgmhisiO0uv8AAPvhIMDQsdR/YrIjtLHg"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("BgADAAAABgAVAAMAEAABAAkAEAAIAAEAAgANAAoAAgAFAA0ADAAXABMADAAEABcADwAWAAcADwASABYACwAUABEACwAOABQA"),
+"material": SubResource("StandardMaterial3D_xrgij"),
+"name": "Color_M01.001",
+"primitive": 3,
+"uv_scale": Vector4(3.97468, 1.98312, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAD///7/VNUAAP///v//vwAA///+////AAD+/wAAVNUAAP7/AAD//wAA/v8AAP//AAAAAP//VNUAAAAA//8AAAAAAAD///+///////7//7///////v/////////+/9fvT17+/wAA//9PXv7/AAD//09e/v8AANfv//8AAP//AAD//wAA////v///AAD//9fvT14AAAAAAABPXgAAAAD//09eAAAAANfvAAAAAAAAVNUAAAAAAAAAAAAAAAAAAP//VFWqqv//////f/+/VFWqqv8//7//f/+/VFWqqv9//z////////////9//7/kN+Q3/z//v/9//7/kN+Q3/3//P//////kN+Q3/3//P/8//7/kN+Q3VFWqqv9//z//P/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_kfmui")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jvn8h"]
+albedo_texture = ExtResource("1_ss1le")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_vy4an"]
+points = PackedVector3Array(0, -5, -2, 0, -5, 7.15256e-07, 0, -0.000490665, -2, 1.84172, -5, -2, 5, -5, 7.15256e-07, 0, -0.000490665, -0.000195026, 1.84172, -0.000490665, -2, 5, -0.000490665, -0.000195026)
+
+[node name="ConcreteRamp" type="StaticBody3D"]
+collision_layer = 4
+
+[node name="Straight Ramp" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("ArrayMesh_7fjm5")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_jvn8h")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_vy4an")

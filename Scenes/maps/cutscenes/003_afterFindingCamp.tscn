@@ -343,8 +343,45 @@ bones/46/position = Vector3(0.0240362, 0.210009, 3.16527)
 [node name="RedSUVtm" parent="." instance=ExtResource("3_kr6sa")]
 transform = Transform3D(1.01717, 0, 0.961958, 0, 1.4, 0, -0.961958, 0, 1.01717, -46.1785, 0.0114846, -46.1467)
 
+[node name="FLWheel" parent="RedSUVtm" index="2"]
+surface_material_override/0 = null
+
+[node name="FRWheel" parent="RedSUVtm" index="3"]
+surface_material_override/0 = null
+
+[node name="Hood" parent="RedSUVtm" index="4"]
+surface_material_override/0 = null
+
 [node name="LDoor" parent="RedSUVtm" index="6"]
 transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="RDoor" parent="RedSUVtm" index="8"]
+surface_material_override/0 = null
+surface_material_override/1 = null
+
+[node name="RLWheel" parent="RedSUVtm" index="9"]
+surface_material_override/0 = null
+
+[node name="RRWheel" parent="RedSUVtm" index="10"]
+surface_material_override/0 = null
+
+[node name="SteeringWheel" parent="RedSUVtm" index="12"]
+surface_material_override/0 = null
+
+[node name="Throttle" parent="RedSUVtm" index="13"]
+surface_material_override/0 = null
+
+[node name="TransfercaseShifter" parent="RedSUVtm" index="14"]
+surface_material_override/0 = null
+
+[node name="Trunk" parent="RedSUVtm" index="15"]
+surface_material_override/0 = null
+
+[node name="Body" parent="RedSUVtm" index="16"]
+surface_material_override/0 = null
+surface_material_override/1 = null
 
 [editable path="Lain"]
 [editable path="wendigo"]

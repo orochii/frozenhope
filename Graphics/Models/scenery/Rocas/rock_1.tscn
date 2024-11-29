@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://cm5n82ee4f08h"]
+[gd_scene load_steps=6 format=4 uid="uid://cm5n82ee4f08h"]
 
 [ext_resource type="Texture2D" uid="uid://uvslexoex4kq" path="res://Graphics/Models/scenery/Rocas/R.jpg" id="1_3ktxu"]
 
@@ -42,9 +42,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ccr7e")
 
-[node name="Rock1" type="Node3D"]
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwn7v"]
+size = Vector3(5.50003, 4.67834, 5.20119)
+
+[node name="Rock1" type="StaticBody3D"]
 
 [node name="Rock1" type="MeshInstance3D" parent="."]
 transform = Transform3D(2.76897, 0, 0, 0, 2.76897, 0, 0, 0, 2.76897, 0, 1.65, 0)
 mesh = SubResource("ArrayMesh_7wj43")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.161026, 1.83917, 0.0850143)
+shape = SubResource("BoxShape3D_gwn7v")
