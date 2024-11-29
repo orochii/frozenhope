@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=4 uid="uid://ckidv3qhmuqct"]
+[gd_scene load_steps=6 format=4 uid="uid://ckidv3qhmuqct"]
 
 [ext_resource type="Texture2D" uid="uid://uvslexoex4kq" path="res://Graphics/Models/scenery/Rocas/R.jpg" id="1_16mfs"]
 
@@ -42,9 +42,16 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_akfhc")
 
-[node name="Rock6" type="Node3D"]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_cnquq"]
+points = PackedVector3Array(2.02905, 0.444367, 0.701315, 0.820467, 1.36193, 0.781416, 1.92846, 0.349267, 1.65981, 2.02905, -0.472192, 0.701315, 2.02336, 0.405927, -0.446155, -0.653822, 1.25842, 0.826522, -0.261716, 0.770909, 1.82195, 0.995074, 0.718053, 1.82351, 1.01253, 0.722058, -1.03719, -0.754411, 1.06782, -1.04847, 1.92846, -0.182689, 1.65981, 0.995074, -0.459779, 1.82351, 1.01253, -0.652981, -1.03719, 2.02336, -0.284396, -0.446155, 0.440508, 0.393113, -2.14889, -1.83166, 0.591521, -1.04847, -1.84874, 0.67701, 0.234705, -0.261716, -0.267978, 1.82195, -0.754411, 0.378698, -2.12362, -1.67945, 0.274189, -1.96497, -0.808691, -0.592117, 0.771306, -0.754411, -0.683413, -1.04847, -0.754411, -0.465785, -2.12362, 0.440508, -0.271182, -2.14889, -1.83166, -0.402119, -1.04847, -1.84874, -0.186293, 0.234705, -1.67945, -0.187494, -1.96497)
+
+[node name="Rock6" type="StaticBody3D"]
 
 [node name="Rock6" type="MeshInstance3D" parent="."]
 transform = Transform3D(1.8288, 0, 0, 0, 1.8288, 0, 0, 0, 1.8288, 0, 0.7, 0)
 mesh = SubResource("ArrayMesh_fswce")
 skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1.8288, 0, 0, 0, 1.8288, 0, 0, 0, 1.8288, 0, 0.7, 0)
+shape = SubResource("ConvexPolygonShape3D_cnquq")

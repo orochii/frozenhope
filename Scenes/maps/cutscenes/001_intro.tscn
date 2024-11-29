@@ -1,10 +1,9 @@
-[gd_scene load_steps=39 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=38 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
 [ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
 [ext_resource type="AudioStream" uid="uid://bg4pctxpob14g" path="res://Audio/Voice/01.wav" id="3_14hch"]
-[ext_resource type="Material" uid="uid://jeg6842m148g" path="res://Graphics/Models/vehicles/RedTruckTM/suv_psxmat.tres" id="3_yjtyc"]
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="3_ykbs4"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
 [ext_resource type="AudioStream" uid="uid://c0oo14ke6b0md" path="res://Audio/Voice/02.wav" id="5_6sasq"]
@@ -2358,57 +2357,45 @@ transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464
 [node name="RedSUVtm" parent="." instance=ExtResource("1_l1bfu")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 
-[node name="Brake" parent="RedSUVtm" index="0"]
-surface_material_override/0 = ExtResource("3_yjtyc")
-
-[node name="Clutch" parent="RedSUVtm" index="1"]
-surface_material_override/0 = ExtResource("3_yjtyc")
-
 [node name="FLWheel" parent="RedSUVtm" index="2"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="FRWheel" parent="RedSUVtm" index="3"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="Hood" parent="RedSUVtm" index="4"]
-surface_material_override/0 = ExtResource("3_yjtyc")
-
-[node name="Interior" parent="RedSUVtm" index="5"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="LDoor" parent="RedSUVtm" index="6"]
 transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
-surface_material_override/0 = ExtResource("3_yjtyc")
-
-[node name="PBrake" parent="RedSUVtm" index="7"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
+surface_material_override/1 = null
 
 [node name="RDoor" parent="RedSUVtm" index="8"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
+surface_material_override/1 = null
 
 [node name="RLWheel" parent="RedSUVtm" index="9"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="RRWheel" parent="RedSUVtm" index="10"]
-surface_material_override/0 = ExtResource("3_yjtyc")
-
-[node name="Shifter" parent="RedSUVtm" index="11"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="SteeringWheel" parent="RedSUVtm" index="12"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="Throttle" parent="RedSUVtm" index="13"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="TransfercaseShifter" parent="RedSUVtm" index="14"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="Trunk" parent="RedSUVtm" index="15"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
 
 [node name="Body" parent="RedSUVtm" index="16"]
-surface_material_override/0 = ExtResource("3_yjtyc")
+surface_material_override/0 = null
+surface_material_override/1 = null
 
 [node name="Lain" parent="." instance=ExtResource("3_ykbs4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460924, 0, 0.496816)

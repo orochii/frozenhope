@@ -1,4 +1,4 @@
-[gd_scene load_steps=55 format=4 uid="uid://cvdgpuc2x1i1w"]
+[gd_scene load_steps=56 format=4 uid="uid://cvdgpuc2x1i1w"]
 
 [ext_resource type="Texture2D" uid="uid://crwsvojtf5wgc" path="res://Graphics/Models/vehicles/RedTruckTM/pixelatedredandwhitewindows.png" id="1_cewkl"]
 [ext_resource type="Script" path="res://Source/Character/RedSuv.cs" id="1_dk37g"]
@@ -118,6 +118,7 @@ shadow_mesh = SubResource("ArrayMesh_opflp")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_2acmo"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -166,6 +167,7 @@ shadow_mesh = SubResource("ArrayMesh_0m2cs")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nq4ap"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -214,6 +216,7 @@ shadow_mesh = SubResource("ArrayMesh_ogha7")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_xb7pw"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -328,6 +331,7 @@ shadow_mesh = SubResource("ArrayMesh_vrdcs")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_uug32"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -432,6 +436,7 @@ shadow_mesh = SubResource("ArrayMesh_jgko6")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_gc5ca"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -480,6 +485,7 @@ shadow_mesh = SubResource("ArrayMesh_3yuxe")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_opa02"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -528,6 +534,7 @@ shadow_mesh = SubResource("ArrayMesh_wqqmq")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0nli4"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -608,6 +615,7 @@ shadow_mesh = SubResource("ArrayMesh_mbe0n")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_aotdo"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -654,6 +662,7 @@ shadow_mesh = SubResource("ArrayMesh_8uu6m")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_tfefm"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -700,6 +709,7 @@ shadow_mesh = SubResource("ArrayMesh_m5o8t")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_mg2em"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -779,6 +789,7 @@ shadow_mesh = SubResource("ArrayMesh_g3wjh")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_nywpr"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -851,6 +862,7 @@ shadow_mesh = SubResource("ArrayMesh_xfeww")
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_eroae"]
 render_priority = 0
 shader = ExtResource("2_p5ti2")
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -862,7 +874,11 @@ shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
 shader_parameter/albedo = ExtResource("2_dvpqh")
 
-[node name="RedSUVtm" type="Node3D" node_paths=PackedStringArray("LeftDoor", "RightDoor", "FR_Wheel", "FL_Wheel", "RR_Wheel", "RL_Wheel")]
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_qosnx"]
+points = PackedVector3Array(-0.00644074, 0.013864, -0.00322043, -0.00644074, 0.013864, -0.00244444, -0.00644074, 0.0152887, -0.00322142, -0.00453424, -0.00938284, -0.00381082, -0.00626421, -0.00607216, -0.00321155, -0.00621377, -0.0134837, -0.00314935, -0.00626421, -0.0118745, -0.00279689, -0.00626673, 0.0143975, 0.00133285, -0.00644074, 0.0152887, -0.00244543, -0.00626421, -0.0113785, -0.00134561, -0.00626421, -0.0106056, -0.000818409, 0.00643948, 0.0152887, -0.00322142, -1.25961e-06, 0.00853752, -0.0041613, -0.000793112, 0.00847408, -0.00415636, -0.00453424, 0.00817416, -0.00381082, -0.000793112, -0.00968565, -0.00415636, -0.0032128, -0.0141643, -0.00330139, -0.00491377, -0.0139451, -0.00314935, -0.00621377, -0.0134837, -0.00177606, -0.00609399, 0.00248428, 0.00216018, -0.00609273, 0.00755412, 0.002174, -0.00612425, 0.0140832, 0.00202591, -1.25961e-06, 0.012376, 0.00592463, 0.00626547, 0.0143975, 0.00133285, -0.00609273, -0.00428128, 0.00214438, -0.00609399, -0.00405922, 0.00214438, 0.00643948, 0.0152887, -0.00244543, -0.00604859, -0.0120043, 0.00170998, 0.00453298, 0.00817416, -0.00381082, 0.000791854, 0.00847408, -0.00415636, 0.00643948, 0.013864, -0.00322043, 0.00453298, -0.00938284, -0.00381082, -1.25961e-06, -0.00974909, -0.0041613, -0.00285596, -0.0141729, -0.00330139, -0.0032128, -0.0141643, -0.00102376, -0.00491377, -0.0139451, -0.00177606, -0.00604859, -0.0129992, 0.00106332, -0.0050386, 0.0112282, 0.00466488, -0.00597798, 0.0122462, 0.0024534, -0.00469816, 0.0125201, 0.00546851, 0.00425558, 0.012376, 0.0057953, 0.0046969, 0.0125201, 0.00546851, 0.00612299, 0.0140832, 0.00202591, -0.00425684, 0.012376, 0.0057953, -1.25961e-06, 0.00658803, 0.00583874, 0.00643948, 0.013864, -0.00244444, 0.00609147, 0.00755412, 0.002174, 0.00609273, 0.00248428, 0.00216018, 0.00609273, -0.00405922, 0.00214438, 0.00609147, -0.00428128, 0.00214438, 0.00626295, -0.0106056, -0.000818409, -0.00470572, -0.00155602, 0.00526711, -0.00470194, 0.00673222, 0.00538558, -0.00382435, -0.0131809, 0.00106332, -1.25961e-06, -0.0132645, 0.00106332, 0.00604734, -0.0120043, 0.00170998, -1.25961e-06, -0.00169733, 0.00571533, -0.00425684, -0.00137434, 0.005586, 0.000791854, -0.00968565, -0.00415636, 0.00626295, -0.0118745, -0.00279689, 0.00621252, -0.0134837, -0.00314935, 0.00626295, -0.00607216, -0.00321155, 0.00321154, -0.0141643, -0.00330139, 0.00285471, -0.0141729, -0.00330139, -0.00285596, -0.0141729, -0.00102376, 0.00425558, 0.00672069, 0.0057094, 0.00470446, -0.00155602, 0.00526711, 0.00470068, 0.00673222, 0.00538558, 0.00503734, 0.0112282, 0.00466488, 0.00597672, 0.0122462, 0.0024534, -0.00425684, 0.00672069, 0.0057094, 0.00626295, -0.0113785, -0.00134561, 0.00621252, -0.0134837, -0.00177606, 0.00382309, -0.0131809, 0.00106332, 0.00285471, -0.0141729, -0.00102376, 0.00604734, -0.0129992, 0.00106332, 0.00425558, -0.00137434, 0.005586, 0.00491251, -0.0139451, -0.00314935, 0.00321154, -0.0141643, -0.00102376, 0.00491251, -0.0139451, -0.00177606)
+
+[node name="RedSUVtm" type="CharacterBody3D" node_paths=PackedStringArray("LeftDoor", "RightDoor", "FR_Wheel", "FL_Wheel", "RR_Wheel", "RL_Wheel")]
+collision_layer = 8
 script = ExtResource("1_dk37g")
 LeftDoor = NodePath("LDoor")
 RightDoor = NodePath("RDoor")
@@ -970,3 +986,47 @@ mesh = SubResource("ArrayMesh_abcv1")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("ShaderMaterial_eroae")
 surface_material_override/1 = ExtResource("4_buwrr")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, -5.96046e-08, 0.627485, 0.175413)
+shape = SubResource("ConvexPolygonShape3D_qosnx")
+
+[node name="LeftBreakLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.57, 0.625, -1.3)
+light_color = Color(0.921569, 0, 0.145098, 1)
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 2.0
+
+[node name="RightBreakLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.575201, 0.625, -1.3)
+light_color = Color(0.921569, 0, 0.145098, 1)
+light_energy = 0.5
+shadow_enabled = true
+omni_range = 2.0
+
+[node name="LeftFrontLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0.625, 1.5)
+shadow_enabled = true
+omni_range = 0.7
+
+[node name="RightFontLight" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.625, 1.5)
+shadow_enabled = true
+omni_range = 0.7
+
+[node name="RightSpotLight" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, -1.23384e-15, 8.74228e-08, 1.51808e-08, 0.984808, 0.173648, -8.60946e-08, 0.173648, -0.984808, -0.5, 0.65, 1.5)
+light_energy = 4.5
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 25.0
+spot_angle_attenuation = 0.125
+
+[node name="LeftSpotLight" type="SpotLight3D" parent="."]
+transform = Transform3D(-1, -1.23384e-15, 8.74228e-08, 1.51808e-08, 0.984808, 0.173648, -8.60946e-08, 0.173648, -0.984808, 0.5, 0.65, 1.5)
+light_energy = 4.5
+shadow_enabled = true
+spot_range = 10.0
+spot_angle = 25.0
+spot_angle_attenuation = 0.125

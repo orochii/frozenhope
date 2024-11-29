@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://b7cp1mhvqm6po"]
 
-[ext_resource type="AudioStream" uid="uid://c5ym1i1xw55go" path="res://Audio/Sound Effects/testTing.ogg" id="1_rfqab"]
+[ext_resource type="AudioStream" uid="uid://don4txpd1ge31" path="res://Audio/Sound Effects/Environment/SFX_BULLET_IMPACT_STONE_JDY.wav" id="1_ddwfp"]
 
 [sub_resource type="Curve" id="Curve_grikw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.93924, 0.0, 0, 0]
@@ -95,7 +95,7 @@ libraries = {
 autoplay = "start"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_rfqab")
+stream = ExtResource("1_ddwfp")
 volume_db = 4.0
 pitch_scale = 1.25
 autoplay = true
