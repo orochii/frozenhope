@@ -5,11 +5,16 @@ public partial class DmgPopUp : Control
 {
 	[Export] Label DamageLabel;
 	[Export] AnimationPlayer Animator;
+	[Export] Color HealingColor;
 	private Node3D _target = null;
 	private Vector3 _offset;
 	public void Setup(Node3D target, Vector3 offset, int damage) {
 		_target = target;
 		_offset = offset;
+		if (damage < 0) {
+			damage = -damage;
+			DamageLabel.SelfModulate = HealingColor;
+		}
 		DamageLabel.Text = string.Format("{0}", damage);
 	}
 	public override void _Ready()
