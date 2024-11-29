@@ -5,6 +5,8 @@ public partial class GameplayUI : Control
 {
 	[Export] AnimationPlayer OverlayEffect;
 	[Export] Inventory Inventory;
+	[Export] Control DmgPopupParent;
+	[Export] PackedScene DamagePopupTemplate;
 	public void Refresh() {
 		// Run when UI mode is set to this.
 		OverlayEffect.Play("RESET");
@@ -31,6 +33,13 @@ public partial class GameplayUI : Control
     }
 
 	public void SpawnPopup(Targettable obj, int damage) {
-		//
+		var popup = DamagePopupTemplate.Instantiate<DmgPopUp>();
+		if (popup != null) {
+			var reticlePos = obj.GetReticlePosition();
+			var objectPos = obj.GetPivotPosition();
+			var offset = reticlePos - objectPos;
+			popup.Setup(obj as Node3D, offset, damage);
+			DmgPopupParent.AddChild(popup);
+		}
 	}
 }
