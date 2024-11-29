@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ysxelpxf3ry"
-path.s3tc="res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"
+uid="uid://brxr4h3f8xx77"
+path.s3tc="res://.godot/imported/Industrial_exterior_v2_Bridges.png-5c8947bb516377d8ebe3831e5aee2215.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "c28054d2ab4a89a95e679036f9251f7a"
+}
 
 [deps]
 
-source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png"
-dest_files=["res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"]
+source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Bridges.png"
+dest_files=["res://.godot/imported/Industrial_exterior_v2_Bridges.png-5c8947bb516377d8ebe3831e5aee2215.s3tc.ctex"]
 
 [params]
 

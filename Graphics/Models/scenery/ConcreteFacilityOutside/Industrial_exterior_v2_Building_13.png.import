@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ysxelpxf3ry"
-path.s3tc="res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"
+uid="uid://c3rqax5udb3s6"
+path.s3tc="res://.godot/imported/Industrial_exterior_v2_Building_13.png-5c5fd915ea14b1b9605d0b265120a059.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "1e68d93fcaae5f79220ef98c479dc276"
+}
 
 [deps]
 
-source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png"
-dest_files=["res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"]
+source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Building_13.png"
+dest_files=["res://.godot/imported/Industrial_exterior_v2_Building_13.png-5c5fd915ea14b1b9605d0b265120a059.s3tc.ctex"]
 
 [params]
 
