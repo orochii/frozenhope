@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://drlg522ihalbs"]
+
+[ext_resource type="Texture2D" uid="uid://w4v8cq7o8gcq" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Barrel-Texture.png" id="1_mk5th"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sioo8"]
+resource_name = "material"
+cull_mode = 2
+albedo_texture = ExtResource("1_mk5th")
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_t1ibf"]
+_surfaces = [{
+"aabb": AABB(-0.4, -0.34641, -0.9, 0.8, 0.692821, 0.9),
+"format": 34896613377,
+"index_count": 60,
+"index_data": PackedByteArray("AgAAAAcAAAABAAMAAQACAAYAAAACAAEAAAAIAAcAAAALAAgAAwALAAAAAwAEAAsAAQAEAAMAAQAFAAQABgAFAAEABgAKAAUAAgAKAAYAAgAJAAoABwAJAAIABwAIAAkABAAIAAsACAAKAAkACgAEAAUACAAEAAoA"),
+"name": "material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("////f///AAD/P/////8AAP8/AAD//wAA/7//////AAD/v///AAAAAP8///8AAAAAAAD/f///AAD/vwAA//8AAP+/AAAAAAAA/z8AAAAAAAAAAP9/AAAAAP///38AAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_di3xn"]
+resource_name = "Barrel_ID3"
+_surfaces = [{
+"aabb": AABB(-0.4, -0.34641, -0.9, 0.8, 0.692821, 0.9),
+"attribute_data": PackedByteArray("SvVBozan//82p///Nqf//0jl+4c3qP//Nqf//zan//9H1UGjSvUSkW3O////f//////SnG3OhIf/f4SHNqeEhzrvkK43qISHbc7//wCB//9H1ROR/3///0jlWKxtzv///3+Eh8HgQIBtzoSHNqeEhzanhIf9z/6Rbc6EhwCBhIc51yapwviqhTanhIc2p4SH"),
+"format": 34896613399,
+"index_count": 60,
+"index_data": PackedByteArray("CAAAABYAAAAEAAkABAAIABQAAAAIAAQAAQAaABcAAQAiABoACwAjAAIACwAOACMABQANAAoABQARAA0AEwAPAAMAEwAfAA8ABgAeABIABgAbAB4AFQAcAAcAFQAYABwADAAZACEAGQAgAB0AIAAMABAAGQAMACAA"),
+"material": SubResource("StandardMaterial3D_sioo8"),
+"name": "material",
+"primitive": 3,
+"uv_scale": Vector4(1.98902, 2.02187, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("////f///VJX///9///+M4v///3///0rK/z//////Ssr/P/////9Ulf8///////+//z8AAP//jOL/PwAA//////8/AAD//1SV/7//////VJX/v///////v/+//////0rK/7///wAA////v///AAD/v/+///8AAErK/z///wAASsr/P///AAD///8///8AAP+/AAD/f///jOIAAP9///9KygAA/3///1SV/78AAP//////vwAA//9Ulf+/AAD//4zi/78AAAAA////vwAAAAD///+/AAAAAIzi/z8AAAAAjOL/PwAAAAD///8/AAAAAP//AAD/fwAAjOIAAP9/AABKygAA/38AAP//////fwAA//////9/AACM4v///38AAErK/////6ucVU5nu7Nds92XxP////////9/Vc5S4/9//z///////////////39nu7NdJtnYpv///39nu7Nds92XxCbZ2Kb///9/Vc5S47Pdl8T//////3//P/////+rnFVO/3//PybZ2KarnFVOVc5S4/9//z8m2dimVc5S47Pdl8Qm2dimJtnYpqucVU5nu7Nd")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_t1ibf")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yhyws"]
+points = PackedVector3Array(0.399922, -6.78599e-05, -5.96046e-08, 0.199922, 0.34641, -5.96046e-08, 0.199922, -0.34641, -5.96046e-08, 0.399922, -6.78599e-05, -0.9, 0.199922, 0.34641, -0.9, -0.200078, 0.34641, -5.96046e-08, -0.200078, -0.34641, -5.96046e-08, 0.199922, -0.34641, -0.9, -0.200078, 0.34641, -0.9, -0.4, -6.78599e-05, -5.96046e-08, -0.200078, -0.34641, -0.9, -0.4, -6.78599e-05, -0.9)
+
+[node name="Barrel" type="StaticBody3D"]
+collision_layer = 8
+
+[node name="Barrel" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_di3xn")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_yhyws")

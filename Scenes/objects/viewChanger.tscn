@@ -5,7 +5,7 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wurr"]
 
 [node name="ViewChanger" type="Area3D" node_paths=PackedStringArray("Deactivate", "Activate")]
-collision_layer = 0
+collision_layer = 2
 script = ExtResource("1_rc6d8")
 Deactivate = []
 Activate = []

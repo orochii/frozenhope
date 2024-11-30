@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=4 uid="uid://ba2xhywbxq5oh"]
+[gd_scene load_steps=12 format=4 uid="uid://ba2xhywbxq5oh"]
 
 [ext_resource type="Texture2D" uid="uid://o1dmgbwte601" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Plate Texture.png" id="1_ywj8t"]
 [ext_resource type="Texture2D" uid="uid://b0ysxelpxf3ry" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png" id="2_ms154"]
@@ -42,6 +42,9 @@ shadow_mesh = SubResource("ArrayMesh_dbqtk")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gbde4"]
 albedo_texture = ExtResource("1_ywj8t")
 
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_jmys8"]
+data = PackedVector3Array(-0.0001, 7.1608, -5.501, 4.3999, -7.161, -3.301, 4.3999, 7.161, -3.301, -0.0001, 7.1608, -5.501, -0.0001, -7.161, -5.501, 4.3999, -7.161, -3.301, -4.4, 7.161, -3.301, -0.0001, -7.161, -5.501, -0.0001, 7.1608, -5.501, -4.4, 7.161, -3.301, -4.4, -7.161, -3.301, -0.0001, -7.161, -5.501, -0.0001, -7.0002, -5.5001, -4.0001, -7.0002, -3.5, 4, -7.0002, -3.5, -4.0001, -7.0002, -3.5, -4.0001, -0.5001, -0.0001, -4.0001, -7.0002, 0, -4.0001, -7.0002, -3.5, -4.0001, -0.5001, -2, -4.0001, -0.5001, -0.0001, -4.0001, 0.4999, -0.0001, -4.0001, 6.9999, -3.5, -4.0001, 6.9999, -0.0001, -4.0001, -7.0002, -3.5, -4.0001, 0.4999, -2, -4.0001, -0.5001, -2, -4.0001, 0.4999, -2, -4.0001, 6.9999, -3.5, -4.0001, 0.4999, -0.0001, -4.0001, 0.4999, -2, -4.0001, -7.0002, -3.5, -4.0001, 6.9999, -3.5, 4, 6.9999, -3.5, 4, 6.249, -0.0001, 4, 6.9999, -0.0001, 4, 6.9999, -3.5, 4, 6.249, -2, 4, 6.249, -0.0001, 4, -7.0002, 0, 4, 6.9999, -3.5, 4, -7.0002, -3.5, 4, 5.2492, -2, 4, -7.0002, 0, 4, 5.2492, -0.0001, 4, 6.9999, -3.5, 4, 5.2492, -2, 4, 6.249, -2, 4, 5.2492, -2, 4, 6.9999, -3.5, 4, -7.0002, 0, -0.0001, 6.9999, -5.5001, 4, 6.9999, -3.5, -4.0001, 6.9999, -3.5, -0.0001, 7.161, -5.501, 4.4, -7.161, -3.301, -0.0001, -7.161, -5.501, -0.0001, 7.161, -5.501, 4.4, 7.161, -3.301, 4.4, -7.161, -3.301, -4.4, 7.161, -3.301, -0.0001, -7.161, -5.501, -4.4, -7.161, -3.301, -4.4, 7.161, -3.301, -0.0001, 7.161, -5.501, -0.0001, -7.161, -5.501, -0.0001, -7.0002, -5.5001, 4, -7.0002, -3.5, -4.0001, -7.0002, -3.5, -4.0001, -0.5001, -0.0001, -4.0001, -7.0002, -3.5, -4.0001, -7.0002, 0, -4.0001, 6.9999, -3.5, -4.0001, 0.4999, -0.0001, -4.0001, 6.9999, -0.0001, -4.0001, 6.9999, -3.5, -4.0001, 0.4999, -2, -4.0001, 0.4999, -0.0001, -4.0001, -0.5001, -2, -4.0001, -7.0002, -3.5, -4.0001, -0.5001, -0.0001, -4.0001, 6.9999, -3.5, -4.0001, -0.5001, -2, -4.0001, 0.4999, -2, -4.0001, -7.0002, -3.5, -4.0001, -0.5001, -2, -4.0001, 6.9999, -3.5, 4, 6.249, -0.0001, 4, 6.9999, -3.5, 4, 6.9999, -0.0001, 4, 6.9999, -3.5, 4, -7.0002, 0, 4, -7.0002, -3.5, 4, -7.0002, 0, 4, 5.2492, -2, 4, 5.2492, -0.0001, 4, 6.249, -2, 4, 6.9999, -3.5, 4, 6.249, -0.0001, 4, 6.9999, -3.5, 4, 5.2492, -2, 4, -7.0002, 0, 4, 6.9999, -3.5, 4, 6.249, -2, 4, 5.2492, -2, -0.0001, 6.9999, -5.5001, -4.0001, 6.9999, -3.5, 4, 6.9999, -3.5)
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t7s6y"]
 resource_name = "Color_A05.003"
 cull_mode = 2
@@ -81,13 +84,17 @@ shadow_mesh = SubResource("ArrayMesh_1sfs0")
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_rkf8n"]
 albedo_texture = ExtResource("2_ms154")
 
-[node name="BigShed" type="Node3D"]
+[node name="BigShed" type="StaticBody3D"]
 
 [node name="Shed A" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
 mesh = SubResource("ArrayMesh_pya6i")
 skeleton = NodePath("")
 surface_material_override/0 = SubResource("StandardMaterial3D_gbde4")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_jmys8")
 
 [node name="Shed A Frame" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0)
