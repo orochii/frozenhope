@@ -148,9 +148,9 @@ public class GameState {
             persistentData.inventorySizeY = value.Y;
         }
     }
-    public bool IsSpaceAvailable(BaseItem item, Vector2I position) {
+    public bool IsSpaceAvailable(BaseItem item, Vector2I position, int ignore=-2) {
         var matrix = persistentData.GetInvMatrix();
-        return IsThereEnoughSpace(matrix, position.X, position.Y, item.SlotSize.X, item.SlotSize.Y);
+        return IsThereEnoughSpace(matrix, position.X, position.Y, item.SlotSize.X, item.SlotSize.Y, ignore);
     }
     public bool AddItem(ItemAddEntry item) {
         if (item==null) return false;
@@ -241,12 +241,12 @@ public class GameState {
         position = new Vector2I();
         return false;
     }
-    private bool IsThereEnoughSpace(int[,] matrix, int x, int y, int w, int h) {
+    private bool IsThereEnoughSpace(int[,] matrix, int x, int y, int w, int h, int ignore=-2) {
         // Check if there's enough space around
         for (int xx = 0; xx < w; xx++) {
             for (int yy = 0; yy < h; yy++) {
                 if (matrix[x+xx,y+yy] != -1) {
-                    return false;
+                    if (ignore != matrix[x+xx,y+yy]) return false;
                 }
             }
         }
@@ -264,13 +264,33 @@ public class GameState {
     public List<ItemEntry> GetInventoryEntries() {
         return persistentData.inventory;
     }
+    public bool MoveToSlot(int index, Vector2I position) {
+        // Get item.
+        var itemEntry = persistentData.inventory[index];
+        var item = BaseItem.Get(itemEntry.itemID);
+        // Check if there's space for it somewhere else
+        if (IsSpaceAvailable(item, position, index)) {
+            itemEntry.posX = position.X;
+            itemEntry.posY = position.Y;
+            return true;
+        }
+        // Return we failed :')
+        return false;
+    }
     public bool CombineSlots(int index1, int index2) {
         // Get items.
         var itemEntry1 = persistentData.inventory[index1];
-        var itemEntry2 = persistentData.inventory[index2];
         var item1 = BaseItem.Get(itemEntry1.itemID);
+        var itemEntry2 = persistentData.inventory[index2];
         var item2 = BaseItem.Get(itemEntry2.itemID);
         // Step1: Try combine stacks.
+        if (itemEntry1.itemID == itemEntry2.itemID) {
+            var remainingSpace = item2.MaxStack - itemEntry2.stackSize;
+            var moveStack = Math.Min(remainingSpace, itemEntry1.stackSize);
+            RemoveFromSlot(new Vector2I(itemEntry1.posX, itemEntry1.posY), moveStack);
+            itemEntry2.stackSize += moveStack;
+            return true;
+        }
         // Step2: Try reload (one must be a weapon, the other must be valid ammo).
         var wpn = item1 is WeaponItem ? (item1 as WeaponItem) : (item2 is WeaponItem ? item2 as WeaponItem : null);
         var wpE = wpn==item1 ? itemEntry1 : wpn==item2 ? itemEntry2 : null;
@@ -280,6 +300,7 @@ public class GameState {
             return ReloadWithAmmo(wpn,wpE,amm,amE);
         }
         // Step3: Try combining (check if can do). --not for now.
+        // TODO.
         // Else: no can't do :(.
         return false;
     }

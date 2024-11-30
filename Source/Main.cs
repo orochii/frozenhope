@@ -69,7 +69,10 @@ public partial class Main : Node
         Loader.HideLoader();
     }
 	public Node3D CurrentScene => currentScene;
-	public void LoadIntroMap() {
+
+    public bool Busy;
+
+    public void LoadIntroMap() {
 		if (SkipIntro) Main.Instance.StartGame();
 		else ChangeMap(Database.IntroScene);
 	}

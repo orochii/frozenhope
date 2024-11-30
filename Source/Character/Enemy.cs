@@ -51,6 +51,9 @@ public partial class Enemy : CharacterBody3D, Targettable
     public override void _Process(double delta)
     {
 		if (Dead) return;
+		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
+		canMove = canMove && !Main.Instance.Busy;
+		if (!canMove) return;
 		var isIdling = Graphic.StateMachine.ActionState == EActionState.NONE;
 		var isAttacking = Graphic.StateMachine.ActionState == EActionState.ATTACK;
 		Vector2 move = new Vector2();

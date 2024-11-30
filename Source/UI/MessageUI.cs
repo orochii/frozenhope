@@ -19,8 +19,8 @@ public partial class MessageUI : Control
 		if (Main.Instance.UI.Mode != (int)UiParent.EModes.MESSAGE) LastMode = Main.Instance.UI.Mode;
 		Main.Instance.UI.SetUIMode((int)UiParent.EModes.MESSAGE);
 		//
-		MessageLabel.Text = text;
-		Background.SelfModulate = showBackground ? Colors.White : Colors.Transparent;
+		MessageLabel.Text = "[center]"+text;
+		Background.Modulate = showBackground ? Colors.White : Colors.Transparent;
 		MessageLabel.VisibleCharacters = 0;
 		visibleCharacters = 0;
 		autocloseTimer = autoclose;

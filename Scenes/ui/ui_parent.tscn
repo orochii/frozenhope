@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=47 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -22,7 +22,6 @@
 [ext_resource type="Script" path="res://Source/UI/Stats.cs" id="19_1hcux"]
 [ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
 [ext_resource type="Script" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
-[ext_resource type="Texture2D" uid="uid://b3wyfgxsvhv4c" path="res://Graphics/textures/fade_circle.png" id="22_c364i"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" path="res://Source/UI/Splash.cs" id="24_2h878"]
 
@@ -495,6 +494,7 @@ horizontal_alignment = 1
 
 [node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
 process_mode = 3
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -933,7 +933,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Gameplay/SubViewport"]
 
 [node name="Message" type="Control" parent="." node_paths=PackedStringArray("MessageLabel", "Background")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -941,34 +940,53 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("21_suu8w")
-MessageLabel = NodePath("TextureRect/RichTextLabel")
-Background = NodePath("TextureRect")
+MessageLabel = NodePath("MarginContainer/RichTextLabel")
+Background = NodePath("Background")
 
-[node name="TextureRect" type="NinePatchRect" parent="Message"]
-custom_minimum_size = Vector2(0, 48)
+[node name="Background" type="Control" parent="Message"]
 layout_mode = 1
-anchors_preset = -1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BarTop" type="ColorRect" parent="Message/Background"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+grow_horizontal = 2
+color = Color(0, 0, 0, 1)
+
+[node name="BarBottom" type="ColorRect" parent="Message/Background"]
+custom_minimum_size = Vector2(0, 32)
+layout_mode = 1
+anchors_preset = 12
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_left = 16.0
-offset_top = -32.0
-offset_right = -16.0
-offset_bottom = -16.0
 grow_horizontal = 2
 grow_vertical = 0
-texture = ExtResource("22_c364i")
+color = Color(0, 0, 0, 1)
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Message/TextureRect"]
-clip_contents = false
+[node name="MarginContainer" type="MarginContainer" parent="Message"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.1
-anchor_top = 0.5
-anchor_right = 0.9
-anchor_bottom = 0.5
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -32.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Message/MarginContainer"]
+clip_contents = false
+layout_mode = 2
 theme = ExtResource("3_wyq5x")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.164706)
 theme_override_constants/outline_size = 1
