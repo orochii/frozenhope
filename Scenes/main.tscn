@@ -1,4 +1,4 @@
-[gd_scene load_steps=49 format=3 uid="uid://boouo4s50i43s"]
+[gd_scene load_steps=48 format=3 uid="uid://boouo4s50i43s"]
 
 [ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
@@ -12,7 +12,6 @@
 [ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="6_0bwkt"]
 [ext_resource type="Script" path="res://Source/UI/GameplayUI.cs" id="6_opeho"]
 [ext_resource type="Texture2D" uid="uid://dd8f6x356pdy5" path="res://Graphics/textures/crosshair2.png" id="7_cwps4"]
-[ext_resource type="PackedScene" uid="uid://qrbmfvltjec" path="res://Scenes/ui/dmg_pop_up.tscn" id="7_ds4by"]
 [ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="7_hmgak"]
 [ext_resource type="Script" path="res://Source/UI/Crosshair.cs" id="7_vysdj"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="8_j6fhx"]
@@ -498,7 +497,7 @@ theme = ExtResource("8_j6fhx")
 text = "Spanish Inquisition Software 2024"
 horizontal_alignment = 1
 
-[node name="Gameplay" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
+[node name="Gameplay" type="Control" parent="CanvasLayer/UIParent" node_paths=PackedStringArray("OverlayEffect", "Inventory")]
 process_mode = 3
 texture_filter = 1
 layout_mode = 1
@@ -510,8 +509,6 @@ grow_vertical = 2
 script = ExtResource("6_opeho")
 OverlayEffect = NodePath("Overlay/OverlayAnimation")
 Inventory = NodePath("MarginContainer/VBoxContainer/Inventory")
-DmgPopupParent = NodePath("DmgPopupParent")
-DamagePopupTemplate = ExtResource("7_ds4by")
 
 [node name="DmgPopupParent" type="Control" parent="CanvasLayer/UIParent/Gameplay"]
 layout_mode = 1
@@ -831,7 +828,6 @@ script = ExtResource("11_ej3np")
 Health = NodePath("TextureRect/TextureRect")
 HealthLabel = NodePath("TextureRect/Label")
 EquippedIcon = NodePath("Slot/TextureRect")
-AmmoLabel = NodePath("Slot/TextureRect/HBoxContainer/Ammo")
 HealthColorGradient = SubResource("GradientTexture1D_nwv2s")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]

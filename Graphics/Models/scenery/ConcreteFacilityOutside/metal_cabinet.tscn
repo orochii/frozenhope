@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://dtjw42cwmdj0l"]
+
+[ext_resource type="Texture2D" uid="uid://0foahfuh4fvx" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Metal_cabinet_1.png" id="1_mgvf4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_adwwe"]
+resource_name = "Metal_cabinet_1"
+cull_mode = 2
+albedo_texture = ExtResource("1_mgvf4")
+metallic = 1.0
+roughness = 0.858579
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_787eh"]
+_surfaces = [{
+"aabb": AABB(-0.605966, -0.0183652, -0.199787, 1.21193, 1.43673, 0.399573),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AwAAAAQAAwAGAAAAAAAHAAQAAAACAAcABgAFAAEABgADAAUAAwAHAAUAAwAEAAcAAgAGAAEAAgAAAAYABQACAAEABQAHAAIA"),
+"name": "Metal_cabinet_1",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/v/+/wAAAAAAAAAAAAAAAP//AAAAAAAAAABT4f7/AAD+/1Ph/v8AAAAAAAD//wAAAAD//wAAAAD+/wAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l70ib"]
+resource_name = "Industrial_exterior_v2_Metal_cabinet_1"
+_surfaces = [{
+"aabb": AABB(-0.605966, -0.0183652, -0.199787, 1.21193, 1.43673, 0.399573),
+"attribute_data": PackedByteArray("yoQjrKTfiX9G4BCARuD//zXnTJWQrLvdNeeK0cqEu91G4P////9bjw+AbY9uf+mXRuBtj6Tf6Zf//1uP/////xf6TJUPgP//RuAQgJCsI6xuf4l/F/qK0Ubg////////"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("CwABAA0ACwAUAAEAAgAXAA4AAgAIABcAEgAPAAMAEgAJAA8ACgAWABEACgAMABYABwATAAUABwAAABMAEAAGAAQAEAAVAAYA"),
+"material": SubResource("StandardMaterial3D_adwwe"),
+"name": "Metal_cabinet_1",
+"primitive": 3,
+"uv_scale": Vector4(1.999, 1.90042, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/v/+/wAA///+//7/AABsr/7//v8AAAYAAAAAAAAA/78AAAAAAABU1QAAAAAAAP////8AAAAAVNX//wAAAAD/////AAAAAAAAAABT4f7//78AAFPh/v8AgAAAU+H+/2yv/v9T4f7/AID+/1Ph/v9sr/7/U+H+/wgAAAAAAP///78AAAAA//9U1QAAAAD//wCAAAD//wAA/78AAP//AAD//wAA//8AAGyv/v8AAP//VNX+/wAA//8AgP7/AAD//wAA/3/+/////3/7v/h//3/+/6oqVNX/f///qipU1f9//v//v/9/7X/a//9////+//9//3///////3/6v/Z//H/4/6oqVNX/f///8X/j//9//v/+//9/qipU1f9/////v/9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_787eh")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_8rqme"]
+points = PackedVector3Array(-0.605966, -0.0183652, -0.199787, -0.605966, -0.0183652, 0.199786, -0.605966, 1.41837, -0.199787, 0.605966, -0.0183652, -0.199787, 0.605847, -0.0183652, 0.199786, -0.605966, 1.24609, 0.199747, 0.605847, 1.41822, -0.199787, 0.605847, 1.24609, 0.199747)
+
+[node name="MetalCabinetA" type="StaticBody3D"]
+collision_layer = 8
+
+[node name="Metal_cabinet_1" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_l70ib")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_8rqme")

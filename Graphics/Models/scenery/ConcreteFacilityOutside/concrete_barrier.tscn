@@ -1,0 +1,59 @@
+[gd_scene load_steps=7 format=4 uid="uid://bh3l22nv4rq7l"]
+
+[ext_resource type="Texture2D" uid="uid://c6bfog3lu2d0r" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Concrete Floor Texture.png" id="1_cesx8"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_j41wy"]
+resource_name = "material"
+cull_mode = 2
+roughness = 0.5
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2aovs"]
+_surfaces = [{
+"aabb": AABB(-1, -0.25, -1, 2, 0.5, 1),
+"format": 34896613377,
+"index_count": 54,
+"index_data": PackedByteArray("AwABAAAAAwAKAAEAAAACAAQAAAABAAIAAQAHAAgAAQAKAAcABQAKAAMABQALAAoABAALAAUABAACAAsAAgAIAAYAAgABAAgABwAGAAgABwAJAAYACwAHAAoACwAJAAcACwAGAAkACwACAAYA"),
+"name": "material",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 12,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAAAAMrMAAAAA//8yswAA//8AAP//AAAAAP////8AAP///////wAAzAz/vwAAAAAy8/8/AAAAAMwM/z8AAAAAMvP/vwAAAAD//wAAMrMAAP////8yswAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_yrilt"]
+resource_name = "Concrete Barricade_ID3"
+_surfaces = [{
+"aabb": AABB(-1, -0.25, -1, 2, 0.5, 1),
+"attribute_data": PackedByteArray("r58fof9/FKGvn7K375/ht/9/p7cmgNW3uH+yt/l/4bf///i31//Qt9f/FKG4f0mhuH8fodf/PqH/fz6hr59JofeHFO2G+S/t3v967d7/Uu12hv7/7Yf57PKXFO1GgFLthvn//3aGL+1GgHrt6Jf57Nf/p7f//9W373/Ft7h/27cmgPi3/3/Qt+afxbevn9u3"),
+"format": 34896613399,
+"index_count": 54,
+"index_data": PackedByteArray("CgAEAAEACgAcAAQAAAAGAAwAAAACAAYABQATABcABQAdABMADwAfAAsADwAjAB8ADQAhAA4ADQAJACEABwAWABAABwADABYAFAARABgAFAAZABEAIgAVAB4AIgAbABUAIAASABoAIAAIABIA"),
+"material": SubResource("StandardMaterial3D_j41wy"),
+"name": "material",
+"primitive": 3,
+"uv_scale": Vector4(2.00187, 1.70085, 0, 0),
+"vertex_count": 36,
+"vertex_data": PackedByteArray("AAAAAP//VNUAAAAA////vwAAAAAys1TVAAAAADKzvtgAAAAAMrP/vwAAAAAyszLHAAD//zKzVNUAAP//MrO+2AAA//8ys///AAD//zKz/////wAA////v///AAD//1TVAAD/////VNUAAP//////////////////////////VNXMDP+/AAC+2MwM/78AAP//zAz/vwAA//8y8/8/AAAyxzLz/z8AAP//MvP/PwAAvtjMDP8/AAC+2MwM/z8AADLHzAz/PwAA//8y8/+/AAD//zLz/78AAP//MvP/vwAAvtj//wAAMrP/v///AAAyszLH//8AADKzvtj//wAAMrNU1f////8ys////////zKz////////MrO+2P////8ys1TVVFWqqgAA/39UVaqqW1OjrAAA/38AAP9/VFWqqltTo6z/f6rF/3//vwAA/3+qKqoqVFWqqv9//7//f/+/qiqqKltTo6z/f////3+qxQAA/3//f///oyyjLFtTo6wAAP9//3////9/////f6rFoyyjLAAA/38AAP9/oyyjLKoqqir/f6rF/3//v6MsoyyqKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2aovs")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e6431"]
+albedo_texture = ExtResource("1_cesx8")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_friv4"]
+points = PackedVector3Array(-0.900157, -0.125049, -1, -1, -0.25, -0.30002, -0.900157, 0.124951, -1, 0.899961, -0.125049, -1, -1, 0.25, -0.30002, 1, -0.25, -0.30002, -1, -0.25, 0, 0.899961, 0.124951, -1, -1, 0.25, 0, 1, 0.25, -0.30002, 1, -0.25, 0, 1, 0.25, 0)
+
+[node name="ConcreteBarrier" type="StaticBody3D"]
+collision_layer = 8
+
+[node name="SketchUp" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+mesh = SubResource("ArrayMesh_yrilt")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_e6431")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0, -1, 0, 1, 0, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_friv4")

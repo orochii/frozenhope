@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ysxelpxf3ry"
-path.s3tc="res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"
+uid="uid://bj08dgomh8bed"
+path.s3tc="res://.godot/imported/Industrial_exterior_v2_Roadblock.png-56a38df56ce7ee112f65aabc7c7e0baa.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "1ef41579b3e1718e420f2e3f73a43fb8"
+}
 
 [deps]
 
-source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png"
-dest_files=["res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"]
+source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Roadblock.png"
+dest_files=["res://.godot/imported/Industrial_exterior_v2_Roadblock.png-56a38df56ce7ee112f65aabc7c7e0baa.s3tc.ctex"]
 
 [params]
 

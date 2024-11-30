@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://dweetxjuvrr7j"]
+
+[ext_resource type="Texture2D" uid="uid://cd11iupl44hni" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Cargo_1.png" id="1_6arfb"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_oidfh"]
+resource_name = "Cargo_1_close"
+cull_mode = 2
+albedo_texture = ExtResource("1_6arfb")
+metallic = 1.0
+roughness = 0.858579
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_uktpv"]
+_surfaces = [{
+"aabb": AABB(-4.06035, -0.0809431, -1.51075, 8, 3, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("BAAGAAAABAADAAYABgABAAAABgACAAEAAwACAAYAAwAHAAIAAAAFAAQAAAABAAUAAQAHAAUAAQACAAcABQADAAQABQAHAAMA"),
+"name": "Cargo_1_close",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP////8AAAAA//8AAAAA//8AAAAAAAD//wAA//8AAP///////wAAAAAAAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_hmg3t"]
+resource_name = "Industrial_exterior_v2_Cargo_1_close"
+_surfaces = [{
+"aabb": AABB(-4.06035, -0.0809431, -1.51075, 8, 3, 3),
+"attribute_data": PackedByteArray("+1NZWR4AvawVAOf/+1MAABUA8aweAL2sAAAAAGDC8aweANpZVcLaWRUA5/8BqFlZVcK9rGDC5/+vVFlZYMLxrFXCvayvVI4AAABZWR4A2llgwuf/FQDxrFXC2lkBqI4A"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("DAATAAEADAAJABMAEgADAAAAEgAGAAMACgAHABQACgAVAAcAAgAPAA0AAgAEAA8ABQAWABAABQAIABYAEQALAA4AEQAXAAsA"),
+"material": SubResource("StandardMaterial3D_oidfh"),
+"name": "Cargo_1_close",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP///78AAAAA////PwAAAAD//wCAAAD//////78AAP////8AgAAA//////+/AAD//wAA/78AAP//AAD//wAA//8AAP+///8AAAAA/z///wAAAAD/////AAAAAP+///8AAP///z///wAA//8AgP//AAD///+/////////AID/////////v/////////+/AAAAAAAA/78AAAAAAAD/PwAAAAAAAP///////wAA////////AAD/v/////8AAP+//3///wAA/3//f////3////9///////9//3////9///////9/AAD/f/9/////fwAAAAD/f/9/////fwAA/3///////3//fwAA/3///wAA/3//f////3///////3//fwAA")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_uktpv")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_pynbb"]
+points = PackedVector3Array(3.93965, 2.91906, 1.48925, 3.93965, 2.91906, -1.51075, -4.06035, 2.91906, 1.48925, 3.93965, -0.0809431, 1.48925, 3.93965, -0.0809431, -1.51075, -4.06035, 2.91906, -1.51075, -4.06035, -0.0809431, 1.48925, -4.06035, -0.0809431, -1.51075)
+
+[node name="ContainerBlueLocked" type="StaticBody3D"]
+collision_layer = 8
+
+[node name="Cargo_1_close2" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_hmg3t")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_pynbb")

@@ -2,8 +2,8 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ysxelpxf3ry"
-path.s3tc="res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"
+uid="uid://b1k343c3gqabf"
+path.s3tc="res://.godot/imported/Car8_grey.png-1af67c502e2e0cd0093bf52dcaee33ee.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
@@ -11,8 +11,8 @@ metadata={
 
 [deps]
 
-source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png"
-dest_files=["res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"]
+source_file="res://Graphics/Models/vehicles/Car8/Car8_grey.png"
+dest_files=["res://.godot/imported/Car8_grey.png-1af67c502e2e0cd0093bf52dcaee33ee.s3tc.ctex"]
 
 [params]
 

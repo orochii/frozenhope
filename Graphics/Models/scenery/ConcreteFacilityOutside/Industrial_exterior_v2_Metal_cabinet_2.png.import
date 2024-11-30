@@ -2,17 +2,20 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://b0ysxelpxf3ry"
-path.s3tc="res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"
+uid="uid://cxc5bfvpat6fd"
+path.s3tc="res://.godot/imported/Industrial_exterior_v2_Metal_cabinet_2.png-59e19384e4fe5f23d2ddb98de7f4480e.s3tc.ctex"
 metadata={
 "imported_formats": ["s3tc_bptc"],
 "vram_texture": true
 }
+generator_parameters={
+"md5": "d8fbfc3254f476e36dc1d119f85dcad0"
+}
 
 [deps]
 
-source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Shed Frame Texture.png"
-dest_files=["res://.godot/imported/Shed Frame Texture.png-809d06c4e6409bd99279634a8a235aa4.s3tc.ctex"]
+source_file="res://Graphics/Models/scenery/ConcreteFacilityOutside/Industrial_exterior_v2_Metal_cabinet_2.png"
+dest_files=["res://.godot/imported/Industrial_exterior_v2_Metal_cabinet_2.png-59e19384e4fe5f23d2ddb98de7f4480e.s3tc.ctex"]
 
 [params]
 

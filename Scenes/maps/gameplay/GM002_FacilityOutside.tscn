@@ -1,4 +1,4 @@
-[gd_scene load_steps=22 format=3 uid="uid://dlnlnxiop05ag"]
+[gd_scene load_steps=41 format=3 uid="uid://dlnlnxiop05ag"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_5w4ie"]
 [ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="2_uj0dq"]
@@ -10,27 +10,32 @@
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="8_2f70v"]
 [ext_resource type="PackedScene" uid="uid://ctxhglafc8xic" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/guard_house.tscn" id="9_gcqfw"]
 [ext_resource type="PackedScene" uid="uid://clm2sh0kpt0tb" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/chain_link_pillar.tscn" id="10_uigdx"]
+[ext_resource type="PackedScene" uid="uid://bh3l22nv4rq7l" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_barrier.tscn" id="11_80fwn"]
 [ext_resource type="PackedScene" uid="uid://dht403ju20xdc" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/chain_link_fence.tscn" id="11_u1wrr"]
+[ext_resource type="PackedScene" uid="uid://br4gh4h4t3bag" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/fence_nice_corner.tscn" id="12_1gbgo"]
 [ext_resource type="PackedScene" uid="uid://cfnxum8qykbv2" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/LampPost.tscn" id="12_1hf26"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="12_qctx3"]
 [ext_resource type="PackedScene" uid="uid://bdfrm2g7rihud" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_ramp.tscn" id="13_a1owh"]
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="13_g52uq"]
+[ext_resource type="PackedScene" uid="uid://bu1rppv448fk5" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/fence_nice_main.tscn" id="13_pq0ep"]
 [ext_resource type="PackedScene" uid="uid://be6dqen27sxuy" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_floor.tscn" id="13_x11pi"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_io1lp"]
-sky_top_color = Color(0.680522, 0.735972, 0.81331, 1)
-sky_horizon_color = Color(0.837937, 0.834755, 0.834467, 1)
-sky_energy_multiplier = 0.9
-ground_bottom_color = Color(0.671227, 0.603047, 0.524558, 1)
-ground_horizon_color = Color(0.837937, 0.834755, 0.834467, 1)
-
-[sub_resource type="Sky" id="Sky_s043u"]
-sky_material = SubResource("ProceduralSkyMaterial_io1lp")
+[ext_resource type="PackedScene" uid="uid://ba2xhywbxq5oh" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/big_shed.tscn" id="15_x1au4"]
+[ext_resource type="PackedScene" uid="uid://c741jy0om1uun" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/facility_hangar.tscn" id="16_7u1wj"]
+[ext_resource type="PackedScene" uid="uid://dvr15owh55e4b" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_curb_straight.tscn" id="17_eoo4g"]
+[ext_resource type="ArrayMesh" uid="uid://cy83thqg8n7bi" path="res://Graphics/Models/vehicles/Car8/Car8.obj" id="18_f8264"]
+[ext_resource type="PackedScene" uid="uid://8ef40bwnpei6" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_curb_cornerA.tscn" id="18_qftdh"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="19_2xpes"]
+[ext_resource type="PackedScene" uid="uid://cisoxomi27kwc" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/building_piece2.tscn" id="19_xiuei"]
+[ext_resource type="Texture2D" uid="uid://b1k343c3gqabf" path="res://Graphics/Models/vehicles/Car8/Car8_grey.png" id="20_bhvm6"]
+[ext_resource type="PackedScene" uid="uid://bk1ipxlgu8yhl" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/building_piece.tscn" id="21_f820j"]
+[ext_resource type="PackedScene" uid="uid://cq8h60sjst20s" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/box_woodA.tscn" id="27_sd48g"]
+[ext_resource type="PackedScene" uid="uid://dweetxjuvrr7j" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/container_blue_locked.tscn" id="28_7p6d1"]
+[ext_resource type="PackedScene" uid="uid://dtjw42cwmdj0l" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/metal_cabinet.tscn" id="29_23cau"]
+[ext_resource type="PackedScene" uid="uid://crip23b8oc3u4" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/ventilation.tscn" id="30_nhamj"]
 
 [sub_resource type="Environment" id="Environment_vhopj"]
 background_mode = 2
 background_energy_multiplier = 0.1
-sky = SubResource("Sky_s043u")
 ambient_light_sky_contribution = 0.0
 tonemap_mode = 2
 fog_enabled = true
@@ -42,12 +47,41 @@ script = ExtResource("7_vcgb6")
 ZonePosition = Vector2i(0, 0)
 HeightMapTexture = ExtResource("4_qhp4s")
 SplatmapsTexture = [ExtResource("6_6rhcn")]
-FoliagesTexture = null
+FoliagesTexture = []
 ObjectsTexture = [ExtResource("5_ikme2")]
 
 [sub_resource type="Resource" id="Resource_1gaxn"]
 script = ExtResource("8_2f70v")
 Zones = [SubResource("Resource_xuihx")]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_yj2j3"]
+radius = 0.3
+height = 1.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_eopgj"]
+albedo_color = Color(1, 1, 0.564706, 1)
+emission_enabled = true
+emission = Color(1, 1, 0.564706, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_nk0s5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_ffk16"]
+height = 1.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_iplvn"]
+render_priority = 0
+shader = ExtResource("19_2xpes")
+shader_parameter/vertex_color = null
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("20_bhvm6")
 
 [node name="GM002FacilityOutside" type="Node3D"]
 
@@ -66,16 +100,13 @@ script = ExtResource("1_5w4ie")
 DataPath = "res://Scenes/maps/gameplay/GM002FacilityOutside"
 CollisionLayers = 8
 TextureSets = ExtResource("2_uj0dq")
+Foliages = []
 DefaultObjectFrequency = 4
 Objects = [ExtResource("3_dw5ha")]
 TerrainZones = SubResource("Resource_1gaxn")
 metadata/_edit_lock_ = false
 
 [node name="Scenery" type="Node3D" parent="."]
-
-[node name="GuardHouse" parent="Scenery" instance=ExtResource("9_gcqfw")]
-transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 2.28193, -4.76837e-07, -5.83009)
-collision_layer = 8
 
 [node name="Fence" type="Node3D" parent="Scenery"]
 
@@ -169,10 +200,82 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -1.00275, -4.76837e-07,
 [node name="ChainLinkFence7" parent="Scenery/Fence" instance=ExtResource("11_u1wrr")]
 transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -0.99201, 0, -23.4052)
 
+[node name="ConcreteBarrier" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.980925, 0, 0.194388, 0, 1, 0, -0.194388, 0, 0.980925, 7.33998, 0, -4.9575)
+
+[node name="ConcreteBarrier18" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05197, 0, -4.64975)
+
+[node name="ConcreteBarrier5" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.985941, 0, 0.167095, 0, 1, 0, -0.167095, 0, 0.985941, 1.79525, 0, 4.59633)
+
+[node name="ConcreteBarrier17" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.932558, 0, 0.361022, 0, 1, 0, -0.361022, 0, 0.932558, -1.07285, 0, 2.31552)
+
+[node name="ConcreteBarrier6" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.979488, 0, 0.201505, 0, 1, 0, -0.201505, 0, 0.979488, 4.51981, 0, 4.08726)
+
+[node name="ConcreteBarrier7" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.963906, 0, 0.266246, 0, 1, 0, -0.266246, 0, 0.963906, 7.1176, 0, 3.43138)
+
+[node name="ConcreteBarrier8" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.998935, 0, 0.0461471, 0, 1, 0, -0.0461471, 0, 0.998935, 10.2797, 0, 2.94768)
+
+[node name="ConcreteBarrier9" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.99986, 0, -0.0167898, 0, 1, 0, 0.0167898, 0, 0.99986, 12.8779, 0, 2.88472)
+
+[node name="ConcreteBarrier10" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.98472, 0, -0.174147, 0, 1, 0, 0.174147, 0, 0.98472, 15.5007, 0, 3.18757)
+
+[node name="ConcreteBarrier11" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.284652, 0, 0.958631, 0, 1, 0, -0.958631, 0, 0.284652, 18.5043, 0, 7.17889)
+
+[node name="ConcreteBarrier12" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.230067, 0, 0.973175, 0, 1, 0, -0.973175, 0, 0.230067, 19.058, 0, 7.54607)
+
+[node name="ConcreteBarrier13" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.28609, 0, 0.958203, 0, 1, 0, -0.958203, 0, 0.28609, 19.6597, 0, 7.62766)
+
+[node name="ConcreteBarrier15" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.773122, 0, 0.634258, 0, 1, 0, -0.634258, 0, 0.773122, 20.7177, 0, 8.13594)
+
+[node name="ConcreteBarrier16" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.986737, 0, 0.162327, 0, 1, 0, -0.162327, 0, 0.986737, 21.3481, 0, 7.00026)
+
+[node name="ConcreteBarrier19" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.237042, 0, 0.9715, 0, 1, 0, -0.9715, 0, 0.237042, 22.3444, 0, -14.5441)
+
+[node name="ConcreteBarrier14" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(-0.722871, 0, 0.690984, 0, 1, 0, -0.690984, 0, -0.722871, 18.9831, 0.996009, 7.5269)
+
+[node name="ConcreteBarrier2" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.844459, 0, 0.535621, 0, 1, 0, -0.535621, 0, 0.844459, 10.0732, 0, -5.92175)
+
+[node name="ConcreteBarrier3" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.761504, 0, 0.64816, 0, 1, 0, -0.64816, 0, 0.761504, 11.9968, 0, -7.31883)
+
+[node name="ConcreteBarrier4" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
+transform = Transform3D(0.682471, 0, 0.730913, 0, 1, 0, -0.730913, 0, 0.682471, 13.8521, 0, -8.96833)
+
+[node name="FenceNiceCorner" parent="Scenery/Fence" instance=ExtResource("12_1gbgo")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 26.827, 1.88177, -19.1846)
+
+[node name="FenceNiceMain" parent="Scenery/Fence" instance=ExtResource("13_pq0ep")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 29.7855, 1.88, -20.467)
+
+[node name="FenceNiceMain2" parent="Scenery/Fence" instance=ExtResource("13_pq0ep")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25.545, 1.88, -16.305)
+
+[node name="FenceNiceMain3" parent="Scenery/Fence" instance=ExtResource("13_pq0ep")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 25.545, 1.88, -13.525)
+
 [node name="LampPosts" type="Node3D" parent="Scenery"]
 
 [node name="LampPost" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02551, -0.655829, -4.64319)
+
+[node name="LampPost8" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26.0745, -0.655829, -19.8432)
 
 [node name="LampPost3" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, -5.11361)
@@ -187,13 +290,13 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, 2.98786)
 omni_range = 7.5
 
 [node name="LampPost5" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3111, -0.655829, 2.40321)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, 5)
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost5" index="3"]
 omni_range = 8.0
 
 [node name="LampPost6" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 20.3111, -0.655829, -7.79792)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, -10)
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost6" index="3"]
 omni_range = 8.0
@@ -201,10 +304,8 @@ omni_range = 8.0
 [node name="LampPost2" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02551, -0.655829, 2.33243)
 
-[node name="OmniLight3D" type="OmniLight3D" parent="Scenery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.35512, 2.04214, -5.6548)
-shadow_enabled = true
-omni_range = 4.52821
+[node name="LampPost7" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, -0.656, -10)
 
 [node name="Concrete" type="Node3D" parent="Scenery"]
 
@@ -215,7 +316,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -0.8, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -0.8, 5)
 
 [node name="ConcreteFloor3" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 27, -0.8, -5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 27, -0.8, -10)
+
+[node name="ConcreteFloor9" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
+transform = Transform3D(-4.37114e-08, 0, -1.58955, 0, 1, 0, 1, 0, -6.94814e-08, 15.1, -1.95, -16)
+
+[node name="ConcreteFloor10" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
+transform = Transform3D(-4.37114e-08, 0, -1.58955, 0, 1, 0, 1, 0, -6.94814e-08, 15.1, -1.95, -21)
+
+[node name="ConcreteFloor11" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
+transform = Transform3D(0, 4.37114e-08, -1.58955, 1.08784, -4.37114e-08, 0, -4.75508e-08, -1, -6.94814e-08, 15.1, -1.95, -24)
+collision_layer = 8
+
+[node name="ConcreteFloor7" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 26, -0.8, -10)
+
+[node name="ConcreteFloor8" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 31, -0.8, -20)
 
 [node name="ConcreteFloor4" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -0.8, -5)
@@ -226,20 +343,217 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -0.8, 0)
 [node name="ConcreteFloor6" parent="Scenery/Concrete" instance=ExtResource("13_x11pi")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 32, -0.8, 5)
 
-[node name="ConcreteRamp" parent="Scenery" instance=ExtResource("13_a1owh")]
+[node name="ConcreteRamp" parent="Scenery/Concrete" instance=ExtResource("13_a1owh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27, -0.8, -5)
 
-[node name="ConcreteRamp2" parent="Scenery" instance=ExtResource("13_a1owh")]
+[node name="ConcreteRamp2" parent="Scenery/Concrete" instance=ExtResource("13_a1owh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27, -0.8, 0)
 
-[node name="ConcreteRamp3" parent="Scenery" instance=ExtResource("13_a1owh")]
+[node name="ConcreteRamp3" parent="Scenery/Concrete" instance=ExtResource("13_a1owh")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 27, -0.8, -10)
 
+[node name="ConcreteCurbStraight" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 25.2847, -1.10036, 5.15001)
+
+[node name="ConcreteCurbStraight4" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(-4.37114e-08, 0, -1.26, 0, 1, 0, 1, 0, -5.50763e-08, 25.7847, -1.10036, -14.15)
+
+[node name="ConcreteCurbStraight5" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(-4.37114e-08, 0, -1.26, 0, 1, 0, 1, 0, -5.50763e-08, 25.7847, -1.10036, -18.15)
+
+[node name="ConcreteCurbStraight6" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(-1, 0, 1.10153e-07, 0, 1, 0, -8.74228e-08, 0, -1.26, 27.5038, -1.10036, -20.2332)
+
+[node name="ConcreteCurbStraight7" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(-1, 0, 1.10153e-07, 0, 1, 0, -8.74228e-08, 0, -1.26, 31.5038, -1.10036, -20.2332)
+
+[node name="ConcreteCurbStraight2" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.2847, -1.10036, 5.15001)
+
+[node name="ConcreteCurbStraight3" parent="Scenery/Concrete" instance=ExtResource("17_eoo4g")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2847, -1.10036, 5.15001)
+
+[node name="ConcreteCurbCorner1" parent="Scenery/Concrete" instance=ExtResource("18_qftdh")]
+transform = Transform3D(-1.26, 0, -8.74228e-08, 0, 1, 0, 1.10153e-07, 0, -1, 24.6641, -1.1, -11.0553)
+
+[node name="Buildings" type="Node3D" parent="Scenery"]
+
+[node name="BigShed" parent="Scenery/Buildings" instance=ExtResource("15_x1au4")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 19.0499, 5.96046e-08, -18.2784)
+
+[node name="FacilityHangar" parent="Scenery/Buildings" instance=ExtResource("16_7u1wj")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 42.5815, 1.334, -3)
+
+[node name="GuardHouse" parent="Scenery/Buildings" instance=ExtResource("9_gcqfw")]
+transform = Transform3D(0.45, 0, 0, 0, 0.45, 0, 0, 0, 0.45, 2.9725, -4.76837e-07, -5.83009)
+collision_layer = 8
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Scenery/Buildings/GuardHouse"]
+transform = Transform3D(2.22222, 0, 0, 0, 2.22222, 0, 0, 0, 2.22222, 2.38487, 4.53809, 0.389533)
+shadow_enabled = true
+omni_range = 4.52821
+
+[node name="DoorLightBody" type="MeshInstance3D" parent="Scenery/Buildings"]
+transform = Transform3D(0.3, 0, 0, 0, -4.0433e-08, -0.3, 0, 0.925, -1.31134e-08, 32.3, 4.8, -2.5)
+mesh = SubResource("CapsuleMesh_yj2j3")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
+
+[node name="RightSpotLightBleed2" type="OmniLight3D" parent="Scenery/Buildings/DoorLightBody"]
+transform = Transform3D(3.33333, 0, 0, 0, -4.72556e-08, 1.08108, 0, -3.33333, -1.45705e-07, -1, 0, 0.333334)
+light_color = Color(1, 1, 0.564706, 1)
+shadow_bias = 0.0
+omni_range = 3.35
+omni_attenuation = -0.307
+
+[node name="DoorLightBody2" type="MeshInstance3D" parent="Scenery/Buildings"]
+transform = Transform3D(0.3, 0, 0, 0, -4.0433e-08, -0.3, 0, 0.925, -1.31134e-08, 29.8, 3, -14)
+mesh = SubResource("CapsuleMesh_yj2j3")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
+
+[node name="RightSpotLightBleed2" type="OmniLight3D" parent="Scenery/Buildings/DoorLightBody2"]
+transform = Transform3D(3.33333, 0, 0, 0, -4.72557e-08, 1.08108, 0, -3.33333, -1.45705e-07, -0.666664, 0, 0.333334)
+light_color = Color(1, 1, 0.564706, 1)
+shadow_bias = 0.0
+omni_range = 3.35
+
+[node name="RightSpotLightLense" type="MeshInstance3D" parent="Scenery/Buildings"]
+transform = Transform3D(0.3, 0, 0, 0, -1.31134e-08, -0.3, 0, 0.3, -1.31134e-08, 32.1, 5.7, -8)
+mesh = SubResource("SphereMesh_nk0s5")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
+
+[node name="RightSpotLightBody" type="MeshInstance3D" parent="Scenery/Buildings/RightSpotLightLense"]
+transform = Transform3D(0.533333, 0.92376, 0, 4.03788e-08, -2.33127e-08, 1.06667, 0.92376, -0.533333, -4.66255e-08, 0.333344, 0, -0.200001)
+mesh = SubResource("CylinderMesh_ffk16")
+skeleton = NodePath("../..")
+
+[node name="RightSpotLightBleed" type="OmniLight3D" parent="Scenery/Buildings/RightSpotLightLense"]
+transform = Transform3D(3.33333, 0, 0, 0, -1.45705e-07, 3.33333, 0, -3.33333, -1.45705e-07, -0.333328, 0, 0)
+light_color = Color(1, 1, 0.564706, 1)
+shadow_bias = 0.0
+omni_range = 4.0
+
+[node name="RightSpotLight" type="SpotLight3D" parent="Scenery/Buildings/RightSpotLightLense"]
+transform = Transform3D(-1.45705e-07, -1.66667, 2.88675, -3.33333, -5.33316e-08, -1.99036e-07, 1.45705e-07, -2.88675, -1.66667, -0.333328, 0, 0)
+light_color = Color(1, 1, 0.564706, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 15.0
+
+[node name="LeftSpotLightBody2" type="MeshInstance3D" parent="Scenery/Buildings"]
+transform = Transform3D(0.16, 0.277128, 0, -0.277128, 0.16, 0, 0, 0, 0.32, 32.2, 5.76, 3)
+mesh = SubResource("CylinderMesh_ffk16")
+
+[node name="LeftSpotLightLense2" type="MeshInstance3D" parent="Scenery/Buildings/LeftSpotLightBody2"]
+transform = Transform3D(0.46875, 3.54892e-08, 0.811899, 0.811899, -2.04897e-08, -0.46875, 0, 0.9375, -4.09794e-08, 0.0061264, -0.364388, 0)
+mesh = SubResource("SphereMesh_nk0s5")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
+
+[node name="LeftSpotLight" type="SpotLight3D" parent="Scenery/Buildings/LeftSpotLightBody2"]
+transform = Transform3D(-6.8299e-08, -3.125, -2.38419e-07, -1.18297e-07, -2.38419e-07, 3.125, -3.125, 6.82991e-08, -1.18297e-07, -0.15012, -0.635017, 0)
+light_color = Color(1, 1, 0.564706, 1)
+light_energy = 2.0
+shadow_enabled = true
+spot_range = 15.0
+
+[node name="LeftSpotLightBleed" type="OmniLight3D" parent="Scenery/Buildings/LeftSpotLightBody2"]
+transform = Transform3D(1.5625, -2.70633, 0, 2.70633, 1.5625, 0, 0, 0, 3.125, -0.15012, -0.635017, 0)
+light_color = Color(1, 1, 0.564706, 1)
+omni_range = 4.0
+
+[node name="Building_Piece" parent="Scenery/Buildings" instance=ExtResource("21_f820j")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 32.5131, 1.2, -13.0611)
+
+[node name="Building_Piece2" parent="Scenery/Buildings" instance=ExtResource("21_f820j")]
+transform = Transform3D(0.6, 0, 0, 0, 0.6, 0, 0, 0, 0.6, 32.51, 1.2, -18.061)
+
+[node name="Building_Piece3" parent="Scenery/Buildings" instance=ExtResource("19_xiuei")]
+transform = Transform3D(-0.5, 0, -4.37114e-08, 0, 0.5, 0, 4.37114e-08, 0, -0.5, 32.1131, 1.25321, -14.0099)
+
+[node name="Detailing" type="Node3D" parent="Scenery"]
+
+[node name="Car8" type="MeshInstance3D" parent="Scenery/Detailing"]
+transform = Transform3D(0.698795, 0, -0.041051, 0, 0.7, 0, 0.041051, 0, 0.698795, 16.7557, 0, -13.0769)
+mesh = ExtResource("18_f8264")
+skeleton = NodePath("../../../Cameras")
+surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
+
+[node name="Car9" type="MeshInstance3D" parent="Scenery/Detailing"]
+transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.614, 0, -13.8927)
+mesh = ExtResource("18_f8264")
+skeleton = NodePath("../../../Cameras")
+surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
+
+[node name="Car10" type="MeshInstance3D" parent="Scenery/Detailing"]
+transform = Transform3D(0.637261, 0, 0.289651, 0, 0.7, 0, -0.289651, 0, 0.637261, 17.8776, 0, -17.7709)
+mesh = ExtResource("18_f8264")
+skeleton = NodePath("../../../Cameras")
+surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
+
+[node name="Box_WoodA" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.852485, 0, -0.522752, 0, 1, 0, 0.522752, 0, 0.852485, 23.6087, 0, -11.0675)
+
+[node name="Box_WoodA6" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.970135, 0, 0.242565, 0, 1, 0, -0.242565, 0, 0.970135, 14.7377, 0, -10.6544)
+
+[node name="Box_WoodA2" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.992014, 0, 0.12613, 0, 1, 0, -0.12613, 0, 0.992014, 23.179, 0, -12.5642)
+
+[node name="Box_WoodA3" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.955211, 0, 0.295925, 0, 1, 0, -0.295925, 0, 0.955211, 23.1837, 0.810184, -12.5657)
+
+[node name="Box_WoodA4" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.380167, 0, 0.924918, 0, 1, 0, -0.924918, 0, 0.380167, 24.1191, 0, -11.8451)
+
+[node name="Box_WoodA5" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
+transform = Transform3D(0.825488, 0, -0.56442, 0, 1, 0, 0.56442, 0, 0.825488, 23.891, 0.81, -11.546)
+
+[node name="ContainerBlueLocked" parent="Scenery/Detailing" instance=ExtResource("28_7p6d1")]
+transform = Transform3D(0.94065, 0.0143478, -0.339075, 0, 0.999106, 0.0422767, 0.339378, -0.0397676, 0.939809, 26.5745, 0, 8.30901)
+
+[node name="ContainerBlueLocked2" parent="Scenery/Detailing" instance=ExtResource("28_7p6d1")]
+transform = Transform3D(-0.703271, 0, -0.710922, 0, 1, 0, 0.710922, 0, -0.703271, 14.213, -5.96046e-08, 8.50862)
+
+[node name="MetalCabinetA" parent="Scenery/Detailing" instance=ExtResource("29_23cau")]
+transform = Transform3D(0, 0, -1, 0, 1, 0, 1, 0, 0, 30.3531, 1.2, -19.2883)
+
+[node name="Ventilation" parent="Scenery/Detailing" instance=ExtResource("30_nhamj")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 30.235, 3.395, -17.5)
+
+[node name="Ventilation2" parent="Scenery/Detailing" instance=ExtResource("30_nhamj")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 30.235, 3.395, -18.5)
+
+[node name="Ventilation3" parent="Scenery/Detailing" instance=ExtResource("30_nhamj")]
+transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 30.235, 3.395, -19.5)
+
+[node name="RightSpotLightBleed3" type="OmniLight3D" parent="Scenery/Detailing"]
+transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-13, 0, -1.42109e-13, 1, 18.7684, 2.86735, -16.2943)
+light_color = Color(1, 1, 0.564706, 1)
+shadow_bias = 0.0
+
 [node name="Player" parent="." instance=ExtResource("12_qctx3")]
-transform = Transform3D(-0.109439, 0, 0.993993, 0, 1, 0, -0.993993, 0, -0.109439, 30.8195, 1.56566, -5.41077)
+transform = Transform3D(-0.109439, 0, 0.993993, 0, 1, 0, -0.993993, 0, -0.109439, 25.8166, 1.56566, -4.85995)
+
+[node name="Cameras" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.853946, 0.344491, -0.390003, 0, 0.749484, 0.662022, 0.520362, -0.565331, 0.640019, 17.3372, 5.11384, 1.5831)
+current = true
+
+[node name="FacilityEntrannceMain" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.0251918, -0.326217, -0.944959, 0, 0.945259, -0.326321, 0.999683, -0.00822063, -0.0238128, 23.8028, 1.6286, -2.59975)
+
+[node name="Apporach1" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.625129, -0.588659, 0.512537, 0, 0.65666, 0.754187, -0.780522, -0.471464, 0.410497, 25.099, 5.24555, 4.67476)
+
+[node name="FacilityEntranceSide" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.813561, 0.473122, -0.338043, 0, 0.581351, 0.813653, 0.581479, 0.661957, -0.472965, 25.8791, 6.81003, -20.3959)
+
+[node name="Guardhouse" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.934026, 0.283216, -0.217678, 0, 0.609393, 0.792868, 0.357204, -0.74056, 0.56919, 1.221, 4.53926, 3.13775)
 
 [node name="RedSUVtm" parent="." instance=ExtResource("13_g52uq")]
-transform = Transform3D(0.764563, 0, 1.17279, 0, 1.4, 0, -1.17279, 0, 0.764563, 1.92627, 0, 1.78772)
+transform = Transform3D(0.764543, 0, 1.17281, 0, 1.4, 0, -1.17281, 0, 0.764543, 1.926, 0, 1.788)
 
 [node name="FLWheel" parent="RedSUVtm" index="2"]
 surface_material_override/0 = null
@@ -297,12 +611,6 @@ visible = false
 
 [node name="LeftSpotLight" parent="RedSUVtm" index="23"]
 visible = false
-
-[node name="Cameras" type="Node3D" parent="."]
-
-[node name="Camera3D" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.853946, 0.344491, -0.390003, 0, 0.749484, 0.662022, 0.520362, -0.565331, 0.640019, 17.3372, 5.11384, 1.5831)
-current = true
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]
