@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=48 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
@@ -17,10 +17,18 @@
 [ext_resource type="AudioStream" uid="uid://ccj46bjppvrvw" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit4.wav" id="9_ej8x5"]
 [ext_resource type="AudioStream" uid="uid://c5j7uj4sr53yk" path="res://Audio/Voice/04.wav" id="9_rx3xp"]
 [ext_resource type="Texture2D" uid="uid://bln84ym8y5h17" path="res://Graphics/Lain/Lain_Untitled_surprise.png" id="10_kgplf"]
+[ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="15_xtwcr"]
+[ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="16_3srqo"]
+[ext_resource type="Resource" uid="uid://coj1bqevtjhyb" path="res://Data/terrain/TerrainTrees.tres" id="17_gxrvh"]
+[ext_resource type="Texture2D" uid="uid://droi1ixvfm0i2" path="res://Scenes/maps/cutscenes/intro/Heightmap_0_0.res" id="18_lrlub"]
 [ext_resource type="Texture2D" uid="uid://bge8ysqqpjjck" path="res://Graphics/Lain/Lain_Untitled_gasp.png" id="19_cukto"]
+[ext_resource type="Texture2D" uid="uid://ufxiipjd3a0v" path="res://Scenes/maps/cutscenes/intro/Object_0_0_0.res" id="19_jx1xm"]
+[ext_resource type="Texture2D" uid="uid://w7hud3q40msf" path="res://Scenes/maps/cutscenes/intro/Splatmap_0_0_0.res" id="20_4krx5"]
 [ext_resource type="PackedScene" uid="uid://babtkorew36j3" path="res://Graphics/Models/scenery/materials_trees/tree1.glb" id="20_cmv1y"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZoneResource.cs" id="21_66ko3"]
 [ext_resource type="PackedScene" uid="uid://lkvxlooxa6x" path="res://Graphics/Models/scenery/materials_trees/tree2.glb" id="21_mmq22"]
 [ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="22_ub1n4"]
+[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="22_un804"]
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wyt56"]
@@ -346,7 +354,7 @@ tracks/0/keys = {
 
 [sub_resource type="Animation" id="Animation_mb5jv"]
 resource_name = "new_animation"
-length = 4.0
+length = 9.0
 loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
@@ -355,10 +363,10 @@ tracks/0/path = NodePath("MovingGround/ScenarioPivot:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 4),
+"times": PackedFloat32Array(0, 9),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(0, 0, 0), Vector3(0, 0, -200)]
+"values": [Vector3(0, 0, 0), Vector3(0, 0, -300)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0fy0"]
@@ -378,6 +386,18 @@ shader_parameter/color2 = Color(0.245984, 0.245984, 0.245984, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_j6jht"]
 material = SubResource("ShaderMaterial_g3fhg")
 size = Vector2(1000, 1000)
+
+[sub_resource type="Resource" id="Resource_p6rjf"]
+script = ExtResource("21_66ko3")
+ZonePosition = Vector2i(0, 0)
+HeightMapTexture = ExtResource("18_lrlub")
+SplatmapsTexture = [ExtResource("20_4krx5")]
+FoliagesTexture = null
+ObjectsTexture = [ExtResource("19_jx1xm")]
+
+[sub_resource type="Resource" id="Resource_2uumr"]
+script = ExtResource("22_un804")
+Zones = [SubResource("Resource_p6rjf")]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe421"]
 render_priority = 0
@@ -467,6 +487,7 @@ libraries = {
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -200)
 
 [node name="Scenario" type="MeshInstance3D" parent="MovingGround/ScenarioPivot"]
+visible = false
 mesh = SubResource("PlaneMesh_j6jht")
 skeleton = NodePath("../..")
 
@@ -475,9 +496,10 @@ transform = Transform3D(0.418802, 0, -0.908077, 0, 1, 0, 0.908077, 0, 0.418802, 
 current = true
 
 [node name="Cam4Moving" type="Camera3D" parent="MovingGround/ScenarioPivot"]
-transform = Transform3D(-0.994288, 0, -0.106732, 0, 1, 0, 0.106732, 0, -0.994288, -3.49129, 0.717, 31.8183)
+transform = Transform3D(-0.994288, 0, -0.106732, 0, 1, 0, 0.106732, 0, -0.994288, -3.491, 0.717, 131.818)
 
 [node name="treesRight" type="Node3D" parent="MovingGround/ScenarioPivot"]
+visible = false
 
 [node name="trees" type="Node3D" parent="MovingGround/ScenarioPivot/treesRight"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 200)
@@ -1417,6 +1439,7 @@ transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464
 
 [node name="treesLeft" type="Node3D" parent="MovingGround/ScenarioPivot"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 600)
+visible = false
 
 [node name="trees" type="Node3D" parent="MovingGround/ScenarioPivot/treesLeft"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -50, 0, 200)
@@ -2354,48 +2377,21 @@ transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464
 [node name="tree17" parent="MovingGround/ScenarioPivot/treesLeft/trees6" instance=ExtResource("20_cmv1y")]
 transform = Transform3D(0.0625464, 0, 0.998042, 0, 1, 0, -0.998042, 0, 0.0625464, 134.737, 0, 128.713)
 
+[node name="TerraBrush" type="Node3D" parent="MovingGround/ScenarioPivot"]
+script = ExtResource("15_xtwcr")
+ZonesSize = 1001
+DataPath = "res://Scenes/maps/cutscenes/intro"
+TextureSets = ExtResource("16_3srqo")
+DefaultObjectFrequency = 5
+Objects = [ExtResource("17_gxrvh")]
+TerrainZones = SubResource("Resource_2uumr")
+metadata/_edit_lock_ = false
+
 [node name="RedSUVtm" parent="." instance=ExtResource("1_l1bfu")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 
-[node name="FLWheel" parent="RedSUVtm" index="2"]
-surface_material_override/0 = null
-
-[node name="FRWheel" parent="RedSUVtm" index="3"]
-surface_material_override/0 = null
-
-[node name="Hood" parent="RedSUVtm" index="4"]
-surface_material_override/0 = null
-
 [node name="LDoor" parent="RedSUVtm" index="6"]
 transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="RDoor" parent="RedSUVtm" index="8"]
-surface_material_override/0 = null
-surface_material_override/1 = null
-
-[node name="RLWheel" parent="RedSUVtm" index="9"]
-surface_material_override/0 = null
-
-[node name="RRWheel" parent="RedSUVtm" index="10"]
-surface_material_override/0 = null
-
-[node name="SteeringWheel" parent="RedSUVtm" index="12"]
-surface_material_override/0 = null
-
-[node name="Throttle" parent="RedSUVtm" index="13"]
-surface_material_override/0 = null
-
-[node name="TransfercaseShifter" parent="RedSUVtm" index="14"]
-surface_material_override/0 = null
-
-[node name="Trunk" parent="RedSUVtm" index="15"]
-surface_material_override/0 = null
-
-[node name="Body" parent="RedSUVtm" index="16"]
-surface_material_override/0 = null
-surface_material_override/1 = null
 
 [node name="Lain" parent="." instance=ExtResource("3_ykbs4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460924, 0, 0.496816)

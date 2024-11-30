@@ -1359,7 +1359,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
 [node name="RightSpotLightBleed2" type="OmniLight3D" parent="Scenery/Buildings/MeshInstance3D"]
 transform = Transform3D(3.33333, 0, 0, 0, -4.72558e-08, 1.08108, 0, -3.33333, -1.45705e-07, -0.666664, 0, 0.333334)
 light_color = Color(1, 1, 0.564706, 1)
-shadow_bias = 0.0
+shadow_enabled = true
 omni_range = 3.35
 
 [node name="Detailing" type="Node3D" parent="Scenery"]
@@ -1369,13 +1369,11 @@ transform = Transform3D(0.698795, 0, -0.041051, 0, 0.7, 0, 0.041051, 0, 0.698795
 collision_layer = 8
 
 [node name="Car8" type="MeshInstance3D" parent="Scenery/Detailing/Van1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("18_f8264")
 skeleton = NodePath("../../../../Cameras")
 surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Detailing/Van1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_w8hpy")
 
 [node name="Van2" type="StaticBody3D" parent="Scenery/Detailing"]
@@ -1383,13 +1381,11 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, 20.614, 0, -13.893)
 collision_layer = 8
 
 [node name="Car8" type="MeshInstance3D" parent="Scenery/Detailing/Van2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("18_f8264")
 skeleton = NodePath("../../../../Cameras")
 surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Detailing/Van2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_w8hpy")
 
 [node name="Van3" type="StaticBody3D" parent="Scenery/Detailing"]
@@ -1397,13 +1393,11 @@ transform = Transform3D(0.637478, 0, 0.289173, 0, 0.7, 0, -0.289173, 0, 0.637478
 collision_layer = 8
 
 [node name="Car8" type="MeshInstance3D" parent="Scenery/Detailing/Van3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 mesh = ExtResource("18_f8264")
 skeleton = NodePath("../../../../Cameras")
 surface_material_override/0 = SubResource("ShaderMaterial_iplvn")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Detailing/Van3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
 shape = SubResource("ConvexPolygonShape3D_w8hpy")
 
 [node name="Box_WoodA" parent="Scenery/Detailing" instance=ExtResource("27_sd48g")]
@@ -1622,7 +1616,7 @@ spot_angle = 25.0
 spot_angle_attenuation = 0.125
 
 [node name="Player" parent="." instance=ExtResource("12_qctx3")]
-transform = Transform3D(-0.789426, 0, 0.613844, 0, 1, 0, -0.613844, 0, -0.789426, 3.33768, 0.791459, 0.412855)
+transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 4.43391, 0.791459, 1.07406)
 
 [node name="Cameras" type="Node3D" parent="."]
 
@@ -1736,6 +1730,27 @@ transform = Transform3D(0.965167, 0, 0.261633, 0, 1, 0, -0.261633, 0, 0.965167, 
 collision_layer = 8
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BabyFence/ExitBlock"]
+shape = SubResource("BoxShape3D_dvl0p")
+
+[node name="ExitBlock6" type="StaticBody3D" parent="BabyFence"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, 3)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BabyFence/ExitBlock6"]
+shape = SubResource("BoxShape3D_dvl0p")
+
+[node name="ExitBlock7" type="StaticBody3D" parent="BabyFence"]
+transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 1, -4.5, 0.5, -4.9)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BabyFence/ExitBlock7"]
+shape = SubResource("BoxShape3D_dvl0p")
+
+[node name="ExitBlock8" type="StaticBody3D" parent="BabyFence"]
+transform = Transform3D(-3.27835e-07, 0, 1, 0, 1, 0, -7.5, 0, -4.37114e-08, -7.5, 0.5, -0.899999)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="BabyFence/ExitBlock8"]
 shape = SubResource("BoxShape3D_dvl0p")
 
 [node name="ExitBlock2" type="StaticBody3D" parent="BabyFence"]

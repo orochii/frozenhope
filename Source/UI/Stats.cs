@@ -28,7 +28,7 @@ public partial class Stats : Control
 		else Health.SpeedMult = 0.2f + (0.8f * healthPerc); // simple remapping of value from 0.2 to 1.0 (don't want speed at 0)
 		Health.LineColor = SampleGradient(_cachedHealthGradient, healthPerc);
 		// Set equipment icon.
-		//SetEquipIcon();
+		SetEquipIcon();
 	}
 	private void SetEquipIcon() {
 		var equip = Main.Instance.State.GetEquippedItemEntry();

@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://rrd1wrhlyth2"
+path="res://.godot/imported/Frozen_Hope_Title_ Screen_JDY.wav-4dc5945963b9f59d9b208a30b87b5e2b.sample"
+
+[deps]
+
+source_file="res://Audio/Music/Frozen_Hope_Title_ Screen_JDY.wav"
+dest_files=["res://.godot/imported/Frozen_Hope_Title_ Screen_JDY.wav-4dc5945963b9f59d9b208a30b87b5e2b.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=2863939
+compress/mode=0

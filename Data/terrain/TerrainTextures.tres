@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="TextureSetsResource" load_steps=15 format=3 uid="uid://cc88dhndvd6ve"]
+[gd_resource type="Resource" script_class="TextureSetsResource" load_steps=19 format=3 uid="uid://cc88dhndvd6ve"]
 
 [ext_resource type="Texture2D" uid="uid://b44rysdoaf8gn" path="res://Graphics/textures/terrain/Snow010A_1K-JPG/Snow010A_1K-JPG_Color.jpg" id="1_tlaha"]
 [ext_resource type="Texture2D" uid="uid://b48bdj0ctockk" path="res://Graphics/textures/terrain/Snow010A_1K-JPG/Snow010A_1K-JPG_NormalGL.jpg" id="2_al7jf"]
@@ -10,7 +10,10 @@
 [ext_resource type="Texture2D" uid="uid://hrsgm48sr3kk" path="res://Graphics/textures/terrain/Ground011_1K-JPG/Ground011_1K-JPG_Color.jpg" id="8_uqaox"]
 [ext_resource type="Texture2D" uid="uid://hugqb7a1ejp2" path="res://Graphics/textures/terrain/Ground011_1K-JPG/Ground011_1K-JPG_NormalGL.jpg" id="9_ntv0x"]
 [ext_resource type="Texture2D" uid="uid://crubw6cao8k0g" path="res://Graphics/textures/terrain/Ground011_1K-JPG/Ground011_1K-JPG_Roughness.jpg" id="10_cnwdf"]
+[ext_resource type="Texture2D" uid="uid://8wslawkgktcb" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_Color.jpg" id="11_d7gkk"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetsResource.cs" id="11_qqg08"]
+[ext_resource type="Texture2D" uid="uid://rte3f0dboij2" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_NormalGL.jpg" id="12_g0uml"]
+[ext_resource type="Texture2D" uid="uid://j468f6umlb52" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_Roughness.jpg" id="13_qr3c8"]
 
 [sub_resource type="Resource" id="Resource_g284b"]
 script = ExtResource("4_bm60u")
@@ -36,6 +39,14 @@ NormalTexture = ExtResource("9_ntv0x")
 RoughnessTexture = ExtResource("10_cnwdf")
 TextureDetail = -1
 
+[sub_resource type="Resource" id="Resource_iakh5"]
+script = ExtResource("4_bm60u")
+Name = "Dirt"
+AlbedoTexture = ExtResource("11_d7gkk")
+NormalTexture = ExtResource("12_g0uml")
+RoughnessTexture = ExtResource("13_qr3c8")
+TextureDetail = -1
+
 [resource]
 script = ExtResource("11_qqg08")
-TextureSets = [SubResource("Resource_g284b"), SubResource("Resource_03hih"), SubResource("Resource_6si7d")]
+TextureSets = [SubResource("Resource_g284b"), SubResource("Resource_03hih"), SubResource("Resource_6si7d"), SubResource("Resource_iakh5")]
