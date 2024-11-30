@@ -264,5 +264,17 @@ public class GameState {
     public List<ItemEntry> GetInventoryEntries() {
         return persistentData.inventory;
     }
+    public bool CombineSlots(int index1, int index2) {
+        // Get items.
+        var itemEntry1 = persistentData.inventory[index1];
+        var itemEntry2 = persistentData.inventory[index2];
+        var item1 = BaseItem.Get(itemEntry1.itemID);
+        var item2 = BaseItem.Get(itemEntry2.itemID);
+        // Step1: Try reload (one must be a weapon, the other must be valid ammo).
+
+        // Step2: Try combining (check if can do). --not for now.
+        // Step3: no can't do :(
+        return false;
+    }
     #endregion
 }
