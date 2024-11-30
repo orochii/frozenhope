@@ -31,6 +31,7 @@ public partial class Inventory : Control
 			_spawnedSlots[i].Visible = true;
 			_spawnedSlots[i].Setup(null);
 			_spawnedSlots[i].Index = -1;
+			_spawnedSlots[i].GridPosition = new Vector2I(i%size.X, i/size.X);
 			_spawnedSlots[i].ParentInventory = this;
 			inventoryGrid.AddChild(_spawnedSlots[i]);
 		}
@@ -40,7 +41,10 @@ public partial class Inventory : Control
 		var size = Main.Instance.State.InventorySize;
 		// Clear all slots
 		SetCombine(null);
-		foreach (var slot in _spawnedSlots) slot.Setup(null);
+		foreach (var slot in _spawnedSlots) {
+			slot.Index = -1;
+			slot.Setup(null);
+		}
 		// Set each inventory item to their location.
 		var entries = Main.Instance.State.GetInventoryEntries();
 		for (int idx = 0; idx < entries.Count; idx++) {

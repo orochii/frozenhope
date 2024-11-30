@@ -68,7 +68,9 @@ public partial class Player : CharacterBody3D, Targettable
 	public override void _Process(double delta)
 	{
 		if (Dead) return;
+		// Shouldn't move if we're not in gameplay mode
 		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
+		canMove = canMove && !Main.Instance.Busy;
 		// Cast to float because working with doubles sucks when everything is using floats.
 		var d = (float)delta;
 		if (canMove) {

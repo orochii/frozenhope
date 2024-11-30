@@ -9,6 +9,7 @@ public partial class InvSlotButton : TextureButton
 	[Export] Label Quantity;
 	GameState.ItemEntry CurrentEntry;
 	public int Index;
+	public Vector2I GridPosition;
 	public BaseItem Item = null;
 	public Inventory ParentInventory;
 	public void Setup(GameState.ItemEntry entry, bool ignoreVisuals=false) {
@@ -51,7 +52,13 @@ public partial class InvSlotButton : TextureButton
 		var combine = ParentInventory.GetCombine();
 		// Use item
 		if (combine != null) {
-			if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
+			// If target is empty.
+			if (Index == -1) {
+				if (Main.Instance.State.MoveToSlot(combine.Index, GridPosition)) {
+					ParentInventory.RefreshSlots();
+				}
+			}
+			else if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
 				Player.Instance.RefreshEquippedModel();
 				ParentInventory.RefreshSlots();
 			}

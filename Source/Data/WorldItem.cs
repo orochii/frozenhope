@@ -18,26 +18,30 @@ public partial class WorldItem : StaticBody3D, Interactable
             Hide();
         }
         Interface.Visible = false;
-        GD.Print("Read: Hide Interface");
     }
 
     public void ShowInterface() {
         if (!IsVisibleInTree()) return;
-        GD.Print("Show Interface");
         Interface.Visible = true;
     }
 
     public void HideInterface() {
-        GD.Print("Hide Interface");
         Interface.Visible = false;
     }
 
-    public void InteractItem() {
+    public async void InteractItem() {
         if (!IsVisibleInTree()) return;
-        //Add to inventory
+        // Stop game
+        Main.Instance.Busy = true;
+        // Add to inventory
         Main.Instance.State.AddItem(Item);
         //We remove the item (I suspect we'll need to add a permant removal flag)
         Main.Instance.State.SetSwitch(PickedUpFlag,true);
         Hide();
+        // Show text.
+        string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+        await Main.Instance.UI.Message.SetText(str, false);
+        // Unpause game
+        Main.Instance.Busy = false;
     }
 }
