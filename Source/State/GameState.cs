@@ -270,10 +270,34 @@ public class GameState {
         var itemEntry2 = persistentData.inventory[index2];
         var item1 = BaseItem.Get(itemEntry1.itemID);
         var item2 = BaseItem.Get(itemEntry2.itemID);
-        // Step1: Try reload (one must be a weapon, the other must be valid ammo).
-
-        // Step2: Try combining (check if can do). --not for now.
-        // Step3: no can't do :(
+        // Step1: Try combine stacks.
+        // Step2: Try reload (one must be a weapon, the other must be valid ammo).
+        var wpn = item1 is WeaponItem ? (item1 as WeaponItem) : (item2 is WeaponItem ? item2 as WeaponItem : null);
+        var wpE = wpn==item1 ? itemEntry1 : wpn==item2 ? itemEntry2 : null;
+        var amm = item1 is AmmoItem ? (item1 as AmmoItem) : (item2 is AmmoItem ? item2 as AmmoItem : null);
+        var amE = amm==item1 ? itemEntry1 : amm==item2 ? itemEntry2 : null;
+        if (wpn.IsCompatibleWithAmmo(amE.itemID)) {
+            return ReloadWithAmmo(wpn,wpE,amm,amE);
+        }
+        // Step3: Try combining (check if can do). --not for now.
+        // Else: no can't do :(.
+        return false;
+    }
+    private bool ReloadWithAmmo(WeaponItem wpn, ItemEntry wpE, AmmoItem amm, ItemEntry amE) {
+        if (wpn.IsCompatibleWithAmmo(amE.itemID)) {
+            if (wpE.ammoId != amE.itemID) {
+                AddItem(amm, wpE.ammoQty);
+                wpE.ammoId = "";
+                wpE.ammoQty = 0;
+            } 
+            wpE.ammoId = amE.itemID;
+            var remainingSpace = wpn.AmmoMax - wpE.ammoQty;
+            var addAmmo = Math.Min(remainingSpace, wpE.ammoQty);
+            if (addAmmo <= 0) return false;
+            RemoveFromSlot(new Vector2I(amE.posX, amE.posY), addAmmo);
+            wpE.ammoQty += addAmmo;
+            return true;
+        }
         return false;
     }
     #endregion

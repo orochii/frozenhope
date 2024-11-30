@@ -52,6 +52,7 @@ public partial class InvSlotButton : TextureButton
 		// Use item
 		if (combine != null) {
 			if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
+				Player.Instance.RefreshEquippedModel();
 				ParentInventory.RefreshSlots();
 			}
 			else {
@@ -73,6 +74,6 @@ public partial class InvSlotButton : TextureButton
 		}
 	}
 	public void SetCombine(bool v) {
-		Icon.Visible = v;
+		Icon.Visible = !v;
 	}
 }

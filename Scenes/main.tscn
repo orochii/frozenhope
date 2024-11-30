@@ -395,6 +395,7 @@ script = ExtResource("1_o1rfr")
 WorldParent = NodePath("WorldParent")
 UI = NodePath("CanvasLayer/UIParent")
 Loader = NodePath("CanvasLayer/UIParent/Loader")
+SkipIntro = true
 
 [node name="WorldParent" type="Node" parent="."]
 
@@ -828,6 +829,7 @@ script = ExtResource("11_ej3np")
 Health = NodePath("TextureRect/TextureRect")
 HealthLabel = NodePath("TextureRect/Label")
 EquippedIcon = NodePath("Slot/TextureRect")
+AmmoLabel = NodePath("Slot/TextureRect/HBoxContainer/Ammo")
 HealthColorGradient = SubResource("GradientTexture1D_nwv2s")
 
 [node name="TextureRect" type="TextureRect" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats"]
@@ -900,12 +902,13 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="Ammo" type="RichTextLabel" parent="CanvasLayer/UIParent/Gameplay/MarginContainer/VBoxContainer/Stats/Slot/TextureRect/HBoxContainer"]
-custom_minimum_size = Vector2(16, 8)
+custom_minimum_size = Vector2(24, 8)
 layout_mode = 2
 theme = ExtResource("8_j6fhx")
 theme_override_constants/outline_size = 2
 bbcode_enabled = true
-text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]1"
+text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]17
+"
 fit_content = true
 scroll_active = false
 
