@@ -276,7 +276,7 @@ public class GameState {
         var wpE = wpn==item1 ? itemEntry1 : wpn==item2 ? itemEntry2 : null;
         var amm = item1 is AmmoItem ? (item1 as AmmoItem) : (item2 is AmmoItem ? item2 as AmmoItem : null);
         var amE = amm==item1 ? itemEntry1 : amm==item2 ? itemEntry2 : null;
-        if (wpn.IsCompatibleWithAmmo(amE.itemID)) {
+        if (wpn != null && amm != null && wpn.IsCompatibleWithAmmo(amE.itemID)) {
             return ReloadWithAmmo(wpn,wpE,amm,amE);
         }
         // Step3: Try combining (check if can do). --not for now.

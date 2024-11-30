@@ -6,8 +6,8 @@ public partial class Main : Node
 	public static Main Instance;
 	[Export] public Node WorldParent;
 	[Export] public UiParent UI;
-	[Export] public Loader Loader;
-	[Export] public Boolean SkipIntro;
+	[Export] public bool SkipIntro;
+	public Loader Loader;
 	public Database Database;
 	public GameState State;
 	Node3D currentScene;
@@ -15,6 +15,7 @@ public partial class Main : Node
 	{
 		Instance = this;
 		Database = Database.Get();
+		Loader = UI.Loader;
 	}
 	public void StartGame() {
 		State = new GameState();

@@ -212,10 +212,10 @@ public partial class Player : CharacterBody3D, Targettable
 		Graphic.StateMachine.ModeState = aiming ? EModeState.AIMING : EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
+		// Work over a copy, commit changes later.
+		var velocity = Velocity;
 		// Apply gravity
-		var v = Velocity;
-		v += GetGravity();
-		Velocity = v;
+		if (!IsOnFloor()) velocity += GetGravity();
 		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
@@ -225,7 +225,8 @@ public partial class Player : CharacterBody3D, Targettable
 			if (aiming) {
 				// When aiming, left/right strafe the character around the target instead.
 				targetVelocity += (Transform.Basis.X * -move.X);
-			} else {
+			} 
+			else {
 				// We rotate the character
 				var RotationY = GlobalRotation.Y;
     			RotationY = Mathf.Wrap(RotationY + -move.X * d * RotateSpeed, 0, Mathf.Tau);
@@ -233,19 +234,20 @@ public partial class Player : CharacterBody3D, Targettable
 			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
 			targetVelocity = targetVelocity * currMoveState.Speed;
-			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
+			var planarVelocity = new Vector3(velocity.X, 0, velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
-			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
+			velocity = new Vector3(planarVelocity.X, velocity.Y, planarVelocity.Z);
 		} else {
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
-			var planarVelocity = new Vector3(Velocity.X, 0, Velocity.Z);
+			var planarVelocity = new Vector3(velocity.X, 0, velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
-			Velocity = new Vector3(planarVelocity.X, Velocity.Y, planarVelocity.Z);
+			velocity = new Vector3(planarVelocity.X, velocity.Y, planarVelocity.Z);
 		}
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
+		Velocity = velocity;
 		MoveAndSlide();
 	}
 	//Default Move Processing
