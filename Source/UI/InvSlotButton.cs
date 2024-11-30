@@ -48,7 +48,20 @@ public partial class InvSlotButton : TextureButton
         Pressed += OnInventorySelected;
     }
 	private void OnInventorySelected() {
-		switch (Item) {
+		var combine = ParentInventory.GetCombine();
+		// Use item
+		if (combine != null) {
+			if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
+				Player.Instance.RefreshEquippedModel();
+				ParentInventory.RefreshSlots();
+			}
+			else {
+				// Play buzzer.
+			}
+		}
+		// Use item
+		else {
+			switch (Item) {
 			case WeaponItem:
 				Main.Instance.State.SetEquippedItem(Index);
 				Player.Instance.RefreshEquippedModel();
@@ -57,6 +70,10 @@ public partial class InvSlotButton : TextureButton
 			case UseableItem:
 				ParentInventory.RefreshSlots();
 				break;
+			}
 		}
+	}
+	public void SetCombine(bool v) {
+		Icon.Visible = !v;
 	}
 }

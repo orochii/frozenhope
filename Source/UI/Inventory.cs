@@ -6,7 +6,10 @@ public partial class Inventory : Control
 	[Export] GridContainer inventoryGrid;
 	[Export] InvSlotButton invSlotTemplate;
 	[Export] InfoColumn InfoColumn;
+	[Export] Control CombineObj;
+	[Export] TextureRect CombineIcon;
 	InvSlotButton[] _spawnedSlots;
+	private InvSlotButton currentCombineSlot;
 	public override void _Ready()
 	{
 		Visible = false;
@@ -36,6 +39,7 @@ public partial class Inventory : Control
 	public void RefreshSlots() {
 		var size = Main.Instance.State.InventorySize;
 		// Clear all slots
+		SetCombine(null);
 		foreach (var slot in _spawnedSlots) slot.Setup(null);
 		// Set each inventory item to their location.
 		var entries = Main.Instance.State.GetInventoryEntries();
@@ -60,10 +64,43 @@ public partial class Inventory : Control
 		if (focused is InvSlotButton) {
 			var slot = focused as InvSlotButton;
 			InfoColumn.Setup(slot.Item);
+			// Reposition combine overlay thing
+			CombineObj.GlobalPosition = slot.GlobalPosition;
+			// Get input for combine.
+			if (Input.IsActionJustPressed("aim")) {
+				SetCombine(slot);
+			}
 		}
 		// Inputs.
 		if (Input.IsActionJustPressed("cancel")) {
-			Main.Instance.UI.Gameplay.CloseMenu();
+			if (currentCombineSlot != null) {
+				SetCombine(null);
+			}
+			else {
+				Main.Instance.UI.Gameplay.CloseMenu();
+			}
 		}
+	}
+	public void SetCombine(InvSlotButton button) {
+		if (currentCombineSlot != null) currentCombineSlot.SetCombine(false);
+		currentCombineSlot = button;
+		if (button == null || button.Item==null) {
+			CombineObj.Visible = false;
+			currentCombineSlot = null;
+		}
+		else {
+			button.SetCombine(true);
+			CombineObj.Visible = true;
+			// Set icon
+			CombineIcon.Texture = button.Item.Icon;
+			// Resize container
+			float sizeX = Math.Max(32, button.Item.SlotSize.X * 32);
+			float sizeY = Math.Max(32, button.Item.SlotSize.Y * 32);
+			// Set position
+			CombineObj.GlobalPosition = button.GlobalPosition;
+		}
+	}
+	public InvSlotButton GetCombine() {
+		return currentCombineSlot;
 	}
 }
