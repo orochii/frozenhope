@@ -1,0 +1,13 @@
+[gd_resource type="Resource" load_steps=3 format=3 uid="uid://w0vp4o6s6jdu"]
+
+[ext_resource type="Script" path="res://Source/Data/HealItem.cs" id="1_ifyhh"]
+[ext_resource type="PackedScene" uid="uid://dw25vpysr34u" path="res://Graphics/Models/items/h_healing_kit.tscn" id="4_hoio2"]
+
+[resource]
+script = ExtResource("1_ifyhh")
+HealAmount = 70
+DisplayName = "Medkit"
+DisplayDescription = "Used to treat severe injuries. {0}"
+Model = ExtResource("4_hoio2")
+SlotSize = Vector2i(1, 1)
+MaxStack = 2

@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=87 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -54,6 +54,12 @@
 [ext_resource type="AudioStream" uid="uid://duh85baeogkhq" path="res://Audio/Music/Frozen_Hope_Snow_Ambience_JDY.wav" id="49_4qabv"]
 [ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="49_ofai4"]
 [ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="54_r617x"]
+[ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="55_36f02"]
+[ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="56_ff2tc"]
+[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="57_58qf6"]
+[ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="58_4tilc"]
+[ext_resource type="Resource" uid="uid://w0vp4o6s6jdu" path="res://Data/items/healing_kit.tres" id="59_gen17"]
+[ext_resource type="PackedScene" uid="uid://dw25vpysr34u" path="res://Graphics/Models/items/h_healing_kit.tscn" id="60_umaqp"]
 
 [sub_resource type="Resource" id="Resource_g284b"]
 script = ExtResource("2_6m0g5")
@@ -201,6 +207,22 @@ fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0
 radius = 1.0
+
+[sub_resource type="Resource" id="Resource_qmvw0"]
+script = ExtResource("57_58qf6")
+Item = ExtResource("56_ff2tc")
+Amount = 8
+AmmoQty = 0
+
+[sub_resource type="Resource" id="Resource_w020m"]
+script = ExtResource("57_58qf6")
+Item = ExtResource("59_gen17")
+Amount = 1
+AmmoQty = 0
+
+[sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
+vertices = PackedVector3Array(9.56417, -1.67308, -5.80446, 7.31417, -1.67308, -8.30446, 5.31417, -1.67308, -8.80446, 9.56417, -1.42308, 0.945543, -1.43583, -0.673078, 7.94554, 4.56417, -0.923078, 8.19554, 6.81417, -1.17308, 6.44554, -5.93583, -0.423078, 4.94554, -0.935832, -1.42308, -8.80446, -5.93583, -0.923078, -6.55446, -7.68583, -0.673078, -3.80446)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 2, 10), PackedInt32Array(10, 2, 7), PackedInt32Array(7, 2, 3), PackedInt32Array(7, 3, 6)]
 
 [node name="Gm001CampOswald" type="Node3D"]
 
@@ -520,6 +542,20 @@ collision_layer = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/ExitBlock4"]
 shape = SubResource("BoxShape3D_ouaaf")
 
+[node name="ExitBlock5" type="StaticBody3D" parent="Scenery"]
+transform = Transform3D(0.524907, 0, -0.0521154, 0, 0.745533, 0, 0.0129474, 0, 2.11284, -38.2929, 12.3474, -13.344)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/ExitBlock5"]
+shape = SubResource("BoxShape3D_ouaaf")
+
+[node name="ExitBlock6" type="StaticBody3D" parent="Scenery"]
+transform = Transform3D(0.483823, 0, 0.34782, 0, 0.511824, 0, -0.0794547, 0, 2.11798, -38.4505, 12.2428, -15.4216)
+collision_layer = 8
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/ExitBlock6"]
+shape = SubResource("BoxShape3D_ouaaf")
+
 [node name="RedSUVtm2" parent="." instance=ExtResource("5_xp7nv")]
 transform = Transform3D(-1.05022, 0.0571012, -0.924001, 0.07815, 1.39781, -0.00244346, 0.922459, -0.053412, -1.05177, -38.067, 12.058, -7.635)
 
@@ -734,6 +770,26 @@ transform = Transform3D(0.524892, 0, -0.851169, 0, 1, 0, 0.851169, 0, 0.524892, 
 
 [node name="Camera3D" type="Camera3D" parent="EvtDeadguy"]
 transform = Transform3D(-0.901687, -0.351722, 0.251501, 0.0617099, 0.47102, 0.879961, -0.427963, 0.80897, -0.403008, 0.732868, 2.12714, -1.21534)
+
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="PistolAmmo" parent="Interactables" instance=ExtResource("55_36f02")]
+transform = Transform3D(0.446009, 0, -0.226, 0, 0.5, 0, 0.226, 0, 0.446009, -48.2891, 12.6135, -20.3902)
+Item = SubResource("Resource_qmvw0")
+
+[node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
+
+[node name="HealingKit" parent="Interactables" instance=ExtResource("55_36f02")]
+transform = Transform3D(0.499802, 0, 0.0140742, 0, 0.5, 0, -0.0140742, 0, 0.499802, -43.7321, 12.0621, -15.0939)
+Item = SubResource("Resource_w020m")
+
+[node name="h_healing_kit" parent="Interactables/HealingKit" instance=ExtResource("60_umaqp")]
+transform = Transform3D(-2.95419e-08, 7.96936e-09, -0.7, 0.182318, 0.67584, 9.58585e-16, 0.67584, -0.182318, -3.0598e-08, 0.0065812, -0.0490424, -0.00945591)
+
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
+navigation_mesh = SubResource("NavigationMesh_rem6n")
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]

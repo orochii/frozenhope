@@ -6,6 +6,7 @@ public partial class EvtDeadguy : Area3D
 	[Export] string Flag;
 	[Export] Node3D PlayerLocation;
 	[Export] Camera3D Camera;
+	[Export] AnimationPlayer Cutscene;
     public override void _Ready()
     {
         BodyEntered += OnBodyEntered;
