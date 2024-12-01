@@ -22,4 +22,4 @@ DisplayDescription = "Ammo for 9mm pistols. {0}"
 Icon = ExtResource("2_7ok15")
 Model = ExtResource("2_qtjth")
 SlotSize = Vector2i(1, 1)
-MaxStack = 20
+MaxStack = 30

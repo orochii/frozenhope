@@ -1791,12 +1791,18 @@ collision_layer = 8
 [node name="CollisionShape3D" type="CollisionShape3D" parent="BabyFence/ExitBlock5"]
 shape = SubResource("BoxShape3D_dvl0p")
 
-[node name="WorldItem" parent="." instance=ExtResource("39_cvq0u")]
+[node name="Interactables" type="Node3D" parent="."]
+
+[node name="PickUps" type="Node3D" parent="Interactables"]
+
+[node name="WorldItem" parent="Interactables/PickUps" instance=ExtResource("39_cvq0u")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 17.2321, 0, 5.14486)
 Item = SubResource("Resource_h2xfp")
 
-[node name="9mm_ammo2" parent="WorldItem" instance=ExtResource("42_x36di")]
+[node name="9mm_ammo2" parent="Interactables/PickUps/WorldItem" instance=ExtResource("42_x36di")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Flavour" type="Node3D" parent="Interactables"]
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]

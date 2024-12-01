@@ -22,4 +22,4 @@ DisplayDescription = "A can of .308 ammo for rifles."
 Icon = ExtResource("2_13bxy")
 Model = ExtResource("2_62pfo")
 SlotSize = Vector2i(1, 1)
-MaxStack = 40
+MaxStack = 20
