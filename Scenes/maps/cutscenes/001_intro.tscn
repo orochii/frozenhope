@@ -1,4 +1,4 @@
-[gd_scene load_steps=54 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=52 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
@@ -31,6 +31,7 @@
 [ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="22_ub1n4"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="22_un804"]
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
+[ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="24_k1oil"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="31_1tnvv"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="31_f4j2i"]
 [ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="32_erbwr"]
@@ -166,70 +167,34 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("IntroMusic:playing")
+tracks/9/path = NodePath("TitleTheme:volume_db")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [0.0]
 }
 tracks/10/type = "value"
 tracks/10/imported = false
 tracks/10/enabled = true
-tracks/10/path = NodePath("CarEngine:playing")
+tracks/10/path = NodePath("RedSUVtm/CarEngine:volume_db")
 tracks/10/interp = 1
 tracks/10/loop_wrap = true
 tracks/10/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
+"update": 0,
+"values": [10.0]
 }
 tracks/11/type = "value"
 tracks/11/imported = false
 tracks/11/enabled = true
-tracks/11/path = NodePath("ListenInsideCar:current")
+tracks/11/path = NodePath("RedSUVtm/CarEngine:playing")
 tracks/11/interp = 1
 tracks/11/loop_wrap = true
 tracks/11/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/12/type = "value"
-tracks/12/imported = false
-tracks/12/enabled = true
-tracks/12/path = NodePath("CarEngineMuffled:playing")
-tracks/12/interp = 1
-tracks/12/loop_wrap = true
-tracks/12/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/13/type = "value"
-tracks/13/imported = false
-tracks/13/enabled = true
-tracks/13/path = NodePath("MovingGround/ScenarioPivot/ListenOutside2:current")
-tracks/13/interp = 1
-tracks/13/loop_wrap = true
-tracks/13/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [false]
-}
-tracks/14/type = "value"
-tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("TitleTheme:playing")
-tracks/14/interp = 1
-tracks/14/loop_wrap = true
-tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -482,89 +447,39 @@ tracks/13/keys = {
 }
 tracks/14/type = "value"
 tracks/14/imported = false
-tracks/14/enabled = false
-tracks/14/path = NodePath("IntroMusic:playing")
+tracks/14/enabled = true
+tracks/14/path = NodePath("TitleTheme:volume_db")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [true]
+"values": [0.0, -80.0]
 }
 tracks/15/type = "value"
 tracks/15/imported = false
 tracks/15/enabled = true
-tracks/15/path = NodePath("CarEngine:playing")
+tracks/15/path = NodePath("RedSUVtm/CarEngine:volume_db")
 tracks/15/interp = 1
 tracks/15/loop_wrap = true
 tracks/15/keys = {
-"times": PackedFloat32Array(0, 2, 56.2),
-"transitions": PackedFloat32Array(1, 1, 1),
-"update": 1,
-"values": [true, false, true]
+"times": PackedFloat32Array(0, 2, 2.03333, 56.2, 56.2006, 56.2333, 60),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [-80.0, 10.0, -20.0, -20.0, -20.0, 10.0, -80.0]
 }
 tracks/16/type = "value"
 tracks/16/imported = false
 tracks/16/enabled = true
-tracks/16/path = NodePath("ListenInsideCar:current")
+tracks/16/path = NodePath("RedSUVtm/CarEngine:playing")
 tracks/16/interp = 1
 tracks/16/loop_wrap = true
 tracks/16/keys = {
-"times": PackedFloat32Array(2, 56.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/17/type = "value"
-tracks/17/imported = false
-tracks/17/enabled = true
-tracks/17/path = NodePath("CarEngineMuffled:playing")
-tracks/17/interp = 1
-tracks/17/loop_wrap = true
-tracks/17/keys = {
-"times": PackedFloat32Array(2, 56.2),
-"transitions": PackedFloat32Array(1, 1),
-"update": 1,
-"values": [true, false]
-}
-tracks/18/type = "value"
-tracks/18/imported = false
-tracks/18/enabled = true
-tracks/18/path = NodePath("MovingGround/ScenarioPivot/ListenOutside2:current")
-tracks/18/interp = 1
-tracks/18/loop_wrap = true
-tracks/18/keys = {
-"times": PackedFloat32Array(56.2),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [true]
-}
-tracks/19/type = "value"
-tracks/19/imported = false
-tracks/19/enabled = true
-tracks/19/path = NodePath("TitleTheme:playing")
-tracks/19/interp = 1
-tracks/19/loop_wrap = true
-tracks/19/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [false]
-}
-tracks/20/type = "method"
-tracks/20/imported = false
-tracks/20/enabled = true
-tracks/20/path = NodePath("IntroMusic")
-tracks/20/interp = 1
-tracks/20/loop_wrap = true
-tracks/20/keys = {
-"times": PackedFloat32Array(1),
-"transitions": PackedFloat32Array(1),
-"values": [{
-"args": [0.0],
-"method": &"play"
-}]
+"values": [true]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
@@ -2637,6 +2552,13 @@ transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 
 [node name="LDoor" parent="RedSUVtm" index="6"]
 transform = Transform3D(100, 0, 0, 0, -0.000361999, 100, 0, -100, -0.000361999, 0.626342, 0.594915, 0.645325)
+
+[node name="CarEngine" type="AudioStreamPlayer3D" parent="RedSUVtm"]
+transform = Transform3D(-0.535827, 0.0291333, -0.471429, 0.0398724, 0.713171, -0.00124663, 0.470642, -0.027251, -0.536617, -0.00294848, 0.239789, 0.351636)
+stream = ExtResource("24_k1oil")
+volume_db = 10.0
+max_distance = 20.0
+bus = &"SFX"
 
 [node name="Lain" parent="." instance=ExtResource("3_ykbs4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460924, 0, 0.496816)

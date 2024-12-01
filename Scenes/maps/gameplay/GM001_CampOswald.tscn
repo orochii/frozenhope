@@ -1,4 +1,4 @@
-[gd_scene load_steps=76 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=78 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -53,6 +53,7 @@
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="48_bk6sa"]
 [ext_resource type="AudioStream" uid="uid://duh85baeogkhq" path="res://Audio/Music/Frozen_Hope_Snow_Ambience_JDY.wav" id="49_4qabv"]
 [ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="49_ofai4"]
+[ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="54_r617x"]
 
 [sub_resource type="Resource" id="Resource_g284b"]
 script = ExtResource("2_6m0g5")
@@ -196,6 +197,10 @@ background_energy_multiplier = 0.2
 sky = SubResource("Sky_s043u")
 fog_enabled = true
 fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
+height = 1.0
+radius = 1.0
 
 [node name="Gm001CampOswald" type="Node3D"]
 
@@ -711,6 +716,24 @@ max_distance = 10.0
 stream = ExtResource("49_4qabv")
 volume_db = -8.0
 autoplay = true
+
+[node name="EvtDeadguy" type="Area3D" parent="." node_paths=PackedStringArray("PlayerLocation", "Camera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.7839, 12.6195, -9.89785)
+collision_layer = 16
+script = ExtResource("54_r617x")
+Flag = "evtdeadguy"
+PlayerLocation = NodePath("Node3D")
+Camera = NodePath("Camera3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="EvtDeadguy"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_opak0")
+
+[node name="Node3D" type="Node3D" parent="EvtDeadguy"]
+transform = Transform3D(0.524892, 0, -0.851169, 0, 1, 0, 0.851169, 0, 0.524892, 0.920208, -0.0755987, -0.955082)
+
+[node name="Camera3D" type="Camera3D" parent="EvtDeadguy"]
+transform = Transform3D(-0.901687, -0.351722, 0.251501, 0.0617099, 0.47102, 0.879961, -0.427963, 0.80897, -0.403008, 0.732868, 2.12714, -1.21534)
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]

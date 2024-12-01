@@ -41,6 +41,9 @@ public partial class WorldItem : StaticBody3D, Interactable
         // Show text.
         string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
         await Main.Instance.UI.Message.SetText(str, false);
+        // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
+        // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
+        Main.Instance.UI.Message.EndMessage();
         // Unpause game
         Main.Instance.Busy = false;
     }

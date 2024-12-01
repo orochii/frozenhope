@@ -8,6 +8,8 @@ public partial class ViewChanger : Area3D
     [Export] public ViewChanger[] Deactivate;
     [Export] public ViewChanger[] Activate;
     public void _OnPlayerEnter(Node3D body){
+        //Ignore if message is running
+        if (Main.Instance.Busy) return;
         //If ViewChanger is active, changes to its assigned camera
         if (Active) Camera.Current = true;
         //Iterates over the Deactivate array if it isn't empty, turning off assigned ViewChangers
