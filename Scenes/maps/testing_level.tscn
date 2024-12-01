@@ -17,7 +17,7 @@
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="15_43oa2"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="16_ygq0g"]
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="17_35xgy"]
-[ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Graphics/Models/items/world_item.tscn" id="18_rod0i"]
+[ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="18_rod0i"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="19_qlfiv"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="20_a3kyn"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="21_ysje2"]
