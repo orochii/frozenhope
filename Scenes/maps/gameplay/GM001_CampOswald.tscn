@@ -1,4 +1,4 @@
-[gd_scene load_steps=78 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=81 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -54,6 +54,9 @@
 [ext_resource type="AudioStream" uid="uid://duh85baeogkhq" path="res://Audio/Music/Frozen_Hope_Snow_Ambience_JDY.wav" id="49_4qabv"]
 [ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="49_ofai4"]
 [ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="54_r617x"]
+[ext_resource type="Script" path="res://Source/Events/EvtStart.cs" id="55_ss1ml"]
+[ext_resource type="Texture2D" uid="uid://c5wovq4v8xklk" path="res://Graphics/textures/controls_diagram.png" id="56_c5hf2"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="57_vtyt3"]
 
 [sub_resource type="Resource" id="Resource_g284b"]
 script = ExtResource("2_6m0g5")
@@ -734,6 +737,242 @@ transform = Transform3D(0.524892, 0, -0.851169, 0, 1, 0, 0.851169, 0, 0.524892, 
 
 [node name="Camera3D" type="Camera3D" parent="EvtDeadguy"]
 transform = Transform3D(-0.901687, -0.351722, 0.251501, 0.0617099, 0.47102, 0.879961, -0.427963, 0.80897, -0.403008, 0.732868, 2.12714, -1.21534)
+
+[node name="EvtStart" type="Node" parent="." node_paths=PackedStringArray("ControlScheme")]
+script = ExtResource("55_ss1ml")
+ControlScheme = NodePath("Control")
+
+[node name="Control" type="Control" parent="EvtStart"]
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="EvtStart/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.376471)
+
+[node name="ControlsDiagram" type="Sprite2D" parent="EvtStart/Control"]
+texture = ExtResource("56_c5hf2")
+centered = false
+
+[node name="Label9" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+anchors_preset = 10
+anchor_right = 1.0
+offset_top = 16.0
+offset_bottom = 26.0
+grow_horizontal = 2
+theme = ExtResource("57_vtyt3")
+text = "GAMEPAD CONTROLS:"
+horizontal_alignment = 1
+
+[node name="Label" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 66.0
+offset_top = 75.0
+offset_right = 106.0
+offset_bottom = 85.0
+theme = ExtResource("57_vtyt3")
+text = "Move"
+horizontal_alignment = 2
+
+[node name="Label7" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 157.0
+offset_top = 64.0
+offset_right = 197.0
+offset_bottom = 74.0
+theme = ExtResource("57_vtyt3")
+text = "Aim"
+horizontal_alignment = 2
+
+[node name="Label8" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 211.0
+offset_top = 77.0
+offset_right = 251.0
+offset_bottom = 87.0
+theme = ExtResource("57_vtyt3")
+text = "Ok/Shoot"
+
+[node name="Label4" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 117.0
+offset_top = 85.0
+offset_right = 157.0
+offset_bottom = 95.0
+theme = ExtResource("57_vtyt3")
+text = "Move"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 68.0
+offset_top = 28.0
+offset_right = 134.0
+offset_bottom = 38.0
+theme = ExtResource("57_vtyt3")
+text = "Change target (L)"
+horizontal_alignment = 2
+
+[node name="Label3" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 188.0
+offset_top = 28.0
+offset_right = 254.0
+offset_bottom = 38.0
+theme = ExtResource("57_vtyt3")
+text = "Change target (R)"
+
+[node name="Label5" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 209.0
+offset_top = 52.0
+offset_right = 275.0
+offset_bottom = 62.0
+theme = ExtResource("57_vtyt3")
+text = "Menu"
+
+[node name="Label6" type="Label" parent="EvtStart/Control/ControlsDiagram"]
+offset_left = 223.0
+offset_top = 64.0
+offset_right = 289.0
+offset_bottom = 74.0
+theme = ExtResource("57_vtyt3")
+text = "Back"
+
+[node name="MarginContainer" type="MarginContainer" parent="EvtStart/Control"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -66.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/margin_left = 64
+theme_override_constants/margin_top = 0
+theme_override_constants/margin_right = 64
+theme_override_constants/margin_bottom = 24
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EvtStart/Control/MarginContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "KEYBOARD CONTROLS:"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "Arrows/WASD"
+
+[node name="Label2" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Move"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "Space"
+
+[node name="Label8" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Aim/Combine"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="Label8" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "F"
+
+[node name="Label9" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Ok/Shoot"
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "Q"
+
+[node name="Label3" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Change target (L)"
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "E"
+
+[node name="Label4" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer2"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Change target (R)"
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label5" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "Tab"
+
+[node name="Label6" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer3"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Menu"
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2"]
+layout_mode = 2
+
+[node name="Label7" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+theme_override_colors/font_color = Color(0.820853, 0.689731, 0.524987, 1)
+text = "Escape"
+
+[node name="Label6" type="Label" parent="EvtStart/Control/MarginContainer/VBoxContainer/HBoxContainer/VBoxContainer2/HBoxContainer4"]
+layout_mode = 2
+theme = ExtResource("57_vtyt3")
+text = "Back"
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]

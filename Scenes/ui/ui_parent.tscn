@@ -944,6 +944,7 @@ MessageLabel = NodePath("MarginContainer/RichTextLabel")
 Background = NodePath("Background")
 
 [node name="Background" type="Control" parent="Message"]
+modulate = Color(1, 1, 1, 0)
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -991,8 +992,6 @@ theme = ExtResource("3_wyq5x")
 theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.164706)
 theme_override_constants/outline_size = 1
 bbcode_enabled = true
-text = "[center]You got a [color=#ff8]Hammer[/color]. It allows you to hammer things.
-Fancy, innit? Eyyyyy. You know you like eet, bruv."
 fit_content = true
 scroll_active = false
 

@@ -221,7 +221,7 @@ public partial class Player : CharacterBody3D, Targettable
 		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
-			Graphic.StateMachine.MoveState = (run && move.Y>0) ? EMoveState.RUN : EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y<0) ? EMoveState.RUN : EMoveState.WALK;
 			var targetVelocity = (Transform.Basis.Z * -move.Y);
 			// Are we in aim mode?
 			if (aiming) {
