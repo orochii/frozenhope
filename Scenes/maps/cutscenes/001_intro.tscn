@@ -1,4 +1,4 @@
-[gd_scene load_steps=48 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=51 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
@@ -30,6 +30,9 @@
 [ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="22_ub1n4"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="22_un804"]
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
+[ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="31_1tnvv"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="31_f4j2i"]
+[ext_resource type="AudioStream" uid="uid://rrd1wrhlyth2" path="res://Audio/Music/Frozen_Hope_Title_ Screen_JDY.wav" id="33_ollso"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wyt56"]
 sky_top_color = Color(0.680522, 0.735972, 0.81331, 1)
@@ -120,6 +123,54 @@ tracks/5/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [0]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Control/MarginContainer/Subtitles:text")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [""]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("Control/MarginContainer/Subtitles/SubtitleBackground:visible")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/8/type = "value"
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/path = NodePath("Control/MarginContainer/Subtitles/SubtitleBackground:size")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(200, 22)]
+}
+tracks/9/type = "value"
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/path = NodePath("TitleTheme:playing")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
 }
 
 [sub_resource type="Animation" id="Animation_xj7n8"]
@@ -330,6 +381,54 @@ tracks/10/keys = {
 "update": 1,
 "values": [3, 0]
 }
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("Control/MarginContainer/Subtitles:text")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(2.1667, 6.8, 11.8, 12.4, 16, 17.2667, 21.9333, 26.0333, 27, 30.7667, 32.7, 36.6333, 37.2667, 43.4333, 44.4333, 49.5667, 51.8, 53.0667, 54.8333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": ["[center]George here from the Ranger station, anyone near Point Oswald, come in...[/center]", "[center]I repeat, anyone near point Oswald, come in. Over[/center]", "", "[center]L.K. here, I’m near there, what’s the problem George?[/center]", "", "[center]Leona? Could you please go to Point Oswald and check in on a camping group?[/center]", "[center]A blizzard is coming and I’ve been unable to hail them. Over.[/center]", "", "[center]Camping group by Point Oswald, isn’t that my brother’s group?[/center]", "", "[center]Uhh… yeah, that’s him alright. Over.[/center]", "", "[center]Numbskull probably turned off his radio by accident, I’ll head on over and give him an earful.[/center]", "", "[center]Don’t be too hard on him, let me know as soon as you’ve arrived there.[/center]", "[center]George Over and Out.[/center]", "", "[center]L.K. over and out.[/center]", ""]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("Control/MarginContainer/Subtitles/SubtitleBackground:visible")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(2.1667, 11.8, 12.4, 16, 17.2667, 26.0333, 27, 30.7667, 32.7, 36.6333, 37.2667, 43.4333, 44.4333, 51.8, 53.0667, 54.8333),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [true, false, true, false, true, false, true, false, true, false, true, false, true, false, true, false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("Control/MarginContainer/Subtitles/SubtitleBackground:size")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(2.16667, 6.8, 12.4, 32.7, 37.2667, 49.5667),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1),
+"update": 1,
+"values": [Vector2(200, 22), Vector2(200, 11), Vector2(200, 22), Vector2(200, 13), Vector2(200, 22), Vector2(200, 11)]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("TitleTheme:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [false]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
 _data = {
@@ -392,7 +491,7 @@ script = ExtResource("21_66ko3")
 ZonePosition = Vector2i(0, 0)
 HeightMapTexture = ExtResource("18_lrlub")
 SplatmapsTexture = [ExtResource("20_4krx5")]
-FoliagesTexture = null
+FoliagesTexture = []
 ObjectsTexture = [ExtResource("19_jx1xm")]
 
 [sub_resource type="Resource" id="Resource_2uumr"]
@@ -462,6 +561,7 @@ shader_parameter/albedo = ExtResource("19_cukto")
 [node name="intro" type="Node3D" node_paths=PackedStringArray("Animation")]
 script = ExtResource("1_x8eer")
 Animation = NodePath("AnimationPlayer")
+NextScene = "cutscenes/002_camp_arrival"
 metadata/uiMode = 0
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -2382,6 +2482,7 @@ script = ExtResource("15_xtwcr")
 ZonesSize = 1001
 DataPath = "res://Scenes/maps/cutscenes/intro"
 TextureSets = ExtResource("16_3srqo")
+Foliages = []
 DefaultObjectFrequency = 5
 Objects = [ExtResource("17_gxrvh")]
 TerrainZones = SubResource("Resource_2uumr")
@@ -2438,6 +2539,9 @@ AlternateMaterials = Array[Material]([SubResource("ShaderMaterial_qe421"), SubRe
 [node name="AudioListener3D" type="AudioListener3D" parent="Lain"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.34359, -0.367344)
 
+[node name="Rifle" parent="." instance=ExtResource("31_1tnvv")]
+transform = Transform3D(0.0107364, -0.096348, 0.151663, 0.0683263, 0.142709, 0.0858228, -0.166181, 0.052451, 0.045085, -0.191323, 0.81928, 0.353462)
+
 [node name="Camera2" type="Camera3D" parent="."]
 transform = Transform3D(-0.999789, 9.71925e-10, 0.0205411, 0.00935037, 0.890388, 0.455107, -0.0182895, 0.455203, -0.8902, 0.370958, 1.54168, 0.149549)
 
@@ -2461,6 +2565,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("31_f4j2i")
 
 [node name="ColorRect" type="ColorRect" parent="Control"]
 modulate = Color(1, 1, 1, 0)
@@ -2471,6 +2576,37 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 color = Color(0, 0, 0, 1)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.187
+anchor_top = 0.833
+anchor_right = 0.812
+anchor_bottom = 0.917
+offset_left = 0.159996
+offset_top = 0.0799866
+offset_right = 0.159973
+offset_bottom = 1.91998
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Subtitles" type="RichTextLabel" parent="Control/MarginContainer"]
+layout_mode = 2
+bbcode_enabled = true
+
+[node name="SubtitleBackground" type="ColorRect" parent="Control/MarginContainer/Subtitles"]
+visible = false
+show_behind_parent = true
+layout_mode = 2
+offset_right = 200.0
+offset_bottom = 22.0
+color = Color(0, 0, 0, 0.705882)
+
+[node name="TitleTheme" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("33_ollso")
+autoplay = true
+bus = &"Music"
 
 [editable path="RedSUVtm"]
 [editable path="Lain"]
