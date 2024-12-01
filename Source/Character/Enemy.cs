@@ -50,6 +50,7 @@ public partial class Enemy : CharacterBody3D, Targettable
     }
     public override void _Process(double delta)
     {
+		if (!IsVisibleInTree()) return;
 		if (Dead) return;
 		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
 		canMove = canMove && !Main.Instance.Busy;

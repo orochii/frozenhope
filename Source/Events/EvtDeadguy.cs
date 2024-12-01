@@ -6,6 +6,9 @@ public partial class EvtDeadguy : Area3D
 	[Export] string Flag;
 	[Export] Node3D PlayerLocation;
 	[Export] Camera3D Camera;
+	[Export] AnimationPlayer Animation;
+	[Export] Enemy Wendigo;
+	[Export] Node3D WendigoProp;
     public override void _Ready()
     {
         BodyEntered += OnBodyEntered;
@@ -30,7 +33,13 @@ public partial class EvtDeadguy : Area3D
 		// Show the bars :O
 		await Main.Instance.UI.Message.SetBars(true);
 		await Main.Instance.UI.Message.SetText("Oh my god, this is horrible, what happened here?", false);
-		// TODO: Show where the Wendy go.
+		// Play animation.
+		Wendigo.Visible = false;
+		WendigoProp.Visible = true;
+		Animation.Play("sequence");
+		await ToSignal(Animation, AnimationPlayer.SignalName.AnimationFinished);
+		Wendigo.Visible = true;
+		WendigoProp.Visible = false;
 		// Return to old camera, close message.
 		previousCamera.Current = true;
 		await Main.Instance.UI.Message.SetBars(false);

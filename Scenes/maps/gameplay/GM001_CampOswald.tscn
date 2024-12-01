@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=79 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -27,7 +27,6 @@
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ObjectResource.cs" id="18_nu7wo"]
 [ext_resource type="Texture2D" uid="uid://ba8rcrvosjt7d" path="res://Scenes/maps/gameplay/Gm001CampOswald/Object_0_0_0.res" id="20_i3j6a"]
 [ext_resource type="PackedScene" uid="uid://baqhs0f4v1g6p" path="res://Graphics/Models/scenery/materials_fences/fence_wood_2.tscn" id="25_0grh5"]
-[ext_resource type="PackedScene" uid="uid://cygnhseocxq75" path="res://Graphics/Models/enemies/p_wendigo.tscn" id="25_t114s"]
 [ext_resource type="PackedScene" uid="uid://rt16jr4p0h0c" path="res://Graphics/Models/scenery/materials_fences/fence_wood_3.tscn" id="26_k5pir"]
 [ext_resource type="PackedScene" uid="uid://2n4sgmke4akl" path="res://Graphics/Models/scenery/materials_fences/fence_wood_1.tscn" id="27_psmnr"]
 [ext_resource type="PackedScene" uid="uid://cm5n82ee4f08h" path="res://Graphics/Models/scenery/Rocas/rock_1.tscn" id="28_g7wl4"]
@@ -53,7 +52,7 @@
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="48_bk6sa"]
 [ext_resource type="AudioStream" uid="uid://duh85baeogkhq" path="res://Audio/Music/Frozen_Hope_Snow_Ambience_JDY.wav" id="49_4qabv"]
 [ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="49_ofai4"]
-[ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="54_r617x"]
+[ext_resource type="PackedScene" uid="uid://udkmerrmivqi" path="res://Scenes/objects/evt/evt_deadguy.tscn" id="53_2tyis"]
 [ext_resource type="Script" path="res://Source/Events/EvtStart.cs" id="55_ss1ml"]
 [ext_resource type="Texture2D" uid="uid://c5wovq4v8xklk" path="res://Graphics/textures/controls_diagram.png" id="56_c5hf2"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="57_vtyt3"]
@@ -201,10 +200,6 @@ sky = SubResource("Sky_s043u")
 fog_enabled = true
 fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
-height = 1.0
-radius = 1.0
-
 [node name="Gm001CampOswald" type="Node3D"]
 
 [node name="TerraBrush" type="Node3D" parent="."]
@@ -219,9 +214,6 @@ TerrainZones = SubResource("Resource_ohpeo")
 metadata/_edit_lock_ = false
 
 [node name="Scenery" type="Node3D" parent="."]
-
-[node name="Wendigo" parent="Scenery" instance=ExtResource("25_t114s")]
-transform = Transform3D(-0.0765882, 0, 0.290059, 0, 0.3, 0, -0.290059, 0, -0.0765882, -72.1931, 12.4973, -8.93219)
 
 [node name="Trees" type="Node3D" parent="Scenery"]
 
@@ -720,23 +712,7 @@ stream = ExtResource("49_4qabv")
 volume_db = -8.0
 autoplay = true
 
-[node name="EvtDeadguy" type="Area3D" parent="." node_paths=PackedStringArray("PlayerLocation", "Camera")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.7839, 12.6195, -9.89785)
-collision_layer = 16
-script = ExtResource("54_r617x")
-Flag = "evtdeadguy"
-PlayerLocation = NodePath("Node3D")
-Camera = NodePath("Camera3D")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="EvtDeadguy"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
-shape = SubResource("CylinderShape3D_opak0")
-
-[node name="Node3D" type="Node3D" parent="EvtDeadguy"]
-transform = Transform3D(0.524892, 0, -0.851169, 0, 1, 0, 0.851169, 0, 0.524892, 0.920208, -0.0755987, -0.955082)
-
-[node name="Camera3D" type="Camera3D" parent="EvtDeadguy"]
-transform = Transform3D(-0.901687, -0.351722, 0.251501, 0.0617099, 0.47102, 0.879961, -0.427963, 0.80897, -0.403008, 0.732868, 2.12714, -1.21534)
+[node name="EvtDeadguy" parent="." instance=ExtResource("53_2tyis")]
 
 [node name="EvtStart" type="Node" parent="." node_paths=PackedStringArray("ControlScheme")]
 script = ExtResource("55_ss1ml")
