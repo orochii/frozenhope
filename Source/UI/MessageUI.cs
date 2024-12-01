@@ -20,13 +20,27 @@ public partial class MessageUI : Control
 		Main.Instance.UI.SetUIMode((int)UiParent.EModes.MESSAGE);
 		//
 		MessageLabel.Text = "[center]"+text;
-		Background.Modulate = showBackground ? Colors.White : Colors.Transparent;
 		MessageLabel.VisibleCharacters = 0;
 		visibleCharacters = 0;
 		autocloseTimer = autoclose;
 		await ToSignal(this, SignalName.OnMessageClose);
-		Main.Instance.UI.SetUIMode(LastMode);
 		return true;
+	}
+	public async Task<bool> SetBars(bool v, float duration=0.5f) {
+		//
+		if (Main.Instance.UI.Mode != (int)UiParent.EModes.MESSAGE) LastMode = Main.Instance.UI.Mode;
+		Main.Instance.UI.SetUIMode((int)UiParent.EModes.MESSAGE);
+		//
+		var startCol = v ? Colors.Transparent: Colors.White;
+		var endCol = v ? Colors.White: Colors.Transparent;
+		Background.Modulate = startCol;
+		var tween = CreateTween().TweenProperty(Background, "modulate", endCol, duration);
+		await ToSignal(tween, Tween.SignalName.Finished);
+		//
+		return true;
+	}
+	public void EndMessage() {
+		Main.Instance.UI.SetUIMode(LastMode);
 	}
     public override void _Process(double delta)
     {
@@ -42,6 +56,7 @@ public partial class MessageUI : Control
 			} else if (Input.IsActionJustPressed("interact")) close = true;
 			if (close) {
 				// Close
+				MessageLabel.Text = "";
 				EmitSignal(SignalName.OnMessageClose);
 				Visible = false;
 			}

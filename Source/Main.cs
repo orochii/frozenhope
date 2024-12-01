@@ -51,6 +51,7 @@ public partial class Main : Node
             currentScene = newMapScene.Instantiate<Node3D>();
             WorldParent.AddChild(currentScene);
 			int uiMode = 1;
+			if (currentScene is Cutscene) uiMode = (int)UiParent.EModes.CUTSCENE;
 			if (currentScene.HasMeta("uiMode")) {
 				uiMode = currentScene.GetMeta("uiMode").AsInt32();
 			}
