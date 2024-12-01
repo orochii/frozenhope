@@ -1,8 +1,9 @@
-[gd_scene load_steps=51 format=3 uid="uid://ccn55toql5a6v"]
+[gd_scene load_steps=54 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
 [ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
 [ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
+[ext_resource type="AudioStream" uid="uid://c2iymc8qnni4i" path="res://Audio/Music/Frozen_Hope_Title_ Screen_Short_JDY.wav" id="2_svwh4"]
 [ext_resource type="AudioStream" uid="uid://bg4pctxpob14g" path="res://Audio/Voice/01.wav" id="3_14hch"]
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="3_ykbs4"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
@@ -32,7 +33,9 @@
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="31_1tnvv"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="31_f4j2i"]
+[ext_resource type="AudioStream" uid="uid://byldw1tlyvuff" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_JDY.wav" id="32_erbwr"]
 [ext_resource type="AudioStream" uid="uid://rrd1wrhlyth2" path="res://Audio/Music/Frozen_Hope_Title_ Screen_JDY.wav" id="33_ollso"]
+[ext_resource type="AudioStream" uid="uid://d3pflxxdy5wuk" path="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_MUFFLED_JDY.wav" id="33_sronq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_wyt56"]
 sky_top_color = Color(0.680522, 0.735972, 0.81331, 1)
@@ -163,10 +166,70 @@ tracks/8/keys = {
 tracks/9/type = "value"
 tracks/9/imported = false
 tracks/9/enabled = true
-tracks/9/path = NodePath("TitleTheme:playing")
+tracks/9/path = NodePath("IntroMusic:playing")
 tracks/9/interp = 1
 tracks/9/loop_wrap = true
 tracks/9/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/10/type = "value"
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/path = NodePath("CarEngine:playing")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/11/type = "value"
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/path = NodePath("ListenInsideCar:current")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/12/type = "value"
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/path = NodePath("CarEngineMuffled:playing")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/13/type = "value"
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/path = NodePath("MovingGround/ScenarioPivot/ListenOutside2:current")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/14/type = "value"
+tracks/14/imported = false
+tracks/14/enabled = true
+tracks/14/path = NodePath("TitleTheme:playing")
+tracks/14/interp = 1
+tracks/14/loop_wrap = true
+tracks/14/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
@@ -419,15 +482,89 @@ tracks/13/keys = {
 }
 tracks/14/type = "value"
 tracks/14/imported = false
-tracks/14/enabled = true
-tracks/14/path = NodePath("TitleTheme:playing")
+tracks/14/enabled = false
+tracks/14/path = NodePath("IntroMusic:playing")
 tracks/14/interp = 1
 tracks/14/loop_wrap = true
 tracks/14/keys = {
-"times": PackedFloat32Array(0),
+"times": PackedFloat32Array(1),
 "transitions": PackedFloat32Array(1),
 "update": 0,
+"values": [true]
+}
+tracks/15/type = "value"
+tracks/15/imported = false
+tracks/15/enabled = true
+tracks/15/path = NodePath("CarEngine:playing")
+tracks/15/interp = 1
+tracks/15/loop_wrap = true
+tracks/15/keys = {
+"times": PackedFloat32Array(0, 2, 56.2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [true, false, true]
+}
+tracks/16/type = "value"
+tracks/16/imported = false
+tracks/16/enabled = true
+tracks/16/path = NodePath("ListenInsideCar:current")
+tracks/16/interp = 1
+tracks/16/loop_wrap = true
+tracks/16/keys = {
+"times": PackedFloat32Array(2, 56.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/17/type = "value"
+tracks/17/imported = false
+tracks/17/enabled = true
+tracks/17/path = NodePath("CarEngineMuffled:playing")
+tracks/17/interp = 1
+tracks/17/loop_wrap = true
+tracks/17/keys = {
+"times": PackedFloat32Array(2, 56.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/18/type = "value"
+tracks/18/imported = false
+tracks/18/enabled = true
+tracks/18/path = NodePath("MovingGround/ScenarioPivot/ListenOutside2:current")
+tracks/18/interp = 1
+tracks/18/loop_wrap = true
+tracks/18/keys = {
+"times": PackedFloat32Array(56.2),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/19/type = "value"
+tracks/19/imported = false
+tracks/19/enabled = true
+tracks/19/path = NodePath("TitleTheme:playing")
+tracks/19/interp = 1
+tracks/19/loop_wrap = true
+tracks/19/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
 "values": [false]
+}
+tracks/20/type = "method"
+tracks/20/imported = false
+tracks/20/enabled = true
+tracks/20/path = NodePath("IntroMusic")
+tracks/20/interp = 1
+tracks/20/loop_wrap = true
+tracks/20/keys = {
+"times": PackedFloat32Array(1),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [0.0],
+"method": &"play"
+}]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
@@ -2488,6 +2625,13 @@ Objects = [ExtResource("17_gxrvh")]
 TerrainZones = SubResource("Resource_2uumr")
 metadata/_edit_lock_ = false
 
+[node name="ListenOutside1" type="AudioListener3D" parent="MovingGround/ScenarioPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -9.265, 0.717, 33.261)
+current = true
+
+[node name="ListenOutside2" type="AudioListener3D" parent="MovingGround/ScenarioPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.491, 0.717, 131.818)
+
 [node name="RedSUVtm" parent="." instance=ExtResource("1_l1bfu")]
 transform = Transform3D(1.4, 0, 0, 0, 1.4, 0, 0, 0, 1.4, 0, 0, 0)
 
@@ -2558,6 +2702,22 @@ volume_db = -8.0
 max_db = 1.0
 pitch_scale = 0.95
 
+[node name="ListenInsideCar" type="AudioListener3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.464, 1.40426, 0.155)
+
+[node name="CarEngine" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1.5)
+stream = ExtResource("32_erbwr")
+volume_db = 10.0
+max_distance = 30.0
+
+[node name="CarEngineMuffled" type="AudioStreamPlayer3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, 1.5)
+stream = ExtResource("33_sronq")
+volume_db = -7.0
+pitch_scale = 0.8
+max_distance = 5.0
+
 [node name="Control" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -2603,8 +2763,14 @@ offset_right = 200.0
 offset_bottom = 22.0
 color = Color(0, 0, 0, 0.705882)
 
+[node name="IntroMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_svwh4")
+volume_db = -20.0
+bus = &"Music"
+
 [node name="TitleTheme" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("33_ollso")
+volume_db = -10.0
 autoplay = true
 bus = &"Music"
 

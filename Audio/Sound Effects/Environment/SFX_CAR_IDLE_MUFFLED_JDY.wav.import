@@ -1,0 +1,24 @@
+[remap]
+
+importer="wav"
+type="AudioStreamWAV"
+uid="uid://d3pflxxdy5wuk"
+path="res://.godot/imported/SFX_CAR_IDLE_MUFFLED_JDY.wav-e1d50ee8007057937e30125914fb7eca.sample"
+
+[deps]
+
+source_file="res://Audio/Sound Effects/Environment/SFX_CAR_IDLE_MUFFLED_JDY.wav"
+dest_files=["res://.godot/imported/SFX_CAR_IDLE_MUFFLED_JDY.wav-e1d50ee8007057937e30125914fb7eca.sample"]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop_mode=2
+edit/loop_begin=0
+edit/loop_end=115073
+compress/mode=0
