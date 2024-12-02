@@ -13,11 +13,30 @@ public partial class Main : Node
 	Node3D currentScene;
 	public override void _Ready()
 	{
+		DirAccess.MakeDirRecursiveAbsolute(SnapPath());
 		Instance = this;
 		Database = Database.Get();
 		Loader = UI.Loader;
 	}
-	public void StartGame() {
+    public override void _Input(InputEvent evt)
+    {
+        if (evt is InputEventKey) {
+			var key = evt as InputEventKey;
+			if (key.Pressed && key.Keycode == Key.F9) {
+				TakeScreenshot();
+			}
+		}
+    }
+	private string SnapPath() {
+		return "user://Snap/";
+	}
+	public void TakeScreenshot() {
+		ulong timestamp = (ulong)(Time.GetUnixTimeFromSystem() * 1000);
+		var name = SnapPath() + timestamp.ToString() + ".png";
+		var img = GetViewport().GetTexture().GetImage();
+		img.SavePng(name);
+	}
+    public void StartGame() {
 		State = new GameState();
 		foreach(var e in Database.StartingItems) {
 			State.AddItem(e);
