@@ -15,7 +15,8 @@ EquippedModel = ExtResource("1_qrxqs")
 WeaponBoneIdx = 0
 AnimationSet = "pistol"
 DisplayName = "Gl 17"
-DisplayDescription = "A 9mm pistol. Third generation from 1996 iirc."
+DisplayDescription = "Polymer frame pistol, light and reliable.
+Uses 9mm bullets."
 Icon = ExtResource("1_0r2ju")
 Model = ExtResource("2_yiciy")
 SlotSize = Vector2i(1, 1)
