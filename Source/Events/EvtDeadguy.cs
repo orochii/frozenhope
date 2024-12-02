@@ -67,17 +67,12 @@ public partial class EvtDeadguy : Area3D
 		// Show bars
 		await Main.Instance.UI.Message.SetBars(true);
 		await Main.Instance.UI.Message.SetText("What is this monster?", false);
-		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await Main.Instance.UI.Message.SetText("Thankfully, that body over there surely doesn't look like my brother but--", false);
-		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await Main.Instance.UI.Message.SetText("I better find him, hopefully he's okay.", false);
-		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		// Camera change to where the tracks are
 		FinalCamera.Current = true;
 		await Main.Instance.UI.Message.SetText("Hmm... I think I can see some vehicle tracks going through that opening in the fence.", false);
-		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		await Main.Instance.UI.Message.SetText("Maybe following those I'll find my brother, or someone that can give me some answers.", false);
-		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		// Hide bars, end message
 		await Main.Instance.UI.Message.SetBars(false);
 		Main.Instance.UI.Message.EndMessage();

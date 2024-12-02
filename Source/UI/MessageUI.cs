@@ -24,6 +24,7 @@ public partial class MessageUI : Control
 		visibleCharacters = 0;
 		autocloseTimer = autoclose;
 		await ToSignal(this, SignalName.OnMessageClose);
+		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		return true;
 	}
 	public async Task<bool> SetBars(bool v, float duration=0.5f) {
