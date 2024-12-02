@@ -8,6 +8,7 @@ public partial class Inventory : Control
 	[Export] InfoColumn InfoColumn;
 	[Export] Control CombineObj;
 	[Export] TextureRect CombineIcon;
+	[Export] RichTextLabel InstructionsLabel;
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
 	public override void _Ready()
@@ -72,7 +73,7 @@ public partial class Inventory : Control
 			CombineObj.GlobalPosition = slot.GlobalPosition;
 			// Get input for combine.
 			if (Input.IsActionJustPressed("aim")) {
-				SetCombine(slot);
+				if(currentCombineSlot == null) SetCombine(slot);
 			}
 		}
 		// Inputs.
@@ -103,8 +104,17 @@ public partial class Inventory : Control
 			// Set position
 			CombineObj.GlobalPosition = button.GlobalPosition;
 		}
+		RefreshInstructions();
 	}
 	public InvSlotButton GetCombine() {
 		return currentCombineSlot;
+	}
+	private void RefreshInstructions() {
+		if (currentCombineSlot == null) {
+			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Use/Equip [color=#fd8](Aim):[/color] Move/Combine [color=#fd8](Back):[/color] Close menu";
+		}
+		else {
+			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Place/Combine [color=#fd8](Back):[/color] Cancel";
+		}
 	}
 }

@@ -3,7 +3,7 @@ using System;
 
 public partial class UiParent : Control
 {
-	public enum EModes { TITLE, GAMEPLAY, MESSAGE, CUTSCENE, SPLASH }
+	public enum EModes { TITLE, GAMEPLAY, MESSAGE, CUTSCENE, SPLASH, GAMEOVER }
 	[Export] Control[] UIs;
 	[Export] public Loader Loader;
 	private int _mode;
@@ -11,6 +11,9 @@ public partial class UiParent : Control
 	public override void _Ready()
 	{
 		SetUIMode((int)EModes.SPLASH);
+	}
+	public void SetUIMode(EModes mode) {
+		SetUIMode((int)mode);
 	}
 	public void SetUIMode(int idx) {
 		_mode = idx;
