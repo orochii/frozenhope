@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://bvedlftr3otom"]
 
-[ext_resource type="AudioStream" uid="uid://dh18w34fv7ici" path="res://Audio/Sound Effects/testOw.ogg" id="1_ar1s7"]
+[ext_resource type="AudioStream" uid="uid://brgdh8tif2mvw" path="res://Audio/Sound Effects/Enemies/SFX_MOOSE_TAKE_HIT1_JDY.wav" id="1_1vegt"]
 
 [sub_resource type="Curve" id="Curve_grikw"]
 _data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -1.93924, 0.0, 0, 0]
@@ -95,7 +95,6 @@ libraries = {
 autoplay = "start"
 
 [node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("1_ar1s7")
+stream = ExtResource("1_1vegt")
 volume_db = -5.0
-pitch_scale = 0.5
 autoplay = true

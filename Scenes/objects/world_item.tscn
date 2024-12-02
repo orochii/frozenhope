@@ -18,5 +18,7 @@ shape = SubResource("CylinderShape3D_opak0")
 [node name="Interface" type="Label3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 billboard = 1
-text = "X"
-font_size = 144
+fixed_size = true
+text = "TAKE"
+font_size = 24
+outline_size = 10

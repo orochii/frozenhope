@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=84 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -56,9 +56,8 @@
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="56_ff2tc"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="57_58qf6"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="58_4tilc"]
+[ext_resource type="AudioStream" uid="uid://60c0r33iewon" path="res://Audio/Music/Frozen_Hope_Encounter(B)_JDY.wav" id="59_53kvp"]
 [ext_resource type="PackedScene" uid="uid://udkmerrmivqi" path="res://Scenes/objects/evt/evt_deadguy.tscn" id="59_fb5ws"]
-[ext_resource type="Resource" uid="uid://w0vp4o6s6jdu" path="res://Data/items/healing_kit.tres" id="59_gen17"]
-[ext_resource type="PackedScene" uid="uid://dw25vpysr34u" path="res://Graphics/Models/items/h_healing_kit.tscn" id="60_umaqp"]
 [ext_resource type="PackedScene" uid="uid://csgbsdmea13p0" path="res://Scenes/objects/evt/evt_start.tscn" id="60_xvvdw"]
 
 [sub_resource type="Resource" id="Resource_g284b"]
@@ -208,12 +207,6 @@ fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 script = ExtResource("57_58qf6")
 Item = ExtResource("56_ff2tc")
 Amount = 8
-AmmoQty = 0
-
-[sub_resource type="Resource" id="Resource_w020m"]
-script = ExtResource("57_58qf6")
-Item = ExtResource("59_gen17")
-Amount = 1
 AmmoQty = 0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
@@ -743,7 +736,7 @@ max_distance = 10.0
 
 [node name="CampAmbiance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("49_4qabv")
-volume_db = -8.0
+volume_db = -3.0
 autoplay = true
 
 [node name="Interactables" type="Node3D" parent="."]
@@ -755,20 +748,18 @@ Item = SubResource("Resource_qmvw0")
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
 
-[node name="HealingKit" parent="Interactables" instance=ExtResource("55_36f02")]
-transform = Transform3D(0.499802, 0, 0.0140742, 0, 0.5, 0, -0.0140742, 0, 0.499802, -43.7321, 12.0621, -15.0939)
-Item = SubResource("Resource_w020m")
-
-[node name="h_healing_kit" parent="Interactables/HealingKit" instance=ExtResource("60_umaqp")]
-transform = Transform3D(-2.95419e-08, 7.96936e-09, -0.7, 0.182318, 0.67584, 9.58585e-16, 0.67584, -0.182318, -3.0598e-08, 0.0065812, -0.0490424, -0.00945591)
-
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
 navigation_mesh = SubResource("NavigationMesh_rem6n")
 
-[node name="EvtDeadguy" parent="." instance=ExtResource("59_fb5ws")]
+[node name="EvtDeadguy" parent="." node_paths=PackedStringArray("Music") instance=ExtResource("59_fb5ws")]
+Music = NodePath("../CombatMusic")
 
 [node name="EvtStart" parent="." instance=ExtResource("60_xvvdw")]
+
+[node name="CombatMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("59_53kvp")
+bus = &"Music"
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]
