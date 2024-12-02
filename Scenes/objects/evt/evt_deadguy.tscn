@@ -196,7 +196,6 @@ bones/46/position = Vector3(-1.24188, 2.56602, 0.861999)
 transform = Transform3D(0.128969, 0.139947, -0.981724, 0, 0.989992, 0.141126, 0.991649, -0.0182008, 0.127678, 7.10766, 1.3461, -4.45071)
 
 [node name="Control" type="Control" parent="."]
-visible = false
 texture_filter = 1
 layout_mode = 3
 anchors_preset = 15
@@ -237,7 +236,8 @@ Unfortunately, due to IRL stuff for both of us (work, study), the demonstration 
 CREDITS
 Ocean's Dream as George's voice
 Amysaurus as Leona's voice
-JVDMusic for all the music and many SFX
+JDYMusic for all the music and many SFX
+Sidewinder for help with modelling
 
 SCRIPT, CODE, DESIGN, ETC
 OzzyTheOne and Orochii Zouveleki
