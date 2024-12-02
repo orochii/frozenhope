@@ -736,7 +736,7 @@ max_distance = 10.0
 
 [node name="CampAmbiance" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("49_4qabv")
-volume_db = -8.0
+volume_db = -3.0
 autoplay = true
 
 [node name="Interactables" type="Node3D" parent="."]
@@ -752,7 +752,8 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
 navigation_mesh = SubResource("NavigationMesh_rem6n")
 
-[node name="EvtDeadguy" parent="." instance=ExtResource("59_fb5ws")]
+[node name="EvtDeadguy" parent="." node_paths=PackedStringArray("Music") instance=ExtResource("59_fb5ws")]
+Music = NodePath("../CombatMusic")
 
 [node name="EvtStart" parent="." instance=ExtResource("60_xvvdw")]
 

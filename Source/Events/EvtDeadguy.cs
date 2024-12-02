@@ -11,6 +11,7 @@ public partial class EvtDeadguy : Area3D
 	[Export] Node3D WendigoProp;
 	[Export] Control EndMessage;
 	[Export] Camera3D FinalCamera;
+	[Export] AudioStreamPlayer Music;
 	[Signal] public delegate void InputReceivedEventHandler();
     public override void _Ready()
     {
@@ -47,6 +48,7 @@ public partial class EvtDeadguy : Area3D
 		Wendigo.Visible = false;
 		WendigoProp.Visible = true;
 		Animation.Play("sequence");
+		Music.Play();
 		await ToSignal(Animation, AnimationPlayer.SignalName.AnimationFinished);
 		Wendigo.Visible = true;
 		WendigoProp.Visible = false;
@@ -65,6 +67,8 @@ public partial class EvtDeadguy : Area3D
 		Main.Instance.Busy = true;
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
         Main.Instance.UI.SetUIMode((int)UiParent.EModes.MESSAGE);
+		//Stop music
+		Music.Stop();
 		// Show bars
 		await Main.Instance.UI.Message.SetBars(true);
 		await Main.Instance.UI.Message.SetText("What is this monster?", false);

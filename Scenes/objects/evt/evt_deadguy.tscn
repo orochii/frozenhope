@@ -1,8 +1,10 @@
-[gd_scene load_steps=9 format=3 uid="uid://udkmerrmivqi"]
+[gd_scene load_steps=11 format=3 uid="uid://udkmerrmivqi"]
 
 [ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="1_xauce"]
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="2_dp8sl"]
+[ext_resource type="AudioStream" uid="uid://d4caom5hmd42q" path="res://Audio/Sound Effects/Enemies/SFX_MOOSE_IDLE_BREATHE_JDY.wav" id="2_eg6al"]
 [ext_resource type="PackedScene" uid="uid://cygnhseocxq75" path="res://Graphics/Models/enemies/p_wendigo.tscn" id="3_my1vq"]
+[ext_resource type="AudioStream" uid="uid://qkk1axtq5y6f" path="res://Audio/Sound Effects/Enemies/SFX_MOOSE_JUMP_ATTACK_JDY.wav" id="3_tjwa7"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="4_ohh8p"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
@@ -58,6 +60,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 0,
 "values": [Vector3(0, 1.66269, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("Wendigo2/AudioStreamPlayer3D:volume_db")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [20.0]
 }
 
 [sub_resource type="Animation" id="Animation_oaglf"]
@@ -121,6 +135,37 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0, 1.66269, 0), Vector3(0, 1.66269, 0), Vector3(0, 1.26859, 0)]
 }
+tracks/5/type = "audio"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("Wendigo2/AudioStreamPlayer3D")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"clips": [{
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": ExtResource("2_eg6al")
+}, {
+"end_offset": 1.45,
+"start_offset": 0.0,
+"stream": ExtResource("3_tjwa7")
+}],
+"times": PackedFloat32Array(1.76667, 3.53337)
+}
+tracks/5/use_blend = true
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("Wendigo2/AudioStreamPlayer3D:volume_db")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3.5334),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [5.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_7j0f5"]
 _data = {
@@ -169,8 +214,12 @@ bones/0/rotation = Quaternion(-0.0708503, 0.295609, -0.703548, 0.642351)
 bones/1/position = Vector3(-3.21255, 0.146445, 0.783823)
 bones/1/rotation = Quaternion(0.0978189, -0.255147, -0.700308, 0.659469)
 bones/2/position = Vector3(-2.15906, 4.17061, 1.72753e-06)
-bones/2/rotation = Quaternion(-4.97061e-08, 9.49913e-08, -0.225246, 0.974302)
-bones/7/rotation = Quaternion(-2.25976e-09, 8.99952e-08, 0.0273636, 0.999626)
+bones/2/rotation = Quaternion(-4.134e-08, 5.88035e-08, -0.225246, 0.974302)
+bones/3/rotation = Quaternion(5.76619e-08, -1.64136e-07, -0.0969006, 0.995294)
+bones/4/rotation = Quaternion(-9.91403e-08, -1.34747e-07, -0.258905, 0.965903)
+bones/5/rotation = Quaternion(-3.39699e-10, 3.6186e-07, -0.0639609, 0.997952)
+bones/6/rotation = Quaternion(1.54951e-08, -1.81653e-07, -0.0885829, 0.996069)
+bones/7/rotation = Quaternion(-2.9542e-09, 8.42593e-08, 0.0273636, 0.999626)
 bones/9/rotation = Quaternion(3.75521e-08, 3.34045e-07, -0.083267, 0.996527)
 bones/10/rotation = Quaternion(-0.145018, -0.00818791, -0.200686, 0.968828)
 bones/11/rotation = Quaternion(-0.123901, -0.038139, -0.0376262, 0.990847)
@@ -191,6 +240,11 @@ bones/34/position = Vector3(1.44992, 1.94635, 2.24497)
 bones/34/rotation = Quaternion(0.778561, 0.147999, 0.604001, -0.0843939)
 bones/45/position = Vector3(-1.24188, 2.56602, -0.864922)
 bones/46/position = Vector3(-1.24188, 2.56602, 0.861999)
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="Wendigo2"]
+transform = Transform3D(-0.305882, 0, -3.31927, 0, 3.33333, 0, 3.31927, 0, -0.305882, -0.0733994, 4.61972, 4.42483)
+volume_db = 20.0
+max_distance = 30.0
 
 [node name="CameraTowardsTrail" type="Camera3D" parent="."]
 transform = Transform3D(0.128969, 0.139947, -0.981724, 0, 0.989992, 0.141126, 0.991649, -0.0182008, 0.127678, 7.10766, 1.3461, -4.45071)
