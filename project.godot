@@ -12,8 +12,9 @@ config_version=5
 
 config/name="FrozenHope"
 run/main_scene="res://Scenes/main.tscn"
+config/use_custom_user_dir=true
 config/features=PackedStringArray("4.3", "C#", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://icon.png"
 
 [display]
 
