@@ -13,8 +13,9 @@ public partial class Main : Node
 	Node3D currentScene;
 	public override void _Ready()
 	{
-		DirAccess.MakeDirRecursiveAbsolute(SnapPath());
 		Instance = this;
+		AudioManager.Init();
+		DirAccess.MakeDirRecursiveAbsolute(SnapPath());
 		Database = Database.Get();
 		Loader = UI.Loader;
 	}

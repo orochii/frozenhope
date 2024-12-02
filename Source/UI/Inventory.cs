@@ -11,6 +11,7 @@ public partial class Inventory : Control
 	[Export] RichTextLabel InstructionsLabel;
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
+	private InvSlotButton lastFocused;
 	public override void _Ready()
 	{
 		Visible = false;
@@ -68,21 +69,30 @@ public partial class Inventory : Control
 		var focused = GetViewport().GuiGetFocusOwner();
 		if (focused is InvSlotButton) {
 			var slot = focused as InvSlotButton;
-			InfoColumn.Setup(slot.Item);
-			// Reposition combine overlay thing
-			CombineObj.GlobalPosition = slot.GlobalPosition;
+			if (slot != lastFocused) {
+				lastFocused = slot;
+				AudioManager.PlaySystemSound("cursor");
+				InfoColumn.Setup(slot.Item);
+				// Reposition combine overlay thing
+				CombineObj.GlobalPosition = slot.GlobalPosition;
+			}
 			// Get input for combine.
 			if (Input.IsActionJustPressed("aim")) {
-				if(currentCombineSlot == null) SetCombine(slot);
+				if(currentCombineSlot == null) {
+					SetCombine(slot);
+					AudioManager.PlaySystemSound("decision");
+				}
 			}
 		}
 		// Inputs.
 		if (Input.IsActionJustPressed("cancel")) {
 			if (currentCombineSlot != null) {
 				SetCombine(null);
+				AudioManager.PlaySystemSound("cancel");
 			}
 			else {
 				Main.Instance.UI.Gameplay.CloseMenu();
+				AudioManager.PlaySystemSound("cancel");
 			}
 		}
 	}
