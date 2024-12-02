@@ -77,5 +77,4 @@ public partial class Main : Node
 		if (SkipIntro) Main.Instance.StartGame();
 		else ChangeMap(Database.IntroScene);
 	}
-		
 }

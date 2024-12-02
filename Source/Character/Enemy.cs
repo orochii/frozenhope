@@ -5,6 +5,8 @@ using System.Transactions;
 
 public partial class Enemy : CharacterBody3D, Targettable
 {
+	[Signal] public delegate void OnEnemyDeathEventHandler(Node3D self);
+	//
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private float RotateSpeed = 4;
 	[Export] private CharacterGraphic Graphic;
@@ -281,6 +283,8 @@ public partial class Enemy : CharacterBody3D, Targettable
 		CollisionMask = 0;
 		// Show animation.
 		Graphic.StateMachine.ActionState = EActionState.DEATH;
+		// Emit signal
+		EmitSignal(SignalName.OnEnemyDeath, this);
 	}
 	public void Revive() {
 		// Disable movement/collision.

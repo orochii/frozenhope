@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://udkmerrmivqi"]
+[gd_scene load_steps=9 format=3 uid="uid://udkmerrmivqi"]
 
 [ext_resource type="Script" path="res://Source/Events/EvtDeadguy.cs" id="1_xauce"]
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="2_dp8sl"]
 [ext_resource type="PackedScene" uid="uid://cygnhseocxq75" path="res://Graphics/Models/enemies/p_wendigo.tscn" id="3_my1vq"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="4_ohh8p"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0
@@ -127,7 +128,7 @@ _data = {
 "sequence": SubResource("Animation_oaglf")
 }
 
-[node name="EvtDeadguy" type="Area3D" node_paths=PackedStringArray("PlayerLocation", "Camera", "Animation", "Wendigo", "WendigoProp")]
+[node name="EvtDeadguy" type="Area3D" node_paths=PackedStringArray("PlayerLocation", "Camera", "Animation", "Wendigo", "WendigoProp", "EndMessage", "FinalCamera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -51.7839, 12.6195, -9.89785)
 collision_layer = 16
 script = ExtResource("1_xauce")
@@ -137,6 +138,8 @@ Camera = NodePath("Camera3D")
 Animation = NodePath("AnimationPlayer")
 Wendigo = NodePath("Wendigo")
 WendigoProp = NodePath("Wendigo2")
+EndMessage = NodePath("Control")
+FinalCamera = NodePath("CameraTowardsTrail")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
@@ -188,5 +191,62 @@ bones/34/position = Vector3(1.44992, 1.94635, 2.24497)
 bones/34/rotation = Quaternion(0.778561, 0.147999, 0.604001, -0.0843939)
 bones/45/position = Vector3(-1.24188, 2.56602, -0.864922)
 bones/46/position = Vector3(-1.24188, 2.56602, 0.861999)
+
+[node name="CameraTowardsTrail" type="Camera3D" parent="."]
+transform = Transform3D(0.128969, 0.139947, -0.981724, 0, 0.989992, 0.141126, 0.991649, -0.0182008, 0.127678, 7.10766, 1.3461, -4.45071)
+
+[node name="Control" type="Control" parent="."]
+visible = false
+texture_filter = 1
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.501961)
+
+[node name="MarginContainer" type="MarginContainer" parent="Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 16
+theme_override_constants/margin_top = 32
+theme_override_constants/margin_right = 16
+theme_override_constants/margin_bottom = 32
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Control/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("4_ohh8p")
+bbcode_enabled = true
+text = "[center]Thank you for trying this small showcase!
+
+Unfortunately, due to IRL stuff for both of us (work, study), the demonstration had to be severely downscaled, but we tried to at least prepare a small peek of what the game would become.
+
+CREDITS
+Ocean's Dream as George's voice
+Amysaurus as Leona's voice
+JVDMusic for all the music and many SFX
+
+SCRIPT, CODE, DESIGN, ETC
+OzzyTheOne and Orochii Zouveleki
+
+---
+Press [color=#fd4]Ok/Shoot[/color] to go back to title screen."
+fit_content = true
+scroll_active = false
+
+[connection signal="OnEnemyDeath" from="Wendigo" to="." method="OnEnemyDeath"]
 
 [editable path="Wendigo2"]

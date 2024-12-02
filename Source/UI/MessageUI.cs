@@ -58,7 +58,7 @@ public partial class MessageUI : Control
 				// Close
 				MessageLabel.Text = "";
 				EmitSignal(SignalName.OnMessageClose);
-				Visible = false;
+				//Visible = false;
 			}
 		} else {
 			// Advance letters.
