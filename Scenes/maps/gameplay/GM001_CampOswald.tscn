@@ -210,8 +210,8 @@ Amount = 8
 AmmoQty = 0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
-vertices = PackedVector3Array(9.56417, -1.67308, -5.80446, 7.31417, -1.67308, -8.30446, 5.31417, -1.67308, -8.80446, 9.56417, -1.42308, 0.945543, -1.43583, -0.673078, 7.94554, 4.56417, -0.923078, 8.19554, 6.81417, -1.17308, 6.44554, -5.93583, -0.423078, 4.94554, -0.935832, -1.42308, -8.80446, -5.93583, -0.923078, -6.55446, -7.68583, -0.673078, -3.80446)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 2, 10), PackedInt32Array(10, 2, 7), PackedInt32Array(7, 2, 3), PackedInt32Array(7, 3, 6)]
+vertices = PackedVector3Array(-2.48446, -1.0009, -7.93682, -1.98446, -1.0009, -6.68682, -1.23446, -1.0009, -6.93682, -0.484455, -1.0009, -8.68682, 6.76554, -1.5009, -6.43682, 8.01554, -1.5009, -6.93682, 7.26554, -1.5009, -8.18682, 5.01554, -1.2509, -6.68682, 2.26554, -1.0009, -2.68682, 3.01554, -1.0009, -2.93682, 4.51554, -1.2509, -5.18682, -0.234455, -1.0009, -5.18682, -1.23446, -1.0009, -4.43682, -0.484455, -1.0009, -6.18682, 3.26554, -1.0009, -2.43682, 5.26554, -1.2509, -4.43682, -2.48446, -0.750898, -5.18682, -3.23446, -0.750898, -6.43682, -3.73446, -0.750898, -7.18682, -4.48446, -0.750898, -7.18682, -6.23446, -0.750898, -6.18682, -7.23446, -0.500898, -3.68682, -1.98446, -0.750898, 1.31318, -0.984455, -0.750898, 2.06318, 0.0155449, -0.750898, 1.56318, 0.765545, -0.750898, 0.313178, -6.98446, -0.250898, 1.31318, -6.23446, -0.250898, 3.81318, -3.48446, -0.500898, 2.81318, -2.98446, -0.500898, 1.56318, 1.76554, -1.0009, 0.313178, 2.26554, -1.0009, -2.18682, 7.01554, -1.5009, -5.18682, 9.51554, -1.5009, -5.68682, 9.51554, -1.2509, 0.813178, 6.51554, -1.2509, -4.43682, 3.01554, -1.0009, -1.93682, 2.51554, -1.0009, 1.56318, 6.51554, -1.0009, 4.81318, 8.01554, -1.2509, 4.31318, 0.765545, -0.750898, 2.56318, 0.515545, -0.750898, 2.06318, -0.984455, -0.750898, 2.31318, -1.73446, -0.500898, 3.56318, -1.98446, -0.500898, 7.81318, 0.765545, -0.500898, 8.31318, 5.51554, -0.750898, 7.81318, 6.01554, -1.0009, 5.06318, 1.76554, -0.750898, 2.56318, -5.98446, -0.250898, 4.81318, -2.73446, -0.500898, 3.56318)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 7), PackedInt32Array(7, 8, 11), PackedInt32Array(11, 8, 12), PackedInt32Array(13, 2, 3), PackedInt32Array(14, 9, 15), PackedInt32Array(15, 9, 10), PackedInt32Array(13, 3, 11), PackedInt32Array(11, 3, 7), PackedInt32Array(7, 3, 6), PackedInt32Array(16, 17, 1), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 16), PackedInt32Array(19, 16, 20), PackedInt32Array(20, 16, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 26), PackedInt32Array(31, 30, 8), PackedInt32Array(8, 30, 25), PackedInt32Array(8, 25, 12), PackedInt32Array(25, 22, 29), PackedInt32Array(16, 12, 21), PackedInt32Array(21, 12, 26), PackedInt32Array(26, 12, 29), PackedInt32Array(29, 12, 25), PackedInt32Array(4, 5, 32), PackedInt32Array(32, 5, 33), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 33), PackedInt32Array(37, 33, 34), PackedInt32Array(37, 34, 38), PackedInt32Array(31, 36, 30), PackedInt32Array(30, 36, 37), PackedInt32Array(35, 32, 33), PackedInt32Array(14, 15, 36), PackedInt32Array(36, 15, 35), PackedInt32Array(34, 39, 38), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(44, 43, 45), PackedInt32Array(45, 43, 48), PackedInt32Array(45, 48, 47), PackedInt32Array(45, 47, 46), PackedInt32Array(27, 28, 49), PackedInt32Array(49, 28, 50), PackedInt32Array(38, 47, 37), PackedInt32Array(37, 47, 48), PackedInt32Array(48, 43, 40), PackedInt32Array(50, 43, 49), PackedInt32Array(49, 43, 44)]
 
 [node name="Gm001CampOswald" type="Node3D"]
 
@@ -752,8 +752,48 @@ transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299,
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
 navigation_mesh = SubResource("NavigationMesh_rem6n")
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(-2.45039, 0, 3.63752, -1.3359, 0, 3.33104, -0.945827, 0, 2.35586, 0.266182, 0, 2.02151, 0.893082, 0, 2.57876, 1.86826, 0, 2.45337, 2.50909, 0, 1.58965, 2.06329, 0, 0.433364, 0.809494, 0, 0.307984, -0.207478, 0, 1.61751, -1.113, 0, 2.02151, -1.99066, 0, 1.36675, -3.23053, 0, 1.77075, -3.3977, 0, 3.01062)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(2.58335, 0, -1.98504, 2.9371, 0, -2.00762, 3.15536, 0, -2.27105, 3.20805, 0, -2.70006, 2.92957, 0, -2.95596, 2.3726, 0, -2.89575, 2.20702, 0, -2.54953, 2.33497, 0, -2.1732)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D3" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(4.98997, 0, -4.50036, 6.16411, 0, -4.27456, 7.10493, 0, -5.34333, 6.65334, 0, -6.57016, 5.27597, 0, -6.77338, 4.44806, 0, -5.74224)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D4" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(-2.21224, 0, -4.70899, -1.17357, 0, -4.48319, -0.330601, 0, -5.27348, -0.646717, 0, -6.38741, -1.33916, 0, -6.82395, -1.97892, 0, -6.65083, -2.60362, 0, -5.72507)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavMeshBaker" type="CSGPolygon3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.998131, -0.00180782, 0.0610915, -0.061117, -0.0359257, 0.997484, 0.000391482, -0.999353, -0.035969, 0, -2.33765, 0)
+polygon = PackedVector2Array(-7.28918, -1.34166, -7.68199, 3.17061, -6.36803, 6.73975, -0.0137634, 9.12609, 3.14773, 9.194, 7.28561, 8.47876, 9.81161, 5.76394, 10.089, -0.260693, 8.3498, -4.25824, 7.51352, -5.25561, 6.38983, -5.08221, 6.21893, -6.47338, 5.77015, -8.05906, 2.45117, -8.89506, -1.97517, -8.12864, -6.38657, -4.84746)
+
+[node name="NavigationObstacle3D5" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+height = 2.0
+vertices = PackedVector3Array(-4.00566, 0, -7.31288, -2.97092, 0, -6.37144, -2.03797, 0, -6.82944, -2.708, 0, -7.88113)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
 [node name="EvtDeadguy" parent="." node_paths=PackedStringArray("Music") instance=ExtResource("59_fb5ws")]
 Music = NodePath("../CombatMusic")
+NextLevel = "GM002_FacilityOutside"
 
 [node name="EvtStart" parent="." instance=ExtResource("60_xvvdw")]
 

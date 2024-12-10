@@ -1626,7 +1626,7 @@ spot_angle = 25.0
 spot_angle_attenuation = 0.125
 
 [node name="Player" parent="." instance=ExtResource("12_qctx3")]
-transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 4.43391, 0.791459, 1.07406)
+transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 3.30239, 1.05787, 0.230636)
 
 [node name="Cameras" type="Node3D" parent="."]
 
