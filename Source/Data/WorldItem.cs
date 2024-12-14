@@ -6,6 +6,7 @@ public partial class WorldItem : StaticBody3D, Interactable
 {
     [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
+    [Export(PropertyHint.MultilineText)] private string FlavorText;
     private string PickedUpFlag {
         get {
             string basePath = Main.Instance.WorldParent.GetPath();
@@ -33,13 +34,17 @@ public partial class WorldItem : StaticBody3D, Interactable
         if (!IsVisibleInTree()) return;
         // Stop game
         Main.Instance.Busy = true;
-        // Add to inventory
-        Main.Instance.State.AddItem(Item);
-        //We remove the item (I suspect we'll need to add a permant removal flag)
-        Main.Instance.State.SetSwitch(PickedUpFlag,true);
-        Hide();
-        // Show text.
-        string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+        //Add item to inventory if interactable instance has an item assigned
+        if (Item != null) {
+            Main.Instance.State.AddItem(Item);
+            //We remove the item (I suspect we'll need to add a permant removal flag)
+            Main.Instance.State.SetSwitch(PickedUpFlag,true);
+            Hide();
+            }
+        //Assign text based on whether flavour text is empty or not
+        string str = null;
+        if (FlavorText == null) str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+        else str = FlavorText;
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:

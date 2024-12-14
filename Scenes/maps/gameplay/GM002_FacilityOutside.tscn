@@ -1178,6 +1178,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, -5.11361)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost3" index="3"]
+light_bake_mode = 1
 omni_range = 7.5
 
 [node name="LampPost4" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1185,6 +1186,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, 2.98786)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost4" index="3"]
+light_bake_mode = 1
 omni_range = 7.5
 
 [node name="LampPost5" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1192,6 +1194,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, 5)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost5" index="3"]
+light_bake_mode = 1
 omni_range = 8.0
 
 [node name="LampPost6" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1199,6 +1202,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, -10)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost6" index="3"]
+light_bake_mode = 1
 omni_range = 8.0
 
 [node name="LampPost2" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1292,6 +1296,7 @@ collision_layer = 8
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Scenery/Buildings/GuardHouse"]
 transform = Transform3D(2.22222, 0, 0, 0, 2.22222, 0, 0, 0, 2.22222, 2.38487, 4.53809, 0.389533)
+light_bake_mode = 1
 shadow_enabled = true
 omni_range = 4.52821
 
@@ -1303,6 +1308,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
 [node name="RightSpotLightBleed2" type="OmniLight3D" parent="Scenery/Buildings/DoorLightBody"]
 transform = Transform3D(3.33333, 0, 0, 0, -4.72556e-08, 1.08108, 0, -3.33333, -1.45705e-07, -1, 0, 0.333334)
 light_color = Color(1, 1, 0.564706, 1)
+light_bake_mode = 1
 shadow_bias = 0.0
 omni_range = 3.35
 omni_attenuation = -0.307
@@ -1320,6 +1326,7 @@ skeleton = NodePath("../..")
 [node name="RightSpotLightBleed" type="OmniLight3D" parent="Scenery/Buildings/RightSpotLightLense"]
 transform = Transform3D(3.33333, 0, 0, 0, -1.45705e-07, 3.33333, 0, -3.33333, -1.45705e-07, -0.333328, 0, 0)
 light_color = Color(1, 1, 0.564706, 1)
+light_bake_mode = 1
 shadow_bias = 0.0
 omni_range = 4.0
 
@@ -1327,6 +1334,7 @@ omni_range = 4.0
 transform = Transform3D(-1.45705e-07, -1.66667, 2.88675, -3.33333, -5.33316e-08, -1.99036e-07, 1.45705e-07, -2.88675, -1.66667, -0.333328, 0, 0)
 light_color = Color(1, 1, 0.564706, 1)
 light_energy = 2.0
+light_bake_mode = 1
 shadow_enabled = true
 spot_range = 15.0
 
@@ -1344,12 +1352,14 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
 transform = Transform3D(-6.8299e-08, -3.125, -2.38419e-07, -1.18297e-07, -2.38419e-07, 3.125, -3.125, 6.82991e-08, -1.18297e-07, -0.15012, -0.635017, 0)
 light_color = Color(1, 1, 0.564706, 1)
 light_energy = 2.0
+light_bake_mode = 1
 shadow_enabled = true
 spot_range = 15.0
 
 [node name="LeftSpotLightBleed" type="OmniLight3D" parent="Scenery/Buildings/LeftSpotLightBody2"]
 transform = Transform3D(1.5625, -2.70633, 0, 2.70633, 1.5625, 0, 0, 0, 3.125, -0.15012, -0.635017, 0)
 light_color = Color(1, 1, 0.564706, 1)
+light_bake_mode = 1
 omni_range = 4.0
 
 [node name="Building_Piece" parent="Scenery/Buildings" instance=ExtResource("21_f820j")]
@@ -1369,6 +1379,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_eopgj")
 [node name="RightSpotLightBleed2" type="OmniLight3D" parent="Scenery/Buildings/MeshInstance3D"]
 transform = Transform3D(3.33333, 0, 0, 0, -4.72558e-08, 1.08108, 0, -3.33333, -1.45705e-07, -0.666664, 0, 0.333334)
 light_color = Color(1, 1, 0.564706, 1)
+light_bake_mode = 1
 shadow_enabled = true
 omni_range = 3.35
 
@@ -1453,6 +1464,7 @@ transform = Transform3D(-3.0598e-08, 0, -0.7, 0, 0.7, 0, 0.7, 0, -3.0598e-08, 30
 transform = Transform3D(1, 0, 0, 0, 1, 1.42109e-13, 0, -1.42109e-13, 1, 18.7684, 3.37585, -15.2006)
 light_color = Color(1, 1, 0.564706, 1)
 light_energy = 0.5
+light_bake_mode = 1
 shadow_bias = 0.0
 omni_range = 4.0
 

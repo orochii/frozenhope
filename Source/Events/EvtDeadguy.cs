@@ -83,13 +83,13 @@ public partial class EvtDeadguy : Area3D
 		// Hide bars, end message
 		await Main.Instance.UI.Message.SetBars(false);
 		Main.Instance.UI.Message.EndMessage();
-
+/*
 		//Loading the next level after temp cutscene
 		NextLevel = "gameplay/" + NextLevel;
 		Main.Instance.Busy = false;
 		Main.Instance.ChangeMap(NextLevel);
-
-		/*
+*/
+		
 		// Show temporary game end here.
         EndMessage.Modulate = Colors.Transparent;
         EndMessage.Visible = true;
@@ -102,6 +102,6 @@ public partial class EvtDeadguy : Area3D
 		// Game end! :'D back to title.
 		Main.Instance.Busy = false;
 		Main.Instance.LoadIntroMap();
-		*/
+		
 	}
 }

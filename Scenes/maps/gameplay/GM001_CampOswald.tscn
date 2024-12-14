@@ -590,29 +590,6 @@ current = true
 [node name="CampSide" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.982642, 0.154165, -0.103189, 0, 0.556239, 0.831023, 0.185512, -0.816598, 0.546583, -45.8273, 16.3813, -14.952)
 
-[node name="Light-Flashlight" type="SpotLight3D" parent="."]
-transform = Transform3D(0.667833, 0.0298706, -0.743712, 2.56114e-09, 0.999195, 0.0401318, 0.744312, -0.0268013, 0.667295, -50.854, 12.6, -10.176)
-light_energy = 16.0
-spot_angle = 21.73
-spot_angle_attenuation = 1.03526
-
-[node name="Light-Tent1" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4172, 12.535, -16.3055)
-omni_range = 1.3
-
-[node name="Light-Tent2" type="OmniLight3D" parent="."]
-transform = Transform3D(0.735388, 0, 0.677646, 0, 1, 0, -0.677646, 0, 0.735388, -50.6584, 12.4957, -16.3089)
-omni_range = 1.3
-
-[node name="Light-Car" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -38.0096, 13.6958, -7.70877)
-light_color = Color(0.986625, 0.944926, 0.710037, 1)
-light_energy = 4.6
-shadow_enabled = true
-spot_range = 1.24439
-spot_angle = 46.8287
-spot_angle_attenuation = 0.784585
-
 [node name="CameraChangers" type="Node3D" parent="."]
 
 [node name="ViewRedTruckTM" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
@@ -724,6 +701,33 @@ transform = Transform3D(5.35584, 0.060958, 0.0315846, -0.337436, 0.997635, 0.014
 Camera = NodePath("../../Cameras/CampBack")
 Activate = [NodePath("../ViewCampCorpseB")]
 
+[node name="Light-Flashlight" type="SpotLight3D" parent="."]
+transform = Transform3D(0.667833, 0.0298706, -0.743712, 2.56114e-09, 0.999195, 0.0401318, 0.744312, -0.0268013, 0.667295, -50.854, 12.6, -10.176)
+light_energy = 16.0
+light_bake_mode = 1
+spot_angle = 21.73
+spot_angle_attenuation = 1.03526
+
+[node name="Light-Tent1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4172, 12.535, -16.3055)
+light_bake_mode = 1
+omni_range = 1.3
+
+[node name="Light-Tent2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.735388, 0, 0.677646, 0, 1, 0, -0.677646, 0, 0.735388, -50.6584, 12.4957, -16.3089)
+light_bake_mode = 1
+omni_range = 1.3
+
+[node name="Light-Car" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -38.0096, 13.6958, -7.70877)
+light_color = Color(0.986625, 0.944926, 0.710037, 1)
+light_energy = 4.6
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 1.24439
+spot_angle = 46.8287
+spot_angle_attenuation = 0.784585
+
 [node name="Rifle" parent="." instance=ExtResource("48_bk6sa")]
 transform = Transform3D(0.102482, 0.0283567, -0.145236, 0.0815054, 0.136634, 0.0841897, 0.123508, -0.113697, 0.0649518, -38.0714, 12.7954, -7.98635)
 
@@ -748,8 +752,26 @@ Item = SubResource("Resource_qmvw0")
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
 
+[node name="CampFire" parent="Interactables" instance=ExtResource("55_36f02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8883, 12.1457, -12.5771)
+FlavorText = "Looks like the campfire was torn apart in a hurry."
+
+[node name="Interface" parent="Interactables/CampFire" index="1"]
+text = "Check"
+
+[node name="BrokenFence" parent="Interactables" instance=ExtResource("55_36f02")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4846, 12.1457, -14.3553)
+FlavorText = "Something tore down this piece of the fence... looks like a snowmobile plowed right through it?"
+
+[node name="CollisionShape3D" parent="Interactables/BrokenFence" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250435, 0.25, -0.0630188)
+
+[node name="Interface" parent="Interactables/BrokenFence" index="1"]
+text = "Check"
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
+visible = false
 navigation_mesh = SubResource("NavigationMesh_rem6n")
 
 [node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D"]
@@ -803,3 +825,5 @@ bus = &"Music"
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]
+[editable path="Interactables/CampFire"]
+[editable path="Interactables/BrokenFence"]
