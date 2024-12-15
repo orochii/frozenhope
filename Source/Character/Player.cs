@@ -21,6 +21,7 @@ public partial class Player : CharacterBody3D, Targettable
 	public Targettable CurrentTarget => currentTarget;
 	private float previousTargetRotation;
 	private WorldItem NearbyItem;
+	private WorldScenery NearbyScenery;
 
 	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
 	StringName MoveLeft = "move_left";
@@ -346,6 +347,8 @@ public partial class Player : CharacterBody3D, Targettable
 			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
 		}
 	}
+	
+	// Item interact Processing
 	private void OnItemInRange(Node3D Body) {
 		GD.Print("Item Entered" + Body.ToString());
 		var itemObject = Body as WorldItem;
@@ -357,6 +360,20 @@ public partial class Player : CharacterBody3D, Targettable
 		var itemObject = Body as WorldItem;
 		itemObject.HideInterface();
 		NearbyItem = null;
+	}
+
+	// Scenery intreact Processing
+	private void OnFlavorInRange(Node3D Body) {
+		GD.Print("Scenery Entered" + Body.ToString());
+		var flavorObject = Body as WorldScenery;
+		flavorObject.ShowInterface();
+		NearbyScenery = flavorObject;
+	}
+	private void OnFlavorOutOfRange(Node3D Body) {
+		GD.Print("Scenery Left" + Body.ToString());
+		var flavorObject = Body as WorldScenery;
+		flavorObject.HideInterface();
+		NearbyScenery = null;
 	}
     public Vector3 GetPivotPosition()
     {

@@ -71,6 +71,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_as3kg")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.68674, 0)
 light_color = Color(1, 1, 0.564706, 1)
 light_energy = 3.0
+light_bake_mode = 1
 shadow_enabled = true
 omni_range = 6.0
 omni_attenuation = 1.5

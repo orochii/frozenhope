@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=86 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -55,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="55_36f02"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="56_ff2tc"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="57_58qf6"]
+[ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="57_veoda"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="58_4tilc"]
 [ext_resource type="AudioStream" uid="uid://60c0r33iewon" path="res://Audio/Music/Frozen_Hope_Encounter(B)_JDY.wav" id="59_53kvp"]
 [ext_resource type="PackedScene" uid="uid://udkmerrmivqi" path="res://Scenes/objects/evt/evt_deadguy.tscn" id="59_fb5ws"]
@@ -208,6 +209,10 @@ script = ExtResource("57_58qf6")
 Item = ExtResource("56_ff2tc")
 Amount = 8
 AmmoQty = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
+height = 1.0
+radius = 1.0
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
 vertices = PackedVector3Array(-2.48446, -1.0009, -7.93682, -1.98446, -1.0009, -6.68682, -1.23446, -1.0009, -6.93682, -0.484455, -1.0009, -8.68682, 6.76554, -1.5009, -6.43682, 8.01554, -1.5009, -6.93682, 7.26554, -1.5009, -8.18682, 5.01554, -1.2509, -6.68682, 2.26554, -1.0009, -2.68682, 3.01554, -1.0009, -2.93682, 4.51554, -1.2509, -5.18682, -0.234455, -1.0009, -5.18682, -1.23446, -1.0009, -4.43682, -0.484455, -1.0009, -6.18682, 3.26554, -1.0009, -2.43682, 5.26554, -1.2509, -4.43682, -2.48446, -0.750898, -5.18682, -3.23446, -0.750898, -6.43682, -3.73446, -0.750898, -7.18682, -4.48446, -0.750898, -7.18682, -6.23446, -0.750898, -6.18682, -7.23446, -0.500898, -3.68682, -1.98446, -0.750898, 1.31318, -0.984455, -0.750898, 2.06318, 0.0155449, -0.750898, 1.56318, 0.765545, -0.750898, 0.313178, -6.98446, -0.250898, 1.31318, -6.23446, -0.250898, 3.81318, -3.48446, -0.500898, 2.81318, -2.98446, -0.500898, 1.56318, 1.76554, -1.0009, 0.313178, 2.26554, -1.0009, -2.18682, 7.01554, -1.5009, -5.18682, 9.51554, -1.5009, -5.68682, 9.51554, -1.2509, 0.813178, 6.51554, -1.2509, -4.43682, 3.01554, -1.0009, -1.93682, 2.51554, -1.0009, 1.56318, 6.51554, -1.0009, 4.81318, 8.01554, -1.2509, 4.31318, 0.765545, -0.750898, 2.56318, 0.515545, -0.750898, 2.06318, -0.984455, -0.750898, 2.31318, -1.73446, -0.500898, 3.56318, -1.98446, -0.500898, 7.81318, 0.765545, -0.500898, 8.31318, 5.51554, -0.750898, 7.81318, 6.01554, -1.0009, 5.06318, 1.76554, -0.750898, 2.56318, -5.98446, -0.250898, 4.81318, -2.73446, -0.500898, 3.56318)
@@ -752,22 +757,21 @@ Item = SubResource("Resource_qmvw0")
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
 
-[node name="CampFire" parent="Interactables" instance=ExtResource("55_36f02")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.8883, 12.1457, -12.5771)
+[node name="CampFire" parent="Interactables" instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.9638, 12.2322, -12.5977)
 FlavorText = "Looks like the campfire was torn apart in a hurry."
 
-[node name="Interface" parent="Interactables/CampFire" index="1"]
-text = "Check"
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/CampFire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_opak0")
 
-[node name="BrokenFence" parent="Interactables" instance=ExtResource("55_36f02")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.4846, 12.1457, -14.3553)
+[node name="BrokenFence" parent="Interactables" instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2418, 11.9728, -14.2716)
 FlavorText = "Something tore down this piece of the fence... looks like a snowmobile plowed right through it?"
 
-[node name="CollisionShape3D" parent="Interactables/BrokenFence" index="0"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/BrokenFence"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250435, 0.25, -0.0630188)
-
-[node name="Interface" parent="Interactables/BrokenFence" index="1"]
-text = "Check"
+shape = SubResource("CylinderShape3D_opak0")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
@@ -825,5 +829,3 @@ bus = &"Music"
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]
-[editable path="Interactables/CampFire"]
-[editable path="Interactables/BrokenFence"]

@@ -1178,7 +1178,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, -5.11361)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost3" index="3"]
-light_bake_mode = 1
 omni_range = 7.5
 
 [node name="LampPost4" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1186,7 +1185,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.77884, -0.655829, 2.98786)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost4" index="3"]
-light_bake_mode = 1
 omni_range = 7.5
 
 [node name="LampPost5" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1194,7 +1192,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, 5)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost5" index="3"]
-light_bake_mode = 1
 omni_range = 8.0
 
 [node name="LampPost6" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
@@ -1202,7 +1199,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 23, -0.656, -10)
 collision_layer = 8
 
 [node name="OmniLight3D" parent="Scenery/LampPosts/LampPost6" index="3"]
-light_bake_mode = 1
 omni_range = 8.0
 
 [node name="LampPost2" parent="Scenery/LampPosts" instance=ExtResource("12_1hf26")]
