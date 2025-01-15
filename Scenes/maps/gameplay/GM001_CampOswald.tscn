@@ -770,7 +770,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2418, 11.9728, -14.2716)
 FlavorText = "Something tore down this piece of the fence... looks like a snowmobile plowed right through it?"
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/BrokenFence"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.250435, 0.25, -0.0630188)
+transform = Transform3D(0.620553, 0, 0.300811, 0, 1, 0, -0.0858881, 0, 2.1734, 0.130722, 0.25, -0.0630188)
 shape = SubResource("CylinderShape3D_opak0")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]

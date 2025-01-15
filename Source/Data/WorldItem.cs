@@ -6,6 +6,8 @@ public partial class WorldItem : StaticBody3D, Interactable
 {
     [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
+    [Export] public float InteractAngle = 45f;
+
     private string PickedUpFlag {
         get {
             string basePath = Main.Instance.WorldParent.GetPath();

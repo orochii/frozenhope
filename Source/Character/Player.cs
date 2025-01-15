@@ -13,6 +13,7 @@ public partial class Player : CharacterBody3D, Targettable
 	[Export] private Area3D ItemDetectionArea;
 	[Export] private float RotateSpeed = 4;
 	[Export] private float MaxFocusAngle = 45f;
+	[Export] private Label3D InteractInterface;
 	public int AimTimer;
 	public int AimTimer2 = 0; //Electic Boogaloo
 	private bool aimMode = false;
@@ -48,6 +49,9 @@ public partial class Player : CharacterBody3D, Targettable
 		//Item in range
 		ItemDetectionArea.BodyEntered += OnItemInRange;
 		ItemDetectionArea.BodyExited += OnItemOutOfRange;
+		/*//Scenery in range..?
+		ItemDetectionArea.BodyEntered += OnFlavorInRange;
+		ItemDetectionArea.BodyExited += OnFlavorOutOfRange;*/
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -115,8 +119,9 @@ public partial class Player : CharacterBody3D, Targettable
 					// Attack with held weapon.
 					ExecuteAttack();
 				} else {
-					// Interact with environment.
+					// Interact with environment. Be it items, scenery, doors, etc
 					if (NearbyItem != null) NearbyItem.InteractItem();
+					if (NearbyScenery != null) NearbyScenery.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -310,6 +315,7 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 		return closest;
 	}
+
 	private Targettable PickNextTarget(int dir) {
 		if (currentTarget == null) return null;
 		Targettable closest = null;
@@ -350,31 +356,85 @@ public partial class Player : CharacterBody3D, Targettable
 	
 	// Item interact Processing
 	private void OnItemInRange(Node3D Body) {
+		//Print to console for debugging
 		GD.Print("Item Entered" + Body.ToString());
-		var itemObject = Body as WorldItem;
-		itemObject.ShowInterface();
-		NearbyItem = itemObject;
+		//Actual function processing
+		if (Body is WorldItem) {
+			var itemObject = Body as WorldItem;
+			itemObject.ShowInterface();
+			NearbyItem = itemObject;
+		}
+		if (Body is WorldScenery) {
+			InteractInterface.Visible = true;
+			var flavorObject = Body as WorldScenery;
+			NearbyScenery = flavorObject;
+		}
 	}
 	private void OnItemOutOfRange(Node3D Body) {
+		//Print to console for debugging
 		GD.Print("Item Left" + Body.ToString());
-		var itemObject = Body as WorldItem;
-		itemObject.HideInterface();
-		NearbyItem = null;
+		//Actual function processing
+		if (Body is WorldItem) {
+			var itemObject = Body as WorldItem;
+			itemObject.HideInterface();
+			NearbyItem = null;
+		}
+		if (Body is WorldScenery) {
+			InteractInterface.Visible = false;
+			NearbyScenery = null;
+		}
 	}
 
 	// Scenery intreact Processing
-	private void OnFlavorInRange(Node3D Body) {
-		GD.Print("Scenery Entered" + Body.ToString());
-		var flavorObject = Body as WorldScenery;
-		flavorObject.ShowInterface();
-		NearbyScenery = flavorObject;
+	private void OnFlavorInRange(Node3D Scenery) {
+		//Print to console for debugging
+		GD.Print("Scenery Entered" + Scenery.ToString());
+		//Actual function processing
+		if (WithinInteractAngle(Scenery)) {
+			/*InteractInterface.Visible = true;*/
+			var flavorObject = Scenery as WorldScenery;
+			flavorObject.ShowInterface();
+			NearbyScenery = flavorObject;
+		}
+		
 	}
-	private void OnFlavorOutOfRange(Node3D Body) {
-		GD.Print("Scenery Left" + Body.ToString());
-		var flavorObject = Body as WorldScenery;
-		flavorObject.HideInterface();
-		NearbyScenery = null;
+	private void OnFlavorOutOfRange(Node3D Scenery) {
+		//Print to console for debugging
+		GD.Print("Scenery Left" + Scenery.ToString());
+		//Actual function processing
+		if (!WithinInteractAngle(Scenery)) {
+			/*InteractInterface.Visible = false;*/
+			var flavorObject = Scenery as WorldScenery;
+			flavorObject.HideInterface();
+			NearbyScenery = null;
+		}
 	}
+
+	// This code and the functions that call it are currently unusable because angle detection is not update in realtime
+	private bool WithinInteractAngle(Node3D Interactable){
+		//Get the angle based on whether it's WorldScenery or WorldItem (terrible implementation I know)
+		float itemAngle = 0f;
+		if (Interactable is WorldScenery) {
+			var tg = Interactable as WorldScenery;
+			itemAngle = tg.InteractAngle;
+		}
+		if (Interactable is WorldItem) {
+			var tg = Interactable as WorldItem;
+			itemAngle = tg.InteractAngle;
+		}
+		//Get positions between player and scenery
+		var target = Interactable as StaticBody3D;
+		var pForward = Transform.Basis.Z;
+		Vector3 targetPos = target.GlobalPosition;
+		Vector3 targetRelativePos = targetPos - GlobalPosition;
+		//Check out the angle or something
+		float angle = targetRelativePos.Normalized().AngleTo(pForward);
+		GD.Print("Angle: " + angle);
+		if (angle < Mathf.DegToRad(itemAngle)) return true;
+		return false;
+	}
+
+	// Reticle Processing
     public Vector3 GetPivotPosition()
     {
         return GlobalPosition;

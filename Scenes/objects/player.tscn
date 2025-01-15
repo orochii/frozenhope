@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bwuhe8d2c7xau"]
+[gd_scene load_steps=10 format=3 uid="uid://bwuhe8d2c7xau"]
 
 [ext_resource type="Script" path="res://Source/Character/Player.cs" id="1_hl4ia"]
 [ext_resource type="Script" path="res://Source/Character/CharacterMoveData.cs" id="2_ee1yy"]
@@ -25,7 +25,10 @@ radius = 6.0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k7rh0"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea", "ItemDetectionArea")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_8wt16"]
+size = Vector3(1, 1.7, 0.6)
+
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea", "ItemDetectionArea", "InteractInterface")]
 collision_mask = 44
 floor_snap_length = 1.0
 safe_margin = 0.005
@@ -33,7 +36,8 @@ script = ExtResource("1_hl4ia")
 moveStates = Array[Object]([SubResource("Resource_ojy2r"), SubResource("Resource_h88q8")])
 Graphic = NodePath("Lain")
 DetectionArea = NodePath("TargettingArea")
-ItemDetectionArea = NodePath("ItemDetector")
+ItemDetectionArea = NodePath("ItemDetector2")
+InteractInterface = NodePath("Label3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
@@ -54,3 +58,22 @@ collision_mask = 16
 [node name="ItemCollisionShape3D" type="CollisionShape3D" parent="ItemDetector"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("CylinderShape3D_k7rh0")
+
+[node name="BoxDirectionCollider" type="CollisionShape3D" parent="ItemDetector"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0.325)
+shape = SubResource("BoxShape3D_8wt16")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.84681, 0)
+visible = false
+billboard = 1
+fixed_size = true
+text = "?"
+font_size = 24
+
+[node name="ItemDetector2" type="Area3D" parent="."]
+collision_mask = 16
+
+[node name="WeirdConeLikeDirectionCollider" type="CollisionPolygon3D" parent="ItemDetector2"]
+transform = Transform3D(0.95, 0, 0, 0, -2.60083e-08, 1.785, 0, -0.595, -7.80248e-08, 0, 0.9, 0.5)
+polygon = PackedVector2Array(0.8, -0.8, -0.8, -0.8, 0, 0.8)
