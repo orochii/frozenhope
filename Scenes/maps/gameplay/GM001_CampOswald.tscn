@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=87 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -212,7 +212,8 @@ AmmoQty = 0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0
-radius = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ga7is"]
 
 [sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
 vertices = PackedVector3Array(-2.48446, -1.0009, -7.93682, -1.98446, -1.0009, -6.68682, -1.23446, -1.0009, -6.93682, -0.484455, -1.0009, -8.68682, 6.76554, -1.5009, -6.43682, 8.01554, -1.5009, -6.93682, 7.26554, -1.5009, -8.18682, 5.01554, -1.2509, -6.68682, 2.26554, -1.0009, -2.68682, 3.01554, -1.0009, -2.93682, 4.51554, -1.2509, -5.18682, -0.234455, -1.0009, -5.18682, -1.23446, -1.0009, -4.43682, -0.484455, -1.0009, -6.18682, 3.26554, -1.0009, -2.43682, 5.26554, -1.2509, -4.43682, -2.48446, -0.750898, -5.18682, -3.23446, -0.750898, -6.43682, -3.73446, -0.750898, -7.18682, -4.48446, -0.750898, -7.18682, -6.23446, -0.750898, -6.18682, -7.23446, -0.500898, -3.68682, -1.98446, -0.750898, 1.31318, -0.984455, -0.750898, 2.06318, 0.0155449, -0.750898, 1.56318, 0.765545, -0.750898, 0.313178, -6.98446, -0.250898, 1.31318, -6.23446, -0.250898, 3.81318, -3.48446, -0.500898, 2.81318, -2.98446, -0.500898, 1.56318, 1.76554, -1.0009, 0.313178, 2.26554, -1.0009, -2.18682, 7.01554, -1.5009, -5.18682, 9.51554, -1.5009, -5.68682, 9.51554, -1.2509, 0.813178, 6.51554, -1.2509, -4.43682, 3.01554, -1.0009, -1.93682, 2.51554, -1.0009, 1.56318, 6.51554, -1.0009, 4.81318, 8.01554, -1.2509, 4.31318, 0.765545, -0.750898, 2.56318, 0.515545, -0.750898, 2.06318, -0.984455, -0.750898, 2.31318, -1.73446, -0.500898, 3.56318, -1.98446, -0.500898, 7.81318, 0.765545, -0.500898, 8.31318, 5.51554, -0.750898, 7.81318, 6.01554, -1.0009, 5.06318, 1.76554, -0.750898, 2.56318, -5.98446, -0.250898, 4.81318, -2.73446, -0.500898, 3.56318)
@@ -765,13 +766,13 @@ FlavorText = "Looks like the campfire was torn apart in a hurry."
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
 shape = SubResource("CylinderShape3D_opak0")
 
-[node name="BrokenFence" parent="Interactables" instance=ExtResource("57_veoda")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.2418, 11.9728, -14.2716)
+[node name="Fence" parent="Interactables" instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.3961, 11.9432, -14.2177)
 FlavorText = "Something tore down this piece of the fence... looks like a snowmobile plowed right through it?"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/BrokenFence"]
-transform = Transform3D(0.620553, 0, 0.300811, 0, 1, 0, -0.0858881, 0, 2.1734, 0.130722, 0.25, -0.0630188)
-shape = SubResource("CylinderShape3D_opak0")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/Fence"]
+transform = Transform3D(0.747944, 0, 0.323865, 0, 1, 0, -0.0647001, 0, 3.74394, -0.157818, 0, -0.197639)
+shape = SubResource("BoxShape3D_ga7is")
 
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)

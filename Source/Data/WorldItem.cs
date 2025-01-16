@@ -6,7 +6,7 @@ public partial class WorldItem : StaticBody3D, Interactable
 {
     [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
-    [Export] public float InteractAngle = 45f;
+    [Export] public float InteractAngle = 45f; //Currently unused
 
     private string PickedUpFlag {
         get {

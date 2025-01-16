@@ -5,11 +5,29 @@ using System.Runtime.CompilerServices;
 public partial class WorldScenery : StaticBody3D, Interactable
 {
     [Export] public Label3D Interface;
-    [Export] public float InteractAngle = 45f;
+    [Export] public float InteractAngle = 45f; //Currently unused
+    [Export] public Player Character;
     [Export(PropertyHint.MultilineText)] private string FlavorText;
+
+    public bool Active
+        { get; set;}
 
     public override void _Ready() {
         Interface.Visible = false;
+    }
+
+    public override void _Process(double delta) {
+        if (Active) {
+            GD.Print("It is active");
+            var forward = Character.Transform.Basis.Z;
+            var selfPos = GlobalPosition;
+            var selfPosRelative = selfPos - Character.GlobalPosition;
+            float angle = selfPosRelative.Normalized().AngleTo(forward);
+            GD.Print("Angle is:", angle);
+            if (angle < Mathf.DegToRad(InteractAngle)) {
+                ShowInterface();
+            } else HideInterface();
+        }
     }
 
     public void ShowInterface() {
@@ -34,16 +52,4 @@ public partial class WorldScenery : StaticBody3D, Interactable
         // Unpause game
         Main.Instance.Busy = false;
     }
-
-    /*private bool ValidInteractAngle() {
-		var forward = Transform.Basis.Z;
-        //Get current Position of interactable item
-        Vector3 selfPosition = GlobalPosition;
-        //We check if the player is in front of the item
-        float angle = selfPosition.Normalized().AngleTo(forward);
-        if (angle < Mathf.DegToRad(InteractAngle)) {
-            return true;
-        }
-        return false;
-	}*/
 }

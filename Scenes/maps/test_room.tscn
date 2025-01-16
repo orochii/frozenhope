@@ -1,0 +1,51 @@
+[gd_scene load_steps=7 format=3 uid="uid://crdw8od6g2vf6"]
+
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
+[ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
+size = Vector2(10, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_l6vvm"]
+size = Vector3(10, 0.5, 10)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8ma6o"]
+size = Vector3(0.6, 1, 0.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x7vio"]
+size = Vector3(0.5, 1, 0.5)
+
+[node name="TestRoom" type="Node3D"]
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+collision_layer = 4
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("PlaneMesh_5ibhk")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
+shape = SubResource("BoxShape3D_l6vvm")
+
+[node name="Player" parent="." instance=ExtResource("1_3ffqs")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44673, 0, -1.54296)
+
+[node name="SceneryItem" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("2_crkih")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 1.7)
+Character = NodePath("../Player")
+FlavorText = "This is a cube"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneryItem"]
+shape = SubResource("BoxShape3D_8ma6o")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
+mesh = SubResource("BoxMesh_x7vio")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(0.568532, 0.552043, -0.609934, 0, 0.741416, 0.671046, 0.822661, -0.381511, 0.421519, -1.2562, 2.76538, 3.04529)
+current = true
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56385, 1.46523, 0)

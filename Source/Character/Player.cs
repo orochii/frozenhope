@@ -49,9 +49,9 @@ public partial class Player : CharacterBody3D, Targettable
 		//Item in range
 		ItemDetectionArea.BodyEntered += OnItemInRange;
 		ItemDetectionArea.BodyExited += OnItemOutOfRange;
-		/*//Scenery in range..?
+		//Scenery in range..?
 		ItemDetectionArea.BodyEntered += OnFlavorInRange;
-		ItemDetectionArea.BodyExited += OnFlavorOutOfRange;*/
+		ItemDetectionArea.BodyExited += OnFlavorOutOfRange;
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -121,7 +121,7 @@ public partial class Player : CharacterBody3D, Targettable
 				} else {
 					// Interact with environment. Be it items, scenery, doors, etc
 					if (NearbyItem != null) NearbyItem.InteractItem();
-					if (NearbyScenery != null) NearbyScenery.InteractItem();
+					if (NearbyScenery != null && NearbyScenery.Interface.Visible == true) NearbyScenery.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -364,11 +364,11 @@ public partial class Player : CharacterBody3D, Targettable
 			itemObject.ShowInterface();
 			NearbyItem = itemObject;
 		}
-		if (Body is WorldScenery) {
+		/*if (Body is WorldScenery) {
 			InteractInterface.Visible = true;
 			var flavorObject = Body as WorldScenery;
 			NearbyScenery = flavorObject;
-		}
+		}*/
 	}
 	private void OnItemOutOfRange(Node3D Body) {
 		//Print to console for debugging
@@ -379,10 +379,10 @@ public partial class Player : CharacterBody3D, Targettable
 			itemObject.HideInterface();
 			NearbyItem = null;
 		}
-		if (Body is WorldScenery) {
+		/*if (Body is WorldScenery) {
 			InteractInterface.Visible = false;
 			NearbyScenery = null;
-		}
+		}*/
 	}
 
 	// Scenery intreact Processing
@@ -390,24 +390,21 @@ public partial class Player : CharacterBody3D, Targettable
 		//Print to console for debugging
 		GD.Print("Scenery Entered" + Scenery.ToString());
 		//Actual function processing
-		if (WithinInteractAngle(Scenery)) {
-			/*InteractInterface.Visible = true;*/
-			var flavorObject = Scenery as WorldScenery;
-			flavorObject.ShowInterface();
-			NearbyScenery = flavorObject;
-		}
-		
+		/*InteractInterface.Visible = true;*/
+		var flavorObject = Scenery as WorldScenery;
+		/*flavorObject.ShowInterface();*/
+		flavorObject.Active = true;
+		NearbyScenery = flavorObject;
 	}
 	private void OnFlavorOutOfRange(Node3D Scenery) {
 		//Print to console for debugging
 		GD.Print("Scenery Left" + Scenery.ToString());
 		//Actual function processing
-		if (!WithinInteractAngle(Scenery)) {
-			/*InteractInterface.Visible = false;*/
-			var flavorObject = Scenery as WorldScenery;
-			flavorObject.HideInterface();
-			NearbyScenery = null;
-		}
+		/*InteractInterface.Visible = false;*/
+		var flavorObject = Scenery as WorldScenery;
+		flavorObject.Active = false;
+		flavorObject.HideInterface();
+		NearbyScenery = null;
 	}
 
 	// This code and the functions that call it are currently unusable because angle detection is not update in realtime
