@@ -15,7 +15,7 @@ public partial class Player : CharacterBody3D, Targettable
 	[Export] private float MaxFocusAngle = 45f;
 	[Export] private Label3D InteractInterface;
 	public int AimTimer;
-	public int AimTimer2 = 0; //Electic Boogaloo
+	public int AimTimer2 = 0; //Electric Boogaloo
 	private bool aimMode = false;
 	private List<Targettable> nearbyTargets = new List<Targettable>();
 	private Targettable currentTarget;
@@ -46,12 +46,9 @@ public partial class Player : CharacterBody3D, Targettable
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
-		//Item in range
+		//Interactable in range
 		ItemDetectionArea.BodyEntered += OnItemInRange;
 		ItemDetectionArea.BodyExited += OnItemOutOfRange;
-		//Scenery in range..?
-		ItemDetectionArea.BodyEntered += OnFlavorInRange;
-		ItemDetectionArea.BodyExited += OnFlavorOutOfRange;
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -357,57 +354,71 @@ public partial class Player : CharacterBody3D, Targettable
 	// Item interact Processing
 	private void OnItemInRange(Node3D Body) {
 		//Print to console for debugging
-		GD.Print("Item Entered" + Body.ToString());
+		GD.Print(string.Format("Interactable {0} Entered", Body.ToString()));
 		//Actual function processing
-		if (Body is WorldItem) {
-			var itemObject = Body as WorldItem;
-			itemObject.ShowInterface();
-			NearbyItem = itemObject;
+		var evaluator = Body;
+		switch (evaluator) {
+			case WorldItem:
+				var itemObject = Body as WorldItem;
+				itemObject.ShowInterface();
+				NearbyItem = itemObject;
+				break;
+			case WorldScenery:
+				var flavorObject = Body as WorldScenery;
+				flavorObject.Active = true;
+				NearbyScenery = flavorObject;
+				break;
 		}
-		/*if (Body is WorldScenery) {
-			InteractInterface.Visible = true;
-			var flavorObject = Body as WorldScenery;
-			NearbyScenery = flavorObject;
-		}*/
-	}
-	private void OnItemOutOfRange(Node3D Body) {
-		//Print to console for debugging
-		GD.Print("Item Left" + Body.ToString());
-		//Actual function processing
-		if (Body is WorldItem) {
-			var itemObject = Body as WorldItem;
-			itemObject.HideInterface();
-			NearbyItem = null;
-		}
-		/*if (Body is WorldScenery) {
-			InteractInterface.Visible = false;
-			NearbyScenery = null;
-		}*/
 	}
 
+	private void OnItemOutOfRange(Node3D Body) {
+		//Print to console for debugging
+		GD.Print(string.Format("Interactable {0} Left", Body.ToString()));
+		//Actual function processing
+		var evaluator = Body;
+		switch (evaluator) {
+			case WorldItem:
+				var itemObject = Body as WorldItem;
+				itemObject.HideInterface();
+				NearbyItem = null;
+				break;
+			case WorldScenery:
+				var flavorObject = Body as WorldScenery;
+				flavorObject.Active = false;
+				flavorObject.HideInterface();
+				NearbyScenery = null;
+				break;
+		}
+	}
+
+	//[DELETE ME] Old code that is currently unused
 	// Scenery intreact Processing
 	private void OnFlavorInRange(Node3D Scenery) {
 		//Print to console for debugging
 		GD.Print("Scenery Entered" + Scenery.ToString());
 		//Actual function processing
-		/*InteractInterface.Visible = true;*/
-		var flavorObject = Scenery as WorldScenery;
-		/*flavorObject.ShowInterface();*/
-		flavorObject.Active = true;
-		NearbyScenery = flavorObject;
+		if (Scenery is WorldScenery) {
+			var flavorObject = Scenery as WorldScenery;
+			flavorObject.Active = true;
+			NearbyScenery = flavorObject;
+		}
+		
 	}
+	//[DELETE ME] Old code that is currently unsude
 	private void OnFlavorOutOfRange(Node3D Scenery) {
 		//Print to console for debugging
 		GD.Print("Scenery Left" + Scenery.ToString());
 		//Actual function processing
 		/*InteractInterface.Visible = false;*/
-		var flavorObject = Scenery as WorldScenery;
-		flavorObject.Active = false;
-		flavorObject.HideInterface();
-		NearbyScenery = null;
+		if (Scenery is WorldScenery) {
+			var flavorObject = Scenery as WorldScenery;
+			flavorObject.Active = false;
+			flavorObject.HideInterface();
+			NearbyScenery = null;
+		}
 	}
 
-	// This code and the functions that call it are currently unusable because angle detection is not update in realtime
+	//[DELETE ME] Old code that is currently unused
 	private bool WithinInteractAngle(Node3D Interactable){
 		//Get the angle based on whether it's WorldScenery or WorldItem (terrible implementation I know)
 		float itemAngle = 0f;

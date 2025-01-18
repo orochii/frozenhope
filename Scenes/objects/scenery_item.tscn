@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bppgsn5k50r47"]
 
-[ext_resource type="Script" path="res://Source/Data/WorldScenery.cs" id="1_doajl"]
+[ext_resource type="Script" path="res://Source/Objects/WorldScenery.cs" id="1_doajl"]
 
 [node name="SceneryItem" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
 collision_layer = 16

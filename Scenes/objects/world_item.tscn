@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5g5ax5crsydu"]
 
-[ext_resource type="Script" path="res://Source/Data/WorldItem.cs" id="1_uqqku"]
+[ext_resource type="Script" path="res://Source/Objects/WorldItem.cs" id="1_uqqku"]
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0

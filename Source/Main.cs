@@ -6,6 +6,7 @@ public partial class Main : Node
 	public static Main Instance;
 	[Export] public Node WorldParent;
 	[Export] public UiParent UI;
+	[Export] public int StartScene = 0;
 	[Export] public bool SkipIntro;
 	public Loader Loader;
 	public Database Database;
@@ -24,7 +25,7 @@ public partial class Main : Node
 		}
 		State.SetEquippedItem(0);
 		// Go to scene.
-		ChangeMap(Database.StartingScene);
+		ChangeMap(Database.StartingScene[StartScene]);
 	}
 	private string GetFullMapName(string baseName) {
 		if (baseName.Length==0) return "";

@@ -1,7 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=14 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
+[ext_resource type="Texture2D" uid="uid://36tafid3bwwv" path="res://Graphics/OzzyAvatar1.png" id="3_pn3br"]
+[ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="4_l55va"]
+[ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="5_ttcow"]
+[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
+[ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
 size = Vector2(10, 10)
@@ -14,6 +20,12 @@ size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x7vio"]
 size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="Resource" id="Resource_46hqi"]
+script = ExtResource("6_whqtr")
+Item = ExtResource("5_ttcow")
+Amount = 10
+AmmoQty = 0
 
 [node name="TestRoom" type="Node3D"]
 
@@ -31,13 +43,22 @@ shape = SubResource("BoxShape3D_l6vvm")
 [node name="Player" parent="." instance=ExtResource("1_3ffqs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44673, 0, -1.54296)
 
-[node name="SceneryItem" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("2_crkih")]
+[node name="OzzyCube" parent="." node_paths=PackedStringArray("Character", "SceneCamera") instance=ExtResource("2_crkih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 1.7)
 Character = NodePath("../Player")
+SceneCamera = NodePath("TEstCam")
 FlavorText = "This is a cube"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneryItem"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="OzzyCube"]
 shape = SubResource("BoxShape3D_8ma6o")
+
+[node name="Decal" type="Decal" parent="OzzyCube"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0.0502932, 0.3763, 0)
+size = Vector3(0.35, 0.35, 0.35)
+texture_albedo = ExtResource("3_pn3br")
+
+[node name="TEstCam" type="Camera3D" parent="OzzyCube"]
+transform = Transform3D(-0.792271, -0.558299, 0.246189, 0, 0.403476, 0.91499, -0.610169, 0.72492, -0.319662, 0.254322, 1.0487, -0.478907)
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
@@ -49,3 +70,14 @@ current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56385, 1.46523, 0)
+
+[node name="PistolAmmo" parent="." instance=ExtResource("4_l55va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858622, 0, -0.165233)
+Item = SubResource("Resource_46hqi")
+
+[node name="9mm_ammo2" parent="PistolAmmo" instance=ExtResource("7_3lvew")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Door" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
+transform = Transform3D(0.32139, 0, 0.946947, 0, 1, 0, -0.946947, 0, 0.32139, 3.61662, -1.19209e-07, 0.252268)
+Character = NodePath("../Player")

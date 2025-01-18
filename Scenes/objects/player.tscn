@@ -46,7 +46,7 @@ shape = SubResource("CapsuleShape3D_xvsrg")
 collision_layer = 0
 collision_mask = 32
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="TargettingArea"]
+[node name="TargetCollisionShape3D" type="CollisionShape3D" parent="TargettingArea"]
 shape = SubResource("SphereShape3D_anvua")
 
 [node name="ItemDetector" type="Area3D" parent="."]
@@ -63,10 +63,3 @@ billboard = 1
 fixed_size = true
 text = "?"
 font_size = 24
-
-[node name="ItemDetector2" type="Area3D" parent="."]
-collision_mask = 16
-
-[node name="WeirdConeLikeDirectionCollider" type="CollisionPolygon3D" parent="ItemDetector2"]
-transform = Transform3D(0.95, 0, 0, 0, -2.60083e-08, 1.785, 0, -0.595, -7.80248e-08, 0, 0.9, 0.5)
-polygon = PackedVector2Array(0.8, -0.8, -0.8, -0.8, 0, 0.8)

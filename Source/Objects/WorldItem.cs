@@ -37,16 +37,24 @@ public partial class WorldItem : StaticBody3D, Interactable
         Main.Instance.Busy = true;
         // Add item to inventory
         Main.Instance.State.AddItem(Item);
-        //We remove the item (I suspect we'll need to add a permant removal flag)
-        Main.Instance.State.SetSwitch(PickedUpFlag,true);
-        Hide();
         // Assign and display text
+        await Main.Instance.UI.Message.SetBars(true, 0.1f);
         string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
+        await Main.Instance.UI.Message.SetBars(false, 0.1f);
         Main.Instance.UI.Message.EndMessage();
+        //We remove the item (I suspect we'll need to add a permant removal flag)
+        Main.Instance.State.SetSwitch(PickedUpFlag,true);
+        Hide();
         // Unpause game
         Main.Instance.Busy = false;
     }
+
+    //Overridden ToString
+    public override string ToString() {
+        return Name;
+    }
+
 }
