@@ -1,13 +1,22 @@
 using Godot;
 using System;
 
-public partial class Door : Node3D, Interactable
+public partial class Door : StaticBody3D, Interactable
 {
+    [Export] public Label3D Interface;
     [Export] public float InteractAngle = 45f;
     [Export] public Player Character;
+    [Export] public int GoToScene;
+    [Export] public Vector3 NewSceneXYZ;
     public bool Active
         { get; set;}
-    private bool NearDoor = false;
+    private bool NearDoor = false; // Currently not in use anywhere, why did I make this??
+    private Database Data;
+
+    public override void _Ready() {
+        Interface.Visible = false;
+        Data = Database.Get();
+    }
 
 
     public override void _Process(double delta) {
@@ -19,32 +28,31 @@ public partial class Door : Node3D, Interactable
             //Get the angle between player and item and compare it against InteractAngle
             float angle = selfPosRelative.Normalized().AngleTo(forward);
             if (angle < Mathf.DegToRad(InteractAngle)) {
-                NearDoor = true;
-                GD.Print("Door on");
-            } else {
-                NearDoor = false;
-                GD.Print("Door off");
-            }
+                ShowInterface();
+            } else HideInterface();
         }
     }
 
-    //Not used in this node
-    public void HideInterface() {
-        throw new NotImplementedException();
-    }
-    //Not used in this Node
     public void ShowInterface() {
-        throw new NotImplementedException();
+        if (!IsVisibleInTree()) return;
+        Interface.Visible = true;
+    }
+
+    public void HideInterface() {
+        Interface.Visible = false;
     }
 
     public void InteractItem() {
         if (!IsVisibleInTree()) return;
         // Stop game
+        GD.Print("Start Map Change");
         Main.Instance.Busy = true;
-        //Fade out the screen
-        
+        //Move to specified scene
+        Main.Instance.TransferVector = NewSceneXYZ;
+        Main.Instance.ChangeMap(Data.StartingScene[GoToScene]);
 
         //Unpause game
+        GD.Print("End Map Change");
         Main.Instance.Busy = false;
     }
 
@@ -52,7 +60,4 @@ public partial class Door : Node3D, Interactable
     public override string ToString(){
         return Name;
     }
-
-
-
 }

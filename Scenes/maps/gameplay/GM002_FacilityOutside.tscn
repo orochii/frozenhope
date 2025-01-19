@@ -1,4 +1,4 @@
-[gd_scene load_steps=105 format=4 uid="uid://dlnlnxiop05ag"]
+[gd_scene load_steps=106 format=4 uid="uid://dlnlnxiop05ag"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_5w4ie"]
 [ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="2_uj0dq"]
@@ -42,6 +42,7 @@
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="40_kjude"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="41_ha6ey"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="42_x36di"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="43_mp2dh"]
 
 [sub_resource type="Environment" id="Environment_vhopj"]
 background_mode = 2
@@ -1741,6 +1742,10 @@ Camera = NodePath("../../Cameras/FacilityEntrances")
 transform = Transform3D(-1.31134e-08, 0, -4.95051, 0, 1, 0, 0.3, 0, -2.16394e-07, 28.0785, 1.17816, -11.0241)
 Camera = NodePath("../../Cameras/FacilityEntranceSide")
 
+[node name="ViewChanger" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("37_qj1l1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.353, 1.2, -13.996)
+Camera = NodePath("../../Cameras/FacilityEntranceSide")
+
 [node name="BabyFence" type="Node3D" parent="."]
 
 [node name="ExitBlock" type="StaticBody3D" parent="BabyFence"]
@@ -1811,6 +1816,12 @@ Item = SubResource("Resource_h2xfp")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="Flavour" type="Node3D" parent="Interactables"]
+
+[node name="Doors" type="Node3D" parent="Interactables"]
+
+[node name="StaticBody3D" parent="Interactables" node_paths=PackedStringArray("Character") instance=ExtResource("43_mp2dh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82993, 0, -4.57319)
+Character = NodePath("../../Player")
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]

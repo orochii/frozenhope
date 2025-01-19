@@ -23,6 +23,7 @@ public partial class Player : CharacterBody3D, Targettable
 	private float previousTargetRotation;
 	private WorldItem NearbyItem;
 	private WorldScenery NearbyScenery;
+	private Door NearbyDoor;
 
 	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
 	StringName MoveLeft = "move_left";
@@ -37,9 +38,17 @@ public partial class Player : CharacterBody3D, Targettable
 	public bool Dead => Main.Instance.State.GetHealth() <= 0;
 	private uint OriginalCollisionLayer;
 	private uint OriginalCollisionMask;
+	private Vector3 Empty = Vector3.Zero;
 	public override void _Ready()
 	{
 		Instance = this;
+		//Move player after transfer
+		var vec3 = Main.Instance.TransferVector;
+		if (!vec3.Equals(Empty)) {
+			GD.Print("We are working brotha");
+			GlobalPosition = vec3;
+			Main.Instance.TransferVector = Empty;
+		}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
 		OriginalCollisionMask = CollisionMask;
@@ -119,6 +128,7 @@ public partial class Player : CharacterBody3D, Targettable
 					// Interact with environment. Be it items, scenery, doors, etc
 					if (NearbyItem != null) NearbyItem.InteractItem();
 					if (NearbyScenery != null && NearbyScenery.Interface.Visible == true) NearbyScenery.InteractItem();
+					if (NearbyDoor != null && NearbyDoor.Interface.Visible == true) NearbyDoor.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -368,6 +378,11 @@ public partial class Player : CharacterBody3D, Targettable
 				flavorObject.Active = true;
 				NearbyScenery = flavorObject;
 				break;
+			case Door:
+				var doorObject = Body as Door;
+				doorObject.Active = true;
+				NearbyDoor = doorObject;
+				break;
 		}
 	}
 
@@ -387,6 +402,12 @@ public partial class Player : CharacterBody3D, Targettable
 				flavorObject.Active = false;
 				flavorObject.HideInterface();
 				NearbyScenery = null;
+				break;
+			case Door:
+				var doorObject = Body as Door;
+				doorObject.Active = false;
+				doorObject.HideInterface();
+				NearbyDoor = null;
 				break;
 		}
 	}

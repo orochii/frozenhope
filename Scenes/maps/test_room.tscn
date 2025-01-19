@@ -79,5 +79,12 @@ Item = SubResource("Resource_46hqi")
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
 [node name="Door" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
-transform = Transform3D(0.32139, 0, 0.946947, 0, 1, 0, -0.946947, 0, 0.32139, 3.61662, -1.19209e-07, 0.252268)
+transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
 Character = NodePath("../Player")
+GoToScene = 2
+NewSceneXYZ = Vector3(29.353, 2, -13.996)
+
+[node name="StaticBody3D2" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
+Character = NodePath("../Player")
+GoToScene = 2

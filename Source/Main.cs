@@ -12,6 +12,11 @@ public partial class Main : Node
 	public Database Database;
 	public GameState State;
 	Node3D currentScene;
+	public Node3D CurrentScene => currentScene;
+    public bool Busy;
+	public Vector3 TransferVector = Vector3.Zero;
+
+	//Functions start here
 	public override void _Ready()
 	{
 		Instance = this;
@@ -24,7 +29,7 @@ public partial class Main : Node
 			State.AddItem(e);
 		}
 		State.SetEquippedItem(0);
-		// Go to scene.
+		// Go to scene in position [StartScene]
 		ChangeMap(Database.StartingScene[StartScene]);
 	}
 	private string GetFullMapName(string baseName) {
@@ -46,6 +51,8 @@ public partial class Main : Node
 		// This is a dumb hack to deal with signals.
         var awaiter = await Loader.ToSignal(Loader, Loader.SignalName.OnLoadFinished);
         var newMapScene = (awaiter[0].AsInt32()==1) ? awaiter[1].As<PackedScene>() : null;
+		//We pause the game to get rid of pesky gravity based Player character bugs... kinda
+		GetTree().Paused = true;
 		// Instantiate new map if we received any.
         if (newMapScene != null) {
             if(State!=null) State.MapName = newMapName;
@@ -68,11 +75,10 @@ public partial class Main : Node
         var t = GetTree().CreateTimer(0.1);
         await ToSignal(t, Timer.SignalName.Timeout);
         // Show screen.
+		GetTree().Paused = false;
         Loader.HideLoader();
     }
-	public Node3D CurrentScene => currentScene;
-
-    public bool Busy;
+	
 
     public void LoadIntroMap() {
 		if (SkipIntro) Main.Instance.StartGame();
