@@ -15,6 +15,7 @@ public partial class Main : Node
 	public Node3D CurrentScene => currentScene;
     public bool Busy;
 	public Vector3 TransferVector = Vector3.Zero;
+	public Vector3 TransferRotate = Vector3.Zero;
 
 	//Functions start here
 	public override void _Ready()

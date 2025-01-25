@@ -8,6 +8,7 @@ public partial class Door : StaticBody3D, Interactable
     [Export] public Player Character;
     [Export] public int GoToScene;
     [Export] public Vector3 NewSceneXYZ;
+    [Export] public Vector3 NewSceneRotate;
     public bool Active
         { get; set;}
     private bool NearDoor = false; // Currently not in use anywhere, why did I make this??
@@ -49,6 +50,7 @@ public partial class Door : StaticBody3D, Interactable
         Main.Instance.Busy = true;
         //Move to specified scene
         Main.Instance.TransferVector = NewSceneXYZ;
+        Main.Instance.TransferRotate = NewSceneRotate;
         Main.Instance.ChangeMap(Data.StartingScene[GoToScene]);
 
         //Unpause game

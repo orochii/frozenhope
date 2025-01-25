@@ -44,10 +44,15 @@ public partial class Player : CharacterBody3D, Targettable
 		Instance = this;
 		//Move player after transfer
 		var vec3 = Main.Instance.TransferVector;
+		var rot3 = Main.Instance.TransferRotate;
 		if (!vec3.Equals(Empty)) {
 			GD.Print("We are working brotha");
 			GlobalPosition = vec3;
 			Main.Instance.TransferVector = Empty;
+		}
+		if (!rot3.Equals(Empty)) {
+			GlobalRotationDegrees = rot3;
+			Main.Instance.TransferRotate = Empty;
 		}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
