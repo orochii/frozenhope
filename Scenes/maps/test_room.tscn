@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=17 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
@@ -8,12 +8,13 @@
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
+[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="9_slysd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
-size = Vector2(10, 10)
+size = Vector2(15, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_l6vvm"]
-size = Vector3(10, 0.5, 10)
+size = Vector3(15, 0.5, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ma6o"]
 size = Vector3(0.6, 1, 0.6)
@@ -26,6 +27,12 @@ script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
 Amount = 10
 AmmoQty = 0
+
+[sub_resource type="BoxMesh" id="BoxMesh_3wcf2"]
+size = Vector3(0.5, 1, 4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dlmt1"]
+points = PackedVector3Array(-0.25, -0.5, -2, 0.25, -0.5, -2, -0.25, -0.5, 2, -0.25, 0.5, -2, 0.25, 0.5, -2, 0.25, -0.5, 2, -0.25, 0.5, 2, 0.25, 0.5, 2)
 
 [node name="TestRoom" type="Node3D"]
 
@@ -65,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
 mesh = SubResource("BoxMesh_x7vio")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(0.568532, 0.552043, -0.609934, 0, 0.741416, 0.671046, 0.822661, -0.381511, 0.421519, -1.2562, 2.76538, 3.04529)
+transform = Transform3D(-0.729509, 0.521676, -0.442345, 0, 0.646731, 0.762717, 0.68397, 0.55641, -0.471797, -4.17473, 4.17171, -3.53448)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
@@ -88,3 +95,39 @@ NewSceneXYZ = Vector3(29.353, 2, -13.996)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
 Character = NodePath("../Player")
 GoToScene = 2
+
+[node name="Node" type="Node" parent="."]
+
+[node name="Monster block" type="StaticBody3D" parent="Node"]
+collision_layer = 8
+collision_mask = 33
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/Monster block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+mesh = SubResource("BoxMesh_3wcf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Monster block"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+shape = SubResource("ConvexPolygonShape3D_dlmt1")
+
+[node name="Monster block2" type="StaticBody3D" parent="Node"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -6, 0, 0)
+collision_layer = 8
+collision_mask = 33
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Node/Monster block2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+mesh = SubResource("BoxMesh_3wcf2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Node/Monster block2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
+shape = SubResource("ConvexPolygonShape3D_dlmt1")
+
+[node name="Enemies" type="Node" parent="."]
+
+[node name="Wendigo" parent="Enemies" instance=ExtResource("9_slysd")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.69861, 0, 2.45122)
+
+[node name="Wendigo2" parent="Enemies" node_paths=PackedStringArray("AttackAreas") instance=ExtResource("9_slysd")]
+transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -3.69861, 0, 3.45122)
+AttackAreas = [NodePath("../Wendigo/AttackArea_Swipe"), NodePath("../Wendigo/AttackArea_Chomp")]

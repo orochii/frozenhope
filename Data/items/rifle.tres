@@ -10,6 +10,7 @@ script = ExtResource("3_m5ofe")
 CompatibleAmmo = PackedStringArray("308_ammo")
 AmmoMax = 10
 AimTime = 1000
+FocusAngle = 10.0
 DamageBaseVariance = 15
 EquippedModel = ExtResource("1_sgdl2")
 WeaponBoneIdx = 1

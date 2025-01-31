@@ -16,10 +16,10 @@ public partial class Player : CharacterBody3D, Targettable
 	[Export] private Label3D InteractInterface;
 	public int AimTimer;
 	public int AimTimer2 = 0; //Electric Boogaloo
-	private bool aimMode = false;
-	private List<Targettable> nearbyTargets = new List<Targettable>();
-	private Targettable currentTarget;
-	public Targettable CurrentTarget => currentTarget;
+	private bool _aimMode = false;
+	private List<Targettable> _nearbyTargets = new List<Targettable>();
+	private Targettable _currentTarget;
+	public Targettable CurrentTarget => _currentTarget;
 	private float previousTargetRotation;
 	private WorldItem NearbyItem;
 	private WorldScenery NearbyScenery;
@@ -38,21 +38,24 @@ public partial class Player : CharacterBody3D, Targettable
 	public bool Dead => Main.Instance.State.GetHealth() <= 0;
 	private uint OriginalCollisionLayer;
 	private uint OriginalCollisionMask;
-	private Vector3 Empty = Vector3.Zero;
+	private Vector3 _empty = Vector3.Zero;
+
+	//_Ready override
 	public override void _Ready()
 	{
 		Instance = this;
-		//Move player after transfer
-		var vec3 = Main.Instance.TransferVector;
-		var rot3 = Main.Instance.TransferRotate;
-		if (!vec3.Equals(Empty)) {
+		//Move and rotate player after transfer
+		var transferVector3 = Main.Instance.TransferVector;
+		var rotationVector3 = Main.Instance.TransferRotate;
+		if (!transferVector3.Equals(_empty)) {
 			GD.Print("We are working brotha");
-			GlobalPosition = vec3;
-			Main.Instance.TransferVector = Empty;
+			GlobalPosition = transferVector3;
+			Main.Instance.TransferVector = _empty;
 		}
-		if (!rot3.Equals(Empty)) {
-			GlobalRotationDegrees = rot3;
-			Main.Instance.TransferRotate = Empty;
+		//Rotate player after transfer if rotation data is available
+		if (!rotationVector3.Equals(_empty)) {
+			GlobalRotationDegrees = rotationVector3;
+			Main.Instance.TransferRotate = _empty;
 		}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
@@ -67,15 +70,19 @@ public partial class Player : CharacterBody3D, Targettable
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
 		if (item != null && item is WeaponItem) {
-			var wpn = item as WeaponItem;
+			var weapon = item as WeaponItem;
 			//We assign the equipped weapons AimTime to the player's AimTimer Timer
-			AimTimer = wpn.AimTime;
+			AimTimer = weapon.AimTime;
 			GD.Print("AimTimer Assigned: " + AimTimer);
+			//When equiping weapon, we set the MaxFocusAngle to the equipped weapon's FocusAngle
+			MaxFocusAngle = weapon.FocusAngle;
 			// Orochii will explain this
-			Graphic.SetWeaponModel(wpn.EquippedModel, wpn.WeaponBoneIdx);
-			Graphic.SetVariationId(wpn.AnimationSet);
+			Graphic.SetWeaponModel(weapon.EquippedModel, weapon.WeaponBoneIdx);
+			Graphic.SetVariationId(weapon.AnimationSet);
 		} else {
 			AimTimer = 0;
+			//We set the MaxFocusAngle to 0 (I dunno, just feels right? -Ozzy)
+			MaxFocusAngle = 0f;
 			GD.Print("AimTimer Zero? " + AimTimer);
 			Graphic.SetWeaponModel(null);
 			Graphic.SetVariationId("");
@@ -100,17 +107,17 @@ public partial class Player : CharacterBody3D, Targettable
 			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (aim) {
-				aimMode = !aimMode;
-				if (aimMode) {
+				_aimMode = !_aimMode;
+				if (_aimMode) {
 					//Whenever we draw the weapon, we assign the equipped weapon's AimTimer to AimTimer2
 					RefreshWeaponTimer();
-					currentTarget = PickClosestTarget();
+					_currentTarget = PickClosestTarget();
 					previousTargetRotation = Rotation.Y;
 				} else {
-					currentTarget = null;
+					_currentTarget = null;
 				}
-				
 			}
+
 			//We reduce the AimTimer for damage calculation later on
 			if (AimTimer2 > 0) {
 				AimTimer2 -= 5;
@@ -118,15 +125,23 @@ public partial class Player : CharacterBody3D, Targettable
 				AimTimer2 = 0;
 			}
 			
-			if (currentTarget != null) {
+			/*Test code, to be delete or kept after testing*/
+			if (_aimMode && _currentTarget == null) {
+				RefreshWeaponTimer();
+				_currentTarget = PickClosestTarget();
+				previousTargetRotation = Rotation.Y;
+			}
+
+			//We cycle to a new target if the button is pressed
+			if (_currentTarget != null) {
 				var dir = cycleLeft ? -1 : cycleRight ? 1 : 0;
 				var newTarget = PickNextTarget(dir);
-				if (newTarget != null) currentTarget = newTarget;
+				if (newTarget != null) _currentTarget = newTarget;
 			}
-			ProcessTankMove(d,move,run,aimMode);
+			ProcessTankMove(d,move,run,_aimMode);
 			// Execute attack.
 			if (interact) {
-				if (aimMode) {
+				if (_aimMode) {
 					// Attack with held weapon.
 					ExecuteAttack();
 				} else {
@@ -137,8 +152,8 @@ public partial class Player : CharacterBody3D, Targettable
 				}
 			}
 			// Rotate towards target.
-			if (currentTarget != null) {
-				Vector3 dir = (currentTarget.GetPivotPosition() - GlobalPosition).Normalized();
+			if (_currentTarget != null) {
+				Vector3 dir = (_currentTarget.GetPivotPosition() - GlobalPosition).Normalized();
 				float angle = dir.SignedAngleTo(Vector3.Forward, Vector3.Up);
 				float newRotation = Mathf.DegToRad(180) - angle;
 				float r = Mathf.LerpAngle(previousTargetRotation, newRotation, 0.4f);
@@ -242,8 +257,8 @@ public partial class Player : CharacterBody3D, Targettable
 			Graphic.StateMachine.MoveState = (run && move.Y<0) ? EMoveState.RUN : EMoveState.WALK;
 			var targetVelocity = (Transform.Basis.Z * -move.Y);
 			// Are we in aim mode?
-			if (aiming) {
-				// When aiming, left/right strafe the character around the target instead.
+			if (aiming && _currentTarget!= null) {
+				// When aiming and locked on a target, left/right strafe the character around the target instead.
 				targetVelocity += (Transform.Basis.X * -move.X);
 			} 
 			else {
@@ -306,11 +321,13 @@ public partial class Player : CharacterBody3D, Targettable
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
 		MoveAndSlide();
 	}
+	
+	//We iterate over the enemies stored in the _nearbyTargets List and return the one that computes as closest to the player
 	private Targettable PickClosestTarget() {
 		Targettable closest = null;
 		float closestDst = 0;
 		var forward = Transform.Basis.Z;
-		foreach (var target in nearbyTargets) {
+		foreach (var target in _nearbyTargets) {
 			// Get relative position
 			Vector3 targetPos = target.GetPivotPosition();
 			Vector3 targetRelativePos = targetPos - GlobalPosition;
@@ -328,12 +345,13 @@ public partial class Player : CharacterBody3D, Targettable
 		return closest;
 	}
 
+	//Check if we have an active target, we then switch to the next target in the _nearbyTargets list
 	private Targettable PickNextTarget(int dir) {
-		if (currentTarget == null) return null;
+		if (_currentTarget == null) return null;
 		Targettable closest = null;
 		float closestDst = 0;
-		Vector3 forward = currentTarget.GetPivotPosition() - GlobalPosition;
-		foreach (var target in nearbyTargets) {
+		Vector3 forward = _currentTarget.GetPivotPosition() - GlobalPosition;
+		foreach (var target in _nearbyTargets) {
 			// Get relative position
 			Vector3 targetPos = target.GetPivotPosition();
 			Vector3 targetRelativePos = targetPos - GlobalPosition;
@@ -351,18 +369,24 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 		return closest;
 	}
+
+	//If a Targettable entity enters the player's range, add it to the _nearbyTargets list if it isn't in there already.
 	private void OnBodyEntered(Node3D body) {
 		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
-			if (!nearbyTargets.Contains(target)) nearbyTargets.Add(target);
+			if (!_nearbyTargets.Contains(target)) _nearbyTargets.Add(target);
+			//In case enemy enters Player's detection area while aimMode is true, set _currentTarget to closests enemy
+			if (_aimMode) _currentTarget = PickClosestTarget();
 		}
 	}
+
+	//If a targettable entity leaves the player's range, remove it from the _nearbyTargets list
 	private void OnbodyExited(Node3D body) {
 		if (body == this) return;
 		if (body is Targettable) {
 			var target = body as Targettable;
-			if (nearbyTargets.Contains(target)) nearbyTargets.Remove(target);
+			if (_nearbyTargets.Contains(target)) _nearbyTargets.Remove(target);
 		}
 	}
 	
