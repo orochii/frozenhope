@@ -36,14 +36,14 @@ points = PackedVector3Array(-0.25, -0.5, -2, 0.25, -0.5, -2, -0.25, -0.5, 2, -0.
 
 [node name="TestRoom" type="Node3D"]
 
-[node name="StaticBody3D" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="."]
 collision_layer = 4
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
 mesh = SubResource("PlaneMesh_5ibhk")
 skeleton = NodePath("../..")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.25, 0)
 shape = SubResource("BoxShape3D_l6vvm")
 
@@ -72,7 +72,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
 mesh = SubResource("BoxMesh_x7vio")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.729509, 0.521676, -0.442345, 0, 0.646731, 0.762717, 0.68397, 0.55641, -0.471797, -4.17473, 4.17171, -3.53448)
+transform = Transform3D(-0.644864, -0.569803, 0.509385, 0, 0.666476, 0.745526, -0.764297, 0.480763, -0.429786, 3.48119, 2.98209, -1.31019)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]

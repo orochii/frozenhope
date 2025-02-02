@@ -39,10 +39,14 @@ public partial class Player : CharacterBody3D, Targettable
 	private uint OriginalCollisionLayer;
 	private uint OriginalCollisionMask;
 	private Vector3 _empty = Vector3.Zero;
+	private bool _frozen = false;
 
 	//_Ready override
 	public override void _Ready()
 	{
+		//First thing we do is freeze the player
+		FreezeStatus();
+		//We continue with the rest of the prep
 		Instance = this;
 		//Move and rotate player after transfer
 		var transferVector3 = Main.Instance.TransferVector;
@@ -90,6 +94,9 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	public override void _Process(double delta)
 	{
+		//If character isn't ready to move yet upon scene start, we return
+		if (_frozen) return;
+		//if player is dead, do nothing, duh
 		if (Dead) return;
 		// Shouldn't move if we're not in gameplay mode
 		var canMove = Main.Instance.UI.Mode == (int)UiParent.EModes.GAMEPLAY;
@@ -162,7 +169,6 @@ public partial class Player : CharacterBody3D, Targettable
 			}
 		}
 		else {
-			//
 			ProcessTankMove(d,Vector2.Zero,false,false);
 		}
 	}
@@ -248,9 +254,9 @@ public partial class Player : CharacterBody3D, Targettable
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
 		// Work over a copy, commit changes later.
-		var velocity = Velocity;
+		var _velocity = Velocity;
 		// Apply gravity
-		if (!IsOnFloor()) velocity += GetGravity();
+		if (!IsOnFloor()) _velocity += GetGravity();
 		// Quick check for if we're moving forward or not
 		if (move.LengthSquared() > 0) {
 			// Set character visuals
@@ -269,23 +275,24 @@ public partial class Player : CharacterBody3D, Targettable
 			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
 			targetVelocity = targetVelocity * currMoveState.Speed;
-			var planarVelocity = new Vector3(velocity.X, 0, velocity.Z);
+			var planarVelocity = new Vector3(_velocity.X, 0, _velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
-			velocity = new Vector3(planarVelocity.X, velocity.Y, planarVelocity.Z);
+			_velocity = new Vector3(planarVelocity.X, _velocity.Y, planarVelocity.Z);
 		} else {
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
-			var planarVelocity = new Vector3(velocity.X, 0, velocity.Z);
+			var planarVelocity = new Vector3(_velocity.X, 0, _velocity.Z);
 			planarVelocity = planarVelocity.MoveToward(Vector3.Zero, currMoveState.Deacceleration * d);
-			velocity = new Vector3(planarVelocity.X, velocity.Y, planarVelocity.Z);
+			_velocity = new Vector3(planarVelocity.X, _velocity.Y, planarVelocity.Z);
 		}
 		// This single, built-in function does all the magic regarding collision, slopes, etc.
-		Velocity = velocity;
+		Velocity = _velocity;
 		MoveAndSlide();
 	}
-	//Default Move Processing
+	
+	//Default Move Processing, curretly depreciated
 	private void ProcessMove(float d, Vector2 move, bool run, bool aiming) {
 		// You can't run and aim, because I say so! (less animations :P)
 		if (aiming==true) run = false;
@@ -390,6 +397,8 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
+	
+
 	// Item interact Processing
 	private void OnItemInRange(Node3D Body) {
 		//Print to console for debugging
@@ -399,7 +408,7 @@ public partial class Player : CharacterBody3D, Targettable
 		switch (evaluator) {
 			case WorldItem:
 				var itemObject = Body as WorldItem;
-				itemObject.ShowInterface();
+				itemObject.Active = true;
 				NearbyItem = itemObject;
 				break;
 			case WorldScenery:
@@ -423,6 +432,7 @@ public partial class Player : CharacterBody3D, Targettable
 		switch (evaluator) {
 			case WorldItem:
 				var itemObject = Body as WorldItem;
+				itemObject.Active = false;
 				itemObject.HideInterface();
 				NearbyItem = null;
 				break;
@@ -439,57 +449,6 @@ public partial class Player : CharacterBody3D, Targettable
 				NearbyDoor = null;
 				break;
 		}
-	}
-
-	//[DELETE ME] Old code that is currently unused
-	// Scenery intreact Processing
-	private void OnFlavorInRange(Node3D Scenery) {
-		//Print to console for debugging
-		GD.Print("Scenery Entered" + Scenery.ToString());
-		//Actual function processing
-		if (Scenery is WorldScenery) {
-			var flavorObject = Scenery as WorldScenery;
-			flavorObject.Active = true;
-			NearbyScenery = flavorObject;
-		}
-		
-	}
-	//[DELETE ME] Old code that is currently unsude
-	private void OnFlavorOutOfRange(Node3D Scenery) {
-		//Print to console for debugging
-		GD.Print("Scenery Left" + Scenery.ToString());
-		//Actual function processing
-		/*InteractInterface.Visible = false;*/
-		if (Scenery is WorldScenery) {
-			var flavorObject = Scenery as WorldScenery;
-			flavorObject.Active = false;
-			flavorObject.HideInterface();
-			NearbyScenery = null;
-		}
-	}
-
-	//[DELETE ME] Old code that is currently unused
-	private bool WithinInteractAngle(Node3D Interactable){
-		//Get the angle based on whether it's WorldScenery or WorldItem (terrible implementation I know)
-		float itemAngle = 0f;
-		if (Interactable is WorldScenery) {
-			var tg = Interactable as WorldScenery;
-			itemAngle = tg.InteractAngle;
-		}
-		if (Interactable is WorldItem) {
-			var tg = Interactable as WorldItem;
-			itemAngle = tg.InteractAngle;
-		}
-		//Get positions between player and scenery
-		var target = Interactable as StaticBody3D;
-		var pForward = Transform.Basis.Z;
-		Vector3 targetPos = target.GlobalPosition;
-		Vector3 targetRelativePos = targetPos - GlobalPosition;
-		//Check out the angle or something
-		float angle = targetRelativePos.Normalized().AngleTo(pForward);
-		GD.Print("Angle: " + angle);
-		if (angle < Mathf.DegToRad(itemAngle)) return true;
-		return false;
 	}
 
 	// Reticle Processing
@@ -546,5 +505,16 @@ public partial class Player : CharacterBody3D, Targettable
 
 	private void RefreshWeaponTimer() {
 		AimTimer2 = AimTimer;
+	}
+
+	//Signal functions
+	public void FreezeStatus() {
+		if (_frozen) {
+			_frozen = false;
+			GD.Print("Player unfrozen");
+		} else {
+			_frozen = true;
+			GD.Print("Player frozen.");
+		}
 	}
 }

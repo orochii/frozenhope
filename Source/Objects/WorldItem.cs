@@ -7,6 +7,8 @@ public partial class WorldItem : StaticBody3D, Interactable
     [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
     [Export] public float InteractAngle = 45f; //Currently unused
+    public bool Active
+        { get; set; }
 
     private string PickedUpFlag {
         get {
@@ -20,6 +22,11 @@ public partial class WorldItem : StaticBody3D, Interactable
             Hide();
         }
         Interface.Visible = false;
+    }
+
+    public override void _Process(double delta) {
+        if (Active) ShowInterface();
+        else HideInterface();
     }
 
     public void ShowInterface() {

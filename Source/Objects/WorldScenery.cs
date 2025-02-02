@@ -9,10 +9,9 @@ public partial class WorldScenery : StaticBody3D, Interactable
     [Export] public Player Character;
     [Export] public Camera3D SceneCamera;
     [Export(PropertyHint.MultilineText)] private string FlavorText;
-
     public bool Active
         { get; set;}
-    private Camera3D StashedCamera;
+    private Camera3D _stashedCamera;
 
     public override void _Ready() {
         Interface.Visible = false;
@@ -50,7 +49,7 @@ public partial class WorldScenery : StaticBody3D, Interactable
         //Check if Camera is attached ot this object
         if (SceneCamera != null) {
             //Get current camera and cache it
-            StashedCamera = GetViewport().GetCamera3D();
+            _stashedCamera = GetViewport().GetCamera3D();
             Character.Visible = false;
             SceneCamera.Current = true;
         }
@@ -65,7 +64,7 @@ public partial class WorldScenery : StaticBody3D, Interactable
         if (SceneCamera != null && SceneCamera.Current == true) {
             SceneCamera.Current = false;
             Character.Visible = true;
-            StashedCamera.Current = true;
+            _stashedCamera.Current = true;
         }
         // Unpause game
         InteractAngle = tempAngle;

@@ -10,8 +10,7 @@ public partial class Door : StaticBody3D, Interactable
     [Export] public Vector3 NewSceneXYZ;
     [Export] public Vector3 NewSceneRotate;
     public bool Active
-        { get; set;}
-    private bool NearDoor = false; // Currently not in use anywhere, why did I make this??
+        { get; set; }
     private Database Data;
 
     public override void _Ready() {

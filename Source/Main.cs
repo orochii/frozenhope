@@ -59,6 +59,12 @@ public partial class Main : Node
             if(State!=null) State.MapName = newMapName;
             currentScene = newMapScene.Instantiate<Node3D>();
             WorldParent.AddChild(currentScene);
+			//Search for the Player node inside of the new scene and then unfreeze them, this is done in order to
+			//fix a pesky bug where the Player node gets loaded faster than the Terrain node of the Scene, leading
+			//the player node to fall through the world.
+			Player _unfreezePlayer = GetPlayerNode(currentScene);
+			if (_unfreezePlayer != null) _unfreezePlayer.FreezeStatus();
+			//We set the UI Mode
 			int uiMode = 1;
 			if (currentScene is Cutscene) uiMode = (int)UiParent.EModes.CUTSCENE;
 			if (currentScene.HasMeta("uiMode")) {
@@ -84,5 +90,13 @@ public partial class Main : Node
     public void LoadIntroMap() {
 		if (SkipIntro) Main.Instance.StartGame();
 		else ChangeMap(Database.IntroScene);
+	}
+
+	//We search for the player Node inside of a given scene and return it
+	private Player GetPlayerNode(Node3D Scene){
+		var _playerNode = Scene.FindChild("Player") as Player;
+		if (_playerNode != null) GD.Print("Player Node Found");
+		else GD.Print("Player Node not found");
+		return _playerNode;
 	}
 }
