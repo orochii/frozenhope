@@ -1,6 +1,7 @@
 using Godot;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Runtime.InteropServices;
 
@@ -20,6 +21,8 @@ public partial class Player : CharacterBody3D, Targettable
 	private List<Targettable> _nearbyTargets = new List<Targettable>();
 	private Targettable _currentTarget;
 	public Targettable CurrentTarget => _currentTarget;
+	private List<Interactable> _nearbyInteractables = new List<Interactable>();
+	private Interactable _closestInteractable;
 	private float previousTargetRotation;
 	private WorldItem NearbyItem;
 	private WorldScenery NearbyScenery;
@@ -153,9 +156,9 @@ public partial class Player : CharacterBody3D, Targettable
 					ExecuteAttack();
 				} else {
 					// Interact with environment. Be it items, scenery, doors, etc
-					if (NearbyItem != null) NearbyItem.InteractItem();
-					if (NearbyScenery != null && NearbyScenery.Interface.Visible == true) NearbyScenery.InteractItem();
-					if (NearbyDoor != null && NearbyDoor.Interface.Visible == true) NearbyDoor.InteractItem();
+					if (NearbyItem != null && NearbyItem.Active == true) NearbyItem.InteractItem();
+					if (NearbyScenery != null && NearbyScenery.Active == true) NearbyScenery.InteractItem();
+					if (NearbyDoor != null && NearbyDoor.Active == true) NearbyDoor.InteractItem();
 				}
 			}
 			// Rotate towards target.
@@ -397,58 +400,94 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
-	
-
-	// Item interact Processing
-	private void OnItemInRange(Node3D Body) {
+	//Item interact processing
+	private void OnItemInRange(Node3D body) {
 		//Print to console for debugging
-		GD.Print(string.Format("Interactable {0} Entered", Body.ToString()));
-		//Actual function processing
-		var evaluator = Body;
+		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
+		/*START Temp Code*/
+		if (body is Interactable) {
+			var item = body as Interactable;
+			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Add(item);
+		}
+		/*END Temp Code*/
+		//Main function processing
+		var evaluator = body;
 		switch (evaluator) {
 			case WorldItem:
-				var itemObject = Body as WorldItem;
+				var itemObject = body as WorldItem;
 				itemObject.Active = true;
 				NearbyItem = itemObject;
 				break;
 			case WorldScenery:
-				var flavorObject = Body as WorldScenery;
+				var flavorObject = body as WorldScenery;
 				flavorObject.Active = true;
 				NearbyScenery = flavorObject;
 				break;
 			case Door:
-				var doorObject = Body as Door;
+				var doorObject = body as Door;
 				doorObject.Active = true;
 				NearbyDoor = doorObject;
 				break;
 		}
 	}
 
-	private void OnItemOutOfRange(Node3D Body) {
+	private void OnItemOutOfRange(Node3D body) {
 		//Print to console for debugging
-		GD.Print(string.Format("Interactable {0} Left", Body.ToString()));
+		GD.Print(string.Format("Interactable {0} Left", body.ToString()));
+		/*START Temp Code*/
+		if (body is Interactable) {
+			var item = body as Interactable;
+			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Remove(item);
+		}
+		/*END Temp Code*/
 		//Actual function processing
-		var evaluator = Body;
+		var evaluator = body;
 		switch (evaluator) {
 			case WorldItem:
-				var itemObject = Body as WorldItem;
+				var itemObject = body as WorldItem;
 				itemObject.Active = false;
 				itemObject.HideInterface();
 				NearbyItem = null;
 				break;
 			case WorldScenery:
-				var flavorObject = Body as WorldScenery;
+				var flavorObject = body as WorldScenery;
 				flavorObject.Active = false;
 				flavorObject.HideInterface();
 				NearbyScenery = null;
 				break;
 			case Door:
-				var doorObject = Body as Door;
+				var doorObject = body as Door;
 				doorObject.Active = false;
 				doorObject.HideInterface();
 				NearbyDoor = null;
 				break;
 		}
+	}
+
+	//Currently unsued
+	//Iterates over the Interactable inside of the _nearbyInteractables list and returns the closest one.
+	public Interactable GetClosestInteract() {
+		Interactable closest = null;
+		float closestDst = 0;
+		foreach (var item in _nearbyInteractables) {
+			// Get relative position
+			Vector3 targetPos = item.GetItemPosition();
+			Vector3 targetRelativePos = targetPos - GlobalPosition;
+			// Check if it's the closest item.
+			float dst = targetRelativePos.Length();
+			if (closest == null || dst < closestDst) {
+				closest = item;
+				closestDst = dst;
+			}
+		}
+		return closest;
+	}
+
+	//Currently unused
+	public void RefreshInteractables() {
+		_closestInteractable = GetClosestInteract();
+		foreach (var itemOverdue in _nearbyInteractables) itemOverdue.Active = false;
+		_closestInteractable.Active = true;
 	}
 
 	// Reticle Processing

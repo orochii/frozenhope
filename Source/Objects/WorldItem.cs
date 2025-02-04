@@ -19,7 +19,7 @@ public partial class WorldItem : StaticBody3D, Interactable
     }
     public override void _Ready() {
         if (Main.Instance.State.GetSwitch(PickedUpFlag)) {
-            Hide();
+            QueueFree();
         }
         Interface.Visible = false;
     }
@@ -27,6 +27,11 @@ public partial class WorldItem : StaticBody3D, Interactable
     public override void _Process(double delta) {
         if (Active) ShowInterface();
         else HideInterface();
+    }
+
+    //Interface Functions
+    public Vector3 GetItemPosition(){
+        return GlobalPosition;
     }
 
     public void ShowInterface() {
@@ -52,11 +57,12 @@ public partial class WorldItem : StaticBody3D, Interactable
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
         await Main.Instance.UI.Message.SetBars(false, 0.1f);
         Main.Instance.UI.Message.EndMessage();
-        //We remove the item (I suspect we'll need to add a permant removal flag)
+        //We remove the item (I suspect we'll need to add a permanent removal flag)
         Main.Instance.State.SetSwitch(PickedUpFlag,true);
         Hide();
         // Unpause game
         Main.Instance.Busy = false;
+        QueueFree();
     }
 
     //Overridden ToString

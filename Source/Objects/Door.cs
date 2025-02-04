@@ -33,6 +33,11 @@ public partial class Door : StaticBody3D, Interactable
         }
     }
 
+    //Interface functions
+    public Vector3 GetItemPosition(){
+        return GlobalPosition;
+    }
+
     public void ShowInterface() {
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;

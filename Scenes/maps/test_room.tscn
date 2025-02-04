@@ -8,7 +8,6 @@
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
-[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="9_slysd"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
 size = Vector2(15, 15)
@@ -17,7 +16,6 @@ size = Vector2(15, 15)
 size = Vector3(15, 0.5, 15)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_8ma6o"]
-size = Vector3(0.6, 1, 0.6)
 
 [sub_resource type="BoxMesh" id="BoxMesh_x7vio"]
 size = Vector3(0.5, 1, 0.5)
@@ -25,8 +23,12 @@ size = Vector3(0.5, 1, 0.5)
 [sub_resource type="Resource" id="Resource_46hqi"]
 script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
-Amount = 10
+Amount = 20
 AmmoQty = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_ixygt"]
+height = 0.5
+radius = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_3wcf2"]
 size = Vector3(0.5, 1, 4)
@@ -72,18 +74,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
 mesh = SubResource("BoxMesh_x7vio")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.644864, -0.569803, 0.509385, 0, 0.666476, 0.745526, -0.764297, 0.480763, -0.429786, 3.48119, 2.98209, -1.31019)
+transform = Transform3D(-0.954209, 0.26215, -0.144092, 0, 0.481686, 0.876343, 0.29914, 0.836214, -0.45963, -1.33704, 4.22352, -2.4537)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56385, 1.46523, 0)
 
 [node name="PistolAmmo" parent="." instance=ExtResource("4_l55va")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858622, 0, -0.165233)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858622, 0, -0.065233)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="Door" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
 transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
@@ -124,10 +130,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 shape = SubResource("ConvexPolygonShape3D_dlmt1")
 
 [node name="Enemies" type="Node" parent="."]
-
-[node name="Wendigo" parent="Enemies" instance=ExtResource("9_slysd")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.69861, 0, 2.45122)
-
-[node name="Wendigo2" parent="Enemies" node_paths=PackedStringArray("AttackAreas") instance=ExtResource("9_slysd")]
-transform = Transform3D(-0.866025, 0, 0.5, 0, 1, 0, -0.5, 0, -0.866025, -3.69861, 0, 3.45122)
-AttackAreas = [NodePath("../Wendigo/AttackArea_Swipe"), NodePath("../Wendigo/AttackArea_Chomp")]
