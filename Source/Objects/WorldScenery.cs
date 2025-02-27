@@ -11,6 +11,8 @@ public partial class WorldScenery : StaticBody3D, Interactable
     [Export(PropertyHint.MultilineText)] private string FlavorText;
     public bool Active
         { get; set;}
+    public bool InterfaceVisible
+        { get; set; }
     private Camera3D _stashedCamera;
 
     public override void _Ready() {
@@ -28,7 +30,7 @@ public partial class WorldScenery : StaticBody3D, Interactable
             if (angle < Mathf.DegToRad(InteractAngle)) {
                 ShowInterface();
             } else HideInterface();
-        }
+        } else HideInterface();
     }
 
     //Interface functions
@@ -39,10 +41,12 @@ public partial class WorldScenery : StaticBody3D, Interactable
     public void ShowInterface() {
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;
+        InterfaceVisible = true;
     }
 
     public void HideInterface() {
         Interface.Visible = false;
+        InterfaceVisible = false;
     }
 
     public async void InteractItem() {

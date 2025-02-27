@@ -11,6 +11,8 @@ public partial class Door : StaticBody3D, Interactable
     [Export] public Vector3 NewSceneRotate;
     public bool Active
         { get; set; }
+        public bool InterfaceVisible
+        { get; set; }
     private Database Data;
 
     public override void _Ready() {
@@ -41,16 +43,19 @@ public partial class Door : StaticBody3D, Interactable
     public void ShowInterface() {
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;
+        InterfaceVisible = true;
     }
 
     public void HideInterface() {
         Interface.Visible = false;
+        InterfaceVisible = false;
     }
 
     public void InteractItem() {
         if (!IsVisibleInTree()) return;
-        // Stop game
+        // Stop game and freeze player
         GD.Print("Start Map Change");
+        Character.FreezeStatus();
         Main.Instance.Busy = true;
         //Move to specified scene
         Main.Instance.TransferVector = NewSceneXYZ;

@@ -155,10 +155,19 @@ public partial class Player : CharacterBody3D, Targettable
 					// Attack with held weapon.
 					ExecuteAttack();
 				} else {
-					// Interact with environment. Be it items, scenery, doors, etc
-					if (NearbyItem != null && NearbyItem.Active == true) NearbyItem.InteractItem();
+					// Interact with environment. Be it items, scenery, doors, etc (We use implied True/False boolean conditions)
+					if (_closestInteractable != null && _closestInteractable.Active && _closestInteractable.InterfaceVisible) {
+						_closestInteractable.InteractItem();
+						if (_closestInteractable is WorldItem ) {
+							_nearbyInteractables.Remove(_closestInteractable);
+						}
+						if (_nearbyInteractables.Count > 0) {
+							RefreshInteractables();
+						} else _closestInteractable = null; 
+					}
+					/*if (NearbyItem != null && NearbyItem.Active == true) NearbyItem.InteractItem();
 					if (NearbyScenery != null && NearbyScenery.Active == true) NearbyScenery.InteractItem();
-					if (NearbyDoor != null && NearbyDoor.Active == true) NearbyDoor.InteractItem();
+					if (NearbyDoor != null && NearbyDoor.Active == true) NearbyDoor.InteractItem();*/
 				}
 			}
 			// Rotate towards target.
@@ -250,6 +259,7 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
+		if (_nearbyInteractables.Count > 0) RefreshInteractables();
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
 		if (aiming==true) run = false;
@@ -400,18 +410,21 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
-	//Item interact processing
+	//Processing for when items are in range of the player
 	private void OnItemInRange(Node3D body) {
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
+		GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		/*START Temp Code*/
 		if (body is Interactable) {
 			var item = body as Interactable;
 			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Add(item);
+			RefreshInteractables();
+			GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		}
 		/*END Temp Code*/
 		//Main function processing
-		var evaluator = body;
+		/*var evaluator = body;
 		switch (evaluator) {
 			case WorldItem:
 				var itemObject = body as WorldItem;
@@ -428,7 +441,7 @@ public partial class Player : CharacterBody3D, Targettable
 				doorObject.Active = true;
 				NearbyDoor = doorObject;
 				break;
-		}
+		}*/
 	}
 
 	private void OnItemOutOfRange(Node3D body) {
@@ -437,11 +450,18 @@ public partial class Player : CharacterBody3D, Targettable
 		/*START Temp Code*/
 		if (body is Interactable) {
 			var item = body as Interactable;
-			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Remove(item);
+			item.Active = false;
+			if (_nearbyInteractables.Contains(item)) _nearbyInteractables.Remove(item);
+			if (_nearbyInteractables.Count > 0)  RefreshInteractables();
+			else { 
+				item.Active = false;
+				item.HideInterface();
+				_closestInteractable = null;
+			}
 		}
 		/*END Temp Code*/
 		//Actual function processing
-		var evaluator = body;
+		/*var evaluator = body;
 		switch (evaluator) {
 			case WorldItem:
 				var itemObject = body as WorldItem;
@@ -461,10 +481,10 @@ public partial class Player : CharacterBody3D, Targettable
 				doorObject.HideInterface();
 				NearbyDoor = null;
 				break;
-		}
+		}*/
 	}
 
-	//Currently unsued
+	//Currently unused
 	//Iterates over the Interactable inside of the _nearbyInteractables list and returns the closest one.
 	public Interactable GetClosestInteract() {
 		Interactable closest = null;

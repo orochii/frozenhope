@@ -12,6 +12,11 @@ public partial interface Interactable {
         { get; set; }
         
     /// <summary>
+    /// Boolean to check the state of an assigned interface within an object
+    /// </summary>
+    bool InterfaceVisible
+        { get; set; }
+    /// <summary>
     /// Return a Vector3 equivalent to the item's position
     /// </summary>
     /// <returns>Vector3</returns>

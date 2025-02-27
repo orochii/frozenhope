@@ -9,6 +9,8 @@ public partial class WorldItem : StaticBody3D, Interactable
     [Export] public float InteractAngle = 45f; //Currently unused
     public bool Active
         { get; set; }
+    public bool InterfaceVisible
+        { get; set; }
 
     private string PickedUpFlag {
         get {
@@ -21,7 +23,7 @@ public partial class WorldItem : StaticBody3D, Interactable
         if (Main.Instance.State.GetSwitch(PickedUpFlag)) {
             QueueFree();
         }
-        Interface.Visible = false;
+        HideInterface();
     }
 
     public override void _Process(double delta) {
@@ -37,10 +39,12 @@ public partial class WorldItem : StaticBody3D, Interactable
     public void ShowInterface() {
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;
+        InterfaceVisible = true;
     }
 
     public void HideInterface() {
         Interface.Visible = false;
+        InterfaceVisible = false;
     }
 
     public async void InteractItem() {

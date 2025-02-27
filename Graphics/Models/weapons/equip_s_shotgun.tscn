@@ -1,8 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://bqoua20h4vkeg"]
+[gd_scene load_steps=10 format=3 uid="uid://bqoua20h4vkeg"]
 
 [ext_resource type="PackedScene" uid="uid://dsp6fh5oilw2" path="res://Graphics/Models/weapons/Shotgun.fbx" id="1_i7rn1"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_mg0os"]
+[ext_resource type="Script" path="res://Source/Objects/WeaponGraphic.cs" id="2_vwoow"]
 [ext_resource type="Texture2D" uid="uid://ch4n8i7bpi6f1" path="res://Graphics/Models/weapons/Shotgun_Texture.png" id="3_u215y"]
+[ext_resource type="PackedScene" uid="uid://cbfi7ijxpa15g" path="res://Graphics/Models/weapons/p_muzzle_1.tscn" id="5_iw6ug"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_q1upp"]
 render_priority = 0
@@ -19,8 +21,63 @@ shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
 shader_parameter/albedo = ExtResource("3_u215y")
 
-[node name="Shotgun" instance=ExtResource("1_i7rn1")]
+[sub_resource type="Animation" id="Animation_xtqsd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzle1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_jgmlb"]
+resource_name = "muzzle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("muzzle1:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_w1ebp"]
+_data = {
+"RESET": SubResource("Animation_xtqsd"),
+"muzzle": SubResource("Animation_jgmlb")
+}
+
+[node name="Shotgun" node_paths=PackedStringArray("Animator", "SpawnPoint") instance=ExtResource("1_i7rn1")]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+script = ExtResource("2_vwoow")
+Animator = NodePath("WeaponAnim")
+SpawnPoint = NodePath("SpawnPoint")
 
 [node name="Shotgun" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_q1upp")
+
+[node name="muzzle1" parent="." index="1" instance=ExtResource("5_iw6ug")]
+transform = Transform3D(-2.18557e-08, 2.18557e-08, 0.5, 0.5, -2.18557e-08, 2.18557e-08, 2.18557e-08, 0.5, -2.18557e-08, 0, 0.27, 2.9)
+visible = false
+
+[node name="OmniLight3D" type="OmniLight3D" parent="muzzle1" index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.257772, -1.11759e-08)
+
+[node name="SpawnPoint" type="Node3D" parent="." index="2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.27, 2.9)
+
+[node name="WeaponAnim" type="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_w1ebp")
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=18 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
+[ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="9_bpdo2"]
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
 size = Vector2(15, 15)
@@ -23,12 +24,11 @@ size = Vector3(0.5, 1, 0.5)
 [sub_resource type="Resource" id="Resource_46hqi"]
 script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
-Amount = 20
+Amount = 10
 AmmoQty = 0
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_ixygt"]
 height = 0.5
-radius = 0.25
 
 [sub_resource type="BoxMesh" id="BoxMesh_3wcf2"]
 size = Vector3(0.5, 1, 4)
@@ -91,6 +91,39 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_ixygt")
 
+[node name="PistolAmmo2" parent="." instance=ExtResource("4_l55va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141378, 0, -1.06523)
+Item = SubResource("Resource_46hqi")
+
+[node name="9mm_ammo2" parent="PistolAmmo2" instance=ExtResource("7_3lvew")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_ixygt")
+
+[node name="PistolAmmo3" parent="." instance=ExtResource("4_l55va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141378, 0, -0.265233)
+Item = SubResource("Resource_46hqi")
+
+[node name="9mm_ammo2" parent="PistolAmmo3" instance=ExtResource("7_3lvew")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_ixygt")
+
+[node name="PistolAmmo4" parent="." instance=ExtResource("4_l55va")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.709664, 0, -0.737235)
+Item = SubResource("Resource_46hqi")
+
+[node name="9mm_ammo2" parent="PistolAmmo4" instance=ExtResource("7_3lvew")]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_ixygt")
+
 [node name="Door" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
 transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
 Character = NodePath("../Player")
@@ -130,3 +163,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 3)
 shape = SubResource("ConvexPolygonShape3D_dlmt1")
 
 [node name="Enemies" type="Node" parent="."]
+
+[node name="Wendigo" parent="." instance=ExtResource("9_bpdo2")]
+transform = Transform3D(0.232003, 0, 0.972715, 0, 1, 0, -0.972715, 0, 0.232003, -3.19966, 0, 2.3799)

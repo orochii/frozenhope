@@ -4,11 +4,14 @@ using System;
 public partial class WeaponGraphic : Node3D
 {
 	[Export] AnimationPlayer Animator;
-	[Export] public AudioStreamPlayer SoundEffect;
-	[Export] public AudioStreamPlayer Reload;
 	[Export] public Node3D SpawnPoint;
+	[ExportGroup("Sound Effects")]
+	[Export] public AudioStreamPlayer Fire;
+	[Export] public AudioStreamPlayer Action;
+	[Export] public AudioStreamPlayer Reload;
+	
 	public void Play(string animation) {
 		if (Animator != null) Animator.Play(animation);
-		if (SoundEffect != null) SoundEffect.Play();
+		if (Fire != null) Fire.Play();
 	}
 }
