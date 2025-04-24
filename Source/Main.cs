@@ -6,11 +6,18 @@ public partial class Main : Node
 	public static Main Instance;
 	[Export] public Node WorldParent;
 	[Export] public UiParent UI;
+	[Export] public int StartScene = 0;
 	[Export] public bool SkipIntro;
 	public Loader Loader;
 	public Database Database;
 	public GameState State;
 	Node3D currentScene;
+	public Node3D CurrentScene => currentScene;
+    public bool Busy;
+	public Vector3 TransferVector = Vector3.Zero;
+	public Vector3 TransferRotate = Vector3.Zero;
+
+	//Functions start here
 	public override void _Ready()
 	{
 		Instance = this;
@@ -43,8 +50,8 @@ public partial class Main : Node
 			State.AddItem(e);
 		}
 		State.SetEquippedItem(0);
-		// Go to scene.
-		ChangeMap(Database.StartingScene);
+		// Go to scene in position [StartScene]
+		ChangeMap(Database.StartingScene[StartScene]);
 	}
 	private string GetFullMapName(string baseName) {
 		if (baseName.Length==0) return "";
@@ -65,11 +72,19 @@ public partial class Main : Node
 		// This is a dumb hack to deal with signals.
         var awaiter = await Loader.ToSignal(Loader, Loader.SignalName.OnLoadFinished);
         var newMapScene = (awaiter[0].AsInt32()==1) ? awaiter[1].As<PackedScene>() : null;
+		//We pause the game to get rid of pesky gravity based Player character bugs... kinda
+		GetTree().Paused = true;
 		// Instantiate new map if we received any.
         if (newMapScene != null) {
             if(State!=null) State.MapName = newMapName;
             currentScene = newMapScene.Instantiate<Node3D>();
             WorldParent.AddChild(currentScene);
+			//Search for the Player node inside of the new scene and then unfreeze them, this is done in order to
+			//fix a pesky bug where the Player node gets loaded faster than the Terrain node of the Scene, leading
+			//the player node to fall through the world.
+			Player _unfreezePlayer = GetPlayerNode(currentScene);
+			if (_unfreezePlayer != null) _unfreezePlayer.FreezeStatus();
+			//We set the UI Mode
 			int uiMode = 1;
 			if (currentScene is Cutscene) uiMode = (int)UiParent.EModes.CUTSCENE;
 			if (currentScene.HasMeta("uiMode")) {
@@ -87,14 +102,21 @@ public partial class Main : Node
         var t = GetTree().CreateTimer(0.1);
         await ToSignal(t, Timer.SignalName.Timeout);
         // Show screen.
+		GetTree().Paused = false;
         Loader.HideLoader();
     }
-	public Node3D CurrentScene => currentScene;
-
-    public bool Busy;
+	
 
     public void LoadIntroMap() {
 		if (SkipIntro) Main.Instance.StartGame();
 		else ChangeMap(Database.IntroScene);
+	}
+
+	//We search for the player Node inside of a given scene and return it
+	private Player GetPlayerNode(Node3D Scene){
+		var _playerNode = Scene.FindChild("Player") as Player;
+		if (_playerNode != null) GD.Print("Player Node Found");
+		else GD.Print("Player Node not found");
+		return _playerNode;
 	}
 }

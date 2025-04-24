@@ -10,6 +10,7 @@ script = ExtResource("1_ymyrp")
 CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 17
 AimTime = 200
+FocusAngle = 45.0
 DamageBaseVariance = 15
 EquippedModel = ExtResource("1_qrxqs")
 WeaponBoneIdx = 0

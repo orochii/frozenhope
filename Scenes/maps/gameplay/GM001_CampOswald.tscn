@@ -1,4 +1,4 @@
-[gd_scene load_steps=84 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=88 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -55,6 +55,7 @@
 [ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="55_36f02"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="56_ff2tc"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="57_58qf6"]
+[ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="57_veoda"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="58_4tilc"]
 [ext_resource type="AudioStream" uid="uid://60c0r33iewon" path="res://Audio/Music/Frozen_Hope_Encounter(B)_JDY.wav" id="59_53kvp"]
 [ext_resource type="PackedScene" uid="uid://udkmerrmivqi" path="res://Scenes/objects/evt/evt_deadguy.tscn" id="59_fb5ws"]
@@ -209,9 +210,16 @@ Item = ExtResource("56_ff2tc")
 Amount = 8
 AmmoQty = 0
 
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
+height = 1.0
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ga7is"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_8iyoi"]
+
 [sub_resource type="NavigationMesh" id="NavigationMesh_rem6n"]
-vertices = PackedVector3Array(9.56417, -1.67308, -5.80446, 7.31417, -1.67308, -8.30446, 5.31417, -1.67308, -8.80446, 9.56417, -1.42308, 0.945543, -1.43583, -0.673078, 7.94554, 4.56417, -0.923078, 8.19554, 6.81417, -1.17308, 6.44554, -5.93583, -0.423078, 4.94554, -0.935832, -1.42308, -8.80446, -5.93583, -0.923078, -6.55446, -7.68583, -0.673078, -3.80446)
-polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(10, 9, 8), PackedInt32Array(8, 2, 10), PackedInt32Array(10, 2, 7), PackedInt32Array(7, 2, 3), PackedInt32Array(7, 3, 6)]
+vertices = PackedVector3Array(-2.48446, -1.0009, -7.93682, -1.98446, -1.0009, -6.68682, -1.23446, -1.0009, -6.93682, -0.484455, -1.0009, -8.68682, 6.76554, -1.5009, -6.43682, 8.01554, -1.5009, -6.93682, 7.26554, -1.5009, -8.18682, 5.01554, -1.2509, -6.68682, 2.26554, -1.0009, -2.68682, 3.01554, -1.0009, -2.93682, 4.51554, -1.2509, -5.18682, -0.234455, -1.0009, -5.18682, -1.23446, -1.0009, -4.43682, -0.484455, -1.0009, -6.18682, 3.26554, -1.0009, -2.43682, 5.26554, -1.2509, -4.43682, -2.48446, -0.750898, -5.18682, -3.23446, -0.750898, -6.43682, -3.73446, -0.750898, -7.18682, -4.48446, -0.750898, -7.18682, -6.23446, -0.750898, -6.18682, -7.23446, -0.500898, -3.68682, -1.98446, -0.750898, 1.31318, -0.984455, -0.750898, 2.06318, 0.0155449, -0.750898, 1.56318, 0.765545, -0.750898, 0.313178, -6.98446, -0.250898, 1.31318, -6.23446, -0.250898, 3.81318, -3.48446, -0.500898, 2.81318, -2.98446, -0.500898, 1.56318, 1.76554, -1.0009, 0.313178, 2.26554, -1.0009, -2.18682, 7.01554, -1.5009, -5.18682, 9.51554, -1.5009, -5.68682, 9.51554, -1.2509, 0.813178, 6.51554, -1.2509, -4.43682, 3.01554, -1.0009, -1.93682, 2.51554, -1.0009, 1.56318, 6.51554, -1.0009, 4.81318, 8.01554, -1.2509, 4.31318, 0.765545, -0.750898, 2.56318, 0.515545, -0.750898, 2.06318, -0.984455, -0.750898, 2.31318, -1.73446, -0.500898, 3.56318, -1.98446, -0.500898, 7.81318, 0.765545, -0.500898, 8.31318, 5.51554, -0.750898, 7.81318, 6.01554, -1.0009, 5.06318, 1.76554, -0.750898, 2.56318, -5.98446, -0.250898, 4.81318, -2.73446, -0.500898, 3.56318)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(5, 4, 6), PackedInt32Array(6, 4, 7), PackedInt32Array(9, 8, 10), PackedInt32Array(10, 8, 7), PackedInt32Array(7, 8, 11), PackedInt32Array(11, 8, 12), PackedInt32Array(13, 2, 3), PackedInt32Array(14, 9, 15), PackedInt32Array(15, 9, 10), PackedInt32Array(13, 3, 11), PackedInt32Array(11, 3, 7), PackedInt32Array(7, 3, 6), PackedInt32Array(16, 17, 1), PackedInt32Array(18, 17, 19), PackedInt32Array(19, 17, 16), PackedInt32Array(19, 16, 20), PackedInt32Array(20, 16, 21), PackedInt32Array(23, 22, 24), PackedInt32Array(24, 22, 25), PackedInt32Array(28, 27, 29), PackedInt32Array(29, 27, 26), PackedInt32Array(31, 30, 8), PackedInt32Array(8, 30, 25), PackedInt32Array(8, 25, 12), PackedInt32Array(25, 22, 29), PackedInt32Array(16, 12, 21), PackedInt32Array(21, 12, 26), PackedInt32Array(26, 12, 29), PackedInt32Array(29, 12, 25), PackedInt32Array(4, 5, 32), PackedInt32Array(32, 5, 33), PackedInt32Array(36, 35, 37), PackedInt32Array(37, 35, 33), PackedInt32Array(37, 33, 34), PackedInt32Array(37, 34, 38), PackedInt32Array(31, 36, 30), PackedInt32Array(30, 36, 37), PackedInt32Array(35, 32, 33), PackedInt32Array(14, 15, 36), PackedInt32Array(36, 15, 35), PackedInt32Array(34, 39, 38), PackedInt32Array(41, 40, 42), PackedInt32Array(42, 40, 43), PackedInt32Array(44, 43, 45), PackedInt32Array(45, 43, 48), PackedInt32Array(45, 48, 47), PackedInt32Array(45, 47, 46), PackedInt32Array(27, 28, 49), PackedInt32Array(49, 28, 50), PackedInt32Array(38, 47, 37), PackedInt32Array(37, 47, 48), PackedInt32Array(48, 43, 40), PackedInt32Array(50, 43, 49), PackedInt32Array(49, 43, 44)]
 
 [node name="Gm001CampOswald" type="Node3D"]
 
@@ -590,29 +598,6 @@ current = true
 [node name="CampSide" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.982642, 0.154165, -0.103189, 0, 0.556239, 0.831023, 0.185512, -0.816598, 0.546583, -45.8273, 16.3813, -14.952)
 
-[node name="Light-Flashlight" type="SpotLight3D" parent="."]
-transform = Transform3D(0.667833, 0.0298706, -0.743712, 2.56114e-09, 0.999195, 0.0401318, 0.744312, -0.0268013, 0.667295, -50.854, 12.6, -10.176)
-light_energy = 16.0
-spot_angle = 21.73
-spot_angle_attenuation = 1.03526
-
-[node name="Light-Tent1" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4172, 12.535, -16.3055)
-omni_range = 1.3
-
-[node name="Light-Tent2" type="OmniLight3D" parent="."]
-transform = Transform3D(0.735388, 0, 0.677646, 0, 1, 0, -0.677646, 0, 0.735388, -50.6584, 12.4957, -16.3089)
-omni_range = 1.3
-
-[node name="Light-Car" type="SpotLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -38.0096, 13.6958, -7.70877)
-light_color = Color(0.986625, 0.944926, 0.710037, 1)
-light_energy = 4.6
-shadow_enabled = true
-spot_range = 1.24439
-spot_angle = 46.8287
-spot_angle_attenuation = 0.784585
-
 [node name="CameraChangers" type="Node3D" parent="."]
 
 [node name="ViewRedTruckTM" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
@@ -724,6 +709,33 @@ transform = Transform3D(5.35584, 0.060958, 0.0315846, -0.337436, 0.997635, 0.014
 Camera = NodePath("../../Cameras/CampBack")
 Activate = [NodePath("../ViewCampCorpseB")]
 
+[node name="Light-Flashlight" type="SpotLight3D" parent="."]
+transform = Transform3D(0.667833, 0.0298706, -0.743712, 2.56114e-09, 0.999195, 0.0401318, 0.744312, -0.0268013, 0.667295, -50.854, 12.6, -10.176)
+light_energy = 16.0
+light_bake_mode = 1
+spot_angle = 21.73
+spot_angle_attenuation = 1.03526
+
+[node name="Light-Tent1" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -43.4172, 12.535, -16.3055)
+light_bake_mode = 1
+omni_range = 1.3
+
+[node name="Light-Tent2" type="OmniLight3D" parent="."]
+transform = Transform3D(0.735388, 0, 0.677646, 0, 1, 0, -0.677646, 0, 0.735388, -50.6584, 12.4957, -16.3089)
+light_bake_mode = 1
+omni_range = 1.3
+
+[node name="Light-Car" type="SpotLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -38.0096, 13.6958, -7.70877)
+light_color = Color(0.986625, 0.944926, 0.710037, 1)
+light_energy = 4.6
+light_bake_mode = 1
+shadow_enabled = true
+spot_range = 1.24439
+spot_angle = 46.8287
+spot_angle_attenuation = 0.784585
+
 [node name="Rifle" parent="." instance=ExtResource("48_bk6sa")]
 transform = Transform3D(0.102482, 0.0283567, -0.145236, 0.0815054, 0.136634, 0.0841897, 0.123508, -0.113697, 0.0649518, -38.0714, 12.7954, -7.98635)
 
@@ -748,12 +760,84 @@ Item = SubResource("Resource_qmvw0")
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
 transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
 
+[node name="CampFire" parent="Interactables" node_paths=PackedStringArray("Character") instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.9638, 12.2322, -12.5977)
+Character = NodePath("../../Player")
+FlavorText = "Looks like the campfire was torn apart in a hurry."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/CampFire"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.25, 0)
+shape = SubResource("CylinderShape3D_opak0")
+
+[node name="Fence" parent="Interactables" node_paths=PackedStringArray("Character") instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.3961, 11.9432, -14.2177)
+Character = NodePath("../../Player")
+FlavorText = "Something tore down this piece of the fence... looks like a snowmobile plowed right through it?"
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/Fence"]
+transform = Transform3D(0.747944, 0, 0.323865, 0, 1, 0, -0.0647001, 0, 3.74394, -0.157818, 0, -0.197639)
+shape = SubResource("BoxShape3D_ga7is")
+
+[node name="CheckRifle" parent="Interactables" node_paths=PackedStringArray("Character", "SceneCamera") instance=ExtResource("57_veoda")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -38.6022, 12.7466, -7.52827)
+Character = NodePath("../../Player")
+SceneCamera = NodePath("RifleCam")
+FlavorText = "My trusty rifle."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/CheckRifle"]
+transform = Transform3D(0.675732, 0, -0.737148, 0, 1, 0, 0.737148, 0, 0.675732, 0.127135, 0, -0.112704)
+shape = SubResource("BoxShape3D_8iyoi")
+
+[node name="RifleCam" type="Camera3D" parent="Interactables/CheckRifle"]
+transform = Transform3D(0.569451, 0.35976, -0.73912, 0, 0.899145, 0.437651, 0.822025, -0.249221, 0.512019, -0.250778, 0.572267, 0.214103)
+fov = 45.0
+
 [node name="NavigationRegion3D" type="NavigationRegion3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -49.1891, 13.766, -10.8047)
 navigation_mesh = SubResource("NavigationMesh_rem6n")
 
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(-2.45039, 0, 3.63752, -1.3359, 0, 3.33104, -0.945827, 0, 2.35586, 0.266182, 0, 2.02151, 0.893082, 0, 2.57876, 1.86826, 0, 2.45337, 2.50909, 0, 1.58965, 2.06329, 0, 0.433364, 0.809494, 0, 0.307984, -0.207478, 0, 1.61751, -1.113, 0, 2.02151, -1.99066, 0, 1.36675, -3.23053, 0, 1.77075, -3.3977, 0, 3.01062)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D2" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(2.58335, 0, -1.98504, 2.9371, 0, -2.00762, 3.15536, 0, -2.27105, 3.20805, 0, -2.70006, 2.92957, 0, -2.95596, 2.3726, 0, -2.89575, 2.20702, 0, -2.54953, 2.33497, 0, -2.1732)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D3" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(4.98997, 0, -4.50036, 6.16411, 0, -4.27456, 7.10493, 0, -5.34333, 6.65334, 0, -6.57016, 5.27597, 0, -6.77338, 4.44806, 0, -5.74224)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavigationObstacle3D4" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2.09565, 0)
+height = 2.0
+vertices = PackedVector3Array(-2.21224, 0, -4.70899, -1.17357, 0, -4.48319, -0.330601, 0, -5.27348, -0.646717, 0, -6.38741, -1.33916, 0, -6.82395, -1.97892, 0, -6.65083, -2.60362, 0, -5.72507)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
+[node name="NavMeshBaker" type="CSGPolygon3D" parent="NavigationRegion3D"]
+transform = Transform3D(0.998131, -0.00180782, 0.0610915, -0.061117, -0.0359257, 0.997484, 0.000391482, -0.999353, -0.035969, 0, -2.33765, 0)
+polygon = PackedVector2Array(-7.28918, -1.34166, -7.68199, 3.17061, -6.36803, 6.73975, -0.0137634, 9.12609, 3.14773, 9.194, 7.28561, 8.47876, 9.81161, 5.76394, 10.089, -0.260693, 8.3498, -4.25824, 7.51352, -5.25561, 6.38983, -5.08221, 6.21893, -6.47338, 5.77015, -8.05906, 2.45117, -8.89506, -1.97517, -8.12864, -6.38657, -4.84746)
+
+[node name="NavigationObstacle3D5" type="NavigationObstacle3D" parent="NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -2, 0)
+height = 2.0
+vertices = PackedVector3Array(-4.00566, 0, -7.31288, -2.97092, 0, -6.37144, -2.03797, 0, -6.82944, -2.708, 0, -7.88113)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+
 [node name="EvtDeadguy" parent="." node_paths=PackedStringArray("Music") instance=ExtResource("59_fb5ws")]
 Music = NodePath("../CombatMusic")
+NextLevel = "GM002_FacilityOutside"
 
 [node name="EvtStart" parent="." instance=ExtResource("60_xvvdw")]
 

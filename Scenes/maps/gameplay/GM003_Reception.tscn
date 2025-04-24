@@ -1,0 +1,67 @@
+[gd_scene load_steps=7 format=3 uid="uid://clwwy3frymrcr"]
+
+[ext_resource type="PackedScene" uid="uid://dyrvsofcrpc5b" path="res://Graphics/Models/scenery/Tiles/floor_tile_4.tscn" id="1_0fltp"]
+[ext_resource type="PackedScene" uid="uid://hnhrfdnmowka" path="res://Graphics/Models/scenery/Tiles/wall_90.tscn" id="2_cks3j"]
+[ext_resource type="PackedScene" uid="uid://bn755ufai1uda" path="res://Graphics/Models/scenery/Tiles/wall_narrow_2.tscn" id="3_mscck"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="4_c8pps"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="5_qjg6p"]
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="6_ruahr"]
+
+[node name="GM003_Reception" type="Node3D"]
+
+[node name="floor_tile_4" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 4)
+
+[node name="floor_tile_5" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
+
+[node name="floor_tile_6" parent="." instance=ExtResource("1_0fltp")]
+
+[node name="floor_tile_7" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 0)
+
+[node name="floor_tile_8" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="floor_tile_9" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -2)
+
+[node name="floor_tile_10" parent="." instance=ExtResource("1_0fltp")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -4)
+
+[node name="wall_90" parent="." instance=ExtResource("2_cks3j")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -0.6, 3, -0.6)
+
+[node name="wall_narrow_2" parent="." instance=ExtResource("3_mscck")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.15, 3, 1.7)
+
+[node name="wall_narrow_3" parent="." instance=ExtResource("3_mscck")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.15, 3, 3.6)
+
+[node name="ViewChangers" type="Node3D" parent="."]
+
+[node name="ViewChanger" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("4_c8pps")]
+transform = Transform3D(0.658503, 0, 0, 0, 1, 0, 0, 0, 1.79928, 1.3739, 2.65184e-08, -0.06172)
+Camera = NodePath("../../Cameras/HallMiddle")
+
+[node name="ViewChanger2" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("4_c8pps")]
+transform = Transform3D(2.1, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.300871, -9.82336e-08, 1.23507)
+Camera = NodePath("../../Cameras/Hall Entrance")
+
+[node name="StaticBody3D" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("5_qjg6p")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.146223, 1.08808e-07, 4.91275)
+Character = NodePath("../Player")
+GoToScene = 2
+NewSceneXYZ = Vector3(29.353, 2, -13.996)
+NewSceneRotate = Vector3(0, -90, 0)
+
+[node name="Player" parent="." instance=ExtResource("6_ruahr")]
+transform = Transform3D(-0.999972, 0, 0.00752219, 0, 1, 0, -0.00752219, 0, -0.999972, 0.260751, 0.376494, 4.23905)
+
+[node name="Cameras" type="Node3D" parent="."]
+
+[node name="Hall Entrance" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.930417, -0.27869, 0.238024, 0, 0.649449, 0.760405, -0.366502, -0.707494, 0.604259, 1.35827, 4.06662, 5.15398)
+
+[node name="HallMiddle" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.0653997, 0.617767, -0.783637, 0, 0.785318, 0.619093, 0.997859, 0.0404884, -0.0513595, -1.58052, 4.356, -0.339728)

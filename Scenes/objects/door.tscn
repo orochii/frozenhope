@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://ddoq3ly1gal7p"]
+
+[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_tckt0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ccv"]
+size = Vector3(1, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_wuiqg"]
+
+[node name="StaticBody3D" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
+collision_layer = 16
+script = ExtResource("1_tckt0")
+Interface = NodePath("Label3D")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_31ccv")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 2, 0, 0, 0, 0.5, 0, 1, 0)
+shape = SubResource("BoxShape3D_wuiqg")
+
+[node name="Label3D" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true

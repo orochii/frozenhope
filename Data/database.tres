@@ -1,9 +1,13 @@
-[gd_resource type="Resource" script_class="Database" load_steps=7 format=3 uid="uid://tidkq4ucvhge"]
+[gd_resource type="Resource" script_class="Database" load_steps=13 format=3 uid="uid://tidkq4ucvhge"]
 
 [ext_resource type="Resource" uid="uid://d2gmdj8i5534y" path="res://Data/items/glock.tres" id="1_8biv8"]
 [ext_resource type="Script" path="res://Source/Data/Database.cs" id="1_nmb2g"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="2_dhkgy"]
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="2_mwwnc"]
+[ext_resource type="Resource" uid="uid://bgqsqi23jbqjc" path="res://Data/items/308_ammo.tres" id="4_5barp"]
+[ext_resource type="Resource" uid="uid://c8wu2brd3rtum" path="res://Data/items/rifle.tres" id="5_4xose"]
+[ext_resource type="Resource" uid="uid://clmdgvx3o1ef6" path="res://Data/items/shotgun_ammo.tres" id="6_5rofn"]
+[ext_resource type="Resource" uid="uid://cxathawwalwmv" path="res://Data/items/shotgun.tres" id="7_lb7v5"]
 
 [sub_resource type="Resource" id="Resource_m1qy0"]
 script = ExtResource("2_mwwnc")
@@ -18,8 +22,22 @@ Item = ExtResource("2_dhkgy")
 Amount = 7
 AmmoQty = 0
 
+[sub_resource type="Resource" id="Resource_7h2s4"]
+script = ExtResource("2_mwwnc")
+Item = ExtResource("5_4xose")
+Amount = 1
+AmmoInside = ExtResource("4_5barp")
+AmmoQty = 5
+
+[sub_resource type="Resource" id="Resource_m50s7"]
+script = ExtResource("2_mwwnc")
+Item = ExtResource("7_lb7v5")
+Amount = 1
+AmmoInside = ExtResource("6_5rofn")
+AmmoQty = 4
+
 [resource]
 script = ExtResource("1_nmb2g")
-StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv")])
-StartingScene = "gameplay/GM001_CampOswald"
+StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_7h2s4"), SubResource("Resource_m50s7")])
+StartingScene = PackedStringArray("test_room", "gameplay/GM001_CampOswald", "gameplay/GM002_FacilityOutside", "gameplay/GM003_Reception")
 IntroScene = "cutscenes/001_intro"

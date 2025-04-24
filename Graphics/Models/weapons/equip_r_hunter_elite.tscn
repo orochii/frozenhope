@@ -60,11 +60,13 @@ _data = {
 "muzzle": SubResource("Animation_jgmlb")
 }
 
-[node name="Rifle" node_paths=PackedStringArray("Animator", "SpawnPoint") instance=ExtResource("1_mp0kl")]
+[node name="Rifle" node_paths=PackedStringArray("Animator", "SpawnPoint", "Fire", "Reload") instance=ExtResource("1_mp0kl")]
 transform = Transform3D(-0.123117, -0.0400743, 0.075738, 0.0763024, 0.00905364, 0.128826, -0.0389886, 0.144264, 0.0129541, -0.00200006, 0.077, 0.0289994)
 script = ExtResource("2_8e50y")
 Animator = NodePath("WeaponAnim")
 SpawnPoint = NodePath("SpawnPoint")
+Fire = NodePath("WeaponSFX")
+Reload = NodePath("ReloadSFX")
 
 [node name="Rifle" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_wg82q")

@@ -1,0 +1,16 @@
+[gd_scene load_steps=2 format=3 uid="uid://bppgsn5k50r47"]
+
+[ext_resource type="Script" path="res://Source/Objects/WorldScenery.cs" id="1_doajl"]
+
+[node name="SceneryItem" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
+collision_layer = 16
+script = ExtResource("1_doajl")
+Interface = NodePath("Interface")
+
+[node name="Interface" type="Label3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+billboard = 1
+fixed_size = true
+text = "?"
+font_size = 24
+outline_size = 10

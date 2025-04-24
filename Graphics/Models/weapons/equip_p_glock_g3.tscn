@@ -60,13 +60,13 @@ _data = {
 "muzzle": SubResource("Animation_jgmlb")
 }
 
-[node name="glock_g3" node_paths=PackedStringArray("Animator", "SoundEffect", "Reload", "SpawnPoint") instance=ExtResource("1_yw55t")]
+[node name="glock_g3" node_paths=PackedStringArray("Animator", "SpawnPoint", "Fire", "Reload") instance=ExtResource("1_yw55t")]
 transform = Transform3D(-6.55671e-09, 0.15, 6.55671e-09, 0, -6.55671e-09, 0.15, 0.15, 6.55671e-09, 2.86603e-16, 0.0284089, 0.106533, 0)
 script = ExtResource("2_i0ygo")
 Animator = NodePath("WeaponAnim")
-SoundEffect = NodePath("WeaponSFX")
-Reload = NodePath("ReloadSFX")
 SpawnPoint = NodePath("SpawnPoint")
+Fire = NodePath("WeaponSFX")
+Reload = NodePath("ReloadSFX")
 
 [node name="Plane" parent="." index="0"]
 surface_material_override/0 = SubResource("ShaderMaterial_yfb60")

@@ -1,0 +1,56 @@
+[gd_scene load_steps=6 format=4 uid="uid://dyrvsofcrpc5b"]
+
+[ext_resource type="Texture2D" uid="uid://daxg787kgy1if" path="res://Graphics/Models/scenery/Interior/Lab/floor_tile_4_0.png" id="1_yumdn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_dja55"]
+resource_name = "Atlus"
+vertex_color_use_as_albedo = true
+albedo_texture = ExtResource("1_yumdn")
+emission_enabled = true
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_gnc4s"]
+_surfaces = [{
+"aabb": AABB(-0.01, -0.01, 0, 0.02, 0.02, 1e-05),
+"format": 34359742465,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"name": "Atlus",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("CtcjPArXIzwAAAAACtcjPArXI7wAAAAACtcjvArXI7wAAAAACtcjvArXIzwAAAAA")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2gb05"]
+resource_name = "Plane"
+_surfaces = [{
+"aabb": AABB(-0.01, -0.01, 0, 0.02, 0.02, 1e-05),
+"attribute_data": PackedByteArray("8+OaPtBMpz3z45o+BGFPPjDrYz4EYU8+MOtjPtBMpz0="),
+"format": 34359742487,
+"index_count": 6,
+"index_data": PackedByteArray("AAABAAIAAgADAAAA"),
+"material": SubResource("StandardMaterial3D_dja55"),
+"name": "Atlus",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 4,
+"vertex_data": PackedByteArray("CtcjPArXIzwAAAAACtcjPArXI7wAAAAACtcjvArXI7wAAAAACtcjvArXIzwAAAAA/3//f////7//f/9/////v/9//3////+//3//f////78=")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_gnc4s")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_u4v8u"]
+points = PackedVector3Array(0.01, 0.01, 0, 0.01, -0.01, 0, -0.01, 0.01, 0, -0.01, -0.01, 0)
+
+[node name="floor_tile_4" type="StaticBody3D"]
+collision_layer = 4
+
+[node name="FloorTile" type="MeshInstance3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 0, 0)
+mesh = SubResource("ArrayMesh_2gb05")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, -1.19209e-05, 100, 0, -100, -1.19209e-05, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_u4v8u")
