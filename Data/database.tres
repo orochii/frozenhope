@@ -39,5 +39,5 @@ AmmoQty = 4
 [resource]
 script = ExtResource("1_nmb2g")
 StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_7h2s4"), SubResource("Resource_m50s7")])
-StartingScene = PackedStringArray("test_room", "gameplay/GM001_CampOswald", "gameplay/GM002_FacilityOutside", "gameplay/GM003_Reception")
+StartingScene = PackedStringArray("gameplay/GM001_CampOswald", "gameplay/GM002_FacilityOutside", "gameplay/GM003_Reception", "test_room")
 IntroScene = "cutscenes/001_intro"

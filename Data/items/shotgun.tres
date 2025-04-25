@@ -19,5 +19,5 @@ DisplayName = "Shotgun"
 DisplayDescription = "12 gauge shotgun"
 Icon = ExtResource("1_mnpcb")
 Model = ExtResource("3_3tvwt")
-SlotSize = Vector2i(1, 1)
+SlotSize = Vector2i(2, 1)
 MaxStack = 1
