@@ -51,7 +51,7 @@ public partial class WorldItem : StaticBody3D, Interactable
         if (!IsVisibleInTree()) return;
         // Stop game
         Main.Instance.Busy = true;
-        // Add item to inventory
+        // Add item to inventory (We will need to add an exception case where inventory is full or not all ammo can be picked up)
         Main.Instance.State.AddItem(Item);
         // Assign and display text
         await Main.Instance.UI.Message.SetBars(true, 0.1f);

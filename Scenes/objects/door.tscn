@@ -7,7 +7,7 @@ size = Vector3(1, 2, 0.1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_wuiqg"]
 
-[node name="StaticBody3D" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
+[node name="Door" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
 collision_layer = 16
 script = ExtResource("1_tckt0")
 Interface = NodePath("Label3D")

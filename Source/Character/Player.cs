@@ -161,7 +161,7 @@ public partial class Player : CharacterBody3D, Targettable
 						if (_closestInteractable is WorldItem ) {
 							_nearbyInteractables.Remove(_closestInteractable);
 						}
-						if (_nearbyInteractables.Count > 0) {
+						if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false) {
 							RefreshInteractables();
 						} else _closestInteractable = null; 
 					}
@@ -259,7 +259,7 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
-		if (_nearbyInteractables.Count > 0) RefreshInteractables();
+		if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false) RefreshInteractables();
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
 		if (aiming==true) run = false;
@@ -415,14 +415,14 @@ public partial class Player : CharacterBody3D, Targettable
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
 		GD.Print("List has ", _nearbyInteractables.Count, " elements");
-		/*START Temp Code*/
-		if (body is Interactable) {
+		
+		if (body is Interactable)
+		{
 			var item = body as Interactable;
 			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Add(item);
-			RefreshInteractables();
+			if (Main.Instance.Busy == false) RefreshInteractables();
 			GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		}
-		/*END Temp Code*/
 		//Main function processing
 		/*var evaluator = body;
 		switch (evaluator) {
@@ -452,7 +452,7 @@ public partial class Player : CharacterBody3D, Targettable
 			var item = body as Interactable;
 			item.Active = false;
 			if (_nearbyInteractables.Contains(item)) _nearbyInteractables.Remove(item);
-			if (_nearbyInteractables.Count > 0)  RefreshInteractables();
+			if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false)  RefreshInteractables();
 			else { 
 				item.Active = false;
 				item.HideInterface();
@@ -484,7 +484,6 @@ public partial class Player : CharacterBody3D, Targettable
 		}*/
 	}
 
-	//Currently unused
 	//Iterates over the Interactable inside of the _nearbyInteractables list and returns the closest one.
 	public Interactable GetClosestInteract() {
 		Interactable closest = null;
@@ -503,8 +502,9 @@ public partial class Player : CharacterBody3D, Targettable
 		return closest;
 	}
 
-	//Currently unused
-	public void RefreshInteractables() {
+	// Refresh nearest Interactable items
+	public void RefreshInteractables()
+	{
 		_closestInteractable = GetClosestInteract();
 		foreach (var itemOverdue in _nearbyInteractables) itemOverdue.Active = false;
 		_closestInteractable.Active = true;

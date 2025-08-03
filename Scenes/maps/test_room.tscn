@@ -74,7 +74,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0, 1.7)
 mesh = SubResource("BoxMesh_x7vio")
 
 [node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-0.553278, 0.4222, -0.718073, 0, 0.862036, 0.506845, 0.832996, 0.280427, -0.476946, -1.65419, 2.00698, -1.05782)
+transform = Transform3D(-0.772633, 0.426475, -0.470272, 0, 0.740758, 0.671771, 0.634852, 0.519033, -0.572335, -2.0345, 3.6075, -2.78104)
 current = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
