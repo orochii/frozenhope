@@ -53,18 +53,27 @@ public partial class Door : StaticBody3D, Interactable
 
     public void InteractItem() {
         if (!IsVisibleInTree()) return;
-        // Stop game and freeze player
-        GD.Print("Start Map Change");
-        Character.FreezeStatus();
-        Main.Instance.Busy = true;
-        //Move to specified scene
-        Main.Instance.TransferVector = NewSceneXYZ;
-        Main.Instance.TransferRotate = NewSceneRotate;
-        Main.Instance.ChangeMap(Data.StartingScene[GoToScene]);
-
-        //Unpause game
-        GD.Print("End Map Change");
-        Main.Instance.Busy = false;
+        //Check if the target transfers scene is within the available scenes array
+        var length = Data.StartingScene.Length;
+        if (GoToScene >= 0 && GoToScene < length)
+        {
+            // Stop game and freeze player
+            GD.Print("Start Map Change");
+            Character.FreezeStatus();
+            Main.Instance.Busy = true;
+            //Move to specified scene
+            Main.Instance.TransferVector = NewSceneXYZ;
+            Main.Instance.TransferRotate = NewSceneRotate;
+            Main.Instance.ChangeMap(Data.StartingScene[GoToScene]);
+            
+            //Unpause game
+            GD.Print("End Map Change");
+            Main.Instance.Busy = false;
+        }
+        else
+        {
+            GD.Print("Target map out of range.");
+        }
     }
 
     //Override ToString

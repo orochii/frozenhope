@@ -1634,9 +1634,6 @@ spot_range = 10.0
 spot_angle = 25.0
 spot_angle_attenuation = 0.125
 
-[node name="Player" parent="." instance=ExtResource("12_qctx3")]
-transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 3.30239, 1.05787, 0.230636)
-
 [node name="Cameras" type="Node3D" parent="."]
 
 [node name="FacilityEntranceMain" type="Camera3D" parent="Cameras"]
@@ -1827,6 +1824,9 @@ GoToScene = 3
 [node name="StaticBody3D2" parent="Interactables/Doors" node_paths=PackedStringArray("Character") instance=ExtResource("43_mp2dh")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82993, 0, -4.57319)
 Character = NodePath("../../../Player")
+
+[node name="Player" parent="." instance=ExtResource("12_qctx3")]
+transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 3.30239, 1.05787, 0.230636)
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]
