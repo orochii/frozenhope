@@ -545,6 +545,8 @@ public partial class Player : CharacterBody3D, Targettable
 		CollisionMask = 0;
 		// Show animation.
 		Graphic.StateMachine.ActionState = EActionState.DEATH;
+		// Change to gameover.
+		Main.Instance.UI.SetUIMode((int)UiParent.EModes.GAMEOVER);
 	}
 	public void Revive() {
 		// Disable movement/collision.

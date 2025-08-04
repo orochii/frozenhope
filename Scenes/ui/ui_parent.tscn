@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=51 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -24,6 +24,7 @@
 [ext_resource type="Script" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" path="res://Source/UI/Splash.cs" id="24_2h878"]
+[ext_resource type="Script" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -348,6 +349,43 @@ _data = {
 "new_animation": SubResource("Animation_dmkrl")
 }
 
+[sub_resource type="Animation" id="Animation_euauc"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_q5rm4"]
+resource_name = "show"
+length = 5.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Parent:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_61t2i"]
+_data = {
+"RESET": SubResource("Animation_euauc"),
+"show": SubResource("Animation_q5rm4")
+}
+
 [sub_resource type="Animation" id="Animation_vbsm8"]
 length = 0.001
 tracks/0/type = "value"
@@ -409,7 +447,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sn55m")
-UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodePath("Cutscene"), NodePath("Splash")]
+UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodePath("Cutscene"), NodePath("Splash"), NodePath("GameOver")]
 Loader = NodePath("Loader")
 
 [node name="TitleScreen" type="Control" parent="." node_paths=PackedStringArray("buttonList")]
@@ -494,7 +532,6 @@ horizontal_alignment = 1
 
 [node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
 process_mode = 3
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -583,7 +620,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon")]
+[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_r4o41")
@@ -592,6 +629,7 @@ invSlotTemplate = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/Inv
 InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
+InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/RichTextLabel")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 layout_mode = 1
@@ -743,7 +781,8 @@ third line"
 [node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
 layout_mode = 2
 theme = ExtResource("3_wyq5x")
-text = "(a): use/equip (x): move/combine"
+bbcode_enabled = true
+text = "[color=#fd8](Ok):[/color] Use/Equip [color=#fd8](Aim):[/color] Move/Combine [color=#fd8](Back):[/color] Close menu"
 fit_content = true
 
 [node name="Divisor" type="ColorRect" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer"]
@@ -933,6 +972,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 2)
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="Gameplay/SubViewport"]
 
 [node name="Message" type="Control" parent="." node_paths=PackedStringArray("MessageLabel", "Background")]
+visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1039,7 +1079,7 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 theme = ExtResource("3_wyq5x")
-text = "A game by Sidewinder Kojima"
+text = "Spanish Inquisition Software presents..."
 horizontal_alignment = 1
 vertical_alignment = 1
 
@@ -1048,6 +1088,54 @@ libraries = {
 "": SubResource("AnimationLibrary_o57qm")
 }
 autoplay = "new_animation"
+
+[node name="GameOver" type="Control" parent="." node_paths=PackedStringArray("Animation")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("24_vr4ey")
+Animation = NodePath("AnimationPlayer")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
+libraries = {
+"": SubResource("AnimationLibrary_61t2i")
+}
+
+[node name="Parent" type="Control" parent="GameOver"]
+modulate = Color(1, 1, 1, 0)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="GameOver/Parent"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.14, 0.0518, 0.05327, 0.752941)
+
+[node name="Label" type="Label" parent="GameOver/Parent"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -46.0
+offset_top = -11.5
+offset_right = 46.0
+offset_bottom = 11.5
+grow_horizontal = 2
+grow_vertical = 2
+text = "GAME OVER"
 
 [node name="Loader" type="Control" parent="." node_paths=PackedStringArray("Animation")]
 visible = false

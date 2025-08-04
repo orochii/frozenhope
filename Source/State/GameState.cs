@@ -278,6 +278,7 @@ public class GameState {
         return false;
     }
     public bool CombineSlots(int index1, int index2) {
+        if (index1 == index2) return false;
         // Get items.
         var itemEntry1 = persistentData.inventory[index1];
         var item1 = BaseItem.Get(itemEntry1.itemID);
