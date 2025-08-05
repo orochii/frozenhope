@@ -21,10 +21,44 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		Instance = this;
+		AudioManager.Init();
+		DirAccess.MakeDirRecursiveAbsolute(SnapPath());
 		Database = Database.Get();
 		Loader = UI.Loader;
 	}
-	public void StartGame() {
+    public override void _Input(InputEvent evt)
+    {
+        if (evt is InputEventKey) {
+			var key = evt as InputEventKey;
+			if (key.Pressed && key.Keycode == Key.F9) {
+				TakeScreenshot();
+			}
+			if (evt.IsActionPressed("sys_fullscreen")) {
+				ToggleFullscreen();
+			}
+		}
+    }
+	private string SnapPath() {
+		return "user://Snap/";
+	}
+	public void ToggleFullscreen() {
+		var mode = DisplayServer.WindowGetMode();
+		if (mode == DisplayServer.WindowMode.Fullscreen) SetFullscreen(false);
+		else SetFullscreen(true);
+	}
+	public void SetFullscreen(bool v) {
+		if (v)
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Fullscreen);
+		else
+			DisplayServer.WindowSetMode(DisplayServer.WindowMode.Windowed);
+	}
+	public void TakeScreenshot() {
+		ulong timestamp = (ulong)(Time.GetUnixTimeFromSystem() * 1000);
+		var name = SnapPath() + timestamp.ToString() + ".png";
+		var img = GetViewport().GetTexture().GetImage();
+		img.SavePng(name);
+	}
+    public void StartGame() {
 		State = new GameState();
 		foreach(var e in Database.StartingItems) {
 			State.AddItem(e);

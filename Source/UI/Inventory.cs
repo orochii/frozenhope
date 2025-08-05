@@ -8,8 +8,10 @@ public partial class Inventory : Control
 	[Export] InfoColumn InfoColumn;
 	[Export] Control CombineObj;
 	[Export] TextureRect CombineIcon;
+	[Export] RichTextLabel InstructionsLabel;
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
+	private InvSlotButton lastFocused;
 	public override void _Ready()
 	{
 		Visible = false;
@@ -67,21 +69,30 @@ public partial class Inventory : Control
 		var focused = GetViewport().GuiGetFocusOwner();
 		if (focused is InvSlotButton) {
 			var slot = focused as InvSlotButton;
-			InfoColumn.Setup(slot.Item);
-			// Reposition combine overlay thing
-			CombineObj.GlobalPosition = slot.GlobalPosition;
+			if (slot != lastFocused) {
+				lastFocused = slot;
+				AudioManager.PlaySystemSound("cursor");
+				InfoColumn.Setup(slot.Item);
+				// Reposition combine overlay thing
+				CombineObj.GlobalPosition = slot.GlobalPosition;
+			}
 			// Get input for combine.
 			if (Input.IsActionJustPressed("aim")) {
-				SetCombine(slot);
+				if(currentCombineSlot == null) {
+					SetCombine(slot);
+					AudioManager.PlaySystemSound("decision");
+				}
 			}
 		}
 		// Inputs.
 		if (Input.IsActionJustPressed("cancel")) {
 			if (currentCombineSlot != null) {
 				SetCombine(null);
+				AudioManager.PlaySystemSound("cancel");
 			}
 			else {
 				Main.Instance.UI.Gameplay.CloseMenu();
+				AudioManager.PlaySystemSound("cancel");
 			}
 		}
 	}
@@ -103,8 +114,17 @@ public partial class Inventory : Control
 			// Set position
 			CombineObj.GlobalPosition = button.GlobalPosition;
 		}
+		RefreshInstructions();
 	}
 	public InvSlotButton GetCombine() {
 		return currentCombineSlot;
+	}
+	private void RefreshInstructions() {
+		if (currentCombineSlot == null) {
+			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Use/Equip [color=#fd8](Aim):[/color] Move/Combine [color=#fd8](Back):[/color] Close menu";
+		}
+		else {
+			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Place/Combine [color=#fd8](Back):[/color] Cancel";
+		}
 	}
 }

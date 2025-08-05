@@ -837,7 +837,6 @@ carve_navigation_mesh = true
 
 [node name="EvtDeadguy" parent="." node_paths=PackedStringArray("Music") instance=ExtResource("59_fb5ws")]
 Music = NodePath("../CombatMusic")
-NextLevel = "GM002_FacilityOutside"
 
 [node name="EvtStart" parent="." instance=ExtResource("60_xvvdw")]
 

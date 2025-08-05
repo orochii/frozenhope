@@ -56,14 +56,20 @@ public partial class InvSlotButton : TextureButton
 			if (Index == -1) {
 				if (Main.Instance.State.MoveToSlot(combine.Index, GridPosition)) {
 					ParentInventory.RefreshSlots();
+					AudioManager.PlaySystemSound("decision");
+				}
+				else {
+					AudioManager.PlaySystemSound("cancel");
 				}
 			}
 			else if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
 				Player.Instance.RefreshEquippedModel();
 				ParentInventory.RefreshSlots();
+				AudioManager.PlaySystemSound("decision");
 			}
 			else {
 				// Play buzzer.
+				AudioManager.PlaySystemSound("cancel");
 			}
 		}
 		// Use item
@@ -73,9 +79,11 @@ public partial class InvSlotButton : TextureButton
 				Main.Instance.State.SetEquippedItem(Index);
 				Player.Instance.RefreshEquippedModel();
 				ParentInventory.RefreshSlots();
+				AudioManager.PlaySystemSound("decision");
 				break;
 			case UseableItem:
 				ParentInventory.RefreshSlots();
+				AudioManager.PlaySystemSound("decision");
 				break;
 			}
 		}
