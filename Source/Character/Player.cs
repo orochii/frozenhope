@@ -22,6 +22,11 @@ public partial class Player : CharacterBody3D, Targettable
 	private Targettable _currentTarget;
 	public Targettable CurrentTarget => _currentTarget;
 	private List<Interactable> _nearbyInteractables = new List<Interactable>();
+	public List<Interactable> NearbyInteractables
+	{
+		get { return _nearbyInteractables; }
+		set { _nearbyInteractables = value; }
+	}
 	private Interactable _closestInteractable;
 	private float previousTargetRotation;
 	private WorldItem NearbyItem;
@@ -54,25 +59,22 @@ public partial class Player : CharacterBody3D, Targettable
 		//Move and rotate player after transfer
 		var transferVector3 = Main.Instance.TransferVector;
 		var rotationVector3 = Main.Instance.TransferRotate;
-		if (!transferVector3.Equals(_empty)) {
+		//if (!transferVector3.Equals(_empty)) {
 			GD.Print("We are working brotha");
 			GlobalPosition = transferVector3;
 			Main.Instance.TransferVector = _empty;
-		}
+		//}
 		//Rotate player after transfer if rotation data is available
-		if (!rotationVector3.Equals(_empty)) {
+		//if (!rotationVector3.Equals(_empty)) {
 			GlobalRotationDegrees = rotationVector3;
 			Main.Instance.TransferRotate = _empty;
-		}
+		//}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
 		OriginalCollisionMask = CollisionMask;
 		RefreshEquippedModel();
 		DetectionArea.BodyEntered += OnBodyEntered;
 		DetectionArea.BodyExited += OnbodyExited;
-		//Interactable in range
-		ItemDetectionArea.BodyEntered += OnItemInRange;
-		ItemDetectionArea.BodyExited += OnItemOutOfRange;
 	}
 	public void RefreshEquippedModel() {
 		var item = Main.Instance.State.GetEquippedItem();
@@ -129,9 +131,13 @@ public partial class Player : CharacterBody3D, Targettable
 			}
 
 			//We reduce the AimTimer for damage calculation later on
-			if (AimTimer2 > 0) {
+			//This needs to be reworked and turn into an actual Godot timer item
+			if (AimTimer2 > 0)
+			{
 				AimTimer2 -= 5;
-			} else {
+			}
+			else
+			{
 				AimTimer2 = 0;
 			}
 			
@@ -161,9 +167,16 @@ public partial class Player : CharacterBody3D, Targettable
 						if (_closestInteractable is WorldItem ) {
 							_nearbyInteractables.Remove(_closestInteractable);
 						}
-						if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false) {
-							RefreshInteractables();
-						} else _closestInteractable = null; 
+						if (_closestInteractable is Door)
+						{
+							// Set character visuals to not moving
+							Graphic.StateMachine.MoveState = EMoveState.STAND;
+						}
+						if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false)
+							{
+								RefreshInteractables();
+							}
+							else _closestInteractable = null; 
 					}
 					/*if (NearbyItem != null && NearbyItem.Active == true) NearbyItem.InteractItem();
 					if (NearbyScenery != null && NearbyScenery.Active == true) NearbyScenery.InteractItem();
@@ -416,6 +429,7 @@ public partial class Player : CharacterBody3D, Targettable
 		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
 		GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		
+		//Main function processing
 		if (body is Interactable)
 		{
 			var item = body as Interactable;

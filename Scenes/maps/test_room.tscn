@@ -52,9 +52,8 @@ shape = SubResource("BoxShape3D_l6vvm")
 [node name="Player" parent="." instance=ExtResource("1_3ffqs")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.44673, 0, -1.54296)
 
-[node name="OzzyCube" parent="." node_paths=PackedStringArray("Character", "SceneCamera") instance=ExtResource("2_crkih")]
+[node name="OzzyCube" parent="." node_paths=PackedStringArray("SceneCamera") instance=ExtResource("2_crkih")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 0.2, 1.7)
-Character = NodePath("../Player")
 SceneCamera = NodePath("TEstCam")
 FlavorText = "This is a cube"
 
@@ -92,7 +91,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="PistolAmmo2" parent="." instance=ExtResource("4_l55va")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141378, 0, -1.06523)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496718, 0, -0.737493)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo2" instance=ExtResource("7_3lvew")]
@@ -103,7 +102,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="PistolAmmo3" parent="." instance=ExtResource("4_l55va")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.141378, 0, -0.265233)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829614, 0, -2.163)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo3" instance=ExtResource("7_3lvew")]
@@ -114,7 +113,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="PistolAmmo4" parent="." instance=ExtResource("4_l55va")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.709664, 0, -0.737235)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116481, 0, -0.494811)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo4" instance=ExtResource("7_3lvew")]
@@ -124,15 +123,13 @@ transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
 shape = SubResource("CylinderShape3D_ixygt")
 
-[node name="Door" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
+[node name="Door" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
-Character = NodePath("../Player")
 GoToScene = 2
 NewSceneXYZ = Vector3(29.353, 2, -13.996)
 
-[node name="StaticBody3D2" parent="." node_paths=PackedStringArray("Character") instance=ExtResource("8_av1kt")]
+[node name="StaticBody3D2" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
-Character = NodePath("../Player")
 GoToScene = 2
 
 [node name="Node" type="Node" parent="."]
@@ -166,3 +163,12 @@ shape = SubResource("ConvexPolygonShape3D_dlmt1")
 
 [node name="Wendigo" parent="." instance=ExtResource("9_bpdo2")]
 transform = Transform3D(0.232003, 0, 0.972715, 0, 1, 0, -0.972715, 0, 0.232003, -3.19966, 0, 2.3799)
+
+[connection signal="body_entered" from="PistolAmmo" to="PistolAmmo" method="_onPlayerEnter"]
+[connection signal="body_exited" from="PistolAmmo" to="PistolAmmo" method="_onPlayerLeft"]
+[connection signal="body_entered" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerEnter"]
+[connection signal="body_exited" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerLeft"]
+[connection signal="body_entered" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerEnter"]
+[connection signal="body_exited" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerLeft"]
+[connection signal="body_entered" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerEnter"]
+[connection signal="body_exited" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerLeft"]

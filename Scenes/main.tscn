@@ -8,7 +8,7 @@
 script = ExtResource("1_o1rfr")
 WorldParent = NodePath("WorldParent")
 UI = NodePath("CanvasLayer/UIParent")
-StartScene = 4
+StartScene = 7
 SkipIntro = true
 
 [node name="WorldParent" type="Node" parent="."]

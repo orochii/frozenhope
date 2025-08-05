@@ -1,0 +1,322 @@
+[gd_scene load_steps=16 format=4 uid="uid://dxkq8nth50j32"]
+
+[ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_0n3d5"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_moe1s"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_tmyju"]
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_4fyvq"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_agm52"]
+sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
+sky_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
+ground_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
+
+[sub_resource type="Sky" id="Sky_u8f7g"]
+sky_material = SubResource("ProceduralSkyMaterial_agm52")
+
+[sub_resource type="Environment" id="Environment_1h6cw"]
+background_mode = 2
+background_energy_multiplier = 0.25
+sky = SubResource("Sky_u8f7g")
+tonemap_mode = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_0n3d5")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ukt7x"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACAADAAcABgAIAAkACQAKAAYABwALAAgADQAMAAoACgAOAA0ACwAPABAAEAARAAsAEgAJABEAEQATABIABwAUABUAFQAWAAcABAAXAAAAAAACAAQAGQACABgAGAAaABkADAAbABkAGQAKAAwAGAAcABQAFAAHABgADgAKAB0AHQAeAA4AEQAdABoAGgAfABEAHwAHABYAFgAgAB8AEwARABAAEAAhABMA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("//8AAP8/AAD//wAA/38AAP+/AAD/PwAA/78AAP9/AAD/vwAAAAAAAP9/AAAAAAAA/38AAP8/AAD/vwAA/78AAP9/AAD/fwAA/z8AAP9/AAD/PwAA/z8AAP9/AAD/vwAA/z8AAAAAAAAAAAAAAAAAAAAAAAD/PwAA/38AAP//AAD/PwAA//8AAP8/AAD/vwAAAAAAAP9/AAAAAAAA/78AAP//AAD/vwAA//8AAP//AAD/vwAA//8AAP//AAAAAAAA/78AAP9/AAD/fwAA/z8AAP9/AAD/fwAA/38AAAAAAAD//wAA/38AAP8/AAD/fwAAAAAAAP9/AAD/fwAA/78AAP9/AAD//wAAAAAAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_l3lg1"]
+resource_name = "floor-small-square_floor-small-square"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7A=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACAADAAcABgAIAAkACQAKAAYABwALAAgADQAMAAoACgAOAA0ACwAPABAAEAARAAsAEgAJABEAEQATABIABwAUABUAFQAWAAcAGQAXABgAGAAaABkAHAAaABsAGwAdABwAHwAeABwAHAAgAB8AGwAhACIAIgAjABsAJQAgACQAJAAmACUAJwAkAB0AHQAoACcAKAAjACkAKQAqACgALAAnACsAKwAtACwA"),
+"material": SubResource("StandardMaterial3D_e2l3n"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 46,
+"vertex_data": PackedByteArray("//8AAP8//////wAA/3////+/AAD/P////78AAP9/////vwAAAAD///9/AAAAAP///38AAP8/////vwAA/7////9/AAD/f////z8AAP9/////PwAA/z////9/AAD/v////z8AAAAA//8AAAAAAAD//wAAAAD/P////38AAP//////PwAA//////8/AAD/v///AAAAAP9///8AAAAA/7//////AAD/v/////8AAP//////vwAA////////AAAAAP////8AAP8/////vwAAAAD///+/AAD/P////78AAP9/////fwAA/z////9/AAD/f////38AAAAA////PwAAAAD///8/AAD/P/////8AAP9//////wAA/7////+/AAD/v////z8AAP9///8AAAAA/z///wAAAAD/f////z8AAP+/////fwAA/7////+/AAD//////38AAP//////PwAA/////wAAAAD/v///AAAAAP//////f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ukt7x")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_271rf"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnjdr"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_0n3d5")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_mkv8m"]
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.5, 0.2, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAEAAQAAAAUABgAEAAUABQAHAAYAAgADAAYABgAHAAIABgADAAEAAQAEAAYABQAAAAIAAgAHAAUA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAAAAAAAP///////wAA//8AAP//AAAAAAAAAAAAAAAA//8AAAAAAAAAAP//AAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_nx0ij"]
+resource_name = "wall_wall"
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.5, 0.2, 1, 1),
+"attribute_data": PackedByteArray("/3dlxv93mPn/d2XG/3eY+f93mPn/d5j5/3dlxv93Zcb/d5j5/3dlxv93mPn/d2XG/3eY+f93mPn/d2XG/3dlxv93mPn/d5j5/3eY+f93mPn/d2XG/3dlxv93Zcb/d2XG"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABgAEAAUABQAHAAYACgAIAAkACQALAAoADgAMAA0ADQAPAA4AEgAQABEAEQATABIAFgAUABUAFQAXABYA"),
+"material": SubResource("StandardMaterial3D_vnjdr"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA/7///wAAAAD/v/////////+///8AAP///78AAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAP+/AAD//wAA/78AAAAA////vwAA//////+///8AAP//AIAAAAAA//8AgP///////wCAAAD/////AID//wAA////v///AAAAAP+/AAAAAP///78AAAAAAAD/v/////8AAP////////////8AAP//AAD//wAA/////////38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f////3////9/////f////3///wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_mkv8m")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_agvyl"]
+points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
+
+[node name="GM007-1_Tunnel" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1h6cw")
+
+[node name="Door" parent="." instance=ExtResource("1_moe1s")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.9)
+GoToScene = 7
+NewSceneXYZ = Vector3(-0.5, 0, 3.4)
+NewSceneRotate = Vector3(0, 180, 0)
+
+[node name="Door2" parent="." instance=ExtResource("1_moe1s")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0, 7.9)
+GoToScene = 7
+NewSceneXYZ = Vector3(-0.5, 0, 3.4)
+NewSceneRotate = Vector3(0, 180, 0)
+
+[node name="Player" parent="." instance=ExtResource("3_4fyvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.4)
+
+[node name="ViewChangers" type="Node3D" parent="."]
+
+[node name="ToSpareDoor" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1.51851, -0.6, 0, -0.169098)
+Camera = NodePath("../../Cameras/SpareDoor")
+
+[node name="ToCorners_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 1.77486)
+Camera = NodePath("../../Cameras/Corners")
+
+[node name="ToCorners_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(0.453209, 0, -0.422381, 0, 1, 0, 0.21119, 0, 0.906418, 0.516496, 0, 1.40602)
+Camera = NodePath("../../Cameras/Corners")
+
+[node name="ToLongHall_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(0.915333, 0, 0.201349, 0, 1, 0, -0.402699, 0, 0.457666, 1.55665, 0, 2.17562)
+Camera = NodePath("../../Cameras/LongHall")
+
+[node name="ToLongHall_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.39989, 0, 4.25306)
+Camera = NodePath("../../Cameras/LongHall")
+
+[node name="ToDoorWater" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_tmyju")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 2.75796, 1.42657, 0, 6.73441)
+Camera = NodePath("../../Cameras/DoorWater")
+
+[node name="Cameras" type="Node3D" parent="."]
+
+[node name="SpareDoor" type="Camera3D" parent="Cameras"]
+transform = Transform3D(1, 0, 0, 0, 0.866025, 0.5, 0, -0.5, 0.866025, -0.55, 1.806, 1.706)
+
+[node name="Corners" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.615662, -0.463181, 0.637514, 0, 0.809017, 0.587785, -0.788011, -0.361877, 0.498081, 1.76274, 1.97806, 2.12347)
+
+[node name="LongHall" type="Camera3D" parent="Cameras"]
+transform = Transform3D(1, 0, 0, 0, 0.994591, -0.103869, 0, 0.103869, 0.994591, 1.41455, 0.610423, 5.78843)
+
+[node name="DoorWater" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-1, 3.27491e-08, -8.1057e-08, 0, 0.927184, 0.374607, 8.74228e-08, 0.374607, -0.927184, 1.45, 1.714, 4.363)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.904, 1.7, 0.68)
+light_color = Color(0.86, 0.7052, 0.344, 1)
+light_energy = 0.6
+shadow_enabled = true
+omni_range = 2.0
+omni_attenuation = 0.4
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.754, 1.7, 5.723)
+light_color = Color(0.86, 0.7052, 0.344, 1)
+light_energy = 0.6
+shadow_enabled = true
+omni_range = 2.0
+omni_attenuation = 0.4
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1.7, 1.5)
+light_color = Color(0.86, 0.7052, 0.344, 1)
+light_energy = 0.6
+shadow_enabled = true
+omni_range = 2.0
+omni_attenuation = 0.4
+
+[node name="Prototype" type="Node3D" parent="."]
+
+[node name="floor-small-square1" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, -0.5, 0, 0.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square1"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square1"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
+[node name="floor-small-square2" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square2"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square2"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
+[node name="floor-small-square3" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, 1.5, 0, 4.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square3"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square3"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
+[node name="wall" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 3.01992e-07, 0, 2, 0, -1.50996e-07, 0, -2, 0, 0, 0)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall2" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 4.52987e-07, 0, 2, 0, -1.50996e-07, 0, -3, -1.1, 0, 0.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall2"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall2"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall3" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.07284e-07, 0, -2, 0, 2, 0, 1, 0, -2.14569e-07, 1, 0, 1)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall3"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall3"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall4" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.07284e-07, 0, -2, 0, 2, 0, 1, 0, -2.14569e-07, 0, 0, 2.1)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall4"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall4"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall5" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 1.05697e-06, 0, 2, 0, -1.50996e-07, 0, -7, 2, 0, 4.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall5"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall5"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall6" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 9.05975e-07, 0, 2, 0, -1.50996e-07, 0, -6, 0.9, 0, 5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall6"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall6"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall7" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 2, 0, -1, 0, 1.94707e-07, -0.5, 0, -1)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall7"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall7"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="wall8" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1.94707e-07, 0, 1, 0, 2, 0, -1, 0, 1.94707e-07, 1.5, 0, 8)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall8"]
+mesh = SubResource("ArrayMesh_nx0ij")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
+shape = SubResource("ConvexPolygonShape3D_agvyl")

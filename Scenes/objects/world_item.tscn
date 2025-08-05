@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Source/Objects/WorldItem.cs" id="1_uqqku"]
 
-[node name="WorldItem" type="StaticBody3D" node_paths=PackedStringArray("Interface")]
+[node name="WorldItem" type="Area3D" node_paths=PackedStringArray("Interface")]
 collision_layer = 16
 script = ExtResource("1_uqqku")
 Interface = NodePath("Interface")

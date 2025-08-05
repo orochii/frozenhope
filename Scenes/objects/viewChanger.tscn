@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxkjfcblra3fq"]
 
-[ext_resource type="Script" path="res://Scenes/objects/ViewChanger.cs" id="1_rc6d8"]
+[ext_resource type="Script" path="res://Source/Objects/ViewChanger.cs" id="1_rc6d8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wurr"]
 
