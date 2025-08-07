@@ -1,5 +1,6 @@
-[gd_scene load_steps=16 format=4 uid="uid://clwwy3frymrcr"]
+[gd_scene load_steps=21 format=4 uid="uid://clwwy3frymrcr"]
 
+[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_31v5j"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="4_c8pps"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="4_mgl5w"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="5_qjg6p"]
@@ -17,6 +18,18 @@ sky_material = SubResource("ProceduralSkyMaterial_sdvhb")
 background_mode = 2
 sky = SubResource("Sky_ulv45")
 tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_6eme4"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qs7oc"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_0ayky"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kt6qg"]
+size = Vector3(2, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbvmc"]
 resource_name = "colormap"
@@ -105,19 +118,59 @@ points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_y0wcg")
 
-[node name="DoorOutside" parent="." instance=ExtResource("5_qjg6p")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -4.4, 0, 0)
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="DoorOutside" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -4.4, 0, 0)
+collision_layer = 16
+script = ExtResource("1_31v5j")
+Interface = NodePath("Label3D")
 GoToScene = 2
 NewSceneXYZ = Vector3(29.353, 2, -13.996)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="DoorHallM2" parent="." instance=ExtResource("5_qjg6p")]
-transform = Transform3D(-7.97278e-08, 0, -1, 0, 1, 0, 1.82396, 0, -4.37114e-08, 5.4, 0, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/DoorOutside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_6eme4")
+
+[node name="Label3D" type="Label3D" parent="Doors/DoorOutside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/DoorOutside"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_qs7oc")
+
+[node name="DoorHallM2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.4, 0, 0)
+collision_layer = 16
+script = ExtResource("1_31v5j")
+Interface = NodePath("Label3D")
 GoToScene = 4
 NewSceneXYZ = Vector3(-1.4, 0, -2)
 NewSceneRotate = Vector3(0, 90, 0)
 
-[node name="DoorHangar" parent="." instance=ExtResource("5_qjg6p")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/DoorHallM2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_0ayky")
+
+[node name="Label3D" type="Label3D" parent="Doors/DoorHallM2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/DoorHallM2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_kt6qg")
+
+[node name="DoorHangar" parent="Doors" instance=ExtResource("5_qjg6p")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3, 0, 5.9)
 GoToScene = 6
 NewSceneXYZ = Vector3(-10.5, 0, -3.9)
@@ -366,3 +419,8 @@ shape = SubResource("ConvexPolygonShape3D_5uw6r")
 
 [node name="Player" parent="." instance=ExtResource("6_ruahr")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -4, 0, -1.78814e-07)
+
+[connection signal="body_entered" from="Doors/DoorOutside" to="Doors/DoorOutside" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/DoorOutside" to="Doors/DoorOutside" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/DoorHallM2" to="Doors/DoorHallM2" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/DoorHallM2" to="Doors/DoorHallM2" method="_onPlayerLeft"]

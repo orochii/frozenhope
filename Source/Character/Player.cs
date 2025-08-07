@@ -7,7 +7,6 @@ using System.Runtime.InteropServices;
 
 public partial class Player : CharacterBody3D, Targettable
 {
-	public static Player Instance;
 	[Export] private CharacterMoveData[] moveStates;
 	[Export] private CharacterGraphic Graphic;
 	[Export] private Area3D DetectionArea;
@@ -15,6 +14,8 @@ public partial class Player : CharacterBody3D, Targettable
 	[Export] private float RotateSpeed = 4;
 	[Export] private float MaxFocusAngle = 45f;
 	[Export] private Label3D InteractInterface;
+	[Export] private RayCast3D FloorChecker;
+	public static Player Instance;
 	public int AimTimer;
 	public int AimTimer2 = 0; //Electric Boogaloo
 	private bool _aimMode = false;
@@ -29,9 +30,11 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 	private Interactable _closestInteractable;
 	private float previousTargetRotation;
-	private WorldItem NearbyItem;
-	private WorldScenery NearbyScenery;
-	private Door NearbyDoor;
+	public bool Dead => Main.Instance.State.GetHealth() <= 0;
+	private uint OriginalCollisionLayer;
+	private uint OriginalCollisionMask;
+	private Vector3 _empty = Vector3.Zero;
+	private bool _frozen = false;
 
 	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
 	StringName MoveLeft = "move_left";
@@ -43,11 +46,6 @@ public partial class Player : CharacterBody3D, Targettable
 	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
-	public bool Dead => Main.Instance.State.GetHealth() <= 0;
-	private uint OriginalCollisionLayer;
-	private uint OriginalCollisionMask;
-	private Vector3 _empty = Vector3.Zero;
-	private bool _frozen = false;
 
 	//_Ready override
 	public override void _Ready()
@@ -60,14 +58,14 @@ public partial class Player : CharacterBody3D, Targettable
 		var transferVector3 = Main.Instance.TransferVector;
 		var rotationVector3 = Main.Instance.TransferRotate;
 		//if (!transferVector3.Equals(_empty)) {
-			GD.Print("We are working brotha");
-			GlobalPosition = transferVector3;
-			Main.Instance.TransferVector = _empty;
+		GD.Print("We are working brotha");
+		GlobalPosition = transferVector3;
+		Main.Instance.TransferVector = _empty;
 		//}
 		//Rotate player after transfer if rotation data is available
 		//if (!rotationVector3.Equals(_empty)) {
-			GlobalRotationDegrees = rotationVector3;
-			Main.Instance.TransferRotate = _empty;
+		GlobalRotationDegrees = rotationVector3;
+		Main.Instance.TransferRotate = _empty;
 		//}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
@@ -178,9 +176,6 @@ public partial class Player : CharacterBody3D, Targettable
 							}
 							else _closestInteractable = null; 
 					}
-					/*if (NearbyItem != null && NearbyItem.Active == true) NearbyItem.InteractItem();
-					if (NearbyScenery != null && NearbyScenery.Active == true) NearbyScenery.InteractItem();
-					if (NearbyDoor != null && NearbyDoor.Active == true) NearbyDoor.InteractItem();*/
 				}
 			}
 			// Rotate towards target.
@@ -271,11 +266,12 @@ public partial class Player : CharacterBody3D, Targettable
 		hitSpark.GlobalPosition = pos;
 	}
 	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
-	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming) {
+	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming)
+	{
 		if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false) RefreshInteractables();
 		// You can't run and aim, because I say so! (less animations :P)
 		//Agreed (Ozzy)
-		if (aiming==true) run = false;
+		if (aiming == true) run = false;
 		Graphic.StateMachine.ModeState = aiming ? EModeState.AIMING : EModeState.IDLE;
 		// Get current move state properties
 		var currMoveState = run ? moveStates[1] : moveStates[0];
@@ -284,20 +280,23 @@ public partial class Player : CharacterBody3D, Targettable
 		// Apply gravity
 		if (!IsOnFloor()) _velocity += GetGravity();
 		// Quick check for if we're moving forward or not
-		if (move.LengthSquared() > 0) {
+		if (move.LengthSquared() > 0)
+		{
 			// Set character visuals
-			Graphic.StateMachine.MoveState = (run && move.Y<0) ? EMoveState.RUN : EMoveState.WALK;
+			Graphic.StateMachine.MoveState = (run && move.Y < 0) ? EMoveState.RUN : EMoveState.WALK;
 			var targetVelocity = (Transform.Basis.Z * -move.Y);
 			// Are we in aim mode?
-			if (aiming && _currentTarget!= null) {
+			if (aiming && _currentTarget != null)
+			{
 				// When aiming and locked on a target, left/right strafe the character around the target instead.
 				targetVelocity += (Transform.Basis.X * -move.X);
-			} 
-			else {
+			}
+			else
+			{
 				// We rotate the character
 				var RotationY = GlobalRotation.Y;
-    			RotationY = Mathf.Wrap(RotationY + -move.X * d * RotateSpeed, 0, Mathf.Tau);
-    			GlobalRotation = new Vector3(0, RotationY, 0);
+				RotationY = Mathf.Wrap(RotationY + -move.X * d * RotateSpeed, 0, Mathf.Tau);
+				GlobalRotation = new Vector3(0, RotationY, 0);
 			}
 			// Move current velocity in the horizonal plane towards our target velocity, this means accelerate.
 			targetVelocity = targetVelocity * currMoveState.Speed;
@@ -305,7 +304,9 @@ public partial class Player : CharacterBody3D, Targettable
 			planarVelocity = planarVelocity.MoveToward(targetVelocity, currMoveState.Acceleration * d);
 			// Mix our two velocity vectors, replacing X and Z by our new velocity and keeping the original Y
 			_velocity = new Vector3(planarVelocity.X, _velocity.Y, planarVelocity.Z);
-		} else {
+		}
+		else
+		{
 			// Set character visuals to not moving
 			Graphic.StateMachine.MoveState = EMoveState.STAND;
 			// Deaccelerate but only in the "horizontal plane", don't touch the vertical speed (gravity, etc)
@@ -437,25 +438,6 @@ public partial class Player : CharacterBody3D, Targettable
 			if (Main.Instance.Busy == false) RefreshInteractables();
 			GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		}
-		//Main function processing
-		/*var evaluator = body;
-		switch (evaluator) {
-			case WorldItem:
-				var itemObject = body as WorldItem;
-				itemObject.Active = true;
-				NearbyItem = itemObject;
-				break;
-			case WorldScenery:
-				var flavorObject = body as WorldScenery;
-				flavorObject.Active = true;
-				NearbyScenery = flavorObject;
-				break;
-			case Door:
-				var doorObject = body as Door;
-				doorObject.Active = true;
-				NearbyDoor = doorObject;
-				break;
-		}*/
 	}
 
 	private void OnItemOutOfRange(Node3D body) {
@@ -473,29 +455,6 @@ public partial class Player : CharacterBody3D, Targettable
 				_closestInteractable = null;
 			}
 		}
-		/*END Temp Code*/
-		//Actual function processing
-		/*var evaluator = body;
-		switch (evaluator) {
-			case WorldItem:
-				var itemObject = body as WorldItem;
-				itemObject.Active = false;
-				itemObject.HideInterface();
-				NearbyItem = null;
-				break;
-			case WorldScenery:
-				var flavorObject = body as WorldScenery;
-				flavorObject.Active = false;
-				flavorObject.HideInterface();
-				NearbyScenery = null;
-				break;
-			case Door:
-				var doorObject = body as Door;
-				doorObject.Active = false;
-				doorObject.HideInterface();
-				NearbyDoor = null;
-				break;
-		}*/
 	}
 
 	//Iterates over the Interactable inside of the _nearbyInteractables list and returns the closest one.

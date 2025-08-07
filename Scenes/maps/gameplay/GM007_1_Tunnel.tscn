@@ -113,10 +113,9 @@ NewSceneXYZ = Vector3(-0.5, 0, 3.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
 [node name="Door2" parent="." instance=ExtResource("1_moe1s")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0, 7.9)
-GoToScene = 7
-NewSceneXYZ = Vector3(-0.5, 0, 3.4)
-NewSceneRotate = Vector3(0, 180, 0)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.45, 0, 7.9)
+GoToScene = 9
+NewSceneXYZ = Vector3(1.45, 0, -2.4)
 
 [node name="Player" parent="." instance=ExtResource("3_4fyvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.4)

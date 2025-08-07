@@ -131,6 +131,8 @@ NewSceneXYZ = Vector3(29.353, 2, -13.996)
 [node name="StaticBody3D2" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
 GoToScene = 2
+NewSceneXYZ = Vector3(3.5, 0, 0.5)
+NewSceneRotate = Vector3(0, 100, 0)
 
 [node name="Node" type="Node" parent="."]
 

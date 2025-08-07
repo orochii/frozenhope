@@ -1,7 +1,8 @@
-[gd_scene load_steps=16 format=4 uid="uid://dw2p3h5yec5om"]
+[gd_scene load_steps=23 format=4 uid="uid://dw2p3h5yec5om"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ano30"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
+[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_v6aph"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_1jfpj"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_bohmx"]
 
@@ -17,6 +18,24 @@ sky_material = SubResource("ProceduralSkyMaterial_lmc7q")
 background_mode = 2
 sky = SubResource("Sky_2g72d")
 tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_u64hx"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cv6jr"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_eo1de"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_bk301"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_3wul2"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_24y4v"]
+size = Vector3(2, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -105,22 +124,93 @@ points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_dw761")
 
-[node name="Door" parent="." instance=ExtResource("1_ano30")]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -1.9, 0, -2)
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="ToGuardroom" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9, 0, -2)
+collision_layer = 16
+script = ExtResource("1_v6aph")
+Interface = NodePath("Label3D")
 GoToScene = 3
 NewSceneXYZ = Vector3(4.9, 0, 0)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="Door2" parent="." instance=ExtResource("1_ano30")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGuardroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_u64hx")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToGuardroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGuardroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_cv6jr")
+
+[node name="ToBedroom" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, -4)
+collision_layer = 16
+script = ExtResource("1_v6aph")
+Interface = NodePath("Label3D")
 GoToScene = 5
 NewSceneXYZ = Vector3(-1.4, 0, 2)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="Door3" parent="." instance=ExtResource("1_ano30")]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToBedroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_eo1de")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToBedroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToBedroom"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_bk301")
+
+[node name="ToHangar1" parent="Doors" instance=ExtResource("1_ano30")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.5, 0, 3.9)
 GoToScene = 6
 NewSceneXYZ = Vector3(2.5, 0, -3.9)
+
+[node name="ToPrison" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, 15, 0, 1.1)
+collision_layer = 16
+script = ExtResource("1_v6aph")
+Interface = NodePath("Label3D")
+GoToScene = 10
+NewSceneXYZ = Vector3(0, 0, 4.4)
+NewSceneRotate = Vector3(0, 180, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToPrison"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_3wul2")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToPrison"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToPrison"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_24y4v")
+
+[node name="ToHallwayM2" parent="Doors" instance=ExtResource("1_ano30")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9, 0, 2.5)
+GoToScene = 11
+NewSceneXYZ = Vector3(-1.4, 0, -14.5)
+NewSceneRotate = Vector3(0, 90, 0)
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -157,8 +247,20 @@ transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 6.40
 Camera = NodePath("../../Cameras/HallVertFloor")
 
 [node name="ToHallVertHangar" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-1.97556, 0, 2.62268e-07, 0, 1, 0, -1.72709e-07, 0, -3, 8.5, 0, 2.5)
+transform = Transform3D(-2.46945, 0, 2.62268e-07, 0, 1, 0, -2.15886e-07, 0, -3, 8.8, 0, 2.5)
 Camera = NodePath("../../Cameras/HallVertHangar")
+
+[node name="ToHallVertLong_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 11.2176, 0, 2.5)
+Camera = NodePath("../../Cameras/HallVertLong")
+
+[node name="ToHallVertLong_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-1.22479, 0, 2.62268e-07, 0, 1, 0, -1.07075e-07, 0, -3, 15.3163, 0, 2.5)
+Camera = NodePath("../../Cameras/HallVertLong")
+
+[node name="ToHallVertEnd" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-2, 0, 4.52987e-07, 0, 1, 0, -3.01992e-07, 0, -3, 17.8833, 0, 2.5)
+Camera = NodePath("../../Cameras/HallVertEnd")
 
 [node name="Cameras" type="Node3D" parent="."]
 
@@ -178,6 +280,12 @@ transform = Transform3D(-1, -6.07289e-08, 6.28867e-08, 0, 0.71934, 0.694658, -8.
 
 [node name="HallCorner" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.683862, 0.615035, -0.39251, 0, 0.537971, 0.842963, 0.729611, -0.576471, 0.367898, -1.70749, 2.68223, 3.76179)
+
+[node name="HallVertLong" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.168008, 0.547021, -0.820086, 0, 0.831911, 0.554909, 0.985786, -0.093229, 0.139768, 10.1443, 2.02186, 3.3225)
+
+[node name="HallVertEnd" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.291597, 0.448396, -0.844933, 0, 0.883321, 0.468768, 0.956541, -0.136692, 0.257574, 15.2195, 1.84331, 3.56747)
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -327,3 +435,10 @@ shape = SubResource("ConvexPolygonShape3D_6km1l")
 
 [node name="Player" parent="." instance=ExtResource("1_el1ds")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, -2)
+
+[connection signal="body_entered" from="Doors/ToGuardroom" to="Doors/ToGuardroom" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToGuardroom" to="Doors/ToGuardroom" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/ToBedroom" to="Doors/ToBedroom" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToBedroom" to="Doors/ToBedroom" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/ToPrison" to="Doors/ToPrison" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToPrison" to="Doors/ToPrison" method="_onPlayerLeft"]

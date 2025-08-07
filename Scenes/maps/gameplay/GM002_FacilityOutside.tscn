@@ -1,4 +1,4 @@
-[gd_scene load_steps=101 format=4 uid="uid://dlnlnxiop05ag"]
+[gd_scene load_steps=106 format=4 uid="uid://dlnlnxiop05ag"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_5w4ie"]
 [ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="2_uj0dq"]
@@ -23,6 +23,7 @@
 [ext_resource type="PackedScene" uid="uid://dvr15owh55e4b" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_curb_straight.tscn" id="17_eoo4g"]
 [ext_resource type="ArrayMesh" uid="uid://cy83thqg8n7bi" path="res://Graphics/Models/vehicles/Car8/Car8.obj" id="18_f8264"]
 [ext_resource type="PackedScene" uid="uid://8ef40bwnpei6" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/concrete_curb_cornerA.tscn" id="18_qftdh"]
+[ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="19_0m2vs"]
 [ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="19_2xpes"]
 [ext_resource type="PackedScene" uid="uid://cisoxomi27kwc" path="res://Graphics/Models/scenery/ConcreteFacilityOutside/building_piece2.tscn" id="19_xiuei"]
 [ext_resource type="Texture2D" uid="uid://b1k343c3gqabf" path="res://Graphics/Models/vehicles/Car8/Car8_grey.png" id="20_bhvm6"]
@@ -60,6 +61,47 @@ ObjectsTexture = [ExtResource("5_ikme2")]
 [sub_resource type="Resource" id="Resource_1gaxn"]
 script = ExtResource("8_2f70v")
 Zones = [SubResource("Resource_xuihx")]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pbvmc"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("19_0m2vs")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_2t0ky"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 24,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACQAHAAgACAAKAAkADAAKAAsACwANAAwA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("//8AAP9/AAD//wAA//8AAP9/AAD/fwAA/38AAP//AAD/fwAAAAAAAAAAAAAAAAAAAAAAAP9/AAD//wAAAAAAAP//AAD/fwAA/38AAAAAAAD/fwAA/38AAP9/AAD//wAAAAAAAP9/AAAAAAAA//8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_vy3a3"]
+resource_name = "floor-square_floor-square"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+w="),
+"format": 34896613399,
+"index_count": 24,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACQAHAAgACAAKAAkADAAKAAsACwANAAwA"),
+"material": SubResource("StandardMaterial3D_pbvmc"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 14,
+"vertex_data": PackedByteArray("//8AAP9//////wAA//////9/AAD/f////38AAP//////fwAAAAD//wAAAAAAAP//AAAAAP9//////wAAAAD/////AAD/f////38AAAAA////fwAA/3////9/AAD/////AAAAAP9///8AAAAA//////9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_2t0ky")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dy6r3"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_yj2j3"]
 radius = 0.3
@@ -985,7 +1027,7 @@ shadow_enabled = true
 [node name="TerraBrush" type="Node3D" parent="."]
 script = ExtResource("1_5w4ie")
 DataPath = "res://Scenes/maps/gameplay/GM002FacilityOutside"
-CollisionLayers = 8
+CollisionLayers = 4
 TextureSets = ExtResource("2_uj0dq")
 Foliages = []
 DefaultObjectFrequency = 4
@@ -1267,6 +1309,18 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.2847, -1.10036, 5.15001)
 
 [node name="ConcreteCurbCorner1" parent="Scenery/Concrete" instance=ExtResource("18_qftdh")]
 transform = Transform3D(-1.26, 0, -8.74228e-08, 0, 1, 0, 1.10153e-07, 0, -1, 24.6641, -1.1, -11.0553)
+
+[node name="floor-square2" type="StaticBody3D" parent="Scenery/Concrete"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.5, -0.05, 0.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-square" type="MeshInstance3D" parent="Scenery/Concrete/floor-square2"]
+mesh = SubResource("ArrayMesh_vy3a3")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Scenery/Concrete/floor-square2"]
+shape = SubResource("ConvexPolygonShape3D_dy6r3")
 
 [node name="Buildings" type="Node3D" parent="Scenery"]
 
@@ -1809,7 +1863,7 @@ NewSceneRotate = Vector3(0, 90, 0)
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82993, 0, -4.57319)
 
 [node name="Player" parent="." instance=ExtResource("12_qctx3")]
-transform = Transform3D(-0.200838, 0, 0.979623, 0, 1, 0, -0.979623, 0, -0.200838, 3.30239, 1.05787, 0.230636)
+transform = Transform3D(-0.190809, 0, 0.981626, 0, 1, 0, -0.981626, 0, -0.190809, 3.5, 0, 0.5)
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]
