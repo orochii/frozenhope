@@ -1,10 +1,11 @@
-[gd_scene load_steps=23 format=4 uid="uid://dw2p3h5yec5om"]
+[gd_scene load_steps=24 format=4 uid="uid://dw2p3h5yec5om"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ano30"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_v6aph"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_1jfpj"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_bohmx"]
+[ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="4_1t5di"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lmc7q"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -234,25 +235,30 @@ Camera = NodePath("../../Cameras/HallHorzBed")
 transform = Transform3D(-1.31134e-08, 0, -3, 0, 1, 0, 0.3, 0, -1.31134e-07, -0.5, 0, 1)
 Camera = NodePath("../../Cameras/HallCorner")
 
-[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 1, 0, 2.5)
 Camera = NodePath("../../Cameras/HallCorner")
+ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
-[node name="ToHallVertFloor_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+[node name="ToHallVertFloor_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 2.13682, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertFloor")
+Camera = NodePath("../../Cameras/ChaseCamera")
+HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
-[node name="ToHallVertFloor_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+[node name="ToHallVertFloor_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 6.40012, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertFloor")
+Camera = NodePath("../../Cameras/ChaseCamera")
+HideBodies = [NodePath("../../Prototype/wall4")]
 
-[node name="ToHallVertHangar" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+[node name="ToHallVertHangar" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-2.46945, 0, 2.62268e-07, 0, 1, 0, -2.15886e-07, 0, -3, 8.8, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertHangar")
+Camera = NodePath("../../Cameras/ChaseCamera")
+HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
-[node name="ToHallVertLong_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+[node name="ToHallVertLong_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 11.2176, 0, 2.5)
 Camera = NodePath("../../Cameras/HallVertLong")
+ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
 [node name="ToHallVertLong_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-1.22479, 0, 2.62268e-07, 0, 1, 0, -1.07075e-07, 0, -3, 15.3163, 0, 2.5)
@@ -286,6 +292,14 @@ transform = Transform3D(0.168008, 0.547021, -0.820086, 0, 0.831911, 0.554909, 0.
 
 [node name="HallVertEnd" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.291597, 0.448396, -0.844933, 0, 0.883321, 0.468768, 0.956541, -0.136692, 0.257574, 15.2195, 1.84331, 3.56747)
+
+[node name="ChaseCamera" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.963784, 0.119845, -0.23824, 0, 0.893337, 0.449387, 0.266685, 0.433112, -0.860984, 2.80385, 2.19003, -1.06776)
+script = ExtResource("4_1t5di")
+Tracking = true
+Follow_X = true
+X_offset = -1.2
+Z_offset = 3.0
 
 [node name="Prototype" type="Node3D" parent="."]
 

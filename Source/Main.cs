@@ -96,6 +96,7 @@ public partial class Main : Node
 			//Search for the Player node inside of the new scene and then unfreeze them, this is done in order to
 			//fix a pesky bug where the Player node gets loaded faster than the Terrain node of the Scene, leading
 			//the player node to fall through the world.
+			//EDIT: This does not fix the issue lmao
 			Player _unfreezePlayer = GetPlayerNode(currentScene);
 			if (_unfreezePlayer != null) _unfreezePlayer.FreezeStatus();
 			//We set the UI Mode
@@ -127,10 +128,15 @@ public partial class Main : Node
 	}
 
 	//We search for the player Node inside of a given scene and return it
-	private Player GetPlayerNode(Node3D Scene){
+	public Player GetPlayerNode(Node3D Scene){
+		if (Scene == null)
+			return Instance.FindChild("Player") as Player;
+			
 		var _playerNode = Scene.FindChild("Player") as Player;
-		if (_playerNode != null) GD.Print("Player Node Found");
-		else GD.Print("Player Node not found");
+		if (_playerNode != null)
+			GD.Print("Player Node Found");
+		else
+			GD.Print("Player Node not found");
 		return _playerNode;
 	}
 }

@@ -1,8 +1,9 @@
-[gd_scene load_steps=30 format=4 uid="uid://us0as5j44wrb"]
+[gd_scene load_steps=31 format=4 uid="uid://us0as5j44wrb"]
 
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_52ewu"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_g83vf"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="2_e3q5a"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="3_4g3tb"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_k7xsm"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sbje0"]
@@ -204,13 +205,27 @@ mesh = SubResource("BoxMesh_bdm2b")
 
 [node name="ToServiceHall" parent="Doors" instance=ExtResource("2_e3q5a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -4.9)
+GoToScenAlt = "gameplay/GM010_1_Tunnel"
+NewSceneXYZ = Vector3(-7.5, 0, -0.6)
+NewSceneRotate = Vector3(0, 135, 0)
 
 [node name="ViewChangers" type="Node3D" parent="."]
+
+[node name="ToEntrance" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("3_4g3tb")]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 4, 0, 0, 0)
+Camera = NodePath("../../Camera/Entrance")
+
+[node name="ToTempCam1" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("3_4g3tb")]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 2, 0, 0, -4)
+Camera = NodePath("../../Camera/TempCam1")
 
 [node name="Camera" type="Node3D" parent="."]
 
 [node name="Entrance" type="Camera3D" parent="Camera"]
 transform = Transform3D(-0.733088, -0.321443, 0.59938, 0, 0.881268, 0.472617, -0.680133, 0.34647, -0.646047, 1.63872, 2.41085, -1.13781)
+
+[node name="TempCam1" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.346117, -0.584037, 0.734236, 0, 0.782608, 0.622514, -0.938191, -0.215463, 0.270874, 2.60255, 2.6907, -2.44836)
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -347,7 +362,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_lka26")
 
 [node name="wall10" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, -3, 0, -4)
+transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, -3, 0, -3.9)
 collision_layer = 8
 collision_mask = 33
 

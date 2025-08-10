@@ -113,9 +113,9 @@ NewSceneXYZ = Vector3(-0.5, 0, 3.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
 [node name="Door2" parent="." instance=ExtResource("1_moe1s")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.45, 0, 7.9)
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0, 7.9)
 GoToScene = 9
-NewSceneXYZ = Vector3(1.45, 0, -2.4)
+NewSceneXYZ = Vector3(1.5, 0, -2.4)
 
 [node name="Player" parent="." instance=ExtResource("3_4fyvq")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.4)
@@ -224,8 +224,44 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square3"]
 shape = SubResource("ConvexPolygonShape3D_271rf")
 
+[node name="floor-small-square4" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 3, -0.5, 2, 0.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square4"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square4"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
+[node name="floor-small-square5" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 2, 1.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square5"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square5"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
+[node name="floor-small-square6" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 7, 1.5, 2, 4.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square6"]
+mesh = SubResource("ArrayMesh_l3lg1")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square6"]
+shape = SubResource("ConvexPolygonShape3D_271rf")
+
 [node name="wall" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-1, 0, 3.01992e-07, 0, 2, 0, -1.50996e-07, 0, -2, 0, 0, 0)
+transform = Transform3D(-1, 0, 3.01992e-07, 0, 2, 0, -1.50996e-07, 0, -2, 0.1, 0, 0)
 collision_layer = 8
 collision_mask = 33
 
@@ -249,7 +285,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_agvyl")
 
 [node name="wall3" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-1.07284e-07, 0, -2, 0, 2, 0, 1, 0, -2.14569e-07, 1, 0, 1)
+transform = Transform3D(-1.07284e-07, 0, -2, 0, 2, 0, 1, 0, -2.14569e-07, 1, 0, 0.9)
 collision_layer = 8
 collision_mask = 33
 
@@ -273,7 +309,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_agvyl")
 
 [node name="wall5" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-1, 0, 1.05697e-06, 0, 2, 0, -1.50996e-07, 0, -7, 2, 0, 4.5)
+transform = Transform3D(-1, 0, 1.05697e-06, 0, 2, 0, -1.50996e-07, 0, -7, 2.1, 0, 4.5)
 collision_layer = 8
 collision_mask = 33
 
