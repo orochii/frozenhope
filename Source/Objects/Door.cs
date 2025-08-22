@@ -10,6 +10,7 @@ public partial class Door : Area3D, Interactable
     //Use GoToSceneAlt if you wish to input a target map's filepath directly
     [Export] public string GoToScenAlt;
     [Export] public Vector3 NewSceneXYZ;
+    [Export] private bool MaintainRotation;
     [Export(PropertyHint.Range, "-360,360,5")]
     public Vector3 NewSceneRotate;
     private Database _data;
@@ -83,9 +84,12 @@ public partial class Door : Area3D, Interactable
             _playerCharacter.FreezeStatus();
             Main.Instance.Busy = true;
             //Move to specified scene
-            Main.Instance.TransferVector = NewSceneXYZ;
-            Main.Instance.TransferRotate = NewSceneRotate;
-            if (GoToScenAlt == null) Main.Instance.ChangeMap(_data.StartingScene[GoToScene]);
+            var Empty = Vector3.Zero;
+            if (NewSceneXYZ != Empty) Main.Instance.TransferVector = NewSceneXYZ;
+            if (!MaintainRotation) Main.Instance.TransferRotate = NewSceneRotate;
+            else Main.Instance.TransferRotate = _playerCharacter.GlobalRotationDegrees;
+    
+            if (GoToScenAlt == null) Main.Instance.ChangeMap(_data.StartingScene[GoToScene], true, MaintainRotation);
             else Main.Instance.ChangeMap(GoToScenAlt);
             
             //Unpause game

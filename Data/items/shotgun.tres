@@ -16,7 +16,8 @@ EquippedModel = ExtResource("1_yxpvg")
 WeaponBoneIdx = 0
 AnimationSet = "pistol"
 DisplayName = "Shotgun"
-DisplayDescription = "12 gauge shotgun"
+DisplayDescription = "Reliable and rugged pump-action shotgun.
+Chambered in 12 Gauge."
 Icon = ExtResource("1_mnpcb")
 Model = ExtResource("3_3tvwt")
 SlotSize = Vector2i(2, 1)

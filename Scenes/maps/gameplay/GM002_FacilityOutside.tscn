@@ -1,4 +1,4 @@
-[gd_scene load_steps=106 format=4 uid="uid://dlnlnxiop05ag"]
+[gd_scene load_steps=107 format=4 uid="uid://dlnlnxiop05ag"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_5w4ie"]
 [ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="2_uj0dq"]
@@ -39,6 +39,7 @@
 [ext_resource type="Texture2D" uid="uid://beq5v4k0ulv6k" path="res://Graphics/Models/vehicles/RedTruckTM/pixelated.png" id="34_a1fav"]
 [ext_resource type="Material" uid="uid://bqj2lwnseyfim" path="res://Graphics/Models/vehicles/RedTruckTM/redSUVWindow.tres" id="35_fehp1"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="37_qj1l1"]
+[ext_resource type="PackedScene" uid="uid://mtj4vyfrwy54" path="res://Graphics/Models/vehicles/temp_jeep.tscn" id="41_fjc4v"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="43_mp2dh"]
 
 [sub_resource type="Environment" id="Environment_vhopj"]
@@ -1129,9 +1130,6 @@ transform = Transform3D(0.7, 0, 0, 0, 0.7, 0, 0, 0, 0.7, -1.00275, -4.76837e-07,
 [node name="ChainLinkFence7" parent="Scenery/Fence" instance=ExtResource("11_u1wrr")]
 transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -0.99201, 0, -23.4052)
 
-[node name="ConcreteBarrier" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
-transform = Transform3D(0.980925, 0, 0.194388, 0, 1, 0, -0.194388, 0, 0.980925, 7.33998, 0, -4.9575)
-
 [node name="ConcreteBarrier18" parent="Scenery/Fence" instance=ExtResource("11_80fwn")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.05197, 0, -4.64975)
 
@@ -1864,6 +1862,9 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82993, 0, -4.57319)
 
 [node name="Player" parent="." instance=ExtResource("12_qctx3")]
 transform = Transform3D(-0.190809, 0, 0.981626, 0, 1, 0, -0.981626, 0, -0.190809, 3.5, 0, 0.5)
+
+[node name="TempJeep" parent="." instance=ExtResource("41_fjc4v")]
+transform = Transform3D(-0.998856, 0, -0.0478212, 0, 1, 0, 0.0478212, 0, -0.998856, 6.93593, 0, -6.68368)
 
 [editable path="Scenery/LampPosts/LampPost3"]
 [editable path="Scenery/LampPosts/LampPost4"]

@@ -128,6 +128,11 @@ transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.09290
 GoToScene = 2
 NewSceneXYZ = Vector3(29.353, 2, -13.996)
 
+[node name="Door2" parent="." instance=ExtResource("8_av1kt")]
+transform = Transform3D(-0.995675, 0, 0.0929093, 0, 1, 0, -0.0929093, 0, -0.995675, 0.61662, -1.19209e-07, 2.25227)
+GoToScene = 1
+NewSceneXYZ = Vector3(-39.185, 12.59, -6.252)
+
 [node name="StaticBody3D2" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
 GoToScene = 2

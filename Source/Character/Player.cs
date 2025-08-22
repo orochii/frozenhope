@@ -54,19 +54,6 @@ public partial class Player : CharacterBody3D, Targettable
 		FreezeStatus();
 		//We continue with the rest of the prep
 		Instance = this;
-		//Move and rotate player after transfer
-		var transferVector3 = Main.Instance.TransferVector;
-		var rotationVector3 = Main.Instance.TransferRotate;
-		//if (!transferVector3.Equals(_empty)) {
-		GD.Print("We are working brotha");
-		GlobalPosition = transferVector3;
-		Main.Instance.TransferVector = _empty;
-		//}
-		//Rotate player after transfer if rotation data is available
-		//if (!rotationVector3.Equals(_empty)) {
-		GlobalRotationDegrees = rotationVector3;
-		Main.Instance.TransferRotate = _empty;
-		//}
 		// In case uh... revive? lol
 		OriginalCollisionLayer = CollisionLayer;
 		OriginalCollisionMask = CollisionMask;

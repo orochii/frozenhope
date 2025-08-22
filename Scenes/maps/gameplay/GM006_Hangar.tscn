@@ -1,22 +1,19 @@
-[gd_scene load_steps=25 format=4 uid="uid://bgbl8b28bvm55"]
+[gd_scene load_steps=27 format=4 uid="uid://bgbl8b28bvm55"]
 
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_b8int"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ywab3"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_kq11u"]
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_sfoqg"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_gqlym"]
+[ext_resource type="PackedScene" uid="uid://mtj4vyfrwy54" path="res://Graphics/Models/vehicles/temp_jeep.tscn" id="5_mnow7"]
 
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_reed5"]
-sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
-sky_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
-ground_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bq2dq"]
 
 [sub_resource type="Sky" id="Sky_m0svy"]
-sky_material = SubResource("ProceduralSkyMaterial_reed5")
+sky_material = SubResource("ProceduralSkyMaterial_bq2dq")
 
 [sub_resource type="Environment" id="Environment_joa5q"]
 background_mode = 2
-background_energy_multiplier = 0.25
 sky = SubResource("Sky_m0svy")
 tonemap_mode = 2
 
@@ -124,6 +121,9 @@ points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_okmpc"]
 points = PackedVector3Array(0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_kx35r"]
+size = Vector3(5, 3.5, 0.7)
 
 [node name="GM006_Hangar" type="Node3D"]
 
@@ -448,6 +448,16 @@ mesh = SubResource("BoxMesh_s7sny")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/Container3"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("ConvexPolygonShape3D_okmpc")
+
+[node name="TempJeep" parent="Prototype" instance=ExtResource("5_mnow7")]
+transform = Transform3D(-0.433801, 0, -0.901009, 0, 1, 0, 0.901009, 0, -0.433801, -7.50425, -2.38419e-07, 6.49701)
+
+[node name="Shelves" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.6, 0, 8.05)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/Shelves"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+mesh = SubResource("BoxMesh_kx35r")
 
 [node name="Player" parent="." instance=ExtResource("3_gqlym")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 2.5, 0, -3.9)
