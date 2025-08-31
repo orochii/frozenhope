@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=4 uid="uid://dw2p3h5yec5om"]
+[gd_scene load_steps=31 format=4 uid="uid://dw2p3h5yec5om"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ano30"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
@@ -120,6 +120,36 @@ shadow_mesh = SubResource("ArrayMesh_x842g")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6km1l"]
 points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_a7xak"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 4.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4e0r4"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 9.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qurxt"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kdw3l"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6drpl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_et5pe"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_brnnh"]
+size = Vector3(1, 0.6, 0.2)
+
 [node name="GM004_HallwayM1" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -159,7 +189,7 @@ script = ExtResource("1_v6aph")
 Interface = NodePath("Label3D")
 GoToScene = 5
 NewSceneXYZ = Vector3(-1.4, 0, 2)
-NewSceneRotate = Vector3(0, 180, 0)
+NewSceneRotate = Vector3(0, 90, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToBedroom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -300,6 +330,16 @@ TrackPosition = true
 Follow_X = true
 X_offset = -1.2
 Z_offset = 3.0
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.45, 2.5)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 2.45, 2.5)
+shadow_enabled = true
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -446,6 +486,50 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall10"]
 shape = SubResource("ConvexPolygonShape3D_6km1l")
+
+[node name="Pipe" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.9, 1, 1.7)
+mesh = SubResource("CylinderMesh_a7xak")
+
+[node name="Pipe2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 2.75, 1, 3.9)
+mesh = SubResource("CylinderMesh_4e0r4")
+
+[node name="Pipe3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 10.5, 1, 1.1)
+mesh = SubResource("CylinderMesh_qurxt")
+
+[node name="Pipe5" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 7.5, 0.5, 1.1)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe6" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 7.5, 0.5, 3.9)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe7" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 3.5, 0.5, 3.9)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe8" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, -1.9, 0.5, -0.525)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Crate1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7, 0.5, 1.6)
+mesh = SubResource("BoxMesh_6drpl")
+
+[node name="Crate2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(0.994318, 0, -0.106455, 0, 1, 0, 0.106455, 0, 0.994318, 6.61946, 1.5, 1.61962)
+mesh = SubResource("BoxMesh_6drpl")
+
+[node name="Barrel1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7265, 0.5, 1.43501)
+mesh = SubResource("CylinderMesh_et5pe")
+
+[node name="WallCabinet" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 3, 1.4, 1.2)
+mesh = SubResource("BoxMesh_brnnh")
 
 [node name="Player" parent="." instance=ExtResource("1_el1ds")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, -2)

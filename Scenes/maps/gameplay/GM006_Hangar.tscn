@@ -1,4 +1,4 @@
-[gd_scene load_steps=37 format=4 uid="uid://bgbl8b28bvm55"]
+[gd_scene load_steps=40 format=4 uid="uid://bgbl8b28bvm55"]
 
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_b8int"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ywab3"]
@@ -6,6 +6,7 @@
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_sfoqg"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_gqlym"]
 [ext_resource type="PackedScene" uid="uid://mtj4vyfrwy54" path="res://Graphics/Models/vehicles/temp_jeep.tscn" id="5_mnow7"]
+[ext_resource type="PackedScene" uid="uid://dnli4v220d68y" path="res://Graphics/Models/vehicles/temp_forklift.tscn" id="6_kpjwn"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_bq2dq"]
 
@@ -159,6 +160,13 @@ height = 1.2
 [sub_resource type="BoxMesh" id="BoxMesh_kteqo"]
 size = Vector3(0.1, 2.6, 1.15)
 
+[sub_resource type="BoxMesh" id="BoxMesh_csf6l"]
+size = Vector3(0.7, 0.8, 0.7)
+
+[sub_resource type="PrismMesh" id="PrismMesh_d4dby"]
+left_to_right = 0.0
+size = Vector3(0.7, 0.3, 0.7)
+
 [node name="GM006_Hangar" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -306,21 +314,28 @@ transform = Transform3D(-0.747581, 0.47131, -0.467963, 0, 0.704582, 0.709622, 0.
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 5, 2)
+light_color = Color(0.83, 0.9745, 1, 1)
+light_energy = 0.9
+shadow_enabled = true
+omni_range = 9.0
+
+[node name="OmniLight3D8" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 5, 2)
+light_color = Color(0.83, 0.9745, 1, 1)
+light_energy = 0.9
+shadow_enabled = true
+omni_range = 9.0
+
+[node name="OmniLight3D9" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3, 5, 2)
 light_color = Color(0.83, 0.9745, 1, 1)
 light_energy = 0.9
 shadow_enabled = true
 omni_range = 9.0
 
-[node name="OmniLight3D6" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 11, 4, 2)
-light_color = Color(0.83, 0.9745, 1, 1)
-light_energy = 0.9
-shadow_enabled = true
-omni_range = 5.51133
-
 [node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8, 5, 2)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12, 5, 2)
 light_color = Color(0.83, 0.9745, 1, 1)
 light_energy = 0.9
 shadow_enabled = true
@@ -584,6 +599,73 @@ mesh = SubResource("CylinderMesh_dydu6")
 [node name="ContainerDoor" type="MeshInstance3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 12, 1.3, -2)
 mesh = SubResource("BoxMesh_kteqo")
+
+[node name="Forklift" parent="Prototype" instance=ExtResource("6_kpjwn")]
+transform = Transform3D(0.258819, 0, -0.965926, 0, 1, 0, 0.965926, 0, 0.258819, -11.8, 0, 1.6)
+
+[node name="CraneControls" type="Node3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -12.5, 0.3, -4.05)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/CraneControls"]
+mesh = SubResource("BoxMesh_csf6l")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype/CraneControls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.55, 0)
+mesh = SubResource("PrismMesh_d4dby")
+skeleton = NodePath("../..")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.05, 0, -3.9)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGCombiner3D2" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.95, 0, -3.9)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, -0.5)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/CSGCombiner3D2"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 1, 0)
+size = Vector3(0.05, 1, 0.05)
 
 [node name="Player" parent="." instance=ExtResource("3_gqlym")]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 2.5, 0, -3.9)

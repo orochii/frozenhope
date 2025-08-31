@@ -242,10 +242,10 @@ emission_energy_multiplier = 0.5
 material = SubResource("StandardMaterial3D_cuyog")
 
 [sub_resource type="BoxMesh" id="BoxMesh_tf1ab"]
-size = Vector3(0.6, 1.8, 1.8)
+size = Vector3(0.7, 1.85, 1.8)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ifit8"]
-size = Vector3(0.6, 1.8, 1.8)
+size = Vector3(0.7, 1.85, 1.8)
 
 [sub_resource type="BoxMesh" id="BoxMesh_et4ng"]
 size = Vector3(0.1, 1.2, 1.9)
@@ -944,37 +944,37 @@ shape = SubResource("BoxShape3D_s8pu1")
 transform = Transform3D(0.184083, 0, 0, 0, 0.722933, 0, 0, 0, 0.927422, -0.193897, 0.245286, 0)
 mesh = SubResource("SphereMesh_bdbp5")
 
-[node name="Closet" type="StaticBody3D" parent="Prototype"]
+[node name="ClosetTwoDoor" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 0, -2)
 collision_layer = 8
 collision_mask = 33
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/Closet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/ClosetTwoDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.925, 0)
 mesh = SubResource("BoxMesh_tf1ab")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/Closet"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/ClosetTwoDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.05, 0.925, 0)
 shape = SubResource("BoxShape3D_ifit8")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="Prototype"]
+[node name="Couch" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.3, 0, -4)
 collision_layer = 8
 collision_mask = 33
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/StaticBody3D"]
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 mesh = SubResource("BoxMesh_et4ng")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StaticBody3D"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.6, 0)
 shape = SubResource("ConvexPolygonShape3D_vdu2s")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype/StaticBody3D"]
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.5, 0)
 mesh = SubResource("BoxMesh_k5xi3")
 
-[node name="CollisionShape3D2" type="CollisionShape3D" parent="Prototype/StaticBody3D"]
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Prototype/Couch"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.35, 0.5, 0)
 shape = SubResource("ConvexPolygonShape3D_eo1xc")
 
