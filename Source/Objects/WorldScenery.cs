@@ -2,35 +2,55 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class WorldScenery : StaticBody3D, Interactable
+public partial class WorldScenery : Area3D, Interactable
 {
     [Export] public Label3D Interface;
     [Export] public float InteractAngle = 45f;
-    [Export] public Player Character;
     [Export] public Camera3D SceneCamera;
     [Export(PropertyHint.MultilineText)] private string FlavorText;
+    private Camera3D _stashedCamera;
+    private Player _playerCharacter;
     public bool Active
-        { get; set;}
+    { get; set; }
     public bool InterfaceVisible
         { get; set; }
-    private Camera3D _stashedCamera;
-
-    public override void _Ready() {
+    
+    //Overriden Ready function
+    public override void _Ready()
+    {
         Interface.Visible = false;
     }
+    
+    public void _onPlayerEnter(Node3D body)
+    {
+        _playerCharacter = (Player)body;
+        _playerCharacter.NearbyInteractables.Add(this);
+    }
 
-    public override void _Process(double delta) {
-        if (Active) {
-            var forward = Character.Transform.Basis.Z;
+    public void _onPlayerLeft(Node3D body)
+    {
+        _playerCharacter.NearbyInteractables.Remove(this);
+        Active = false;
+        HideInterface();
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Active)
+        {
+            var forward = _playerCharacter.Transform.Basis.Z;
             //Get relative position for maffs
             var selfPos = GlobalPosition;
-            var selfPosRelative = selfPos - Character.GlobalPosition;
+            var selfPosRelative = selfPos - _playerCharacter.GlobalPosition;
             //Get the angle between player and item and compare it against InteractAngle
             float angle = selfPosRelative.Normalized().AngleTo(forward);
-            if (angle < Mathf.DegToRad(InteractAngle)) {
+            if (angle < Mathf.DegToRad(InteractAngle))
+            {
                 ShowInterface();
-            } else HideInterface();
-        } else HideInterface();
+            }
+            else HideInterface();
+        }
+        else HideInterface();
     }
 
     //Interface functions
@@ -59,7 +79,7 @@ public partial class WorldScenery : StaticBody3D, Interactable
         if (SceneCamera != null) {
             //Get current camera and cache it
             _stashedCamera = GetViewport().GetCamera3D();
-            Character.Visible = false;
+            _playerCharacter.Visible = false;
             SceneCamera.Current = true;
         }
         //Assign text to a local string
@@ -72,7 +92,7 @@ public partial class WorldScenery : StaticBody3D, Interactable
         //Reset to StashedCamera if necessary
         if (SceneCamera != null && SceneCamera.Current == true) {
             SceneCamera.Current = false;
-            Character.Visible = true;
+            _playerCharacter.Visible = true;
             _stashedCamera.Current = true;
         }
         // Unpause game

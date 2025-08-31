@@ -18,13 +18,13 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/viewport_width=640
-window/size/viewport_height=480
+window/size/viewport_width=320
+window/size/viewport_height=240
 window/size/resizable=false
+window/size/borderless=true
 window/size/window_width_override=640
 window/size/window_height_override=480
 window/stretch/mode="viewport"
-window/stretch/aspect="keep_height"
 
 [dotnet]
 

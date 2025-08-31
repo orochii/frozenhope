@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://mtj4vyfrwy54"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_kuaev"]
+size = Vector3(1.785, 0.8, 3.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_d8wm1"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_lmvae"]
+size = Vector3(1.785, 0.7, 2.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_51035"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.588235)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ewajx"]
+size = Vector3(1.785, 2, 3.8)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_tjgxa"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 1.9
+
+[node name="TempJeep" type="StaticBody3D"]
+collision_layer = 8
+collision_mask = 33
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.9, 0)
+mesh = SubResource("BoxMesh_kuaev")
+surface_material_override/0 = SubResource("StandardMaterial3D_d8wm1")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.65, -0.5)
+mesh = SubResource("BoxMesh_lmvae")
+surface_material_override/0 = SubResource("StandardMaterial3D_51035")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_ewajx")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.35, -1)
+mesh = SubResource("CylinderMesh_tjgxa")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, 0, 0.35, 1)
+mesh = SubResource("CylinderMesh_tjgxa")

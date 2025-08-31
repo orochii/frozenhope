@@ -1,0 +1,620 @@
+[gd_scene load_steps=26 format=4 uid="uid://dkqubwoo4l5fo"]
+
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_5df1t"]
+[ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_7uuxo"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_jxl6b"]
+[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_xshm7"]
+[ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_6aui1"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sbje0"]
+sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
+sky_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
+ground_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
+
+[sub_resource type="Sky" id="Sky_jwc35"]
+sky_material = SubResource("ProceduralSkyMaterial_sbje0")
+
+[sub_resource type="Environment" id="Environment_leytl"]
+background_mode = 2
+sky = SubResource("Sky_jwc35")
+tonemap_mode = 2
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yy50h"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_qkibf"]
+size = Vector3(7, 4, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_yrnm2"]
+size = Vector3(2, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_mtlng"]
+size = Vector3(7, 4, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_d66bt"]
+size = Vector3(1, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_uh0w2"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_oen5m"]
+size = Vector3(1, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_rmjk8"]
+size = Vector3(2, 2, 0.1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_7uuxo")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_rmw1m"]
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"format": 34896613377,
+"index_count": 96,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACAADAAcABgAIAAkACQAKAAYABwALAAgADQAMAAoACgAOAA0ACwAPABAAEAARAAsAEgAJABEAEQATABIABwAUABUAFQAWAAcABAAXAAAAAAACAAQAGQACABgAGAAaABkADAAbABkAGQAKAAwAGAAcABQAFAAHABgADgAKAB0AHQAeAA4AEQAdABoAGgAfABEAHwAHABYAFgAgAB8AEwARABAAEAAhABMA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 34,
+"vertex_data": PackedByteArray("//8AAP8/AAD//wAA/38AAP+/AAD/PwAA/78AAP9/AAD/vwAAAAAAAP9/AAAAAAAA/38AAP8/AAD/vwAA/78AAP9/AAD/fwAA/z8AAP9/AAD/PwAA/z8AAP9/AAD/vwAA/z8AAAAAAAAAAAAAAAAAAAAAAAD/PwAA/38AAP//AAD/PwAA//8AAP8/AAD/vwAAAAAAAP9/AAAAAAAA/78AAP//AAD/vwAA//8AAP//AAD/vwAA//8AAP//AAAAAAAA/78AAP9/AAD/fwAA/z8AAP9/AAD/fwAA/38AAAAAAAD//wAA/38AAP8/AAD/fwAAAAAAAP9/AAD/fwAA/78AAP9/AAD//wAAAAAAAP//AAA=")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_431jk"]
+resource_name = "floor-small-square_floor-small-square"
+_surfaces = [{
+"aabb": AABB(-0.5, 0, -0.5, 1, 1e-05, 1),
+"attribute_data": PackedByteArray("/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d5j5/3eY+f93mPn/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7P93y+z/d8vs/3fL7A=="),
+"format": 34896613399,
+"index_count": 96,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAIAAgAGAAUACAADAAcABgAIAAkACQAKAAYABwALAAgADQAMAAoACgAOAA0ACwAPABAAEAARAAsAEgAJABEAEQATABIABwAUABUAFQAWAAcAGQAXABgAGAAaABkAHAAaABsAGwAdABwAHwAeABwAHAAgAB8AGwAhACIAIgAjABsAJQAgACQAJAAmACUAJwAkAB0AHQAoACcAKAAjACkAKQAqACgALAAnACsAKwAtACwA"),
+"material": SubResource("StandardMaterial3D_e2l3n"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 46,
+"vertex_data": PackedByteArray("//8AAP8//////wAA/3////+/AAD/P////78AAP9/////vwAAAAD///9/AAAAAP///38AAP8/////vwAA/7////9/AAD/f////z8AAP9/////PwAA/z////9/AAD/v////z8AAAAA//8AAAAAAAD//wAAAAD/P////38AAP//////PwAA//////8/AAD/v///AAAAAP9///8AAAAA/7//////AAD/v/////8AAP//////vwAA////////AAAAAP////8AAP8/////vwAAAAD///+/AAD/P////78AAP9/////fwAA/z////9/AAD/f////38AAAAA////PwAAAAD///8/AAD/P/////8AAP9//////wAA/7////+/AAD/v////z8AAP9///8AAAAA/z///wAAAAD/f////z8AAP+/////fwAA/7////+/AAD//////38AAP//////PwAA/////wAAAAD/v///AAAAAP//////f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_rmw1m")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_i4aad"]
+points = PackedVector3Array(-0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, 0.5, 0, 0.5)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_10mi2"]
+albedo_color = Color(0.968627, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vnjdr"]
+resource_name = "colormap"
+cull_mode = 2
+albedo_texture = ExtResource("1_7uuxo")
+texture_filter = 2
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_s4anq"]
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.5, 0.2, 1, 1),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABQAEAAEAAQAAAAUABgAEAAUABQAHAAYAAgADAAYABgAHAAIABgADAAEAAQAEAAYABQAAAAIAAgAHAAUA"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("/////wAAAAD//wAAAAAAAP///////wAA//8AAP//AAAAAAAAAAAAAAAA//8AAAAAAAAAAP//AAAAAP////8AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ppql6"]
+resource_name = "wall_wall"
+_surfaces = [{
+"aabb": AABB(-0.1, 0, -0.5, 0.2, 1, 1),
+"attribute_data": PackedByteArray("/3dlxv93mPn/d2XG/3eY+f93mPn/d5j5/3dlxv93Zcb/d5j5/3dlxv93mPn/d2XG/3eY+f93mPn/d2XG/3dlxv93mPn/d5j5/3eY+f93mPn/d2XG/3dlxv93Zcb/d2XG"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AgAAAAEAAQADAAIABgAEAAUABQAHAAYACgAIAAkACQALAAoADgAMAA0ADQAPAA4AEgAQABEAEQATABIAFgAUABUAFQAXABYA"),
+"material": SubResource("StandardMaterial3D_vnjdr"),
+"name": "colormap",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("/////wAA/7///wAAAAD/v/////////+///8AAP///78AAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAP+/AAD//wAA/78AAAAA////vwAA//////+///8AAP//AIAAAAAA//8AgP///////wCAAAD/////AID//wAA////v///AAAAAP+/AAAAAP///78AAAAAAAD/v/////8AAP////////////8AAP//AAD//wAA/////////38AAP9/AAD/fwAA/38AAP9/////f////3////9/////f////3////9/////f////3////9/////f////3///wAA/38AAP9/AAD/fwAA/3//f/+//3//v/9//7//f/+/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_s4anq")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lka26"]
+points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
+
+[node name="GM010_Prison" type="Node3D"]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_leytl")
+
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="ToSecurity" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -19.9)
+GoToScene = 12
+NewSceneXYZ = Vector3(-0.5, 0, 2.4)
+NewSceneRotate = Vector3(0, 180, 0)
+
+[node name="ToSecurity2" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -18.5)
+GoToScene = 21
+NewSceneXYZ = Vector3(3.5, 0, 0.5)
+MaintainRotation = true
+NewSceneRotate = Vector3(0, -90, 0)
+
+[node name="ToTram" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.5, 0, -17.1)
+GoToScene = 14
+NewSceneXYZ = Vector3(-1.5, 0, -2.4)
+
+[node name="ToHallM1" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, -14.5)
+GoToScene = 4
+NewSceneXYZ = Vector3(18.4, 0, 2.5)
+NewSceneRotate = Vector3(0, -90, 0)
+
+[node name="ToCargoPlatform" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, -6.5)
+collision_layer = 16
+script = ExtResource("2_xshm7")
+Interface = NodePath("Label3D")
+GoToScene = 15
+NewSceneXYZ = Vector3(-5.4, 0, -0.5)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToCargoPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_yy50h")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToCargoPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToCargoPlatform"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_qkibf")
+
+[node name="ToHangar1" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, -6.5)
+collision_layer = 16
+script = ExtResource("2_xshm7")
+Interface = NodePath("Label3D")
+GoToScene = 6
+NewSceneXYZ = Vector3(12.4, 0, 2)
+NewSceneRotate = Vector3(0, -90, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHangar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_yrnm2")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToHangar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHangar1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
+mesh = SubResource("BoxMesh_mtlng")
+
+[node name="ToBathroom" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0, 19.9)
+GoToScene = 13
+NewSceneXYZ = Vector3(4.5, 0, -1.4)
+
+[node name="ToHangar2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, 15)
+collision_layer = 16
+script = ExtResource("2_xshm7")
+Interface = NodePath("Label3D")
+GoToScene = 8
+NewSceneXYZ = Vector3(5.4, 0, 5)
+NewSceneRotate = Vector3(0, -90, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHangar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_d66bt")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToHangar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHangar2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_uh0w2")
+
+[node name="ToArmory" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 15)
+collision_layer = 16
+script = ExtResource("2_xshm7")
+Interface = NodePath("Label3D")
+GoToScene = 18
+NewSceneXYZ = Vector3(-3.4, 0, 0)
+NewSceneRotate = Vector3(0, 90, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToArmory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_oen5m")
+
+[node name="Label3D" type="Label3D" parent="Doors/ToArmory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToArmory"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+mesh = SubResource("BoxMesh_rmjk8")
+
+[node name="ToGenerator" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 2.5)
+GoToScene = 16
+NewSceneXYZ = Vector3(-5.4, 0, 0.5)
+NewSceneRotate = Vector3(0, 90, 0)
+
+[node name="ToHallwayM3" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 8.5)
+GoToScene = 17
+NewSceneXYZ = Vector3(-3.4, 0, 0.5)
+NewSceneRotate = Vector3(0, 90, 0)
+
+[node name="ViewChangers" type="Node3D" parent="."]
+
+[node name="ToTempCam1_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, -3.07661)
+Camera = NodePath("../../Camera/TempCam1")
+
+[node name="ToTempCam1_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -6.5)
+Camera = NodePath("../../Camera/TempCam1")
+
+[node name="ToTempCam2_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, -0.5, 0, -15.5)
+Camera = NodePath("../../Camera/TempCam2")
+
+[node name="ToTempCam3_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 5.5, 0, -18.5)
+Camera = NodePath("../../Camera/TempCam3")
+
+[node name="ToTempCam3_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.468449, 0, 1.04881, 0, 1, 0, -0.174801, 0, 2.81069, 1.45106, 0, -18.6049)
+Camera = NodePath("../../Camera/TempCam3")
+
+[node name="ToTempCam3_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 3.5, 0, -18.5)
+Camera = NodePath("../../Camera/TempCam3")
+
+[node name="ToTempCam3_D" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 9.5, 0, -18.5)
+Camera = NodePath("../../Camera/TempCam3")
+
+[node name="ToTempCam4_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, -1.5)
+Camera = NodePath("../../Camera/TempCam4")
+
+[node name="ToTempCam4_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 2.5)
+Camera = NodePath("../../Camera/TempCam4")
+
+[node name="ToTempCam4_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 8.5)
+Camera = NodePath("../../Camera/TempCam4")
+
+[node name="ToTempCam5_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 15)
+Camera = NodePath("../../Camera/TempCam5")
+
+[node name="ToTempCam5_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 16.5)
+Camera = NodePath("../../Camera/TempCam5")
+
+[node name="ToTempCam6_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 18)
+Camera = NodePath("../../Camera/TempCam6")
+
+[node name="ToTempCam6_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 19.5)
+Camera = NodePath("../../Camera/TempCam6")
+
+[node name="Camera" type="Node3D" parent="."]
+
+[node name="TempCam1" type="Camera3D" parent="Camera"]
+transform = Transform3D(1, 0, 0, 0, 0.901077, 0.433659, 0, -0.433659, 0.901077, -0.5, 4.033, -1.179)
+
+[node name="TempCam2" type="Camera3D" parent="Camera"]
+transform = Transform3D(-0.877976, -0.396651, 0.268004, 0, 0.559852, 0.828592, -0.478705, 0.727484, -0.491537, -0.0594693, 4.16779, -18.0162)
+
+[node name="TempCam3" type="Camera3D" parent="Camera"]
+transform = Transform3D(-4.37114e-08, -0.414693, 0.909961, 0, 0.909961, 0.414693, -1, 1.81268e-08, -3.97757e-08, 10.745, 2.654, -18.5)
+
+[node name="TempCam4" type="Camera3D" parent="Camera"]
+transform = Transform3D(-1, 1.32236e-08, -8.64169e-08, 0, 0.988494, 0.151261, 8.74228e-08, 0.151261, -0.988494, -0.5, 1.541, -2.863)
+
+[node name="TempCam5" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.99336, 0.0613151, -0.0973502, 0, 0.846152, 0.532941, 0.11505, -0.529402, 0.840534, -0.781986, 2.71051, 17.4212)
+
+[node name="TempCam6" type="Camera3D" parent="Camera"]
+transform = Transform3D(-0.711491, 0.481067, -0.512206, 0, 0.728917, 0.684602, 0.702695, 0.487089, -0.518618, -1.47738, 2.56434, 17.5971)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.75391, 2.17433, -14.5366)
+light_color = Color(0.84, 0.48412, 0.1512, 1)
+shadow_enabled = true
+omni_range = 2.16976
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10, 2.3, -18.5)
+
+[node name="Prototype" type="Node3D" parent="."]
+
+[node name="floor-small-square" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, 5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="floor-small-square2" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square2"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square2"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="floor-small-square3" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, 15)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square3"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square3"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="floor-small-square5" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -15)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square5"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square5"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="floor-small-square4" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.31134e-07, 0, -8, 0, 1, 0, 3, 0, -3.49691e-07, 5, 0, -18.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square4"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square4"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="floor-small-square6" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.31134e-07, 0, -2, 0, 1, 0, 3, 0, -8.74228e-08, 10, 0, -18.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square6"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+surface_material_override/0 = SubResource("StandardMaterial3D_10mi2")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square6"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+
+[node name="wall" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 7, -2, 0, -16.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall9" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, -11, 0, 2.5, 0, 1, 0, -4.80825e-07, 3.5, 0, -20)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall9"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall9"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall10" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, -8, 0, 2.5, 0, 1, 0, -3.49691e-07, 5, 0, -17)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall10"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall10"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall12" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 1.06581e-14, 0, 2.5, 0, -3.55271e-15, 0, 3, 11, 0, -18.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall12"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall12"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall13" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, 10, 0, -20)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall13"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall13"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall14" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, 10, 0, -17)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall14"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall14"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall5" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 5, 1, 0, -14.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall5"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall5"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall2" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 13, -2, 0, -6.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall2"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall2"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall3" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, -2, 0, 5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall3"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall3"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall4" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, -2, 0, 15)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall4"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall4"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall11" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, 3, 0, 2.5, 0, -1, 0, -1.31134e-07, -0.5, 0, 20)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall11"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall11"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall6" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 11, 1, 0, -6.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall6"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall6"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall7" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 11, 1, 0, 4.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall7"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall7"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="wall8" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, 1, 0, 15)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall8"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+
+[node name="Player" parent="." instance=ExtResource("3_6aui1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02966, 0, -13.3564)
+
+[connection signal="body_entered" from="Doors/ToCargoPlatform" to="Doors/ToCargoPlatform" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToCargoPlatform" to="Doors/ToCargoPlatform" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/ToHangar1" to="Doors/ToHangar1" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToHangar1" to="Doors/ToHangar1" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/ToHangar2" to="Doors/ToHangar2" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToHangar2" to="Doors/ToHangar2" method="_onPlayerLeft"]
+[connection signal="body_entered" from="Doors/ToArmory" to="Doors/ToArmory" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Doors/ToArmory" to="Doors/ToArmory" method="_onPlayerLeft"]

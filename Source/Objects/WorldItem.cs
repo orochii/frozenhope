@@ -2,16 +2,17 @@ using Godot;
 using System;
 using System.Runtime.CompilerServices;
 
-public partial class WorldItem : StaticBody3D, Interactable
+public partial class WorldItem : Area3D, Interactable
 {
     [Export] ItemAddEntry Item;
     [Export] public Label3D Interface;
     [Export] public float InteractAngle = 45f; //Currently unused
+    [Export] public Camera3D ItemCamera;
+    private Player _playerCharacter;
     public bool Active
         { get; set; }
     public bool InterfaceVisible
         { get; set; }
-
     private string PickedUpFlag {
         get {
             string basePath = Main.Instance.WorldParent.GetPath();
@@ -19,14 +20,32 @@ public partial class WorldItem : StaticBody3D, Interactable
             return fullPath.Substr(basePath.Length, fullPath.Length-basePath.Length);
         }
     }
-    public override void _Ready() {
-        if (Main.Instance.State.GetSwitch(PickedUpFlag)) {
+    
+    //Overriden Ready function
+    public override void _Ready()
+    {
+        if (Main.Instance.State.GetSwitch(PickedUpFlag))
+        {
             QueueFree();
         }
         HideInterface();
     }
+    
+    public void _onPlayerEnter(Node3D body)
+    {
+        _playerCharacter = (Player)body;
+        _playerCharacter.NearbyInteractables.Add(this);
+    }
 
-    public override void _Process(double delta) {
+    public void _onPlayerLeft(Node3D body)
+    {
+        _playerCharacter.NearbyInteractables.Remove(this);
+        Active = false;
+        HideInterface();
+    }
+
+    public override void _Process(double delta)
+    {
         if (Active) ShowInterface();
         else HideInterface();
     }
@@ -73,5 +92,4 @@ public partial class WorldItem : StaticBody3D, Interactable
     public override string ToString() {
         return Name;
     }
-
 }

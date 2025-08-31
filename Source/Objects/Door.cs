@@ -1,37 +1,59 @@
 using Godot;
 using System;
 
-public partial class Door : StaticBody3D, Interactable
+public partial class Door : Area3D, Interactable
 {
     [Export] public Label3D Interface;
     [Export] public float InteractAngle = 45f;
-    [Export] public Player Character;
+    [Export] public Camera3D DoorCamera;
     [Export] public int GoToScene;
+    //Use GoToSceneAlt if you wish to input a target map's filepath directly
+    [Export] public string GoToScenAlt;
     [Export] public Vector3 NewSceneXYZ;
-    [Export] public Vector3 NewSceneRotate;
+    [Export] private bool MaintainRotation;
+    [Export(PropertyHint.Range, "-360,360,5")]
+    public Vector3 NewSceneRotate;
+    private Database _data;
+    private Player _playerCharacter;
     public bool Active
         { get; set; }
-        public bool InterfaceVisible
+    public bool InterfaceVisible
         { get; set; }
-    private Database Data;
 
-    public override void _Ready() {
+    public override void _Ready()
+    {
         Interface.Visible = false;
-        Data = Database.Get();
+        _data = Database.Get();
     }
 
+    public void _onPlayerEnter(Node3D body)
+    {
+        _playerCharacter = (Player)body;
+        _playerCharacter.NearbyInteractables.Add(this);
+    }
 
-    public override void _Process(double delta) {
-        if (Active) {
-            var forward = Character.Transform.Basis.Z;
+    public void _onPlayerLeft(Node3D body)
+    {
+        _playerCharacter.NearbyInteractables.Remove(this);
+        Active = false;
+        HideInterface();
+    }
+
+    public override void _Process(double delta)
+    {
+        if (Active)
+        {
+            var forward = _playerCharacter.Transform.Basis.Z;
             //Get relative position for maffs
             var selfPos = GlobalPosition;
-            var selfPosRelative = selfPos - Character.GlobalPosition;
+            var selfPosRelative = selfPos - _playerCharacter.GlobalPosition;
             //Get the angle between player and item and compare it against InteractAngle
             float angle = selfPosRelative.Normalized().AngleTo(forward);
-            if (angle < Mathf.DegToRad(InteractAngle)) {
+            if (angle < Mathf.DegToRad(InteractAngle))
+            {
                 ShowInterface();
-            } else HideInterface();
+            }
+            else HideInterface();
         }
     }
 
@@ -54,17 +76,21 @@ public partial class Door : StaticBody3D, Interactable
     public void InteractItem() {
         if (!IsVisibleInTree()) return;
         //Check if the target transfers scene is within the available scenes array
-        var length = Data.StartingScene.Length;
+        var length = _data.StartingScene.Length;
         if (GoToScene >= 0 && GoToScene < length)
         {
             // Stop game and freeze player
             GD.Print("Start Map Change");
-            Character.FreezeStatus();
+            _playerCharacter.FreezeStatus();
             Main.Instance.Busy = true;
             //Move to specified scene
-            Main.Instance.TransferVector = NewSceneXYZ;
-            Main.Instance.TransferRotate = NewSceneRotate;
-            Main.Instance.ChangeMap(Data.StartingScene[GoToScene]);
+            var Empty = Vector3.Zero;
+            if (NewSceneXYZ != Empty) Main.Instance.TransferVector = NewSceneXYZ;
+            if (!MaintainRotation) Main.Instance.TransferRotate = NewSceneRotate;
+            else Main.Instance.TransferRotate = _playerCharacter.GlobalRotationDegrees;
+    
+            if (GoToScenAlt == null) Main.Instance.ChangeMap(_data.StartingScene[GoToScene], true, MaintainRotation);
+            else Main.Instance.ChangeMap(GoToScenAlt);
             
             //Unpause game
             GD.Print("End Map Change");
