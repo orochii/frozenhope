@@ -1,4 +1,4 @@
-[gd_scene load_steps=89 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=90 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -204,11 +204,14 @@ sky = SubResource("Sky_s043u")
 fog_enabled = true
 fog_light_color = Color(0.69931, 0.727332, 0.771365, 1)
 
-[sub_resource type="Resource" id="Resource_qmvw0"]
+[sub_resource type="Resource" id="Resource_nbip7"]
 script = ExtResource("57_58qf6")
 Item = ExtResource("56_ff2tc")
-Amount = 8
+Amount = 10
 AmmoQty = 0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_buyns"]
+height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0
@@ -753,11 +756,15 @@ autoplay = true
 [node name="Interactables" type="Node3D" parent="."]
 
 [node name="PistolAmmo" parent="Interactables" instance=ExtResource("55_36f02")]
-transform = Transform3D(0.446009, 0, -0.226, 0, 0.5, 0, 0.226, 0, 0.446009, -48.2891, 12.6135, -20.3902)
-Item = SubResource("Resource_qmvw0")
+transform = Transform3D(0.891798, 0, -0.452435, 0, 1, 0, 0.452435, 0, 0.891798, -48.2674, 12.5887, -20.4617)
+Item = SubResource("Resource_nbip7")
 
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
-transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, -0.0375148, -0.0684299, -0.064453)
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/PistolAmmo"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+shape = SubResource("CylinderShape3D_buyns")
 
 [node name="CampFire" parent="Interactables" instance=ExtResource("57_veoda")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.9638, 12.2322, -12.5977)
@@ -781,7 +788,7 @@ SceneCamera = NodePath("RifleCam")
 FlavorText = "My trusty rifle."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/CheckRifle"]
-transform = Transform3D(0.675732, 0, -0.737148, 0, 1, 0, 0.737148, 0, 0.675732, 0.127135, 0, -0.112704)
+transform = Transform3D(0.675732, 0, -0.737148, 0, 1, 0, 0.737148, 0, 0.675732, 0.0534202, 0, -0.0451308)
 shape = SubResource("BoxShape3D_8iyoi")
 
 [node name="RifleCam" type="Camera3D" parent="Interactables/CheckRifle"]
@@ -850,6 +857,9 @@ collision_layer = 4
 [node name="CollisionShape3D" type="CollisionShape3D" parent="FallStop"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.273079, 0)
 shape = SubResource("BoxShape3D_g72qa")
+
+[connection signal="body_entered" from="Interactables/PistolAmmo" to="Interactables/PistolAmmo" method="_onPlayerEnter"]
+[connection signal="body_exited" from="Interactables/PistolAmmo" to="Interactables/PistolAmmo" method="_onPlayerLeft"]
 
 [editable path="Scenery/Corpse Torso"]
 [editable path="RedSUVtm2"]

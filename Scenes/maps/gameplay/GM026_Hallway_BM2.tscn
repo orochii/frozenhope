@@ -236,7 +236,6 @@ transform = Transform3D(-0.99605, 0.0742773, -0.0486567, 0.0368698, 0.844457, 0.
 [node name="TempCam2" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.972814, 0.0778671, -0.218103, 0, 0.941779, 0.336233, 0.231586, 0.327093, -0.916176, -3.5, 2.328, -0.784)
 script = ExtResource("3_pxhdb")
-Tracking = true
 Follow_X = true
 X_offset = 1.0
 

@@ -26,7 +26,7 @@ radius = 6.0
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_k7rh0"]
 radius = 0.4
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea", "ItemDetectionArea", "InteractInterface", "FloorChecker")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("Graphic", "DetectionArea", "ItemDetectionArea", "InteractInterface", "FloorChecker") groups=["PlayerNode"]]
 collision_mask = 44
 floor_snap_length = 1.0
 safe_margin = 0.005

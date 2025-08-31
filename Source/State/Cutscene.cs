@@ -20,7 +20,7 @@ public partial class Cutscene : Node3D
 			Main.Instance.StartGame();
 		}
 		else {
-			Main.Instance.ChangeMap(NextScene);
+			Main.Instance.ChangeMap(NextScene, Vector3.Zero, Vector3.Zero);
 		}
 	}
 }

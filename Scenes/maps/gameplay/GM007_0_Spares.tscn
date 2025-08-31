@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=4 uid="uid://dv6bdcqp3ob34"]
+[gd_scene load_steps=23 format=4 uid="uid://dv6bdcqp3ob34"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_5goci"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_duem7"]
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_w2de4"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_d8osl"]
+[ext_resource type="Material" uid="uid://dxm3rh1g5qxv2" path="res://Graphics/textures/emissive.tres" id="3_u6773"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ola0h"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -14,9 +15,11 @@ ground_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
 sky_material = SubResource("ProceduralSkyMaterial_ola0h")
 
 [sub_resource type="Environment" id="Environment_ixn7j"]
-background_mode = 2
 sky = SubResource("Sky_rej3l")
+ambient_light_energy = 0.0
 tonemap_mode = 2
+glow_enabled = true
+glow_blend_mode = 1
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_k8x8b"]
 size = Vector3(1, 2, 0.5)
@@ -28,6 +31,10 @@ size = Vector3(2, 2, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_31ccv"]
 size = Vector3(1, 2, 0.1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_5n0wi"]
+radius = 0.05
+height = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -189,6 +196,20 @@ transform = Transform3D(-0.692802, 0.467899, -0.548722, 0, 0.760922, 0.648843, 0
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2.3, 5)
+light_bake_mode = 1
+shadow_enabled = true
+
+[node name="HatchLight" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -0.5, 2.1, 3.9)
+material_override = ExtResource("3_u6773")
+mesh = SubResource("CapsuleMesh_5n0wi")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights/HatchLight"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -0.2)
+light_color = Color(1, 0, 0, 1)
+light_bake_mode = 1
+omni_range = 2.0
+omni_attenuation = 0.05
 
 [node name="Prototype" type="Node3D" parent="."]
 

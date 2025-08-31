@@ -65,7 +65,7 @@ public partial class Main : Node
 		}
 		State.SetEquippedItem(0);
 		// Go to scene in position [StartScene]
-		ChangeMap(Database.StartingScene[StartScene]);
+		ChangeMap(Database.StartingScene[StartScene], TransferVector, TransferRotate);
 	}
 	private string GetFullMapName(string baseName) {
 		if (baseName.Length==0) return "";
@@ -73,15 +73,16 @@ public partial class Main : Node
     }
 	
 	/// <summary>
-	/// Transfers the user to the "NewMapName" scene and then Move and Rotate the player based on boolean parameters.
+	/// Transfers the user to the "NewMapName" scene and then move and rotate the Player based on the Vector3 PlayerTransfermove
+	/// and the Vector3 PlayerTransferRotate
 	/// </summary>
-	/// <param name="newMapName"></param>
-	/// <param name="MovePlayer"></param>
-	/// <param name="RotatePlayer"></param>
-	public async void ChangeMap(string newMapName, bool MovePlayer = false, bool RotatePlayer = false)
+	/// <param name="MapName"></param>
+	/// <param name="Position"></param>
+	/// <param name="Rotaiton"></param>
+	public async void ChangeMap(string MapName, Vector3 Position, Vector3 Rotation)
 	{
 		// Hide screen.
-		var sceneToLoad = GetFullMapName(newMapName);
+		var sceneToLoad = GetFullMapName(MapName);
 		GD.Print("Loading ", sceneToLoad);
 		Loader.LoadScene(sceneToLoad);
 		await Loader.ToSignal(Loader, Loader.SignalName.OnShowFinished);
@@ -100,17 +101,18 @@ public partial class Main : Node
 		// Instantiate new map if we received any.
 		if (newMapScene != null)
 		{
-			if (State != null) State.MapName = newMapName;
+			if (State != null) State.MapName = MapName;
 			currentScene = newMapScene.Instantiate<Node3D>();
 			WorldParent.AddChild(currentScene);
 			/* Search for the player node within the scene tree and move and rotate them based
-			on NewPlayerPosition and NewPlayerRotation. If these values aren't given, do nothing.
+			on Position and Rotation.
 			*/
-			Player PlayerNode = GetPlayerNode(currentScene);
+			Player PlayerNode = (Player) GetTree().GetFirstNodeInGroup("PlayerNode");
+			GD.Print("main has found player node");
 			if (PlayerNode != null)
 			{
-				if (MovePlayer) PlayerNode.GlobalPosition = TransferVector;
-				if (RotatePlayer) PlayerNode.GlobalRotation = TransferRotate;
+				PlayerNode.GlobalPosition = Position;
+				PlayerNode.GlobalRotationDegrees = Rotation;
 				PlayerNode.FreezeStatus();
 			}
 			//We set the UI Mode
@@ -142,19 +144,6 @@ public partial class Main : Node
 
     public void LoadIntroMap() {
 		if (SkipIntro) Main.Instance.StartGame();
-		else ChangeMap(Database.IntroScene);
-	}
-
-	//We search for the player Node inside of a given scene and return it
-	public Player GetPlayerNode(Node3D Scene){
-		if (Scene == null)
-			return Instance.FindChild("Player") as Player;
-			
-		var _playerNode = Scene.FindChild("Player") as Player;
-		if (_playerNode != null)
-			GD.Print("Player Node Found");
-		else
-			GD.Print("Player Node not found");
-		return _playerNode;
+		else ChangeMap(Database.IntroScene, Vector3.Zero, Vector3.Zero);
 	}
 }
