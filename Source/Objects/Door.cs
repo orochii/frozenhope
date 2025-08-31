@@ -11,12 +11,11 @@ public partial class Door : Area3D, Interactable
     [Export] public string GoToScenAlt;
     [Export] public Vector3 NewSceneXYZ;
     [Export] private bool MaintainRotation;
-    [Export(PropertyHint.Range, "-360,360,5")]
-    public Vector3 NewSceneRotate;
+    [Export(PropertyHint.Range, "-360,360,5")] public Vector3 NewSceneRotate;
     private Database _data;
     private Player _playerCharacter;
     public bool Active
-        { get; set; }
+    { get; set; }
     public bool InterfaceVisible
         { get; set; }
 
@@ -84,13 +83,14 @@ public partial class Door : Area3D, Interactable
             _playerCharacter.FreezeStatus();
             Main.Instance.Busy = true;
             //Move to specified scene
-            var Empty = Vector3.Zero;
-            if (NewSceneXYZ != Empty) Main.Instance.TransferVector = NewSceneXYZ;
-            if (!MaintainRotation) Main.Instance.TransferRotate = NewSceneRotate;
-            else Main.Instance.TransferRotate = _playerCharacter.GlobalRotationDegrees;
-    
-            if (GoToScenAlt == null) Main.Instance.ChangeMap(_data.StartingScene[GoToScene], true, MaintainRotation);
-            else Main.Instance.ChangeMap(GoToScenAlt);
+            var TransferRotation = Vector3.Zero;
+            //Assign Rotatation based on the MaintainRotation boolean
+            TransferRotation = MaintainRotation ? _playerCharacter.GlobalRotationDegrees : NewSceneRotate;
+            //Move to map index if GoToScenAlt string is empty
+            if (GoToScenAlt == null)
+                Main.Instance.ChangeMap(_data.StartingScene[GoToScene], NewSceneXYZ, TransferRotation);
+            else
+                Main.Instance.ChangeMap(GoToScenAlt, NewSceneXYZ, TransferRotation);
             
             //Unpause game
             GD.Print("End Map Change");

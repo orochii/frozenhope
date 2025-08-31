@@ -18,8 +18,8 @@ config/icon="res://icon.png"
 
 [display]
 
-window/size/viewport_width=320
-window/size/viewport_height=240
+window/size/viewport_width=640
+window/size/viewport_height=480
 window/size/resizable=false
 window/size/borderless=true
 window/size/window_width_override=640
@@ -33,6 +33,10 @@ project/assembly_name="Covenant"
 [editor_plugins]
 
 enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "res://addons/terrabrush/plugin.cfg")
+
+[global_group]
+
+PlayerNode="This group contains only the player node"
 
 [input]
 

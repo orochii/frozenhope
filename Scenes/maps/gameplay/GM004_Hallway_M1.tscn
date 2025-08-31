@@ -296,7 +296,7 @@ transform = Transform3D(0.291597, 0.448396, -0.844933, 0, 0.883321, 0.468768, 0.
 [node name="ChaseCamera" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.963784, 0.119845, -0.23824, 0, 0.893337, 0.449387, 0.266685, 0.433112, -0.860984, 2.80385, 2.19003, -1.06776)
 script = ExtResource("4_1t5di")
-Tracking = true
+TrackPosition = true
 Follow_X = true
 X_offset = -1.2
 Z_offset = 3.0

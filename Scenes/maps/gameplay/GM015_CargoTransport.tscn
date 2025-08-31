@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=4 uid="uid://dbwa8ri53330x"]
+[gd_scene load_steps=22 format=4 uid="uid://dbwa8ri53330x"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_x0usd"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_coscm"]
 [ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_n0qxa"]
+[ext_resource type="Material" uid="uid://dxm3rh1g5qxv2" path="res://Graphics/textures/emissive.tres" id="3_6bopa"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_f0wci"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iafwa"]
@@ -23,6 +24,10 @@ size = Vector3(2, 2, 0.5)
 
 [sub_resource type="BoxMesh" id="BoxMesh_uin7w"]
 size = Vector3(7, 4, 0.1)
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_7gbfg"]
+radius = 0.05
+height = 0.3
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -164,6 +169,19 @@ NewSceneRotate = Vector3(0, 90, 0)
 transform = Transform3D(-0.340384, -0.783679, 0.519603, 0, 0.552601, 0.833447, -0.940287, 0.283692, -0.188096, 3.70993, 6.79981, -5.55596)
 
 [node name="Lights" type="Node3D" parent="."]
+
+[node name="HatchLight" type="MeshInstance3D" parent="Lights"]
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3.9, 2.1, -5.5)
+material_override = ExtResource("3_6bopa")
+mesh = SubResource("CapsuleMesh_7gbfg")
+skeleton = NodePath("../..")
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights/HatchLight"]
+transform = Transform3D(-4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0, 1, 0, 0, -0.2)
+light_color = Color(1, 0, 0, 1)
+light_bake_mode = 1
+omni_range = 1.5
+omni_attenuation = 0.05
 
 [node name="Prototype" type="Node3D" parent="."]
 

@@ -1,16 +1,24 @@
 using Godot;
 using System;
+using System.Linq;
 
 public partial class ChaseCamera3D : Camera3D
 {
-    [Export] private bool Tracking = false;
+    [Export] private bool TrackPosition = false;
+    [ExportSubgroup("Positional Tracking")]
     [Export] private bool Follow_X = false;
     [Export] private float X_offset = 0.0f;
     [Export] private bool Follow_Y = false;
     [Export] private float Y_offset = 0.0f;
     [Export] private bool Follow_Z = false;
     [Export] private float Z_offset = 0.0f;
+    [ExportSubgroup("Rotation Tracking")]
+    [Export] private bool TrackRotation = false;
+    [ExportSubgroup("Face Player overwrite")]
+    [Export] private bool FacePlayer = false;
     private Player _playerChar;
+    //[MARK REMOVE]
+    //Unused property
     public Player PlayerChar
     {
         get { return _playerChar; }
@@ -24,33 +32,47 @@ public partial class ChaseCamera3D : Camera3D
 
     public override void _Process(double delta)
     {
-        if (Tracking && this.Current)
-        {
+        if (TrackPosition && Current)
             ChasePlayer();
-        }
+        if (TrackRotation)
+            LookAtPlayer();
+        if (FacePlayer)
+            LookAt(_playerChar.GlobalPosition);
     }
 
     //Method that updates the camera's position according to the player's position based on a predefined offset
     private void ChasePlayer()
     {
-        var CamPosition = this.GlobalPosition;
+        var CamPosition = GlobalPosition;
+        
         if (Follow_X)
             CamPosition.X = _playerChar.GlobalPosition.X - X_offset;
         if (Follow_Y)
             CamPosition.Y = _playerChar.GlobalPosition.Y - Y_offset;
         if (Follow_Z)
             CamPosition.Z = _playerChar.GlobalPosition.Z - Z_offset;
-        this.GlobalPosition = CamPosition;
+        GlobalPosition = CamPosition;
     }
 
-    //Search for the player node amongst the children of the parent node 2 grades above.
-    //Important, always assign the camera node as a nephew Node of the Player node.
+    //Rotate the camera towards the player around the Camera's Y axis
+    private void LookAtPlayer()
+    {
+        var CamRotation = GlobalRotation;
+        var CamPos = new Vector2(GlobalPosition.X, GlobalPosition.Z);
+        var PlayerPos = new Vector2(_playerChar.GlobalPosition.X, _playerChar.GlobalPosition.Z);
+        var Direction = CamPos - PlayerPos;
+        CamRotation.Y = Mathf.Atan2(Direction.X, Direction.Y);
+        GlobalRotation = CamRotation;
+    }
+
+    //Get the Player node for the camera via the PlayerNode global group
     private void FindPlayerForCamera()
     {
-        var ParentScene = this.GetParent().GetParent();
-        _playerChar = ParentScene.FindChild("Player") as Player;
+        _playerChar = (Player)GetTree().GetFirstNodeInGroup("PlayerNode");
         if (_playerChar != null)
-            GD.Print("Found Playder node for Camera");
+            GD.Print(Name + " found PlayerNode");
+        else
+            GD.Print(Name + " couldn't find PlayerNode!");
     }
 
 }

@@ -141,7 +141,13 @@ GoToScene = 12
 NewSceneXYZ = Vector3(-0.5, 0, 2.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="ToSecurity2" parent="Doors" instance=ExtResource("1_5df1t")]
+[node name="ToOffice" parent="Doors" instance=ExtResource("1_5df1t")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.9)
+GoToScenAlt = "gameplay/GM012_B_Office"
+NewSceneXYZ = Vector3(-1, 0, 2.4)
+NewSceneRotate = Vector3(0, 180, 0)
+
+[node name="TempElevator" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -18.5)
 GoToScene = 21
 NewSceneXYZ = Vector3(3.5, 0, 0.5)
