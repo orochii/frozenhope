@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=4 uid="uid://dv6bdcqp3ob34"]
+[gd_scene load_steps=29 format=4 uid="uid://dv6bdcqp3ob34"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_5goci"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_duem7"]
@@ -120,6 +120,31 @@ shadow_mesh = SubResource("ArrayMesh_5ywij")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_ao58u"]
 points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_11x5k"]
+size = Vector3(0.8, 0.8, 0.8)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3gw75"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_75g78"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_anduv"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 0.6
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mikhq"]
+albedo_color = Color(0.3654, 0.49329, 0.63, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_cwaar"]
+material = SubResource("StandardMaterial3D_mikhq")
+size = Vector3(0.45, 1.85, 0.5)
 
 [node name="GM007_Spares" type="Node3D"]
 
@@ -322,8 +347,211 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall7"]
 shape = SubResource("ConvexPolygonShape3D_ao58u")
 
+[node name="Shelf" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(-6.55671e-08, 0, -1, 0, 1, 0, 1.5, 0, -4.37114e-08, -3.55, 0, 2)
+calculate_tangents = false
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+calculate_tangents = false
+size = Vector3(2.5, 2, 0.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="Shelf2" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(-0.75, 0, 8.74228e-08, 0, 1, 0, -6.55671e-08, 0, -1, -2.95, 0, -1.5)
+calculate_tangents = false
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+calculate_tangents = false
+size = Vector3(2.5, 2, 0.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Prototype/Shelf2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="Shelf3" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(-7.43094e-08, 0, -1, 0, 1, 0, 1.7, 0, -4.37114e-08, 1.55, 0, 0.3)
+calculate_tangents = false
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+calculate_tangents = false
+size = Vector3(2.5, 2, 0.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Prototype/Shelf3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="Box" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(0.992932, 0, -0.118681, 0, 1, 0, 0.118681, 0, 0.992932, 0.527599, 0.4, -1.42941)
+mesh = SubResource("BoxMesh_11x5k")
+
+[node name="Pipe1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, -1.3, 0.4, 3.9)
+mesh = SubResource("CylinderMesh_3gw75")
+
+[node name="Pipe2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, -1.75, 0.475, 3.9)
+mesh = SubResource("CylinderMesh_75g78")
+
+[node name="Pipe3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, -4.02341e-21, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, -1.45, 1.2, 3.9)
+mesh = SubResource("CylinderMesh_anduv")
+
+[node name="Locker" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.3, 0.925, 3.65)
+mesh = SubResource("BoxMesh_cwaar")
+
 [node name="Player" parent="." instance=ExtResource("3_d8osl")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 4.5)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
 
 [connection signal="body_entered" from="Doors/ToHangar" to="Doors/ToHangar" method="_onPlayerEnter"]
 [connection signal="body_exited" from="Doors/ToHangar" to="Doors/ToHangar" method="_onPlayerLeft"]
