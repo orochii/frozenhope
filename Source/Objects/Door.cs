@@ -18,11 +18,12 @@ public partial class Door : Area3D, Interactable
     private Database _data;
     private Player _playerCharacter;
     private Camera3D _stashedCamera;
+    private Vector3 _cameraRotationReset;
     public bool Active
     { get; set; }
     public bool InterfaceVisible
     { get; set; }
-    //Signals
+    //#Signals
     [Signal]
     public delegate void InteractedEventHandler();
 
@@ -30,6 +31,7 @@ public partial class Door : Area3D, Interactable
     {
         base._Ready();
         Interface.Visible = false;
+        if (DoorCamera != null) _cameraRotationReset = DoorCamera.Rotation;
         _data = Database.Get();
     }
 
@@ -48,6 +50,7 @@ public partial class Door : Area3D, Interactable
 
     public override void _Process(double delta)
     {
+        float fDelta = (float)delta;
         if (Active)
         {
             var forward = _playerCharacter.Transform.Basis.Z;
@@ -67,11 +70,10 @@ public partial class Door : Area3D, Interactable
             GD.Print("Signal Emited");
             EmitSignal(SignalName.Interacted);
         }
-            
-            
+        if (DoorCamera != null && DoorCamera.Current == true) MoveCamera(fDelta);
     }
 
-    //Interface functions
+    //#Interface functions
     public Vector3 GetItemPosition()
     {
         return GlobalPosition;
@@ -112,6 +114,7 @@ public partial class Door : Area3D, Interactable
                 DoorCamera.Current = false;
                 _playerCharacter.Visible = true;
                 _stashedCamera.Current = true;
+                DoorCamera.Rotation = _cameraRotationReset;
             }
             //Set Text to display
             string str = FlavorText;
@@ -152,7 +155,18 @@ public partial class Door : Area3D, Interactable
         }
     }
 
-    //Override ToString
+    //#Custom Functions
+    public void MoveCamera(float fDelta)
+    {
+        GD.Print("I was called!");
+        var move = Input.GetVector(Main.MoveLeft, Main.MoveRight, Main.MoveUp, Main.MoveDown);
+        var NewRotation = DoorCamera.Rotation;
+        NewRotation.Y = Mathf.Clamp(NewRotation.Y + -move.X * fDelta, (float)-Math.PI/8, (float)Math.PI/8);
+        NewRotation.X = Mathf.Clamp(NewRotation.X + -move.Y * fDelta, (float)-Math.PI/8, (float)Math.PI/8);
+        DoorCamera.Rotation = NewRotation;
+    }
+
+    //#Override ToString
     public override string ToString()
     {
         return Name;

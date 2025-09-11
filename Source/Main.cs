@@ -17,6 +17,17 @@ public partial class Main : Node
 	public Vector3 TransferVector = Vector3.Zero;
 	public Vector3 TransferRotate = Vector3.Zero;
 
+	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
+	public static StringName MoveLeft { get; private set; } = "move_left";
+	public static StringName MoveRight { get; private set; } = "move_right";
+	public static StringName MoveUp { get; private set; } = "move_up";
+	public static StringName MoveDown { get; private set; } = "move_down";
+	public static StringName Sprint { get; private set; } = "run";
+	public static StringName Interact { get; private set; } = "interact";
+	public static StringName Aim { get; private set; } = "aim";
+	public static StringName CycleLeft { get; private set; } = "cycle_left";
+	public static StringName CycleRight { get; private set; } = "cycle_right";
+
 	//Functions start here
 	public override void _Ready()
 	{

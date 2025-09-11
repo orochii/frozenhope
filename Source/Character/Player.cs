@@ -36,21 +36,6 @@ public partial class Player : CharacterBody3D, Targettable
 	private Vector3 _empty = Vector3.Zero;
 	private bool _frozen = false;
 
-	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
-	StringName MoveLeft = "move_left";
-	StringName MoveRight = "move_right";
-	StringName MoveUp = "move_up";
-	StringName MoveDown = "move_down";
-	StringName Sprint = "run";
-	StringName Interact = "interact";
-	public StringName GetInteract
-	{
-		get { return Interact; }
-	}
-	StringName Aim = "aim";
-	StringName CycleLeft = "cycle_left";
-	StringName CycleRight = "cycle_right";
-
 	//_Ready override
 	public override void _Ready()
 	{
@@ -101,12 +86,12 @@ public partial class Player : CharacterBody3D, Targettable
 		if (canMove) {
 			var isIdling = Graphic.StateMachine.ActionState == EActionState.NONE;
 			// Get input direction and dash
-			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
-			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
-			var interact = isIdling ? Input.IsActionJustPressed(Interact) : false;
-			var aim = isIdling ? Input.IsActionJustPressed(Aim) : false;
-			var cycleLeft = isIdling ? Input.IsActionJustPressed(CycleLeft) : false;
-			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
+			var move = isIdling ? Input.GetVector(Main.MoveLeft,Main.MoveRight,Main.MoveUp,Main.MoveDown) : Vector2.Zero;
+			var run = isIdling ? Input.IsActionPressed(Main.Sprint) : false;
+			var interact = isIdling ? Input.IsActionJustPressed(Main.Interact) : false;
+			var aim = isIdling ? Input.IsActionJustPressed(Main.Aim) : false;
+			var cycleLeft = isIdling ? Input.IsActionJustPressed(Main.CycleLeft) : false;
+			var cycleRight = isIdling ? Input.IsActionJustPressed(Main.CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (aim) {
 				_aimMode = !_aimMode;
