@@ -7,6 +7,7 @@ public partial class TitleScreen : Control
 	Control lastFocused;
     public override void _Ready()
     {
+		base._Ready();
 		UIUtils.SetupVBoxList(buttonList);
     }
     public override void _Process(double delta)

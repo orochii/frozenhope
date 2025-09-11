@@ -18,6 +18,7 @@ public partial class WorldScenery : Area3D, Interactable
     //Overriden Ready function
     public override void _Ready()
     {
+        base._Ready();
         Interface.Visible = false;
     }
     

@@ -12,6 +12,7 @@ public partial class CharacterStateMachine : Node
 	CharacterAnimState _lastState = null;
     public override void _Ready()
     {
+		base._Ready();
 		if (Engine.IsEditorHint()) return;
         if (Animator != null) Animator.AnimationFinished += OnAnimationFinished;
     }

@@ -8,7 +8,7 @@ size = Vector3(1, 2, 0.5)
 [sub_resource type="BoxMesh" id="BoxMesh_31ccv"]
 size = Vector3(1, 2, 0.1)
 
-[node name="Door" type="Area3D" node_paths=PackedStringArray("Interface")]
+[node name="Door" type="Area3D" node_paths=PackedStringArray("Interface") groups=["GlobalDoors"]]
 collision_layer = 16
 script = ExtResource("1_tckt0")
 Interface = NodePath("Label3D")

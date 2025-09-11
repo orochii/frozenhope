@@ -46,6 +46,7 @@ public partial class InvSlotButton : TextureButton
 	}
     public override void _Ready()
     {
+		base._Ready();
         Pressed += OnInventorySelected;
     }
 	private void OnInventorySelected() {

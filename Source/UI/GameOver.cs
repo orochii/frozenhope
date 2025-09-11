@@ -6,6 +6,7 @@ public partial class GameOver : Control
 	[Export] AnimationPlayer Animation;
 	public override void _Ready()
 	{
+		base._Ready();
 		Animation.AnimationFinished += OnAnimationFinished;
 	}
 	public void Refresh() {

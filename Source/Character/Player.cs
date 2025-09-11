@@ -43,6 +43,10 @@ public partial class Player : CharacterBody3D, Targettable
 	StringName MoveDown = "move_down";
 	StringName Sprint = "run";
 	StringName Interact = "interact";
+	public StringName GetInteract
+	{
+		get { return Interact; }
+	}
 	StringName Aim = "aim";
 	StringName CycleLeft = "cycle_left";
 	StringName CycleRight = "cycle_right";
@@ -50,6 +54,7 @@ public partial class Player : CharacterBody3D, Targettable
 	//_Ready override
 	public override void _Ready()
 	{
+		base._Ready();
 		//First thing we do is freeze the player
 		FreezeStatus();
 		//We continue with the rest of the prep

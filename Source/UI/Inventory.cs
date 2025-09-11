@@ -14,6 +14,7 @@ public partial class Inventory : Control
 	private InvSlotButton lastFocused;
 	public override void _Ready()
 	{
+		base._Ready();
 		Visible = false;
 		invSlotTemplate.Visible = false;
 	}

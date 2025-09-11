@@ -24,6 +24,7 @@ public partial class WorldItem : Area3D, Interactable
     //Overriden Ready function
     public override void _Ready()
     {
+        base._Ready();
         if (Main.Instance.State.GetSwitch(PickedUpFlag))
         {
             QueueFree();

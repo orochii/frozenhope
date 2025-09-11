@@ -52,8 +52,11 @@ public partial class CharacterGraphic : Node3D
 	}
     public override void _Ready()
     {
-		if (!Engine.IsEditorHint()) {
-			foreach (var c in GetChildren()) {
+		base._Ready();
+		if (!Engine.IsEditorHint())
+		{
+			foreach (var c in GetChildren())
+			{
 				if (c is CharacterStateMachine) StateMachine = c as CharacterStateMachine;
 			}
 		}
