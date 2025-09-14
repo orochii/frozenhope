@@ -1,8 +1,7 @@
-[gd_scene load_steps=24 format=4 uid="uid://dh5jdperyqfsg"]
+[gd_scene load_steps=21 format=4 uid="uid://dh5jdperyqfsg"]
 
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_ic2t7"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_wa2lk"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_33vgl"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="4_ghjy2"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_u0cg6"]
@@ -17,12 +16,6 @@ sky_material = SubResource("ProceduralSkyMaterial_u0cg6")
 background_mode = 2
 sky = SubResource("Sky_0b7x1")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_2br1b"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_pag0u"]
-size = Vector3(2, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -139,30 +132,14 @@ GoToScene = 17
 NewSceneXYZ = Vector3(-0.5, 0, 1.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="ToHallwayM2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.9, 0, -5.96046e-08)
-collision_layer = 16
-script = ExtResource("2_33vgl")
-Interface = NodePath("Label3D")
+[node name="ToHallwayM2" parent="Doors" instance=ExtResource("1_wa2lk")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -3.9, 0, 0)
 GoToScene = 11
 NewSceneXYZ = Vector3(0.4, 0, 15)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_2br1b")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_pag0u")
+[node name="MeshInstance3D" parent="Doors/ToHallwayM2" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -723,5 +700,4 @@ shape = SubResource("BoxShape3D_hk33e")
 [node name="Player" parent="." instance=ExtResource("4_ghjy2")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.37318, 0, -2.59718)
 
-[connection signal="body_entered" from="Doors/ToHallwayM2" to="Doors/ToHallwayM2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHallwayM2" to="Doors/ToHallwayM2" method="_onPlayerLeft"]
+[editable path="Doors/ToHallwayM2"]

@@ -805,7 +805,7 @@ offset_bottom = 8.0
 [node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]
 layout_mode = 2
 offset_right = 45.0
-offset_bottom = 42.0
+offset_bottom = 54.0
 texture = ExtResource("18_shj08")
 patch_margin_left = 8
 patch_margin_top = 8
@@ -835,6 +835,11 @@ layout_mode = 2
 theme = ExtResource("3_wyq5x")
 disabled = true
 text = "Combine"
+
+[node name="Check" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Check"
 
 [node name="Equip" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2

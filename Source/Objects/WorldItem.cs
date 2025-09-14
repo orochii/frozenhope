@@ -32,13 +32,13 @@ public partial class WorldItem : Area3D, Interactable
         HideInterface();
     }
     
-    public void _onPlayerEnter(Node3D body)
+    public void _on_player_entered(Node3D body)
     {
         _playerCharacter = (Player)body;
         _playerCharacter.NearbyInteractables.Add(this);
     }
 
-    public void _onPlayerLeft(Node3D body)
+    public void _on_player_left(Node3D body)
     {
         _playerCharacter.NearbyInteractables.Remove(this);
         Active = false;

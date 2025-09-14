@@ -80,6 +80,7 @@ public class GameState {
         persistentData.switches[id] = value;
     }
     #endregion
+
     #region Character status
     const int HEALTH_BASE = 100;
     const int HEALTH_INCREASE = 10;
@@ -138,12 +139,16 @@ public class GameState {
         return persistentData.inventory[persistentData.EquippedItem];
     }
     #endregion
+
     #region Inventory
-    public Vector2I InventorySize {
-        get {
+    public Vector2I InventorySize
+    {
+        get
+        {
             return new Vector2I(persistentData.inventorySizeX, persistentData.inventorySizeY);
         }
-        set {
+        set
+        {
             persistentData.inventorySizeX = value.X;
             persistentData.inventorySizeY = value.Y;
         }

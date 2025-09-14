@@ -1,4 +1,4 @@
-[gd_scene load_steps=90 format=4 uid="uid://do2iq8ykchugn"]
+[gd_scene load_steps=89 format=4 uid="uid://do2iq8ykchugn"]
 
 [ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="1_w8guf"]
 [ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="2_6m0g5"]
@@ -209,9 +209,6 @@ script = ExtResource("57_58qf6")
 Item = ExtResource("56_ff2tc")
 Amount = 10
 AmmoQty = 0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_buyns"]
-height = 0.5
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_opak0"]
 height = 1.0
@@ -761,10 +758,6 @@ Item = SubResource("Resource_nbip7")
 
 [node name="9mm_ammo2" parent="Interactables/PistolAmmo" instance=ExtResource("58_4tilc")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Interactables/PistolAmmo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_buyns")
 
 [node name="CampFire" parent="Interactables" instance=ExtResource("57_veoda")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -45.9638, 12.2322, -12.5977)

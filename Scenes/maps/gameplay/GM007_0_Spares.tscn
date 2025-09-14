@@ -1,8 +1,7 @@
-[gd_scene load_steps=29 format=4 uid="uid://dv6bdcqp3ob34"]
+[gd_scene load_steps=24 format=4 uid="uid://dv6bdcqp3ob34"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_5goci"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_duem7"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_w2de4"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_d8osl"]
 [ext_resource type="Material" uid="uid://dxm3rh1g5qxv2" path="res://Graphics/textures/emissive.tres" id="3_u6773"]
 
@@ -20,17 +19,6 @@ ambient_light_energy = 0.0
 tonemap_mode = 2
 glow_enabled = true
 glow_blend_mode = 1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_k8x8b"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_dqfh2"]
-size = Vector3(2, 2, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yyjiv"]
-
-[sub_resource type="BoxMesh" id="BoxMesh_31ccv"]
-size = Vector3(1, 2, 0.1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_5n0wi"]
 radius = 0.05
@@ -153,61 +141,28 @@ environment = SubResource("Environment_ixn7j")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToHangar" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, -1, 0, -1.9)
-collision_layer = 16
-script = ExtResource("1_w2de4")
-Interface = NodePath("Label3D")
+[node name="ToHangar" parent="Doors" instance=ExtResource("1_5goci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.9)
 GoToScene = 6
 NewSceneXYZ = Vector3(-3, 0, 7.9)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHangar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_k8x8b")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHangar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHangar"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_dqfh2")
+[node name="MeshInstance3D" parent="Doors/ToHangar" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ToServiceHall" parent="Doors" instance=ExtResource("1_5goci")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -0.5, 0, 3.9)
 GoToScenAlt = "gameplay/GM007_1_Tunnel"
 NewSceneXYZ = Vector3(-0.5, 0, -0.4)
 
-[node name="ToHallwayBM2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 1, 0, 4.5)
-collision_layer = 16
-script = ExtResource("1_w2de4")
-Interface = NodePath("Label3D")
+[node name="Elevator" parent="Doors" instance=ExtResource("1_5goci")]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1, 0, 4.5)
 GoToScene = 26
 NewSceneXYZ = Vector3(-15.5, 0, 5)
 MaintainRotation = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHallwayBM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_yyjiv")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHallwayBM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHallwayBM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+[node name="MeshInstance3D" parent="Doors/Elevator" index="2"]
 visible = false
-mesh = SubResource("BoxMesh_31ccv")
 
 [node name="ViewChangers" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
@@ -553,7 +508,5 @@ mesh = SubResource("BoxMesh_cwaar")
 [node name="Player" parent="." instance=ExtResource("3_d8osl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, -1.5)
 
-[connection signal="body_entered" from="Doors/ToHangar" to="Doors/ToHangar" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHangar" to="Doors/ToHangar" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToHallwayBM2" to="Doors/ToHallwayBM2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHallwayBM2" to="Doors/ToHallwayBM2" method="_onPlayerLeft"]
+[editable path="Doors/ToHangar"]
+[editable path="Doors/Elevator"]

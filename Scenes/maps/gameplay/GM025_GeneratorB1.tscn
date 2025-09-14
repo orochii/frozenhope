@@ -1,6 +1,6 @@
-[gd_scene load_steps=25 format=4 uid="uid://cfcnfytpmkk2r"]
+[gd_scene load_steps=22 format=4 uid="uid://cfcnfytpmkk2r"]
 
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_jrrw5"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_cicj3"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_ra6av"]
 [ext_resource type="PackedScene" uid="uid://bqiy0i8hs2sds" path="res://Graphics/Models/scenery/Kenney-Prototype/stairs-diagonal.glb" id="2_m8isq"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="4_5qxfe"]
@@ -18,15 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_kec8n")
 background_mode = 2
 sky = SubResource("Sky_7i0pj")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_fiyiu"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_4onim"]
-size = Vector3(2, 2, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_bikis"]
-size = Vector3(1, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -137,79 +128,28 @@ environment = SubResource("Environment_y2nrf")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToMachinery" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -2, 0, -2.9)
-collision_layer = 16
-script = ExtResource("1_jrrw5")
-Interface = NodePath("Label3D")
+[node name="ToMachinery" parent="Doors" instance=ExtResource("1_cicj3")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2.9)
 GoToScene = 24
 NewSceneXYZ = Vector3(-1, 0, 7.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_fiyiu")
+[node name="MeshInstance3D" parent="Doors/ToMachinery" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_4onim")
-
-[node name="ToHallway" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-2.18557e-07, 0, 1, 0, 1, 0, -1, 0, -2.18557e-07, -5.9, 0, 1)
-collision_layer = 16
-script = ExtResource("1_jrrw5")
-Interface = NodePath("Label3D")
+[node name="ToHallway" parent="Doors" instance=ExtResource("1_cicj3")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.9, 0, 1)
 GoToScene = 26
 NewSceneXYZ = Vector3(0.4, 0, 1)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_fiyiu")
+[node name="MeshInstance3D" parent="Doors/ToHallway" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_4onim")
-
-[node name="ToEngineer" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-1, 0, -2.62269e-07, 0, 1, 0, 2.62269e-07, 0, -1, -3.5, 0, 3.9)
-collision_layer = 16
-script = ExtResource("1_jrrw5")
-Interface = NodePath("Label3D")
+[node name="ToEngineer" parent="Doors" instance=ExtResource("1_cicj3")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -3.5, 0, 3.9)
 GoToScene = 27
 NewSceneXYZ = Vector3(1.5, 0, -2.4)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_fiyiu")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_bikis")
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -603,9 +543,5 @@ size = Vector3(0.05, 0.5, 0.05)
 [node name="Player" parent="." instance=ExtResource("4_5qxfe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.07092, 0, -0.980417)
 
-[connection signal="body_entered" from="Doors/ToMachinery" to="Doors/ToMachinery" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToMachinery" to="Doors/ToMachinery" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToHallway" to="Doors/ToHallway" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHallway" to="Doors/ToHallway" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToEngineer" to="Doors/ToEngineer" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToEngineer" to="Doors/ToEngineer" method="_onPlayerLeft"]
+[editable path="Doors/ToMachinery"]
+[editable path="Doors/ToHallway"]

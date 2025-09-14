@@ -106,19 +106,18 @@ points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_1h6cw")
 
-[node name="Door" parent="." instance=ExtResource("1_moe1s")]
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="ToSpares" parent="Doors" instance=ExtResource("1_moe1s")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.9)
 GoToScene = 7
 NewSceneXYZ = Vector3(-0.5, 0, 3.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="Door2" parent="." instance=ExtResource("1_moe1s")]
+[node name="ToWater" parent="Doors" instance=ExtResource("1_moe1s")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 1.5, 0, 7.9)
 GoToScene = 9
 NewSceneXYZ = Vector3(1.5, 0, -2.4)
-
-[node name="Player" parent="." instance=ExtResource("3_4fyvq")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.4)
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -355,3 +354,6 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
 shape = SubResource("ConvexPolygonShape3D_agvyl")
+
+[node name="Player" parent="." instance=ExtResource("3_4fyvq")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -0.4)

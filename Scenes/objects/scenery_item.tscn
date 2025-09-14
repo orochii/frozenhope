@@ -15,5 +15,5 @@ text = "?"
 font_size = 24
 outline_size = 10
 
-[connection signal="body_entered" from="." to="." method="_onPlayerEnter"]
-[connection signal="body_exited" from="." to="." method="_onPlayerLeft"]
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]
+[connection signal="body_exited" from="." to="." method="_on_player_left"]

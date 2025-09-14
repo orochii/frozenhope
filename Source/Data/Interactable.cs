@@ -21,13 +21,13 @@ public partial interface Interactable {
     /// Processing of the player entering the Interactable's area
     /// </summary>
     /// <param>Node3D</param>
-    public void _onPlayerEnter(Node3D body);
+    public void _on_player_entered(Node3D body);
 
     /// <summary>
     /// Processing of the player leaving the Interactable's area
     /// </summary>
     /// <param>Node3D</param>
-    public void _onPlayerLeft(Node3D body);
+    public void _on_player_left(Node3D body);
 
     /// <summary>
     /// Return a Vector3 equivalent to the item's position

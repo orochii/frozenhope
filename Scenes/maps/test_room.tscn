@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=28 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
 [ext_resource type="Script" path="res://Source/State/LevelLoader.cs" id="1_53cc4"]
@@ -35,9 +35,6 @@ script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
 Amount = 10
 AmmoQty = 0
-
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ixygt"]
-height = 0.5
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2br1b"]
 size = Vector3(1, 2, 0.5)
@@ -121,20 +118,12 @@ Item = SubResource("Resource_46hqi")
 [node name="9mm_ammo2" parent="PistolAmmo" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
-
 [node name="PistolAmmo2" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496718, 0, -0.737493)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo2" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="PistolAmmo3" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829614, 0, -2.163)
@@ -143,20 +132,12 @@ Item = SubResource("Resource_46hqi")
 [node name="9mm_ammo2" parent="PistolAmmo3" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
-
 [node name="PistolAmmo4" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116481, 0, -0.494811)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo4" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="Door" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
@@ -267,13 +248,5 @@ mesh = SubResource("BoxMesh_ii0nv")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.25, 2.1)
 mesh = SubResource("BoxMesh_iub82")
 
-[connection signal="body_entered" from="PistolAmmo" to="PistolAmmo" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo" to="PistolAmmo" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerLeft"]
-[connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_onPlayerEnter"]
-[connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_onPlayerLeft"]
+[connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_on_player_entered"]
+[connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_on_player_left"]

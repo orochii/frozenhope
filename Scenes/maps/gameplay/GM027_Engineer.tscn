@@ -1,7 +1,7 @@
-[gd_scene load_steps=19 format=4 uid="uid://bckfmxr7jvx0v"]
+[gd_scene load_steps=17 format=4 uid="uid://bckfmxr7jvx0v"]
 
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_5df23"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_xnw52"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_slur7"]
 [ext_resource type="PackedScene" uid="uid://dbryf0qrhi0uq" path="res://Graphics/Models/scenery/Kenney-Prototype/ladder-color.glb" id="2_nfigi"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="4_ura4i"]
 
@@ -17,12 +17,6 @@ sky_material = SubResource("ProceduralSkyMaterial_kec8n")
 background_mode = 2
 sky = SubResource("Sky_7i0pj")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_bcag4"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_3n8rv"]
-size = Vector3(1, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -116,55 +110,17 @@ environment = SubResource("Environment_y2nrf")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToGenerator" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, 1.5, 0, -2.9)
-collision_layer = 16
-script = ExtResource("1_xnw52")
-Interface = NodePath("Label3D")
+[node name="ToGenerator" parent="Doors" instance=ExtResource("1_slur7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.9)
 GoToScene = 25
 NewSceneXYZ = Vector3(-3.5, 0, 3.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_bcag4")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_3n8rv")
-
-[node name="ToGenerator2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1, 0, 1.74846e-07, 0, 1, 0, -1.74846e-07, 0, 1, -3.5, 0, -2.9)
-collision_layer = 16
-script = ExtResource("1_xnw52")
-Interface = NodePath("Label3D")
+[node name="ToHallwayBM2" parent="Doors" instance=ExtResource("1_slur7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -2.9)
 GoToScene = 26
 NewSceneXYZ = Vector3(-2.5, 0, 3.4)
 NewSceneRotate = Vector3(0, 180, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGenerator2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_bcag4")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToGenerator2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGenerator2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_3n8rv")
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -399,8 +355,3 @@ transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 7.75, 
 
 [node name="Player" parent="." instance=ExtResource("4_ura4i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.80514, 0, -0.00111961)
-
-[connection signal="body_entered" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToGenerator2" to="Doors/ToGenerator2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToGenerator2" to="Doors/ToGenerator2" method="_onPlayerLeft"]

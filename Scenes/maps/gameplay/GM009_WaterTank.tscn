@@ -104,13 +104,15 @@ points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_2oas3")
 
-[node name="Door" parent="." instance=ExtResource("1_6wbly")]
+[node name="Doors" type="Node3D" parent="."]
+
+[node name="ToHangar2" parent="Doors" instance=ExtResource("1_6wbly")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 1.9, 0, -0.5)
 GoToScene = 8
 NewSceneXYZ = Vector3(-6.4, 0, 7.5)
 NewSceneRotate = Vector3(0, 90, 0)
 
-[node name="Door2" parent="." instance=ExtResource("1_6wbly")]
+[node name="ToTunnel" parent="Doors" instance=ExtResource("1_6wbly")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 0, -2.9)
 GoToScenAlt = "gameplay/GM007_1_Tunnel"
 NewSceneXYZ = Vector3(1.5, 0, 7.4)

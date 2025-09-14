@@ -1,6 +1,5 @@
-[gd_scene load_steps=52 format=4 uid="uid://us0as5j44wrb"]
+[gd_scene load_steps=49 format=4 uid="uid://us0as5j44wrb"]
 
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_52ewu"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_g83vf"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="2_e3q5a"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="3_4g3tb"]
@@ -11,12 +10,6 @@
 [sub_resource type="Environment" id="Environment_leytl"]
 background_mode = 1
 glow_blend_mode = 1
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_pvaas"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_bdm2b"]
-size = Vector3(2, 2, 0.1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_qanjd"]
 radius = 0.05
@@ -272,29 +265,13 @@ environment = SubResource("Environment_leytl")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToHallway" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 0, 4.9)
-collision_layer = 16
-script = ExtResource("1_52ewu")
-Interface = NodePath("Label3D")
+[node name="ToHallway" parent="Doors" instance=ExtResource("2_e3q5a")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 0, 0, 4.9)
 GoToScene = 4
 NewSceneXYZ = Vector3(15, 0, 1.6)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_pvaas")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHallway"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_bdm2b")
+[node name="MeshInstance3D" parent="Doors/ToHallway" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ToServiceHall" parent="Doors" instance=ExtResource("2_e3q5a")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -4.9)
@@ -1046,5 +1023,4 @@ shape = SubResource("BoxShape3D_gh2t0")
 [node name="Player" parent="." instance=ExtResource("3_k7xsm")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1.31252, 0, 1.10467)
 
-[connection signal="body_entered" from="Doors/ToHallway" to="Doors/ToHallway" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHallway" to="Doors/ToHallway" method="_onPlayerLeft"]
+[editable path="Doors/ToHallway"]
