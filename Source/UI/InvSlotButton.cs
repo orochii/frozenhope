@@ -49,44 +49,58 @@ public partial class InvSlotButton : TextureButton
 		base._Ready();
         Pressed += OnInventorySelected;
     }
-	private void OnInventorySelected() {
+	private async void OnInventorySelected()
+	{
 		var combine = ParentInventory.GetCombine();
 		// Use item
-		if (combine != null) {
+		if (combine != null)
+		{
 			// If target is empty.
-			if (Index == -1) {
-				if (Main.Instance.State.MoveToSlot(combine.Index, GridPosition)) {
+			if (Index == -1)
+			{
+				if (Main.Instance.State.MoveToSlot(combine.Index, GridPosition))
+				{
 					ParentInventory.RefreshSlots();
 					AudioManager.PlaySystemSound("decision");
 				}
-				else {
+				else
+				{
 					AudioManager.PlaySystemSound("cancel");
 				}
 			}
-			else if (Main.Instance.State.CombineSlots(Index,combine.Index)) {
+			else if (Main.Instance.State.CombineSlots(Index, combine.Index))
+			{
 				Player.Instance.RefreshEquippedModel();
 				ParentInventory.RefreshSlots();
 				AudioManager.PlaySystemSound("decision");
 			}
-			else {
+			else
+			{
 				// Play buzzer.
 				AudioManager.PlaySystemSound("cancel");
 			}
 		}
 		// Use item
-		else {
-			switch (Item) {
-			case WeaponItem:
-				Main.Instance.State.SetEquippedItem(Index);
-				Player.Instance.RefreshEquippedModel();
-				ParentInventory.RefreshSlots();
-				AudioManager.PlaySystemSound("decision");
-				break;
-			case UseableItem:
-				ParentInventory.RefreshSlots();
-				AudioManager.PlaySystemSound("decision");
-				break;
-			}
+		else
+		{
+			ParentInventory.SubMenu.MakeVisible(Item, Index, ParentInventory);
+			await ToSignal(ParentInventory.SubMenu, "sub_menu_closed");
+			/*switch (Item)
+			{
+				case WeaponItem:
+					Main.Instance.State.SetEquippedItem(Index);
+					Player.Instance.RefreshEquippedModel();
+					ParentInventory.RefreshSlots();
+					AudioManager.PlaySystemSound("decision");
+					ParentInventory.SubMenu.Visible = false;
+					break;
+				case UseableItem:
+					Main.Instance.State.SetSwitch(Item.DisplayName, true);
+					ParentInventory.RefreshSlots();
+					ParentInventory.InfoColumn.SetupDescription(Item);
+					AudioManager.PlaySystemSound("decision");
+					break;
+			}*/
 		}
 	}
 	public void SetCombine(bool v) {

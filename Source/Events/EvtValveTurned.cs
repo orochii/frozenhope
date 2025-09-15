@@ -19,7 +19,7 @@ public partial class EvtValveTurned : Node3D
         }
     }
 
-    public async void _on_player_interacted()
+    public async void _on_player_interacted(string itemName)
     {
         /*var Items = Main.Instance.State.GetInventoryEntries();
         string KeyCheck = "";
@@ -34,8 +34,9 @@ public partial class EvtValveTurned : Node3D
         //This is just test code, please delete it later
         Main.Instance.State.SetSwitch("hexvalve", true);
         //DELETE ENDS HERE*/
+        if (itemName != "hexvalve") return;
         GD.Print("Valve has been interact, lets turn on/off steam");
-        if (Steam.Emitting)
+        if (!Main.Instance.State.GetSwitch(Name + "Switch"))
         {
             GD.Print("Play animation!");
             Animation.Play("ValveTurnOff");

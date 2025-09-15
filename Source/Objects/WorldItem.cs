@@ -75,7 +75,17 @@ public partial class WorldItem : Area3D, Interactable
         Main.Instance.State.AddItem(Item);
         // Assign and display text
         await Main.Instance.UI.Message.SetBars(true, 0.1f);
-        string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+        string str = "";
+        switch (Item.Item)
+        {
+            case AmmoItem:
+                str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+                break;
+            case UseableItem:
+                var item = Item.Item as UseableItem;
+                str = string.Format("You found {0}.", item.FakeName);
+                break;
+        }
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:

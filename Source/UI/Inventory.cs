@@ -5,10 +5,11 @@ public partial class Inventory : Control
 {
 	[Export] GridContainer inventoryGrid;
 	[Export] InvSlotButton invSlotTemplate;
-	[Export] InfoColumn InfoColumn;
+	[Export] public InfoColumn InfoColumn;
 	[Export] Control CombineObj;
 	[Export] TextureRect CombineIcon;
 	[Export] RichTextLabel InstructionsLabel;
+	[Export] public SubMenu SubMenu;
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
 	private InvSlotButton lastFocused;
@@ -54,8 +55,9 @@ public partial class Inventory : Control
 			var entry = entries[idx];
 			var item = BaseItem.Get(entry.itemID);
 			for (int x = 0; x < item.SlotSize.X; x++) {
-				for (int y = 0; y < item.SlotSize.Y; y++) {
-					bool ignoreVisuals = !(x==0 && y==0); // Only top-left corner
+				for (int y = 0; y < item.SlotSize.Y; y++)
+				{
+					bool ignoreVisuals = !(x == 0 && y == 0); // Only top-left corner
 					var idxSlot = entry.posX + x + (entry.posY + y) * size.X;
 					_spawnedSlots[idxSlot].Setup(entry, ignoreVisuals);
 					_spawnedSlots[idxSlot].Index = idx;
@@ -78,7 +80,7 @@ public partial class Inventory : Control
 				CombineObj.GlobalPosition = slot.GlobalPosition;
 			}
 			// Get input for combine.
-			if (Input.IsActionJustPressed("aim")) {
+			if (Input.IsActionJustPressed(Main.Aim)) {
 				if(currentCombineSlot == null) {
 					SetCombine(slot);
 					AudioManager.PlaySystemSound("decision");
@@ -86,12 +88,34 @@ public partial class Inventory : Control
 			}
 		}
 		// Inputs.
-		if (Input.IsActionJustPressed("cancel")) {
-			if (currentCombineSlot != null) {
+		/*if (Input.IsActionJustPressed(Main.MoveRight))
+		{
+			var currentPosition = lastFocused.Index;
+			var item = _spawnedSlots[currentPosition].Item;
+			int moveDistance = 1;
+			//Don't allow to move past the lower right inventory limit
+			if (currentPosition != _spawnedSlots.GetLength(0) - 1) _spawnedSlots[currentPosition + moveDistance].GrabFocus();
+			GD.Print("Current position " + currentPosition);
+		}
+		if (Input.IsActionJustPressed(Main.MoveLeft))
+		{
+			var currentPosition = lastFocused.Index;
+			var item = _spawnedSlots[currentPosition].Item;
+			int moveDistance = 1;
+			if (currentPosition != 0) _spawnedSlots[currentPosition - moveDistance].GrabFocus();
+			GD.Print("Current position " + currentPosition);
+		}*/
+		//Instead of using personalized inputs to navigate the inventroy we're just gonna use the Godot defaults for now because navigating this inventroy is a nightmare ;-;
+
+		if (Input.IsActionJustPressed("cancel"))
+		{
+			if (currentCombineSlot != null)
+			{
 				SetCombine(null);
 				AudioManager.PlaySystemSound("cancel");
 			}
-			else {
+			else
+			{
 				Main.Instance.UI.Gameplay.CloseMenu();
 				AudioManager.PlaySystemSound("cancel");
 			}

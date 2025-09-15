@@ -620,13 +620,15 @@ shadow_enabled = true
 
 [node name="Ineractabales" type="Node3D" parent="."]
 
-[node name="SceneryItem" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera", "TargetEvent") groups=["SteamValve"] instance=ExtResource("5_y4s5i")]
+[node name="SceneryItem" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera", "TargetEvent") instance=ExtResource("5_y4s5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.2, 3.8)
 SceneCamera = NodePath("../../Cameras/ValveCamera")
 EmitInteractedSignal = true
 FlavorText = "Looks like something can be inserted here.
 "
 TargetEvent = NodePath("../../Events/EvtValveTurned")
+RepeatEvent = true
+Keys = PackedStringArray("hexvalve")
 
 [node name="Interface" parent="Ineractabales/SceneryItem" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.2)

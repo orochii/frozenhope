@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=52 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -21,6 +21,7 @@
 [ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="18_shj08"]
 [ext_resource type="Script" path="res://Source/UI/Stats.cs" id="19_1hcux"]
 [ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
+[ext_resource type="Script" path="res://Scenes/ui/SubMenu.cs" id="20_ut0hg"]
 [ext_resource type="Script" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" path="res://Source/UI/Splash.cs" id="24_2h878"]
@@ -620,7 +621,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
+[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel", "SubMenu")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_r4o41")
@@ -630,6 +631,7 @@ InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
 InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/RichTextLabel")
+SubMenu = NodePath("SubMenu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 layout_mode = 1
@@ -790,16 +792,18 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
 [node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
-visible = false
 anchors_preset = 0
+offset_left = 1.0
 offset_top = 42.0
+offset_right = 1.0
 offset_bottom = 42.0
+script = ExtResource("20_ut0hg")
 
 [node name="Control" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu"]
 anchors_preset = 0
-offset_left = 24.0
+offset_left = 81.0
 offset_top = 8.0
-offset_right = 24.0
+offset_right = 81.0
 offset_bottom = 8.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]

@@ -10,8 +10,11 @@ public partial class WorldScenery : Area3D, Interactable
     [Export] public bool EmitInteractedSignal = false;
     [Export(PropertyHint.MultilineText)] private string FlavorText;
     [Export] public Node3D TargetEvent;
+    [Export] public bool RepeatEvent;
+    [Export] public string[] Keys = new string[0];
     private Camera3D _stashedCamera;
     private Player _playerCharacter;
+    private string _keyPassover;
     public bool Active
     { get; set; }
     public bool InterfaceVisible
@@ -19,7 +22,7 @@ public partial class WorldScenery : Area3D, Interactable
 
     //#Signals
     [Signal]
-    public delegate void player_interactedEventHandler();
+    public delegate void player_interactedEventHandler(string itemName);
 
     //Overriden Ready function
     public override void _Ready()
@@ -60,8 +63,21 @@ public partial class WorldScenery : Area3D, Interactable
         else HideInterface();
     }
 
+    public void ItemChecker()
+    {
+        for (int i = 0; i < Keys.Length; i++)
+        {
+            if (Keys[i] == Player.Instance.UsedItem)
+            {
+                _keyPassover = Player.Instance.UsedItem;
+                Player.Instance.UsedItem = null;
+            }
+        }
+    }
+
     //Interface functions
-    public Vector3 GetItemPosition(){
+    public Vector3 GetItemPosition()
+    {
         return GlobalPosition;
     }
 
@@ -82,22 +98,24 @@ public partial class WorldScenery : Area3D, Interactable
         var tempAngle = InteractAngle;
         InteractAngle = 0f;
         Main.Instance.Busy = true;
+        ItemChecker();
         //Check if Camera is attached to this object
         if (SceneCamera != null) { CameraSetup(); }
         //Set UI mode to cutscene mode!
         await Main.Instance.UI.Message.SetBars(true);
         //Emit the interacted signal in case any events need to listen for it.
-        if (EmitInteractedSignal && !Main.Instance.State.GetSwitch(Name+"Triggered"))
+        if (EmitInteractedSignal && !Main.Instance.State.GetSwitch(Name+"Triggered") && _keyPassover != null)
         {
-            EmitSignal(SignalName.player_interacted);
+            EmitSignal(SignalName.player_interacted, _keyPassover);
             await ToSignal(TargetEvent, "event_over");
             // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
             Main.Instance.UI.Message.EndMessage();
             //Reset to StashedCamera if necessary
             if (SceneCamera != null) { CameraReset(); }
             //Create and store a switch so the event bound to this interactable can't be triggered again
-            Main.Instance.State.SetSwitch(Name+"Triggered", true);
-            // Unpause game
+            if (!RepeatEvent) Main.Instance.State.SetSwitch(Name + "Triggered", true);
+            // Unpause game and reset some things
+            _keyPassover = null;
             InteractAngle = tempAngle;
             Main.Instance.Busy = false;
             return;
