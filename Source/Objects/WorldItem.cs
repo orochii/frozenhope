@@ -11,8 +11,10 @@ public partial class WorldItem : Area3D, Interactable
     private Player _playerCharacter;
     public bool Active
         { get; set; }
-    public bool InterfaceVisible
+    public bool CanInteract
         { get; set; }
+    public bool InterfaceVisible
+    { get; set; }
     private string PickedUpFlag {
         get {
             string basePath = Main.Instance.WorldParent.GetPath();
@@ -67,7 +69,7 @@ public partial class WorldItem : Area3D, Interactable
         InterfaceVisible = false;
     }
 
-    public async void InteractItem() {
+    public async void InteractItem(string itemName = "empty") {
         if (!IsVisibleInTree()) return;
         // Stop game
         Main.Instance.Busy = true;

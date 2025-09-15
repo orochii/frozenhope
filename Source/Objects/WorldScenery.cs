@@ -17,8 +17,10 @@ public partial class WorldScenery : Area3D, Interactable
     private string _keyPassover;
     public bool Active
     { get; set; }
+    public bool CanInteract
+    { get; set; }
     public bool InterfaceVisible
-        { get; set; }
+    { get; set; }
 
     //#Signals
     [Signal]
@@ -63,14 +65,13 @@ public partial class WorldScenery : Area3D, Interactable
         else HideInterface();
     }
 
-    public void ItemChecker()
+    public void ItemChecker(string nameToCheck)
     {
         for (int i = 0; i < Keys.Length; i++)
         {
-            if (Keys[i] == Player.Instance.UsedItem)
+            if (Keys[i] == nameToCheck)
             {
-                _keyPassover = Player.Instance.UsedItem;
-                Player.Instance.UsedItem = null;
+                _keyPassover = nameToCheck;
             }
         }
     }
@@ -81,24 +82,28 @@ public partial class WorldScenery : Area3D, Interactable
         return GlobalPosition;
     }
 
-    public void ShowInterface() {
+    public void ShowInterface()
+    {
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;
         InterfaceVisible = true;
+        CanInteract = true;
     }
 
-    public void HideInterface() {
+    public void HideInterface()
+    {
         Interface.Visible = false;
         InterfaceVisible = false;
+        CanInteract = false;
     }
 
-    public async void InteractItem() {
+    public async void InteractItem(string itemName) {
         if (!IsVisibleInTree()) return;
         // Stop game
         var tempAngle = InteractAngle;
         InteractAngle = 0f;
         Main.Instance.Busy = true;
-        ItemChecker();
+        ItemChecker(itemName);
         //Check if Camera is attached to this object
         if (SceneCamera != null) { CameraSetup(); }
         //Set UI mode to cutscene mode!
@@ -122,6 +127,7 @@ public partial class WorldScenery : Area3D, Interactable
         }
         //Assign text to a local string
         string str = FlavorText;
+        if (itemName != "empty" && _keyPassover == null) str = "I can't use this here.";
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:

@@ -29,13 +29,13 @@ public partial class Player : CharacterBody3D, Targettable
 		set { _nearbyInteractables = value; }
 	}
 	private Interactable _closestInteractable;
+	public Interactable CloestInteractable { get { return _closestInteractable; } }
 	private float previousTargetRotation;
 	public bool Dead => Main.Instance.State.GetHealth() <= 0;
 	private uint OriginalCollisionLayer;
 	private uint OriginalCollisionMask;
 	private Vector3 _empty = Vector3.Zero;
 	private bool _frozen = false;
-	public string UsedItem;
 
 	//_Ready override
 	public override void _Ready()

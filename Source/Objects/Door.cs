@@ -21,6 +21,8 @@ public partial class Door : Area3D, Interactable
     private Vector3 _cameraRotationReset;
     public bool Active
     { get; set; }
+    public bool CanInteract
+        { get; set; }
     public bool InterfaceVisible
     { get; set; }
     //#Signals
@@ -92,7 +94,7 @@ public partial class Door : Area3D, Interactable
         InterfaceVisible = false;
     }
 
-    public async void InteractItem()
+    public async void InteractItem(string itemName = "empty")
     {
         if (!IsVisibleInTree()) return;
         //Check if the door is locked, if yes, allow watching through the window if it has a camera assigned

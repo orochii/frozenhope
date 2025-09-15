@@ -32,8 +32,14 @@ public partial class SubMenu : Control
                     AudioManager.PlaySystemSound("decision");
                     _parentInvetory.SubMenu.Visible = false;
                     EmitSignal(SignalName.sub_menu_closed);
-                    Main.Instance.UI.Gameplay.CloseMenu();
-                    Player.Instance.UsedItem = _item.DisplayName;
+                    //Temp code
+                    var interactable = Player.Instance.CloestInteractable;
+                    if (interactable is WorldScenery && interactable.CanInteract)
+                    {
+                        interactable.InteractItem(_item.DisplayName);
+                        Main.Instance.UI.Gameplay.CloseMenu();
+                    }
+                    //End of Temp code
                     break;
             }
         }

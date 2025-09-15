@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UseableItem" load_steps=4 format=3 uid="uid://tedv060pxv0f"]
+
+[ext_resource type="Texture2D" uid="uid://bknam37m5t8q3" path="res://Graphics/Models/weapons/shotgun_render2.png" id="1_7vt01"]
+[ext_resource type="PackedScene" uid="uid://dh4lfwi1ahn3l" path="res://Graphics/Models/weapons/s_shotgun.tscn" id="2_rlkiy"]
+[ext_resource type="Script" path="res://Source/Data/UseableItem.cs" id="3_6s1oo"]
+
+[resource]
+script = ExtResource("3_6s1oo")
+FakeName = "Blah"
+RealName = "Blah"
+RealDisplayDescription = "Boop"
+DisplayName = "Blah"
+DisplayDescription = "Boop"
+Icon = ExtResource("1_7vt01")
+Model = ExtResource("2_rlkiy")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1
