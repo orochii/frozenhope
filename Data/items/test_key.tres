@@ -6,11 +6,11 @@
 
 [resource]
 script = ExtResource("3_6s1oo")
-FakeName = "Blah"
-RealName = "Blah"
-RealDisplayDescription = "Boop"
-DisplayName = "Blah"
-DisplayDescription = "Boop"
+FakeName = "Master Key"
+RealName = "Master Key"
+RealDisplayDescription = "Opens all doors."
+DisplayName = "masterkey"
+DisplayDescription = "Opens all doors."
 Icon = ExtResource("1_7vt01")
 Model = ExtResource("2_rlkiy")
 SlotSize = Vector2i(1, 1)

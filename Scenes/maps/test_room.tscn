@@ -186,6 +186,46 @@ size = Vector3(0.5, 0.5, 0.2)
 [node name="Camera3D" type="Camera3D" parent="WindowDoor"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, -1.19209e-07, 1.5, 0.2)
 
+[node name="WindowDoor2" type="Area3D" parent="." node_paths=PackedStringArray("Interface") groups=["GlobalDoors"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, 0.0999999)
+collision_layer = 16
+script = ExtResource("11_rlrbt")
+Interface = NodePath("Label3D")
+GoToScene = 2
+NewSceneXYZ = Vector3(3.5, 0, 0.5)
+DoorLock = true
+Keys = PackedStringArray("masterkey")
+FlavorText = "The door is locked. The carving of a Nova is visible on the handle."
+UnlockText = "The door is unlocked."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2br1b")
+
+[node name="Label3D" type="Label3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("BoxMesh_31ccv")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="WindowDoor2"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WindowDoor2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(1, 2, 0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WindowDoor2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 1.5, 0)
+operation = 2
+size = Vector3(0.5, 0.5, 0.2)
+
 [node name="StaticBody3D2" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
 GoToScene = 2
@@ -250,3 +290,5 @@ mesh = SubResource("BoxMesh_iub82")
 
 [connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_on_player_entered"]
 [connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_on_player_left"]
+[connection signal="body_entered" from="WindowDoor2" to="WindowDoor2" method="_on_player_entered"]
+[connection signal="body_exited" from="WindowDoor2" to="WindowDoor2" method="_on_player_left"]

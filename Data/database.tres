@@ -1,4 +1,4 @@
-[gd_resource type="Resource" script_class="Database" load_steps=10 format=3 uid="uid://tidkq4ucvhge"]
+[gd_resource type="Resource" script_class="Database" load_steps=14 format=3 uid="uid://tidkq4ucvhge"]
 
 [ext_resource type="Resource" uid="uid://d2gmdj8i5534y" path="res://Data/items/glock.tres" id="1_8biv8"]
 [ext_resource type="Script" path="res://Source/Data/Database.cs" id="1_nmb2g"]
@@ -6,6 +6,8 @@
 [ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="2_mwwnc"]
 [ext_resource type="Resource" uid="uid://bgqsqi23jbqjc" path="res://Data/items/308_ammo.tres" id="4_5barp"]
 [ext_resource type="Resource" uid="uid://c8wu2brd3rtum" path="res://Data/items/rifle.tres" id="5_4xose"]
+[ext_resource type="Resource" uid="uid://tedv060pxv0f" path="res://Data/items/test_key.tres" id="6_4w0yi"]
+[ext_resource type="Resource" uid="uid://dwmiagw2vheg4" path="res://Data/items/hex_wheel.tres" id="7_v513v"]
 
 [sub_resource type="Resource" id="Resource_m1qy0"]
 script = ExtResource("2_mwwnc")
@@ -27,8 +29,20 @@ Amount = 1
 AmmoInside = ExtResource("4_5barp")
 AmmoQty = 5
 
+[sub_resource type="Resource" id="Resource_awkyh"]
+script = ExtResource("2_mwwnc")
+Item = ExtResource("6_4w0yi")
+Amount = 1
+AmmoQty = 0
+
+[sub_resource type="Resource" id="Resource_4c88h"]
+script = ExtResource("2_mwwnc")
+Item = ExtResource("7_v513v")
+Amount = 1
+AmmoQty = 0
+
 [resource]
 script = ExtResource("1_nmb2g")
-StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_7h2s4")])
+StartingItems = Array[Object]([SubResource("Resource_m1qy0"), SubResource("Resource_u7xcv"), SubResource("Resource_7h2s4"), SubResource("Resource_awkyh"), SubResource("Resource_4c88h")])
 StartingScene = PackedStringArray("test_room", "gameplay/GM001_CampOswald", "gameplay/GM002_FacilityOutside", "gameplay/GM003_Reception", "gameplay/GM004_Hallway_M1", "gameplay/GM005_GuardBedroom", "gameplay/GM006_Hangar", "gameplay/GM007_0_Spares", "gameplay/GM008_Hangar2", "gameplay/GM009_WaterTank", "gameplay/GM010_0_Prison", "gameplay/GM011_Hallway_M2", "gameplay/GM012_Security1", "gameplay/GM013_Bathroom", "gameplay/GM014_Personnel_Tram", "gameplay/GM015_CargoTransport", "gameplay/GM016_0_Generator", "gameplay/GM017_Hallway_M3", "gameplay/GM018_MessHall", "gameplay/GM019_Kitchen", "gameplay/GM020_Entertainment", "gameplay/GM021_Hallway_BM1", "gameplay/GM022_SecurityPower", "gameplay/GM023_Armory", "gameplay/GM024_0_MachineryRoom", "gameplay/GM025_GeneratorB1", "gameplay/GM026_Hallway_BM2", "gameplay/GM027_Engineer")
 IntroScene = "cutscenes/001_intro"

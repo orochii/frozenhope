@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Linq;
 using System.Runtime.InteropServices;
 
 public partial class EvtValveTurned : Node3D
@@ -21,20 +22,6 @@ public partial class EvtValveTurned : Node3D
 
     public async void _on_player_interacted(string itemName)
     {
-        /*var Items = Main.Instance.State.GetInventoryEntries();
-        string KeyCheck = "";
-        foreach (var entry in Items)
-        {
-            var data = BaseItem.Get(entry.itemID);
-            if (data.DisplayName == "hexvalve") KeyCheck = data.DisplayName;
-        }
-        //If KeyCheck is valid, execute the animation, otherwise stop
-        if (KeyCheck != "hexvalve") return;
-        //DELETE THIS LATER
-        //This is just test code, please delete it later
-        Main.Instance.State.SetSwitch("hexvalve", true);
-        //DELETE ENDS HERE*/
-        if (itemName != "hexvalve") return;
         GD.Print("Valve has been interact, lets turn on/off steam");
         if (!Main.Instance.State.GetSwitch(Name + "Switch"))
         {

@@ -11,14 +11,17 @@ public partial class Door : Area3D, Interactable
     //Use GoToSceneAlt if you wish to input a target map's filepath directly
     [Export] public string GoToScenAlt;
     [Export] public Vector3 NewSceneXYZ;
-    [Export] private bool MaintainRotation;
+    [Export] private bool _maintainRotation;
     [Export(PropertyHint.Range, "-360,360,5")] public Vector3 NewSceneRotate;
-    [Export] private bool DoorLock = false;
+    [Export] public bool DoorLock = false;
+    [Export] public string[] Keys = new string[0];
     [Export(PropertyHint.MultilineText)] private string FlavorText;
+    [Export(PropertyHint.MultilineText)] private string UnlockText;
     private Database _data;
     private Player _playerCharacter;
     private Camera3D _stashedCamera;
     private Vector3 _cameraRotationReset;
+    private bool _rightKey;
     public bool Active
     { get; set; }
     public bool CanInteract
@@ -33,6 +36,7 @@ public partial class Door : Area3D, Interactable
     {
         base._Ready();
         Interface.Visible = false;
+        if (Main.Instance.State.GetSwitch(Name + "Unlocked")) DoorLock = false;
         if (DoorCamera != null) _cameraRotationReset = DoorCamera.Rotation;
         _data = Database.Get();
     }
@@ -86,24 +90,45 @@ public partial class Door : Area3D, Interactable
         if (!IsVisibleInTree()) return;
         Interface.Visible = true;
         InterfaceVisible = true;
+        CanInteract = true;
     }
 
     public void HideInterface()
     {
         Interface.Visible = false;
         InterfaceVisible = false;
+        CanInteract = false;
     }
 
     public async void InteractItem(string itemName = "empty")
     {
         if (!IsVisibleInTree()) return;
+        //Pause the game
+        Main.Instance.Busy = true;
+        if (itemName != "empty") _rightKey = ItemChecker(itemName);
         //Check if the door is locked, if yes, allow watching through the window if it has a camera assigned
         if (DoorLock)
         {
             //Pause the game
             Main.Instance.Busy = true;
-            //Assign text to a local string
+            //Set UI mode to cutscene mode!
             await Main.Instance.UI.Message.SetBars(true);
+
+            //Unlock the door if the right key was used
+            if (_rightKey)
+            {
+                //Assign text to a local string
+                await Main.Instance.UI.Message.SetText(UnlockText, false);
+                Main.Instance.State.SetSwitch(Name + "Unlocked", true);
+                DoorLock = false;
+                // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
+                // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
+                Main.Instance.UI.Message.EndMessage();
+                // Unpause game
+                Main.Instance.Busy = false;
+                return;
+            }
+
             //Check if a Camera is attached to the door, if not, proceed to display text.
             if (DoorCamera != null)
             {
@@ -118,9 +143,29 @@ public partial class Door : Area3D, Interactable
                 _stashedCamera.Current = true;
                 DoorCamera.Rotation = _cameraRotationReset;
             }
-            //Set Text to display
-            string str = FlavorText;
-            await Main.Instance.UI.Message.SetText(str, false);
+            //Assign text to a local string
+            string stri = FlavorText;
+            if (itemName != "empty" && !_rightKey) stri = "I can't use this here.";
+            await Main.Instance.UI.Message.SetText(stri, false);
+            // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
+            // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
+            Main.Instance.UI.Message.EndMessage();
+            // Unpause game
+            Main.Instance.Busy = false;
+            return;
+        }
+
+        //In case wrong item is used even after door is unlocked
+        if (itemName != "empty")
+        {
+            //Pause the game
+            Main.Instance.Busy = true;
+            //Set UI mode to cutscene mode!
+            await Main.Instance.UI.Message.SetBars(true);
+            //Assign text to a local string
+            string stri = "I already used this here.";
+            if (!_rightKey) stri = "I can't use this here.";
+            await Main.Instance.UI.Message.SetText(stri, false);
             // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
             // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
             Main.Instance.UI.Message.EndMessage();
@@ -140,7 +185,7 @@ public partial class Door : Area3D, Interactable
             //Move to specified scene
             var TransferRotation = Vector3.Zero;
             //Assign Rotatation based on the MaintainRotation boolean
-            TransferRotation = MaintainRotation ? _playerCharacter.GlobalRotationDegrees : NewSceneRotate;
+            TransferRotation = _maintainRotation ? _playerCharacter.GlobalRotationDegrees : NewSceneRotate;
             //Move to map index if GoToScenAlt string is empty
             if (GoToScenAlt == null)
                 Main.Instance.ChangeMap(_data.StartingScene[GoToScene], NewSceneXYZ, TransferRotation);
@@ -166,6 +211,19 @@ public partial class Door : Area3D, Interactable
         NewRotation.Y = Mathf.Clamp(NewRotation.Y + -move.X * fDelta, (float)-Math.PI/8, (float)Math.PI/8);
         NewRotation.X = Mathf.Clamp(NewRotation.X + -move.Y * fDelta, (float)-Math.PI/8, (float)Math.PI/8);
         DoorCamera.Rotation = NewRotation;
+    }
+
+    public bool ItemChecker(string nameToCheck)
+    {
+        GD.Print("Called ItemChecker");
+        for (int i = 0; i < Keys.Length; i++)
+        {
+            if (Keys[i] == nameToCheck)
+            {
+                return true;
+            }
+        }
+        return false;
     }
 
     //#Override ToString

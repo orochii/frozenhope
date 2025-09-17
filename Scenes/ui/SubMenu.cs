@@ -26,20 +26,22 @@ public partial class SubMenu : Control
                     EmitSignal(SignalName.sub_menu_closed);
                     break;
                 case UseableItem:
+                    //Temporary way to change an items fake description to real description
                     Main.Instance.State.SetSwitch(_item.DisplayName, true);
+                    //Normal code processes
                     _parentInvetory.RefreshSlots();
                     _parentInvetory.InfoColumn.SetupDescription(_item);
                     AudioManager.PlaySystemSound("decision");
                     _parentInvetory.SubMenu.Visible = false;
+                    //Let the parent know that the submenu has been closed
                     EmitSignal(SignalName.sub_menu_closed);
-                    //Temp code
+                    //Check if use of item closes the menu to interact with the environment
                     var interactable = Player.Instance.CloestInteractable;
-                    if (interactable is WorldScenery && interactable.CanInteract)
+                    if ((interactable is WorldScenery || interactable is Door) && interactable.CanInteract)
                     {
                         interactable.InteractItem(_item.DisplayName);
                         Main.Instance.UI.Gameplay.CloseMenu();
                     }
-                    //End of Temp code
                     break;
             }
         }

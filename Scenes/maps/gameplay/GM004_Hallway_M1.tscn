@@ -1,4 +1,4 @@
-[gd_scene load_steps=38 format=4 uid="uid://dw2p3h5yec5om"]
+[gd_scene load_steps=40 format=4 uid="uid://dw2p3h5yec5om"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ano30"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
@@ -26,7 +26,13 @@ tonemap_mode = 2
 size = Vector3(2, 2, 0.1)
 
 [sub_resource type="CylinderShape3D" id="CylinderShape3D_mp5u4"]
-height = 0.3
+height = 0.5
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rulxs"]
+size = Vector3(0.5, 1, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_q81se"]
+size = Vector3(0.4, 0.4, 0.1)
 
 [sub_resource type="Animation" id="Animation_y5035"]
 length = 0.001
@@ -504,6 +510,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 1.1)
 GoToScene = 10
 NewSceneXYZ = Vector3(0, 0, 4.4)
 NewSceneRotate = Vector3(0, 180, 0)
+DoorLock = true
+FlavorText = "It's locked, perhaps the keypad can open it."
 
 [node name="MeshInstance3D" parent="Doors/ToPrison" index="2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -536,38 +544,36 @@ Camera = NodePath("../../Cameras/HallHorzBed")
 transform = Transform3D(-1.31134e-08, 0, -3, 0, 1, 0, 0.3, 0, -1.31134e-07, -0.5, 0, 1)
 Camera = NodePath("../../Cameras/HallCorner")
 
-[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
+[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 1, 0, 2.5)
 Camera = NodePath("../../Cameras/HallCorner")
-ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
-[node name="ToHallVertFloor_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+[node name="ToSteamValve_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 2.13682, 0, 2.5)
-Camera = NodePath("../../Cameras/ChaseCamera")
-HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
+Camera = NodePath("../../Cameras/SteamValve")
 
-[node name="ToHallVertFloor_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 6.40012, 0, 2.5)
-Camera = NodePath("../../Cameras/ChaseCamera")
-HideBodies = [NodePath("../../Prototype/wall4")]
+[node name="ToSteamValve_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 5.49964, 0, 2.5)
+Camera = NodePath("../../Cameras/SteamValve")
 
-[node name="ToHallVertHangar" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-2.46945, 0, 2.62268e-07, 0, 1, 0, -2.15886e-07, 0, -3, 8.8, 0, 2.5)
+[node name="ToSteamPipe" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.7, 0, 4.52987e-07, 0, 1, 0, -1.05697e-07, 0, -3, 6.79964, 0, 2.5)
+Camera = NodePath("../../Cameras/SteamPipe")
+
+[node name="ToHallVertHangar_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-1, 0, 4.17233e-07, 0, 1, 0, -1.49012e-07, 0, -3, 8.9, 0, 2.5)
 Camera = NodePath("../../Cameras/HallVertHangar")
-HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
+ShowBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
 
-[node name="ToHallVertLong_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 11.2176, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertLong")
-ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
+[node name="ToChaseCamera_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.3, 0, 2.08616e-07, 0, 1, 0, -2.98023e-08, 0, -3, 10.6176, 0, 2.5)
+Camera = NodePath("../../Cameras/ChaseCamera")
+HideBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
 
-[node name="ToHallVertLong_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-1.22479, 0, 2.62268e-07, 0, 1, 0, -1.07075e-07, 0, -3, 15.3163, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertLong")
-
-[node name="ToHallVertEnd" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-2, 0, 4.52987e-07, 0, 1, 0, -3.01992e-07, 0, -3, 17.8833, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertEnd")
+[node name="ToChaseCamera_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-5, 0, 4.52987e-07, 0, 1, 0, -7.54979e-07, 0, -3, 16.5, 0, 2.5)
+Camera = NodePath("../../Cameras/ChaseCamera")
+HideBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
 
 [node name="Cameras" type="Node3D" parent="."]
 
@@ -579,27 +585,21 @@ current = true
 transform = Transform3D(-0.0628042, 0.904183, -0.422503, 0, 0.423339, 0.905971, 0.998026, 0.0568988, -0.0265875, -1.64544, 2.84872, -5.816)
 fov = 85.0
 
-[node name="HallVertFloor" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.0200411, 0.246875, 0.96884, 0, 0.969035, -0.246925, -0.999799, -0.00494863, -0.0194205, 10.2941, 0.100248, 2.50364)
-
 [node name="HallVertHangar" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-1, -6.07289e-08, 6.28867e-08, 0, 0.71934, 0.694658, -8.74228e-08, 0.694658, -0.71934, 8.5, 2.888, 1.135)
+transform = Transform3D(-0.346052, -0.584048, 0.734259, 0, 0.782612, 0.62251, -0.938215, 0.215421, -0.270824, 10.5225, 2.47786, 1.6129)
+
+[node name="HallVertHangar2" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-1, -6.0729e-08, 6.28867e-08, 0, 0.71934, 0.694658, -8.74228e-08, 0.694658, -0.71934, 8.5, 2.888, 1.135)
 
 [node name="HallCorner" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.683862, 0.615035, -0.39251, 0, 0.537971, 0.842963, 0.729611, -0.576471, 0.367898, -1.70749, 2.68223, 3.76179)
 
-[node name="HallVertLong" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.168008, 0.547021, -0.820086, 0, 0.831911, 0.554909, 0.985786, -0.093229, 0.139768, 10.1443, 2.02186, 3.3225)
-
-[node name="HallVertEnd" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.291597, 0.448396, -0.844933, 0, 0.883321, 0.468768, 0.956541, -0.136692, 0.257574, 15.2195, 1.84331, 3.56747)
-
 [node name="ChaseCamera" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.963784, 0.119845, -0.23824, 0, 0.893337, 0.449387, 0.266685, 0.433112, -0.860984, 2.80385, 2.19003, -1.06776)
+transform = Transform3D(1, 0, 0, 0, 0.889416, 0.457098, 0, -0.457098, 0.889416, 11.5, 2.2, 5.25)
 script = ExtResource("4_1t5di")
 TrackPosition = true
 Follow_X = true
-X_offset = -1.2
+X_offset = -0.6
 Z_offset = 3.0
 
 [node name="ValveCamera" type="Camera3D" parent="Cameras"]
@@ -607,6 +607,12 @@ transform = Transform3D(-0.948308, 0.11502, -0.295773, 0, 0.932008, 0.362439, 0.
 
 [node name="ValveTurnCamera" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.418419, 0.511169, -0.750754, 0, 0.82659, 0.562804, 0.908254, 0.235488, -0.345861, 3.217, 1.463, 3.043)
+
+[node name="SteamPipe" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.642521, 0.613973, -0.458479, 0, 0.598328, 0.801252, 0.766268, 0.514821, -0.384438, 5.95811, 2.53084, 2.2996)
+
+[node name="SteamValve" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.279691, 0.629872, -0.724592, 0, 0.754713, 0.656055, 0.96009, 0.183493, -0.211086, 0.314465, 2.35152, 1.92643)
 
 [node name="Lights" type="Node3D" parent="."]
 
@@ -620,7 +626,7 @@ shadow_enabled = true
 
 [node name="Ineractabales" type="Node3D" parent="."]
 
-[node name="SceneryItem" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera", "TargetEvent") instance=ExtResource("5_y4s5i")]
+[node name="ValveInteract" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera", "TargetEvent") instance=ExtResource("5_y4s5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.2, 3.8)
 SceneCamera = NodePath("../../Cameras/ValveCamera")
 EmitInteractedSignal = true
@@ -628,17 +634,36 @@ FlavorText = "Looks like something can be inserted here.
 "
 TargetEvent = NodePath("../../Events/EvtValveTurned")
 RepeatEvent = true
-Keys = PackedStringArray("hexvalve")
+Keys = PackedStringArray("masterkey", "hexvalve")
 
-[node name="Interface" parent="Ineractabales/SceneryItem" index="0"]
+[node name="Interface" parent="Ineractabales/ValveInteract" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.2)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Ineractabales/SceneryItem"]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ineractabales/ValveInteract"]
 shape = SubResource("CylinderShape3D_mp5u4")
 
-[node name="Label3D" type="Label3D" parent="Ineractabales/SceneryItem"]
+[node name="Label3D" type="Label3D" parent="Ineractabales/ValveInteract"]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.2, 0.0899999)
 text = "Valve"
+
+[node name="Keypad" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera") instance=ExtResource("5_y4s5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 1.3)
+SceneCamera = NodePath("Camera3D")
+FlavorText = "A keypad."
+
+[node name="Interface" parent="Ineractabales/Keypad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_rulxs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -0.2)
+mesh = SubResource("BoxMesh_q81se")
+
+[node name="Camera3D" type="Camera3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(0.999959, 0.00437565, -0.00789404, 0, 0.874624, 0.484803, 0.00902564, -0.484783, 0.874588, 0, 1.65, 0.65)
 
 [node name="Events" type="Node3D" parent="."]
 
@@ -854,7 +879,6 @@ mesh = SubResource("CylinderMesh_et5pe")
 
 [node name="WallCabinet" type="MeshInstance3D" parent="Prototype"]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 3, 1.4, 1.2)
-visible = false
 mesh = SubResource("BoxMesh_brnnh")
 
 [node name="ValveTube" type="MeshInstance3D" parent="Prototype"]
@@ -868,11 +892,12 @@ process_material = SubResource("ParticleProcessMaterial_gh3e8")
 draw_pass_1 = SubResource("BoxMesh_nr88p")
 
 [node name="Player" parent="." instance=ExtResource("1_el1ds")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, -2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0, -2)
 
-[connection signal="player_interacted" from="Ineractabales/SceneryItem" to="Events/EvtValveTurned" method="_on_player_interacted"]
+[connection signal="player_interacted" from="Ineractabales/ValveInteract" to="Events/EvtValveTurned" method="_on_player_interacted"]
 
 [editable path="Doors/ToGuardroom"]
 [editable path="Doors/ToBedroom"]
 [editable path="Doors/ToPrison"]
-[editable path="Ineractabales/SceneryItem"]
+[editable path="Ineractabales/ValveInteract"]
+[editable path="Ineractabales/Keypad"]

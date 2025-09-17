@@ -14,7 +14,7 @@ public partial class WorldScenery : Area3D, Interactable
     [Export] public string[] Keys = new string[0];
     private Camera3D _stashedCamera;
     private Player _playerCharacter;
-    private string _keyPassover;
+    private bool _keyPassover;
     public bool Active
     { get; set; }
     public bool CanInteract
@@ -32,11 +32,12 @@ public partial class WorldScenery : Area3D, Interactable
         base._Ready();
         Interface.Visible = false;
     }
-    
+
     public void _on_player_entered(Node3D body)
     {
         _playerCharacter = (Player)body;
         _playerCharacter.NearbyInteractables.Add(this);
+        GD.Print("Player enter");
     }
 
     public void _on_player_left(Node3D body)
@@ -44,6 +45,7 @@ public partial class WorldScenery : Area3D, Interactable
         _playerCharacter.NearbyInteractables.Remove(this);
         Active = false;
         HideInterface();
+        GD.Print("Player exit");
     }
 
     public override void _Process(double delta)
@@ -67,11 +69,12 @@ public partial class WorldScenery : Area3D, Interactable
 
     public void ItemChecker(string nameToCheck)
     {
+        GD.Print("Called ItemChecker");
         for (int i = 0; i < Keys.Length; i++)
         {
             if (Keys[i] == nameToCheck)
             {
-                _keyPassover = nameToCheck;
+                _keyPassover = true;
             }
         }
     }
@@ -103,15 +106,17 @@ public partial class WorldScenery : Area3D, Interactable
         var tempAngle = InteractAngle;
         InteractAngle = 0f;
         Main.Instance.Busy = true;
-        ItemChecker(itemName);
+        //Check if a non-default name was given and then check against accepted key values
+        if (itemName != "empty") ItemChecker(itemName);
         //Check if Camera is attached to this object
         if (SceneCamera != null) { CameraSetup(); }
         //Set UI mode to cutscene mode!
         await Main.Instance.UI.Message.SetBars(true);
+        
         //Emit the interacted signal in case any events need to listen for it.
-        if (EmitInteractedSignal && !Main.Instance.State.GetSwitch(Name+"Triggered") && _keyPassover != null)
+        if (EmitInteractedSignal && !Main.Instance.State.GetSwitch(Name + "Triggered") && _keyPassover)
         {
-            EmitSignal(SignalName.player_interacted, _keyPassover);
+            EmitSignal(SignalName.player_interacted, itemName);
             await ToSignal(TargetEvent, "event_over");
             // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:
             Main.Instance.UI.Message.EndMessage();
@@ -120,14 +125,15 @@ public partial class WorldScenery : Area3D, Interactable
             //Create and store a switch so the event bound to this interactable can't be triggered again
             if (!RepeatEvent) Main.Instance.State.SetSwitch(Name + "Triggered", true);
             // Unpause game and reset some things
-            _keyPassover = null;
+            _keyPassover = false;
             InteractAngle = tempAngle;
             Main.Instance.Busy = false;
             return;
         }
+
         //Assign text to a local string
         string str = FlavorText;
-        if (itemName != "empty" && _keyPassover == null) str = "I can't use this here.";
+        if (itemName != "empty" && !_keyPassover) str = "I can't use this here.";
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:

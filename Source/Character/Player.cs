@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -77,6 +78,7 @@ public partial class Player : CharacterBody3D, Targettable
 	{
 		//If character isn't ready to move yet upon scene start, we return
 		if (_frozen) return;
+		CheckSurface();
 		//if player is dead, do nothing, duh
 		if (Dead) return;
 		// Shouldn't move if we're not in gameplay mode
@@ -402,12 +404,14 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
+	//#DEPRECIATED MARK FOR DELETION
 	//Processing for when items are in range of the player
-	private void OnItemInRange(Node3D body) {
+	private void OnItemInRange(Node3D body)
+	{
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
 		GD.Print("List has ", _nearbyInteractables.Count, " elements");
-		
+
 		//Main function processing
 		if (body is Interactable)
 		{
@@ -417,7 +421,7 @@ public partial class Player : CharacterBody3D, Targettable
 			GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		}
 	}
-
+	//#DEPRECIATED MARK FOR DELETION
 	private void OnItemOutOfRange(Node3D body) {
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Left", body.ToString()));
@@ -461,11 +465,18 @@ public partial class Player : CharacterBody3D, Targettable
 		_closestInteractable.Active = true;
 	}
 
+	// Footstep based on surface
+	public void CheckSurface()
+	{
+		var body = FloorChecker.GetColliderShape();
+		GD.Print(body);
+	}
+
 	// Reticle Processing
-    public Vector3 GetPivotPosition()
-    {
-        return GlobalPosition;
-    }
+	public Vector3 GetPivotPosition()
+	{
+		return GlobalPosition;
+	}
     public Vector3 GetReticlePosition()
     {
         return GlobalPosition + new Vector3(0, 2, 0);
@@ -520,11 +531,16 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 
 	//Signal functions
-	public void FreezeStatus() {
-		if (_frozen) {
+	//This is kinda a dumb hacky thing that might need removing
+	public void FreezeStatus()
+	{
+		if (_frozen)
+		{
 			_frozen = false;
 			GD.Print("Player unfrozen");
-		} else {
+		}
+		else
+		{
 			_frozen = true;
 			GD.Print("Player frozen.");
 		}

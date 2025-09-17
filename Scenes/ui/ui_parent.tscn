@@ -792,6 +792,7 @@ custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
 [node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
+visible = false
 anchors_preset = 0
 offset_left = 1.0
 offset_top = 42.0

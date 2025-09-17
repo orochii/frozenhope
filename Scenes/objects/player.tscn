@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=3 uid="uid://bwuhe8d2c7xau"]
 
-[ext_resource type="Script" path="res://Source/Character/Player.cs" id="1_hl4ia"]
-[ext_resource type="Script" path="res://Source/Character/CharacterMoveData.cs" id="2_ee1yy"]
+[ext_resource type="Script" uid="uid://c0223w2v5mi1k" path="res://Source/Character/Player.cs" id="1_hl4ia"]
+[ext_resource type="Script" uid="uid://b2iqv2r6aq8d8" path="res://Source/Character/CharacterMoveData.cs" id="2_ee1yy"]
 [ext_resource type="PackedScene" uid="uid://oykp21gpqp0a" path="res://Graphics/Lain/p_lain.tscn" id="3_8fjv8"]
 
 [sub_resource type="Resource" id="Resource_ojy2r"]
@@ -70,3 +70,4 @@ font_size = 24
 enabled = false
 target_position = Vector3(0, -0.1, 0)
 collision_mask = 4
+hit_from_inside = true
