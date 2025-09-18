@@ -67,7 +67,6 @@ text = "?"
 font_size = 24
 
 [node name="FloorCheck" type="RayCast3D" parent="."]
-enabled = false
-target_position = Vector3(0, -0.1, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
+target_position = Vector3(0, -0.6, 0)
 collision_mask = 4
-hit_from_inside = true

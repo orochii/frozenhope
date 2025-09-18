@@ -295,7 +295,7 @@ collision_layer = 4
 collision_mask = 33
 metadata/concrete = false
 
-[node name="floor-square" type="MeshInstance3D" parent="Prototype/floor-square2"]
+[node name="floor-square" type="MeshInstance3D" parent="Prototype/floor-square2" groups=["concrete"]]
 mesh = SubResource("ArrayMesh_br6pc")
 skeleton = NodePath("")
 
@@ -307,7 +307,7 @@ transform = Transform3D(-1.74846e-07, 0, -1, 0, 1, 0, 4, 0, -4.37114e-08, -4, 0,
 collision_layer = 4
 collision_mask = 33
 
-[node name="floor-square" type="MeshInstance3D" parent="Prototype/floor-square3"]
+[node name="floor-square" type="MeshInstance3D" parent="Prototype/floor-square3" groups=["concrete"]]
 mesh = SubResource("ArrayMesh_br6pc")
 skeleton = NodePath("")
 

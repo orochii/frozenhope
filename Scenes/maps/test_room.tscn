@@ -1,17 +1,17 @@
 [gd_scene load_steps=28 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
-[ext_resource type="Script" path="res://Source/State/LevelLoader.cs" id="1_53cc4"]
+[ext_resource type="Script" uid="uid://d1ehvtdgklw54" path="res://Source/State/LevelLoader.cs" id="1_53cc4"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
 [ext_resource type="Texture2D" uid="uid://36tafid3bwwv" path="res://Graphics/OzzyAvatar1.png" id="3_pn3br"]
 [ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="4_l55va"]
-[ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="4_vfqra"]
+[ext_resource type="Script" uid="uid://cqweuem71bvew" path="res://Source/Objects/ChaseCamera3D.cs" id="4_vfqra"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="5_ttcow"]
-[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
+[ext_resource type="Script" uid="uid://rpcwyw6opyuf" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="9_bpdo2"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="11_rlrbt"]
+[ext_resource type="Script" uid="uid://bviyas1530obe" path="res://Source/Objects/Door.cs" id="11_rlrbt"]
 [ext_resource type="PackedScene" uid="uid://crs5tgfdu2ui4" path="res://Graphics/Models/scenery/Temp/temp_bunkbed.tscn" id="13_3ofou"]
 [ext_resource type="PackedScene" uid="uid://cfc6nqpkm4weq" path="res://Graphics/Models/enemies/wendigo.glb" id="14_ivoc4"]
 
@@ -34,7 +34,6 @@ size = Vector3(0.5, 1, 0.5)
 script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
 Amount = 10
-AmmoQty = 0
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_2br1b"]
 size = Vector3(1, 2, 0.5)
@@ -63,7 +62,7 @@ script = ExtResource("1_53cc4")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_oj440")
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[node name="Floor" type="StaticBody3D" parent="." groups=["Concrete"]]
 collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
@@ -287,6 +286,15 @@ mesh = SubResource("BoxMesh_ii0nv")
 [node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.25, 2.1)
 mesh = SubResource("BoxMesh_iub82")
+
+[node name="Blood" type="StaticBody3D" parent="." groups=["Blood"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Blood"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.45, 0)
+polygon = PackedVector2Array(0.3819008, 0.79634976, 0.9086046, 0.14231116, 0.6828747, -0.6680024, -0.60783863, -0.7027301, -0.630991, 0.518528)
 
 [connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_on_player_entered"]
 [connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_on_player_left"]

@@ -4,6 +4,7 @@ using System;
 public partial class CharacterStateMachine : Node
 {
 	[Export] AnimationPlayer Animator;
+	[Export] AnimationPlayer SoundPlayer;
 	[Export] CharacterAnimState[] AnimStates;
 	[Export] public EMoveState MoveState;
 	[Export] public EModeState ModeState;

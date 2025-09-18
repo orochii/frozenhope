@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://crs5tgfdu2ui4" path="res://Graphics/Models/scenery/Temp/temp_bunkbed.tscn" id="3_hgtcs"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_rwi7j"]
 [ext_resource type="Resource" uid="uid://dwmiagw2vheg4" path="res://Data/items/hex_wheel.tres" id="3_ven7d"]
-[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="4_0pvy8"]
+[ext_resource type="Script" uid="uid://rpcwyw6opyuf" path="res://Source/Data/ItemAddEntry.cs" id="4_0pvy8"]
 [ext_resource type="PackedScene" uid="uid://d18dwumuoftye" path="res://Graphics/Models/items/temp_wheel.tscn" id="5_mkx15"]
 
 [sub_resource type="Environment" id="Environment_j5lk8"]
@@ -17,7 +17,6 @@ tonemap_mode = 2
 script = ExtResource("4_0pvy8")
 Item = ExtResource("3_ven7d")
 Amount = 1
-AmmoQty = 0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -469,4 +468,4 @@ transform = Transform3D(-0.99743, 0, -0.0716541, 0, 1, 0, 0.0716541, 0, -0.99743
 mesh = SubResource("BoxMesh_xisen")
 
 [node name="Player" parent="." instance=ExtResource("3_rwi7j")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, 2)
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0.2, 2)

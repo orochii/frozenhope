@@ -38,6 +38,8 @@ enabled=PackedStringArray("res://addons/anthonyec.camera_preview/plugin.cfg", "r
 PlayerNode="This group contains only the player node"
 GlobalDoors="All the doors should be part of this group."
 GlobalItem="All items that can be picked up."
+Concrete="Marks a body as concrete for sounds processing."
+Blood="Mark body as blood for surface sound processing."
 
 [input]
 

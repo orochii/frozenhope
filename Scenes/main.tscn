@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://boouo4s50i43s"]
 
-[ext_resource type="Script" path="res://Source/Main.cs" id="1_o1rfr"]
+[ext_resource type="Script" uid="uid://dso7cwqll0v34" path="res://Source/Main.cs" id="1_o1rfr"]
 [ext_resource type="Texture2D" uid="uid://bu1vsm42im01j" path="res://Graphics/REF.png" id="2_1l3hs"]
 [ext_resource type="PackedScene" uid="uid://cxn0isptwm3tq" path="res://Scenes/ui/ui_parent.tscn" id="3_eiedn"]
 
@@ -8,7 +8,6 @@
 script = ExtResource("1_o1rfr")
 WorldParent = NodePath("WorldParent")
 UI = NodePath("CanvasLayer/UIParent")
-StartScene = 3
 SkipIntro = true
 
 [node name="WorldParent" type="Node" parent="."]

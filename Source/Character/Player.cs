@@ -78,7 +78,6 @@ public partial class Player : CharacterBody3D, Targettable
 	{
 		//If character isn't ready to move yet upon scene start, we return
 		if (_frozen) return;
-		CheckSurface();
 		//if player is dead, do nothing, duh
 		if (Dead) return;
 		// Shouldn't move if we're not in gameplay mode
@@ -172,32 +171,45 @@ public partial class Player : CharacterBody3D, Targettable
 			ProcessTankMove(d,Vector2.Zero,false,false);
 		}
 	}
-	private void ExecuteAttack() {
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		CheckSurface();
+    }
+
+	private void ExecuteAttack()
+	{
 		var equip = Main.Instance.State.GetEquippedItemEntry();
 		var item = BaseItem.Get(equip.itemID);
-		if (item != null && item is WeaponItem) {
+		if (item != null && item is WeaponItem)
+		{
 			var wpn = item as WeaponItem;
 			// Set Fire state.
 			Graphic.StateMachine.ActionState = EActionState.ATTACK;
 			// Check for ammo.
-			if (equip.ammoQty > 0 && equip.ammoId.Length > 0) {
+			if (equip.ammoQty > 0 && equip.ammoId.Length > 0)
+			{
 				// Get ammo item
 				var ammo = BaseItem.Get(equip.ammoId) as AmmoItem;
 				// Muzzle in weapon.
 				Graphic.SetWeaponAnimation("muzzle");
 				// Check if should do hitscan or spawn projectile.
-				if (ammo.Projectile != null) {
+				if (ammo.Projectile != null)
+				{
 					// Spawn projectile.
 					// TODO.
-				} else
-                {
-                    // Execute hitscan.
-                    ExecuteHitscan(wpn, ammo);
-                }
-                // Spend ammo
-                equip.ammoQty -= 1;
+				}
+				else
+				{
+					// Execute hitscan.
+					ExecuteHitscan(wpn, ammo);
+				}
+				// Spend ammo
+				equip.ammoQty -= 1;
 				if (equip.ammoQty == 0) equip.ammoId = "";
-			} else {
+			}
+			else
+			{
 				// Attack for no ammo (if possible).
 				// TODO.
 			}
@@ -468,8 +480,12 @@ public partial class Player : CharacterBody3D, Targettable
 	// Footstep based on surface
 	public void CheckSurface()
 	{
-		var body = FloorChecker.GetColliderShape();
-		GD.Print(body);
+		var collision = FloorChecker.GetCollider() as StaticBody3D;
+		if (collision != null)
+		{
+			if (collision.IsInGroup("Concrete")) GD.Print("Walk on concrete.");
+			if (collision.IsInGroup("Blood")) GD.Print("Walk on blood.");
+		}
 	}
 
 	// Reticle Processing
