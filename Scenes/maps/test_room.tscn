@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=29 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
 [ext_resource type="Script" uid="uid://d1ehvtdgklw54" path="res://Source/State/LevelLoader.cs" id="1_53cc4"]
@@ -14,6 +14,7 @@
 [ext_resource type="Script" uid="uid://bviyas1530obe" path="res://Source/Objects/Door.cs" id="11_rlrbt"]
 [ext_resource type="PackedScene" uid="uid://crs5tgfdu2ui4" path="res://Graphics/Models/scenery/Temp/temp_bunkbed.tscn" id="13_3ofou"]
 [ext_resource type="PackedScene" uid="uid://cfc6nqpkm4weq" path="res://Graphics/Models/enemies/wendigo.glb" id="14_ivoc4"]
+[ext_resource type="PackedScene" uid="uid://bx4onpetuntxs" path="res://Scenes/objects/item_box.tscn" id="15_kkfdx"]
 
 [sub_resource type="Environment" id="Environment_oj440"]
 background_mode = 1
@@ -295,6 +296,9 @@ collision_mask = 0
 [node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Blood"]
 transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.45, 0)
 polygon = PackedVector2Array(0.3819008, 0.79634976, 0.9086046, 0.14231116, 0.6828747, -0.6680024, -0.60783863, -0.7027301, -0.630991, 0.518528)
+
+[node name="ItemBox" parent="." instance=ExtResource("15_kkfdx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24700165, 0, -2.7115326)
 
 [connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_on_player_entered"]
 [connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_on_player_left"]

@@ -483,8 +483,8 @@ public partial class Player : CharacterBody3D, Targettable
 		var collision = FloorChecker.GetCollider() as StaticBody3D;
 		if (collision != null)
 		{
-			if (collision.IsInGroup("Concrete")) GD.Print("Walk on concrete.");
-			if (collision.IsInGroup("Blood")) GD.Print("Walk on blood.");
+			//if (collision.IsInGroup("Concrete")) GD.Print("Walk on concrete.");
+			//if (collision.IsInGroup("Blood")) GD.Print("Walk on blood.");
 		}
 	}
 

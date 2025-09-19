@@ -1,19 +1,18 @@
 [gd_scene load_steps=40 format=3 uid="uid://oykp21gpqp0a"]
 
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="1_pqum4"]
-[ext_resource type="Script" uid="uid://cfahupv3ftpal" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
-[ext_resource type="Shader" uid="uid://u5gkv4sjmcwv" path="res://Source/Shaders/psx_lit.gdshader" id="2_r62he"]
+[ext_resource type="Script" path="res://Source/Character/CharacterGraphic.cs" id="2_c1pyr"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_r62he"]
 [ext_resource type="Texture2D" uid="uid://b113fpldi2ie1" path="res://Graphics/Lain/Lain_Untitled.png" id="3_elq2l"]
-[ext_resource type="Script" uid="uid://cuxcsflpgb1dc" path="res://Source/Character/CharacterStateMachine.cs" id="5_1mcn7"]
-[ext_resource type="Script" uid="uid://dmhyrisjhmtcc" path="res://Source/Character/CharacterAnimStateEntry.cs" id="6_nl2me"]
-[ext_resource type="Script" uid="uid://dq1quegaqcect" path="res://Source/Character/CharacterAnimState.cs" id="7_oke14"]
+[ext_resource type="Script" path="res://Source/Character/CharacterStateMachine.cs" id="5_1mcn7"]
+[ext_resource type="Script" path="res://Source/Character/CharacterAnimStateEntry.cs" id="6_nl2me"]
+[ext_resource type="Script" path="res://Source/Character/CharacterAnimState.cs" id="7_oke14"]
 [ext_resource type="AudioStream" uid="uid://djmrglnnrjo3p" path="res://Audio/Sound Effects/Characters/SFX_WALK_SNOW_JDY.wav" id="8_xm0ba"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ywud7"]
 render_priority = 0
 shader = ExtResource("2_r62he")
-shader_parameter/albedo = ExtResource("3_elq2l")
-shader_parameter/vertex_color = false
+shader_parameter/vertex_color = null
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -23,136 +22,190 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("3_elq2l")
 
 [sub_resource type="Resource" id="Resource_fbyn7"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Standing"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_1l34e"]
 script = ExtResource("6_nl2me")
 Id = "pistol"
 AnimationId = "Standing_HoldSmallWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_iyqc0"]
 script = ExtResource("6_nl2me")
 Id = "rifle"
 AnimationId = "Standing_HoldRifleWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_1cesr"]
 script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
+ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_fbyn7"), SubResource("Resource_1l34e"), SubResource("Resource_iyqc0")])
 
 [sub_resource type="Resource" id="Resource_g5lm1"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Walk"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_jgbhn"]
 script = ExtResource("6_nl2me")
 Id = "pistol"
 AnimationId = "Walk_HoldSmallWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_8ybfn"]
 script = ExtResource("6_nl2me")
 Id = "rifle"
 AnimationId = "Walk_HoldRifleWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_33pw3"]
 script = ExtResource("7_oke14")
 MoveState = 1
+ModeState = 0
+ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_g5lm1"), SubResource("Resource_jgbhn"), SubResource("Resource_8ybfn")])
 
 [sub_resource type="Resource" id="Resource_db1dw"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Run"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_avosd"]
 script = ExtResource("7_oke14")
 MoveState = 2
+ModeState = 0
+ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_db1dw")])
 
 [sub_resource type="Resource" id="Resource_e7vvv"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Standing"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_brsv7"]
 script = ExtResource("6_nl2me")
 Id = "pistol"
 AnimationId = "Standing_AimSmallWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_rm26b"]
 script = ExtResource("6_nl2me")
 Id = "rifle"
 AnimationId = "Standing_AimRifleWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_wen4n"]
 script = ExtResource("7_oke14")
+MoveState = 0
 ModeState = 1
+ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_e7vvv"), SubResource("Resource_brsv7"), SubResource("Resource_rm26b")])
 
 [sub_resource type="Resource" id="Resource_g6prs"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Walk"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_umejs"]
 script = ExtResource("6_nl2me")
 Id = "pistol"
 AnimationId = "Walk_AimSmallWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_pfjn7"]
 script = ExtResource("6_nl2me")
 Id = "rifle"
 AnimationId = "Walk_AimRifleWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_3akkj"]
 script = ExtResource("7_oke14")
 MoveState = 1
 ModeState = 1
+ActionState = 0
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_g6prs"), SubResource("Resource_umejs"), SubResource("Resource_pfjn7")])
 
 [sub_resource type="Resource" id="Resource_34y5d"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Standing"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_i2p28"]
 script = ExtResource("6_nl2me")
 Id = "pistol"
 AnimationId = "Standing_FireSmallWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_i05wv"]
 script = ExtResource("6_nl2me")
 Id = "rifle"
 AnimationId = "Standing_FireRifleWeapon"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_o8hx8"]
 script = ExtResource("7_oke14")
+MoveState = 0
 ModeState = 1
 ActionState = 1
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_34y5d"), SubResource("Resource_i2p28"), SubResource("Resource_i05wv")])
 
 [sub_resource type="Resource" id="Resource_cutmo"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Damage"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_fgyqo"]
 script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
 ActionState = 4
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_cutmo")])
 
 [sub_resource type="Resource" id="Resource_bhtwa"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "KnockedDown"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_s5umi"]
 script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
 ActionState = 5
+IgnoreActionExit = false
 AnimEntries = Array[Object]([SubResource("Resource_bhtwa")])
 
 [sub_resource type="Resource" id="Resource_h28se"]
 script = ExtResource("6_nl2me")
+Id = ""
 AnimationId = "Death"
+PlayBackwards = false
 
 [sub_resource type="Resource" id="Resource_jwc5k"]
 script = ExtResource("7_oke14")
+MoveState = 0
+ModeState = 0
 ActionState = 2
 IgnoreActionExit = true
 AnimEntries = Array[Object]([SubResource("Resource_h28se")])
@@ -181,7 +234,7 @@ tracks/0/use_blend = true
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_x3wo7"]
 _data = {
-&"sound_animation": SubResource("Animation_1p3lw")
+"sound_animation": SubResource("Animation_1p3lw")
 }
 
 [node name="Lain" node_paths=PackedStringArray("Armature", "WeaponSlot") instance=ExtResource("1_pqum4")]
@@ -229,15 +282,14 @@ surface_material_override/0 = SubResource("ShaderMaterial_ywud7")
 
 [node name="WeaponSlot" type="Node3D" parent="." index="2"]
 
-[node name="StateMachine" type="Node" parent="." index="3" node_paths=PackedStringArray("Animator", "SoundPlayer")]
+[node name="StateMachine" type="Node" parent="." index="3" node_paths=PackedStringArray("Animator")]
 script = ExtResource("5_1mcn7")
 Animator = NodePath("../AnimationPlayer")
-SoundPlayer = NodePath("../SoundPlayer")
 AnimStates = Array[Object]([SubResource("Resource_1cesr"), SubResource("Resource_33pw3"), SubResource("Resource_avosd"), SubResource("Resource_wen4n"), SubResource("Resource_3akkj"), SubResource("Resource_o8hx8"), SubResource("Resource_fgyqo"), SubResource("Resource_s5umi"), SubResource("Resource_jwc5k")])
 
 [node name="Footsteps" type="AudioStreamPlayer3D" parent="." index="4"]
 
 [node name="SoundPlayer" type="AnimationPlayer" parent="." index="5"]
 libraries = {
-&"": SubResource("AnimationLibrary_x3wo7")
+"": SubResource("AnimationLibrary_x3wo7")
 }

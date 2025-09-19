@@ -49,7 +49,7 @@ public partial class InvSlotButton : TextureButton
 		base._Ready();
         Pressed += OnInventorySelected;
     }
-	private async void OnInventorySelected()
+	private void OnInventorySelected()
 	{
 		var combine = ParentInventory.GetCombine();
 		// Use item
@@ -83,24 +83,32 @@ public partial class InvSlotButton : TextureButton
 		// Use item
 		else
 		{
-			ParentInventory.SubMenu.MakeVisible(Item, Index, ParentInventory);
-			await ToSignal(ParentInventory.SubMenu, "sub_menu_closed");
-			/*switch (Item)
+			//ParentInventory.SubMenu.MakeVisible(Item, Index, ParentInventory);
+			//await ToSignal(ParentInventory.SubMenu, "sub_menu_closed");
+			switch (Item)
 			{
 				case WeaponItem:
 					Main.Instance.State.SetEquippedItem(Index);
 					Player.Instance.RefreshEquippedModel();
 					ParentInventory.RefreshSlots();
 					AudioManager.PlaySystemSound("decision");
-					ParentInventory.SubMenu.Visible = false;
+					//ParentInventory.SubMenu.Visible = false;
 					break;
 				case UseableItem:
+					//Temporary way to change an items fake description to real description
 					Main.Instance.State.SetSwitch(Item.DisplayName, true);
 					ParentInventory.RefreshSlots();
 					ParentInventory.InfoColumn.SetupDescription(Item);
 					AudioManager.PlaySystemSound("decision");
+					//Check if use of item closes the menu to interact with the environment
+					var interactable = Player.Instance.CloestInteractable;
+                    if ((interactable is WorldScenery || interactable is Door) && interactable.CanInteract)
+                    {
+                        interactable.InteractItem(Item.DisplayName);
+                        Main.Instance.UI.Gameplay.CloseMenu();
+                    }
 					break;
-			}*/
+			}
 		}
 	}
 	public void SetCombine(bool v) {

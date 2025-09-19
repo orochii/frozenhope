@@ -88,25 +88,6 @@ public partial class Inventory : Control
 			}
 		}
 		// Inputs.
-		/*if (Input.IsActionJustPressed(Main.MoveRight))
-		{
-			var currentPosition = lastFocused.Index;
-			var item = _spawnedSlots[currentPosition].Item;
-			int moveDistance = 1;
-			//Don't allow to move past the lower right inventory limit
-			if (currentPosition != _spawnedSlots.GetLength(0) - 1) _spawnedSlots[currentPosition + moveDistance].GrabFocus();
-			GD.Print("Current position " + currentPosition);
-		}
-		if (Input.IsActionJustPressed(Main.MoveLeft))
-		{
-			var currentPosition = lastFocused.Index;
-			var item = _spawnedSlots[currentPosition].Item;
-			int moveDistance = 1;
-			if (currentPosition != 0) _spawnedSlots[currentPosition - moveDistance].GrabFocus();
-			GD.Print("Current position " + currentPosition);
-		}*/
-		//Instead of using personalized inputs to navigate the inventroy we're just gonna use the Godot defaults for now because navigating this inventroy is a nightmare ;-;
-
 		if (Input.IsActionJustPressed("cancel"))
 		{
 			if (currentCombineSlot != null)

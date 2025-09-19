@@ -182,6 +182,8 @@ public partial class Door : Area3D, Interactable
             GD.Print("Start Map Change");
             _playerCharacter.FreezeStatus();
             Main.Instance.Busy = true;
+            //Play whatever sound is assigned to this door
+            
             //Move to specified scene
             var TransferRotation = Vector3.Zero;
             //Assign Rotatation based on the MaintainRotation boolean

@@ -1,0 +1,116 @@
+[gd_scene load_steps=12 format=3 uid="uid://bx4onpetuntxs"]
+
+[ext_resource type="Script" uid="uid://dcne6dmum70ew" path="res://Source/Objects/ItemBox.cs" id="1_rdoc8"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rdoc8"]
+size = Vector3(0.9, 1, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pftdk"]
+size = Vector3(0.9, 0.7, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1fqkd"]
+albedo_color = Color(0.1254902, 0.36862746, 0.09803922, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_pftdk"]
+size = Vector3(0.9, 0.7, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_p218d"]
+size = Vector3(0.9, 0.2, 0.7)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_jqgxv"]
+albedo_color = Color(0.1254902, 0.36862746, 0.09803922, 1)
+
+[sub_resource type="Animation" id="Animation_ej55x"]
+resource_name = "Lid_Close"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(-0.6981317, 0, 0), Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_dc0u4"]
+resource_name = "Lid_Open"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(-0.6981317, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_avun7"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Hinge:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_o1h2m"]
+_data = {
+&"Lid_Close": SubResource("Animation_ej55x"),
+&"Lid_Open": SubResource("Animation_dc0u4"),
+&"RESET": SubResource("Animation_avun7")
+}
+
+[node name="ItemBox" type="Area3D" node_paths=PackedStringArray("BoxAnimation")]
+collision_layer = 16
+script = ExtResource("1_rdoc8")
+BoxAnimation = NodePath("AnimationPlayer")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0.5)
+shape = SubResource("BoxShape3D_rdoc8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
+collision_layer = 8
+collision_mask = 33
+
+[node name="BoxBody" type="MeshInstance3D" parent="StaticBody3D"]
+mesh = SubResource("BoxMesh_pftdk")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_1fqkd")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
+shape = SubResource("BoxShape3D_pftdk")
+
+[node name="Hinge" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -0.35)
+
+[node name="BoxLid" type="MeshInstance3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.100000024, 0.35)
+mesh = SubResource("BoxMesh_p218d")
+skeleton = NodePath("../..")
+surface_material_override/0 = SubResource("StandardMaterial3D_jqgxv")
+
+[node name="Label3D" type="Label3D" parent="Hinge"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0.21, 0.5)
+text = "ITEM BOX"
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_o1h2m")
+}
+
+[connection signal="body_entered" from="." to="." method="_on_player_entered"]
+[connection signal="body_exited" from="." to="." method="_on_player_left"]

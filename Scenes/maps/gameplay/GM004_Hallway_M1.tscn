@@ -4,10 +4,10 @@
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_1jfpj"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_bohmx"]
-[ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="4_1t5di"]
+[ext_resource type="Script" uid="uid://cqweuem71bvew" path="res://Source/Objects/ChaseCamera3D.cs" id="4_1t5di"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="5_y4s5i"]
 [ext_resource type="PackedScene" uid="uid://d18dwumuoftye" path="res://Graphics/Models/items/temp_wheel.tscn" id="6_w4mrm"]
-[ext_resource type="Script" path="res://Source/Events/EvtValveTurned.cs" id="7_t0gns"]
+[ext_resource type="Script" uid="uid://cco0nc67k8i54" path="res://Source/Events/EvtValveTurned.cs" id="7_t0gns"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lmc7q"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -335,9 +335,9 @@ tracks/7/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_otqfm"]
 _data = {
-"RESET": SubResource("Animation_y5035"),
-"ValveTurnOff": SubResource("Animation_x6g5k"),
-"ValveTurnOn": SubResource("Animation_t2s6i")
+&"RESET": SubResource("Animation_y5035"),
+&"ValveTurnOff": SubResource("Animation_x6g5k"),
+&"ValveTurnOn": SubResource("Animation_t2s6i")
 }
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_ras8o"]
@@ -511,7 +511,7 @@ GoToScene = 10
 NewSceneXYZ = Vector3(0, 0, 4.4)
 NewSceneRotate = Vector3(0, 180, 0)
 DoorLock = true
-FlavorText = "It's locked, perhaps the keypad can open it."
+FlavorText = "It's electronically locked."
 
 [node name="MeshInstance3D" parent="Doors/ToPrison" index="2"]
 transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
@@ -606,7 +606,7 @@ Z_offset = 3.0
 transform = Transform3D(-0.948308, 0.11502, -0.295773, 0, 0.932008, 0.362439, 0.31735, 0.343704, -0.883831, 3.21691, 1.46348, 3.04265)
 
 [node name="ValveTurnCamera" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.418419, 0.511169, -0.750754, 0, 0.82659, 0.562804, 0.908254, 0.235488, -0.345861, 3.217, 1.463, 3.043)
+transform = Transform3D(-0.41841877, 0.51116884, -0.7507541, 0, 0.8265902, 0.56280386, 0.9082541, 0.23548768, -0.34586096, 3.217, 1.463, 3.043)
 
 [node name="SteamPipe" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.642521, 0.613973, -0.458479, 0, 0.598328, 0.801252, 0.766268, 0.514821, -0.384438, 5.95811, 2.53084, 2.2996)
@@ -649,7 +649,7 @@ text = "Valve"
 [node name="Keypad" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera") instance=ExtResource("5_y4s5i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 1.3)
 SceneCamera = NodePath("Camera3D")
-FlavorText = "A keypad."
+FlavorText = "It's a keycard reader."
 
 [node name="Interface" parent="Ineractabales/Keypad" index="0"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
@@ -675,11 +675,11 @@ Blocker = NodePath("SteamBlocker/CollisionShape3D")
 
 [node name="AnimateValve" type="AnimationPlayer" parent="Events/EvtValveTurned"]
 libraries = {
-"": SubResource("AnimationLibrary_otqfm")
+&"": SubResource("AnimationLibrary_otqfm")
 }
 
 [node name="temp_wheel" parent="Events/EvtValveTurned" instance=ExtResource("6_w4mrm")]
-transform = Transform3D(-0.4, 0, 1.01407e-06, 0, 0.4, 0, -1.01407e-06, 0, -0.4, 3.5, 1, 3.6)
+transform = Transform3D(-0.4, 0, 1.0140727e-06, 0, 0.4, 0, -1.0140727e-06, 0, -0.4, 3.5, 1, 3.6)
 visible = false
 
 [node name="SteamBlocker" type="StaticBody3D" parent="Events/EvtValveTurned"]

@@ -25,7 +25,7 @@ public class GameState {
         public int inventorySizeY = 4;
         public int EquippedItem = -1;
         public List<ItemEntry> inventory = new List<ItemEntry>();
-        public List<ItemEntry> boxInventory = new List<ItemEntry>();
+        public List<ItemEntry> boxInventory = new List<ItemEntry>(); //List of items inside the item box
         public int[,] GetInvMatrix()
         {
             // Create inventory matrix

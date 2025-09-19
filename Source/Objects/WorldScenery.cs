@@ -33,21 +33,6 @@ public partial class WorldScenery : Area3D, Interactable
         Interface.Visible = false;
     }
 
-    public void _on_player_entered(Node3D body)
-    {
-        _playerCharacter = (Player)body;
-        _playerCharacter.NearbyInteractables.Add(this);
-        GD.Print("Player enter");
-    }
-
-    public void _on_player_left(Node3D body)
-    {
-        _playerCharacter.NearbyInteractables.Remove(this);
-        Active = false;
-        HideInterface();
-        GD.Print("Player exit");
-    }
-
     public override void _Process(double delta)
     {
         if (Active)
@@ -80,6 +65,20 @@ public partial class WorldScenery : Area3D, Interactable
     }
 
     //Interface functions
+    public void _on_player_entered(Node3D body)
+    {
+        _playerCharacter = (Player)body;
+        _playerCharacter.NearbyInteractables.Add(this);
+        GD.Print("Player enter");
+    }
+
+    public void _on_player_left(Node3D body)
+    {
+        _playerCharacter.NearbyInteractables.Remove(this);
+        Active = false;
+        HideInterface();
+        GD.Print("Player exit");
+    }
     public Vector3 GetItemPosition()
     {
         return GlobalPosition;
