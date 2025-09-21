@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="AudioLibrary" load_steps=2 format=3 uid="uid://d1o4onpnbyfeb"]
+
+[ext_resource type="Script" uid="uid://hva7cf8iteim" path="res://Source/Audio/AudioLibrary.cs" id="2_bjder"]
+
+[resource]
+script = ExtResource("2_bjder")
+entries = Array[Object]([])
+metadata/_custom_type_script = "uid://hva7cf8iteim"

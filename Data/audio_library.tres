@@ -1,7 +1,7 @@
 [gd_resource type="Resource" script_class="AudioLibrary" load_steps=11 format=3 uid="uid://7iawk3ve31qd"]
 
-[ext_resource type="Script" path="res://Source/Audio/AudioLibrary.cs" id="1_4al74"]
-[ext_resource type="Script" path="res://Source/Audio/AudioEntry.cs" id="1_jlw3t"]
+[ext_resource type="Script" uid="uid://hva7cf8iteim" path="res://Source/Audio/AudioLibrary.cs" id="1_4al74"]
+[ext_resource type="Script" uid="uid://dhqd6kxta8k44" path="res://Source/Audio/AudioEntry.cs" id="1_jlw3t"]
 [ext_resource type="AudioStream" uid="uid://b8fxrtqdj34u1" path="res://Audio/Sound Effects/SFX_START_CONTINUE_GAME_JDY.wav" id="2_gaftg"]
 [ext_resource type="AudioStream" uid="uid://bh4mqgfuuat5" path="res://Audio/Sound Effects/SFX_RADIO_PING_JDY.wav" id="3_wfx14"]
 [ext_resource type="AudioStream" uid="uid://1fdwgpwrsmvr" path="res://Audio/Sound Effects/menu_cursor.ogg" id="4_vh554"]
@@ -11,29 +11,22 @@
 script = ExtResource("1_jlw3t")
 id = &"startGame"
 stream = ExtResource("2_gaftg")
-volume = 0.0
-pitch = 1.0
 
 [sub_resource type="Resource" id="Resource_lryom"]
 script = ExtResource("1_jlw3t")
 id = &"decision"
 stream = ExtResource("3_wfx14")
-volume = 0.0
-pitch = 1.0
 
 [sub_resource type="Resource" id="Resource_mmrdk"]
 script = ExtResource("1_jlw3t")
 id = &"cursor"
 stream = ExtResource("4_vh554")
-volume = 0.0
 pitch = 0.5
 
 [sub_resource type="Resource" id="Resource_idvd5"]
 script = ExtResource("1_jlw3t")
 id = &"cancel"
 stream = ExtResource("5_gypvk")
-volume = 0.0
-pitch = 1.0
 
 [resource]
 script = ExtResource("1_4al74")

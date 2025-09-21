@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=4 uid="uid://ydmqqfb7sk0a"]
+[gd_scene load_steps=23 format=4 uid="uid://ydmqqfb7sk0a"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_4fmyb"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_318km"]
@@ -115,6 +115,15 @@ size = Vector3(1.5, 0.7, 2.6)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_4mybj"]
 points = PackedVector3Array(0.75, 0.349932, 1.3, 0.75, -0.35, 1.3, 0.75, 0.349932, -1.3, -0.75, -0.35, 1.3, 0.75, -0.35, -1.3, -0.75, -0.35, -1.3)
 
+[sub_resource type="BoxMesh" id="BoxMesh_bgoxq"]
+size = Vector3(0.8, 0.9, 2.6)
+
+[sub_resource type="BoxMesh" id="BoxMesh_fh44i"]
+size = Vector3(1.8, 1.85, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_jroir"]
+size = Vector3(12, 0.7, 0.1)
+
 [node name="GM014_PersonnelTram" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -145,9 +154,18 @@ NewSceneRotate = Vector3(0, 90, 0)
 [node name="Cameras" type="Node3D" parent="."]
 
 [node name="Camera3D" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.49774, 0.149086, -0.854417, 0, 0.985116, 0.171891, 0.867326, 0.0855573, -0.490332, -3.65592, 0.979314, -2.32524)
+transform = Transform3D(0.681935, -0.362434, 0.635301, 0, 0.868593, 0.495526, -0.731413, -0.337916, 0.592324, 1.73324, 2.13696, 0.822773)
 
 [node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.45, -0.5)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 2.45, 0.5)
+shadow_enabled = true
+omni_range = 2.5
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -298,6 +316,103 @@ mesh = SubResource("PrismMesh_mn2jt")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/TrolleyRamp"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.35, 0)
 shape = SubResource("ConvexPolygonShape3D_4mybj")
+
+[node name="Wall" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.05, 0, -0.5)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.25, 0)
+size = Vector3(0.1, 2.5, 5)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -1)
+operation = 2
+size = Vector3(0.1, 2, 1)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Wall"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0.95)
+operation = 2
+size = Vector3(0.1, 1, 2.6)
+
+[node name="Shelf" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 1.55)
+calculate_tangents = false
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+calculate_tangents = false
+size = Vector3(2.5, 2, 0.7)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.3, 0.3, 0.7)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.35, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.95, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Prototype/Shelf"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.15, 0)
+operation = 2
+size = Vector3(2.5, 0.3, 0.6)
+
+[node name="ControlPanel" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.5, 0.45, 0.6)
+mesh = SubResource("BoxMesh_bgoxq")
+
+[node name="Shelf2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3, 0.925, -2.5)
+mesh = SubResource("BoxMesh_fh44i")
+
+[node name="Rail1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.2, 0.35, 0.2)
+mesh = SubResource("BoxMesh_jroir")
+
+[node name="Rail2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8.2, 0.35, -1.2)
+mesh = SubResource("BoxMesh_jroir")
 
 [node name="Player" parent="." instance=ExtResource("3_twdv6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563722, 0, -1.46302)

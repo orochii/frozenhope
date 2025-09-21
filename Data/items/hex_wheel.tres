@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="UseableItem" load_steps=4 format=3 uid="uid://dwmiagw2vheg4"]
+
+[ext_resource type="Texture2D" uid="uid://bb0ckku4n5oh6" path="res://Graphics/textures/icons/valve_wheel.png" id="1_0xy7k"]
+[ext_resource type="Script" path="res://Source/Data/UseableItem.cs" id="1_27ly4"]
+[ext_resource type="PackedScene" uid="uid://d18dwumuoftye" path="res://Graphics/Models/items/temp_wheel.tscn" id="2_ne1uu"]
+
+[resource]
+script = ExtResource("1_27ly4")
+FakeName = "Hand Wheel"
+RealName = "Valve Wheel"
+RealDisplayDescription = "A hand wheel with a hexagonal plug used to actuate valves."
+DisplayName = "hexvalve"
+DisplayDescription = "A metal hand wheel used for industral purposes."
+Icon = ExtResource("1_0xy7k")
+Model = ExtResource("2_ne1uu")
+SlotSize = Vector2i(1, 1)
+MaxStack = 1

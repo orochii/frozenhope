@@ -27,6 +27,7 @@ public partial class ChaseCamera3D : Camera3D
 
     public override void _Ready()
     {
+        base._Ready();
         FindPlayerForCamera();
     }
 

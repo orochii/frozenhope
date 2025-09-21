@@ -10,6 +10,12 @@ public partial interface Interactable {
     /// </summary>
     bool Active
         { get; set; }
+    
+    /// <summary
+    /// Specific boolean meant to be used to check if an Interactable type is currenly available to be interacted with
+    /// </summary>
+    public bool CanInteract
+        { get; set; }
         
     /// <summary>
     /// Boolean to check the state of an assigned interface within an object
@@ -21,13 +27,13 @@ public partial interface Interactable {
     /// Processing of the player entering the Interactable's area
     /// </summary>
     /// <param>Node3D</param>
-    public void _onPlayerEnter(Node3D body);
+    public void _on_player_entered(Node3D body);
 
     /// <summary>
     /// Processing of the player leaving the Interactable's area
     /// </summary>
     /// <param>Node3D</param>
-    public void _onPlayerLeft(Node3D body);
+    public void _on_player_left(Node3D body);
 
     /// <summary>
     /// Return a Vector3 equivalent to the item's position
@@ -48,5 +54,5 @@ public partial interface Interactable {
     /// <summary>
     /// Item Interaction processing
     /// </summary>
-    public void InteractItem();
+    public void InteractItem(string item = "empty");
 }

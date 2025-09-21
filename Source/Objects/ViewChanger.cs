@@ -7,8 +7,8 @@ public partial class ViewChanger : Area3D
     [Export] public Boolean Active = true;
     [Export] public ViewChanger[] Deactivate = new ViewChanger[0];
     [Export] public ViewChanger[] Activate = new ViewChanger[0];
-    [Export] public StaticBody3D[] HideBodies = new StaticBody3D[0];
-    [Export] public StaticBody3D[] ShowBodies = new StaticBody3D[0];
+    [Export] public Node3D[] HideBodies = new Node3D[0];
+    [Export] public Node3D[] ShowBodies = new Node3D[0];
 
     public void _OnPlayerEnter(Node3D body)
     {

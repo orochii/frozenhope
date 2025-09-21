@@ -7,7 +7,10 @@ public partial class GameplayUI : Control
 	[Export] Inventory Inventory;
 	[Export] Control DmgPopupParent;
 	[Export] PackedScene DamagePopupTemplate;
-	public void Refresh() {
+	[Signal]
+	public delegate void menu_closedEventHandler();
+	public void Refresh()
+	{
 		// Run when UI mode is set to this.
 		OverlayEffect.Play("RESET");
 	}
@@ -17,10 +20,12 @@ public partial class GameplayUI : Control
 		Inventory.Refresh();
 		GetTree().Paused = true;
 	}
-	public void CloseMenu() {
+	public void CloseMenu()
+	{
 		OverlayEffect.Play("hideMenu");
 		Inventory.Visible = false;
 		GetTree().Paused = false;
+		EmitSignal(SignalName.menu_closed);
 	}
 
     public override void _Process(double delta)

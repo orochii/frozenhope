@@ -1,14 +1,24 @@
-[gd_scene load_steps=18 format=3 uid="uid://crdw8od6g2vf6"]
+[gd_scene load_steps=29 format=3 uid="uid://crdw8od6g2vf6"]
 
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_3ffqs"]
+[ext_resource type="Script" uid="uid://d1ehvtdgklw54" path="res://Source/State/LevelLoader.cs" id="1_53cc4"]
 [ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="2_crkih"]
 [ext_resource type="Texture2D" uid="uid://36tafid3bwwv" path="res://Graphics/OzzyAvatar1.png" id="3_pn3br"]
 [ext_resource type="PackedScene" uid="uid://5g5ax5crsydu" path="res://Scenes/objects/world_item.tscn" id="4_l55va"]
+[ext_resource type="Script" uid="uid://cqweuem71bvew" path="res://Source/Objects/ChaseCamera3D.cs" id="4_vfqra"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="5_ttcow"]
-[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
+[ext_resource type="Script" uid="uid://rpcwyw6opyuf" path="res://Source/Data/ItemAddEntry.cs" id="6_whqtr"]
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="7_3lvew"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="8_av1kt"]
 [ext_resource type="PackedScene" uid="uid://2dgsibr5j3yl" path="res://Scenes/objects/wendigo.tscn" id="9_bpdo2"]
+[ext_resource type="Script" uid="uid://bviyas1530obe" path="res://Source/Objects/Door.cs" id="11_rlrbt"]
+[ext_resource type="PackedScene" uid="uid://crs5tgfdu2ui4" path="res://Graphics/Models/scenery/Temp/temp_bunkbed.tscn" id="13_3ofou"]
+[ext_resource type="PackedScene" uid="uid://cfc6nqpkm4weq" path="res://Graphics/Models/enemies/wendigo.glb" id="14_ivoc4"]
+[ext_resource type="PackedScene" uid="uid://bx4onpetuntxs" path="res://Scenes/objects/item_box.tscn" id="15_kkfdx"]
+
+[sub_resource type="Environment" id="Environment_oj440"]
+background_mode = 1
+tonemap_mode = 2
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_5ibhk"]
 size = Vector2(15, 15)
@@ -25,10 +35,12 @@ size = Vector3(0.5, 1, 0.5)
 script = ExtResource("6_whqtr")
 Item = ExtResource("5_ttcow")
 Amount = 10
-AmmoQty = 0
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_ixygt"]
-height = 0.5
+[sub_resource type="BoxShape3D" id="BoxShape3D_2br1b"]
+size = Vector3(1, 2, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_31ccv"]
+size = Vector3(1, 2, 0.1)
 
 [sub_resource type="BoxMesh" id="BoxMesh_3wcf2"]
 size = Vector3(0.5, 1, 4)
@@ -36,9 +48,22 @@ size = Vector3(0.5, 1, 4)
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_dlmt1"]
 points = PackedVector3Array(-0.25, -0.5, -2, 0.25, -0.5, -2, -0.25, -0.5, 2, -0.25, 0.5, -2, 0.25, 0.5, -2, 0.25, -0.5, 2, -0.25, 0.5, 2, 0.25, 0.5, 2)
 
-[node name="TestRoom" type="Node3D"]
+[sub_resource type="BoxMesh" id="BoxMesh_01s1i"]
+size = Vector3(7, 2.5, 0.3)
 
-[node name="Floor" type="StaticBody3D" parent="."]
+[sub_resource type="BoxMesh" id="BoxMesh_ii0nv"]
+size = Vector3(2, 2.5, 0.3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_iub82"]
+size = Vector3(1, 0.5, 0.3)
+
+[node name="TestRoom" type="Node3D"]
+script = ExtResource("1_53cc4")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_oj440")
+
+[node name="Floor" type="StaticBody3D" parent="." groups=["Concrete"]]
 collision_layer = 4
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="Floor"]
@@ -75,9 +100,16 @@ mesh = SubResource("BoxMesh_x7vio")
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(-0.772633, 0.426475, -0.470272, 0, 0.740758, 0.671771, 0.634852, 0.519033, -0.572335, -2.0345, 3.6075, -2.78104)
 current = true
+script = ExtResource("4_vfqra")
+FacePlayer = true
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.56385, 1.46523, 0)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.325868, 1.94311, 2.55426)
+shadow_enabled = true
 
 [node name="PistolAmmo" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.858622, 0, -0.065233)
@@ -86,20 +118,12 @@ Item = SubResource("Resource_46hqi")
 [node name="9mm_ammo2" parent="PistolAmmo" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
-
 [node name="PistolAmmo2" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.496718, 0, -0.737493)
 Item = SubResource("Resource_46hqi")
 
 [node name="9mm_ammo2" parent="PistolAmmo2" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
 
 [node name="PistolAmmo3" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.829614, 0, -2.163)
@@ -108,10 +132,6 @@ Item = SubResource("Resource_46hqi")
 [node name="9mm_ammo2" parent="PistolAmmo3" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
-
 [node name="PistolAmmo4" parent="." instance=ExtResource("4_l55va")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.116481, 0, -0.494811)
 Item = SubResource("Resource_46hqi")
@@ -119,19 +139,92 @@ Item = SubResource("Resource_46hqi")
 [node name="9mm_ammo2" parent="PistolAmmo4" instance=ExtResource("7_3lvew")]
 transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="PistolAmmo4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.2, 0)
-shape = SubResource("CylinderShape3D_ixygt")
-
 [node name="Door" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(-0.0929093, 0, -0.995675, 0, 1, 0, 0.995675, 0, -0.0929093, 3.61662, -1.19209e-07, 0.252268)
 GoToScene = 2
 NewSceneXYZ = Vector3(29.353, 2, -13.996)
 
-[node name="Door2" parent="." instance=ExtResource("8_av1kt")]
-transform = Transform3D(-0.995675, 0, 0.0929093, 0, 1, 0, -0.0929093, 0, -0.995675, 0.61662, -1.19209e-07, 2.25227)
+[node name="WindowDoor" type="Area3D" parent="." node_paths=PackedStringArray("Interface", "DoorCamera") groups=["GlobalDoors"]]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0.6, 0, 2.1)
+collision_layer = 16
+script = ExtResource("11_rlrbt")
+Interface = NodePath("Label3D")
+DoorCamera = NodePath("Camera3D")
 GoToScene = 1
 NewSceneXYZ = Vector3(-39.185, 12.59, -6.252)
+DoorLock = true
+FlavorText = "The door seems to be locked from the other side."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindowDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2br1b")
+
+[node name="Label3D" type="Label3D" parent="WindowDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WindowDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("BoxMesh_31ccv")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="WindowDoor"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WindowDoor/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(1, 2, 0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WindowDoor/CSGCombiner3D"]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 1.5, 0)
+operation = 2
+size = Vector3(0.5, 0.5, 0.2)
+
+[node name="Camera3D" type="Camera3D" parent="WindowDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.999999, -1.19209e-07, 1.5, 0.2)
+
+[node name="WindowDoor2" type="Area3D" parent="." node_paths=PackedStringArray("Interface") groups=["GlobalDoors"]]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, 0.0999999)
+collision_layer = 16
+script = ExtResource("11_rlrbt")
+Interface = NodePath("Label3D")
+GoToScene = 2
+NewSceneXYZ = Vector3(3.5, 0, 0.5)
+DoorLock = true
+Keys = PackedStringArray("masterkey")
+FlavorText = "The door is locked. The carving of a Nova is visible on the handle."
+UnlockText = "The door is unlocked."
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("BoxShape3D_2br1b")
+
+[node name="Label3D" type="Label3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
+billboard = 1
+fixed_size = true
+text = "Open"
+font_size = 22
+uppercase = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="WindowDoor2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+visible = false
+mesh = SubResource("BoxMesh_31ccv")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="WindowDoor2"]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="WindowDoor2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(1, 2, 0.1)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="WindowDoor2/CSGCombiner3D"]
+transform = Transform3D(1, 0, 1.49012e-08, 0, 1, 0, -1.49012e-08, 0, 1, 0, 1.5, 0)
+operation = 2
+size = Vector3(0.5, 0.5, 0.2)
 
 [node name="StaticBody3D2" parent="." instance=ExtResource("8_av1kt")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.28952, 0, -2.55178)
@@ -169,13 +262,45 @@ shape = SubResource("ConvexPolygonShape3D_dlmt1")
 [node name="Enemies" type="Node" parent="."]
 
 [node name="Wendigo" parent="." instance=ExtResource("9_bpdo2")]
-transform = Transform3D(0.232003, 0, 0.972715, 0, 1, 0, -0.972715, 0, 0.232003, -3.19966, 0, 2.3799)
+transform = Transform3D(0.232003, 0, 0.972715, 0, 1, 0, -0.972715, 0, 0.232003, -3.39523, 0, 3.58059)
 
-[connection signal="body_entered" from="PistolAmmo" to="PistolAmmo" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo" to="PistolAmmo" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo2" to="PistolAmmo2" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo3" to="PistolAmmo3" method="_onPlayerLeft"]
-[connection signal="body_entered" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerEnter"]
-[connection signal="body_exited" from="PistolAmmo4" to="PistolAmmo4" method="_onPlayerLeft"]
+[node name="BunkBed" parent="." instance=ExtResource("13_3ofou")]
+transform = Transform3D(-0.275939, 0, 0.961175, 0, 1, 0, -0.961175, 0, -0.275939, 0.577386, 0, 5.26843)
+
+[node name="wendigo" parent="." instance=ExtResource("14_ivoc4")]
+transform = Transform3D(-0.158413, -0.0255313, -0.119388, 1.89004e-12, 0.195578, -0.0418247, 0.122087, -0.0331279, -0.154911, 1.35316, 0, 6.6433)
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.736609, 1.36276, 5.83683)
+light_color = Color(1, 0, 0, 1)
+light_energy = 0.5
+omni_range = 1.147
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.6, 1.25, 2.1)
+mesh = SubResource("BoxMesh_01s1i")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.9, 1.25, 2.1)
+mesh = SubResource("BoxMesh_ii0nv")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 2.25, 2.1)
+mesh = SubResource("BoxMesh_iub82")
+
+[node name="Blood" type="StaticBody3D" parent="." groups=["Blood"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -2)
+collision_layer = 4
+collision_mask = 0
+
+[node name="CollisionPolygon3D" type="CollisionPolygon3D" parent="Blood"]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, -1, 0, 1, -4.371139e-08, 0, -0.45, 0)
+polygon = PackedVector2Array(0.3819008, 0.79634976, 0.9086046, 0.14231116, 0.6828747, -0.6680024, -0.60783863, -0.7027301, -0.630991, 0.518528)
+
+[node name="ItemBox" parent="." instance=ExtResource("15_kkfdx")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.24700165, 0, -2.7115326)
+
+[connection signal="body_entered" from="WindowDoor" to="WindowDoor" method="_on_player_entered"]
+[connection signal="body_exited" from="WindowDoor" to="WindowDoor" method="_on_player_left"]
+[connection signal="body_entered" from="WindowDoor2" to="WindowDoor2" method="_on_player_entered"]
+[connection signal="body_exited" from="WindowDoor2" to="WindowDoor2" method="_on_player_left"]

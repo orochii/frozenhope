@@ -1,29 +1,16 @@
-[gd_scene load_steps=22 format=4 uid="uid://dbwa8ri53330x"]
+[gd_scene load_steps=29 format=4 uid="uid://dbwa8ri53330x"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_x0usd"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_coscm"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_n0qxa"]
 [ext_resource type="Material" uid="uid://dxm3rh1g5qxv2" path="res://Graphics/textures/emissive.tres" id="3_6bopa"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_f0wci"]
-
-[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iafwa"]
-sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
-sky_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
-ground_horizon_color = Color(0.563139, 0.586356, 0.599358, 1)
-
-[sub_resource type="Sky" id="Sky_bnejs"]
-sky_material = SubResource("ProceduralSkyMaterial_iafwa")
+[ext_resource type="ArrayMesh" uid="uid://cy83thqg8n7bi" path="res://Graphics/Models/vehicles/Car8/Car8.obj" id="5_a4saj"]
+[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="6_ed7nf"]
+[ext_resource type="Texture2D" uid="uid://b1k343c3gqabf" path="res://Graphics/Models/vehicles/Car8/Car8_grey.png" id="7_0t2x5"]
 
 [sub_resource type="Environment" id="Environment_cnwpa"]
-background_mode = 2
-sky = SubResource("Sky_bnejs")
+background_mode = 1
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_mstgl"]
-size = Vector3(2, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_uin7w"]
-size = Vector3(7, 4, 0.1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_7gbfg"]
 radius = 0.05
@@ -117,6 +104,47 @@ size = Vector3(9, 0.5, 8.5)
 [sub_resource type="BoxShape3D" id="BoxShape3D_0xuvh"]
 size = Vector3(9, 0.5, 8.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knjxv"]
+albedo_color = Color(0.143147, 0.61, 0.1098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_canby"]
+material = SubResource("StandardMaterial3D_knjxv")
+size = Vector2(8, 2)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dkl1u"]
+render_priority = 0
+shader = ExtResource("6_ed7nf")
+shader_parameter/vertex_color = null
+shader_parameter/jitter = 0.5
+shader_parameter/jitter_z_coordinate = true
+shader_parameter/jitter_depth_independent = true
+shader_parameter/affine_texture_mapping = true
+shader_parameter/affine_texture_intensity = -2.0
+shader_parameter/alpha_scissor = 1.0
+shader_parameter/albedo_color = Color(1, 1, 1, 1)
+shader_parameter/emission_color = Color(1, 1, 1, 1)
+shader_parameter/texture_size = Vector2(1, 1)
+shader_parameter/albedo = ExtResource("7_0t2x5")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_prr41"]
+points = PackedVector3Array(-1.26741, -0.038836, -1.97079, -1.58325, 2.10372, 1.74514, -1.30987, 0.482317, -3.71001, -1.01944, 0.482317, -3.76736, 1.2671, -0.038836, -1.97079, -1.26741, -0.038836, 1.95967, -1.38023, 0.482317, 2.88798, -1.58325, 2.43648, 1.74514, -1.58325, 2.10372, 1.84093, -1.30987, 0.642525, -3.71001, 1.01913, 0.482317, -3.76736, -1.01944, 0.642525, -3.76736, 1.30956, 0.482317, -3.71001, 1.58294, 2.10372, 1.74514, 1.37992, 0.482317, 2.88798, 1.2671, -0.038836, 1.95967, -1.26741, 0.122956, 2.36108, -1.35884, 0.482317, 3.0735, -1.30987, 3.04787, -3.57171, -1.58325, 2.43648, 1.84093, -1.50793, 2.83637, 1.77819, 1.01913, 0.642525, -3.76736, -1.18744, 3.19541, -3.57171, 1.30956, 0.642525, -3.71001, 1.58325, 2.43648, 1.74514, 1.58294, 2.10372, 1.84093, 1.35853, 0.482317, 3.0735, 1.2671, 0.122956, 2.36108, -1.17783, 0.482317, 3.12478, -1.35884, 0.742893, 3.0735, -1.30987, 1.50024, 2.96016, -1.50793, 2.83637, 1.81395, 1.18713, 3.19541, -3.57171, 1.30956, 3.04787, -3.57171, -1.18744, 3.19541, 1.77819, 1.50762, 2.83637, 1.77819, 1.58325, 2.43648, 1.84093, 1.35853, 0.742893, 3.0735, 1.17752, 0.482317, 3.12478, -1.17783, 0.742893, 3.12478, -1.30987, 3.04787, 1.82474, 1.30956, 1.50024, 2.96016, 1.18713, 3.19541, 1.77819, 1.50762, 2.83637, 1.81395, 1.17752, 0.742893, 3.12478, 1.30956, 3.04787, 1.82474)
+
+[sub_resource type="BoxMesh" id="BoxMesh_xled8"]
+size = Vector3(0.7, 0.8, 0.7)
+
+[sub_resource type="PrismMesh" id="PrismMesh_0ml8c"]
+left_to_right = 0.0
+size = Vector3(0.7, 0.3, 0.7)
+
+[sub_resource type="BoxMesh" id="BoxMesh_f3urk"]
+size = Vector3(16, 1, 3)
+
+[sub_resource type="BoxMesh" id="BoxMesh_v5otf"]
+size = Vector3(16, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_x6tah"]
+size = Vector3(1, 4, 0.2)
+
 [node name="GM015_CargoTransport" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -130,30 +158,14 @@ GoToScene = 14
 NewSceneXYZ = Vector3(-1.5, 0, 1.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="ToHallwayM2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToHallwayM2" parent="Doors" instance=ExtResource("1_x0usd")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -5.9, 0, -0.5)
-collision_layer = 16
-script = ExtResource("2_n0qxa")
-Interface = NodePath("Label3D")
 GoToScene = 11
 NewSceneXYZ = Vector3(0.4, 0, -6.5)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_mstgl")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHallwayM2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("BoxMesh_uin7w")
+[node name="MeshInstance3D" parent="Doors/ToHallwayM2" index="2"]
+transform = Transform3D(7, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="ToTunnel" parent="Doors" instance=ExtResource("1_x0usd")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.9, 0, -5.5)
@@ -182,6 +194,116 @@ light_color = Color(1, 0, 0, 1)
 light_bake_mode = 1
 omni_range = 1.5
 omni_attenuation = 0.05
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.95, 2)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 3.95, -4)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="TrackLight1" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight6" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.5, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight7" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight8" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 13, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight9" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight10" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.5, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight11" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -0.5, -1.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="TrackLight12" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 18, -0.5, 0.9)
+light_color = Color(1, 1, 0.1, 1)
+light_energy = 0.4
+omni_range = 1.5
+omni_attenuation = 0.05
+
+[node name="OmniLight3D3" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3.95, 3.5)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="OmniLight3D4" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7, 3.95, -4.5)
+shadow_enabled = true
+omni_range = 7.0
+
+[node name="OmniLight3D5" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 1.5, 4.4)
+light_energy = 0.1
+omni_range = 2.0
+omni_attenuation = 0.5
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -295,8 +417,130 @@ mesh = SubResource("BoxMesh_73vkx")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
 shape = SubResource("BoxShape3D_0xuvh")
 
-[node name="Player" parent="." instance=ExtResource("3_f0wci")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.563722, 0, -1.46302)
+[node name="FloorRails1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.05, -0.5)
+mesh = SubResource("PlaneMesh_canby")
 
-[connection signal="body_entered" from="Doors/ToHallwayM2" to="Doors/ToHallwayM2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHallwayM2" to="Doors/ToHallwayM2" method="_onPlayerLeft"]
+[node name="Van1" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-3.0598e-08, 0, 0.7, 0, 0.7, 0, -0.7, 0, -3.0598e-08, -1.4, 0, -1.9)
+collision_layer = 8
+
+[node name="Car8" type="MeshInstance3D" parent="Prototype/Van1"]
+mesh = ExtResource("5_a4saj")
+skeleton = NodePath("../../../../Cameras")
+surface_material_override/0 = SubResource("ShaderMaterial_dkl1u")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/Van1"]
+shape = SubResource("ConvexPolygonShape3D_prr41")
+
+[node name="Railing" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, 3.9)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0.5, 0)
+size = Vector3(0.05, 1, 0.05)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 1, 0)
+size = Vector3(0.05, 2, 0.05)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Prototype/Railing"]
+transform = Transform3D(-4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0, 1, -1, 0.5, 0)
+size = Vector3(0.05, 2, 0.05)
+
+[node name="PlatformControls" type="Node3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 3.7, 0.3, 4.4)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/PlatformControls"]
+mesh = SubResource("BoxMesh_xled8")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype/PlatformControls"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0.55, 0)
+mesh = SubResource("PrismMesh_0ml8c")
+skeleton = NodePath("../..")
+
+[node name="Office" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+size = Vector3(4, 2, 2)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.975, 0.025)
+operation = 2
+size = Vector3(3.8, 1.95, 1.85)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.975, -0.95)
+operation = 2
+size = Vector3(1, 1.95, 0.1)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Office"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 1.45, -0.95)
+operation = 2
+size = Vector3(1.7, 1, 0.1)
+
+[node name="Rails" type="Node3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 8, 0, -0.5)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype/Rails"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, -3)
+mesh = SubResource("BoxMesh_f3urk")
+
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="Prototype/Rails"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.3, -0.8)
+mesh = SubResource("BoxMesh_v5otf")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="Prototype/Rails"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.3, 0.8)
+mesh = SubResource("BoxMesh_v5otf")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Prototype/Rails"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -0.5, 3)
+mesh = SubResource("BoxMesh_f3urk")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="Prototype/Rails"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, -1.5, 0)
+mesh = SubResource("BoxMesh_f3urk")
+
+[node name="Pillar1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, -5.8)
+mesh = SubResource("BoxMesh_x6tah")
+
+[node name="Pillar2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 2, 4.8)
+mesh = SubResource("BoxMesh_x6tah")
+
+[node name="Pillar3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, -5.8)
+mesh = SubResource("BoxMesh_x6tah")
+
+[node name="Pillar4" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 2, 4.8)
+mesh = SubResource("BoxMesh_x6tah")
+
+[node name="Player" parent="." instance=ExtResource("3_f0wci")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.56372, 0, -4.46302)
+
+[editable path="Doors/ToHallwayM2"]

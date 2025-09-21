@@ -25,24 +25,31 @@ public class GameState {
         public int inventorySizeY = 4;
         public int EquippedItem = -1;
         public List<ItemEntry> inventory = new List<ItemEntry>();
-        public int[,] GetInvMatrix() {
+        public List<ItemEntry> boxInventory = new List<ItemEntry>(); //List of items inside the item box
+        public int[,] GetInvMatrix()
+        {
             // Create inventory matrix
-            int[,] matrix = new int[inventorySizeX,inventorySizeY];
+            int[,] matrix = new int[inventorySizeX, inventorySizeY];
             // Set all as empty first
-            for (int x = 0; x < inventorySizeX; x++) {
-                for (int y = 0; y < inventorySizeY; y++) {
-                    matrix[x,y] = -1;
+            for (int x = 0; x < inventorySizeX; x++)
+            {
+                for (int y = 0; y < inventorySizeY; y++)
+                {
+                    matrix[x, y] = -1;
                 }
             }
             // Now mark each item at its corresponding slot.
-            for (int i = 0; i < inventory.Count; i++) {
+            for (int i = 0; i < inventory.Count; i++)
+            {
                 var entry = inventory[i];
                 var data = BaseItem.Get(entry.itemID);
                 int sizeX = Math.Max(data.SlotSize.X, 1);
                 int sizeY = Math.Max(data.SlotSize.Y, 1);
-                for (int x = entry.posX; x < entry.posX+sizeX; x++) {
-                    for (int y = entry.posY; y < entry.posY+sizeY; y++) {
-                        matrix[x,y] = i;
+                for (int x = entry.posX; x < entry.posX + sizeX; x++)
+                {
+                    for (int y = entry.posY; y < entry.posY + sizeY; y++)
+                    {
+                        matrix[x, y] = i;
                     }
                 }
             }
@@ -80,6 +87,7 @@ public class GameState {
         persistentData.switches[id] = value;
     }
     #endregion
+
     #region Character status
     const int HEALTH_BASE = 100;
     const int HEALTH_INCREASE = 10;
@@ -138,12 +146,16 @@ public class GameState {
         return persistentData.inventory[persistentData.EquippedItem];
     }
     #endregion
+
     #region Inventory
-    public Vector2I InventorySize {
-        get {
+    public Vector2I InventorySize
+    {
+        get
+        {
             return new Vector2I(persistentData.inventorySizeX, persistentData.inventorySizeY);
         }
-        set {
+        set
+        {
             persistentData.inventorySizeX = value.X;
             persistentData.inventorySizeY = value.Y;
         }

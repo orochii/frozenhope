@@ -1,5 +1,6 @@
 using Godot;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
@@ -29,6 +30,7 @@ public partial class Player : CharacterBody3D, Targettable
 		set { _nearbyInteractables = value; }
 	}
 	private Interactable _closestInteractable;
+	public Interactable CloestInteractable { get { return _closestInteractable; } }
 	private float previousTargetRotation;
 	public bool Dead => Main.Instance.State.GetHealth() <= 0;
 	private uint OriginalCollisionLayer;
@@ -36,20 +38,10 @@ public partial class Player : CharacterBody3D, Targettable
 	private Vector3 _empty = Vector3.Zero;
 	private bool _frozen = false;
 
-	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
-	StringName MoveLeft = "move_left";
-	StringName MoveRight = "move_right";
-	StringName MoveUp = "move_up";
-	StringName MoveDown = "move_down";
-	StringName Sprint = "run";
-	StringName Interact = "interact";
-	StringName Aim = "aim";
-	StringName CycleLeft = "cycle_left";
-	StringName CycleRight = "cycle_right";
-
 	//_Ready override
 	public override void _Ready()
 	{
+		base._Ready();
 		//First thing we do is freeze the player
 		FreezeStatus();
 		//We continue with the rest of the prep
@@ -96,12 +88,12 @@ public partial class Player : CharacterBody3D, Targettable
 		if (canMove) {
 			var isIdling = Graphic.StateMachine.ActionState == EActionState.NONE;
 			// Get input direction and dash
-			var move = isIdling ? Input.GetVector(MoveLeft,MoveRight,MoveUp,MoveDown) : Vector2.Zero;
-			var run = isIdling ? Input.IsActionPressed(Sprint) : false;
-			var interact = isIdling ? Input.IsActionJustPressed(Interact) : false;
-			var aim = isIdling ? Input.IsActionJustPressed(Aim) : false;
-			var cycleLeft = isIdling ? Input.IsActionJustPressed(CycleLeft) : false;
-			var cycleRight = isIdling ? Input.IsActionJustPressed(CycleRight) : false;
+			var move = isIdling ? Input.GetVector(Main.MoveLeft,Main.MoveRight,Main.MoveUp,Main.MoveDown) : Vector2.Zero;
+			var run = isIdling ? Input.IsActionPressed(Main.Sprint) : false;
+			var interact = isIdling ? Input.IsActionJustPressed(Main.Interact) : false;
+			var aim = isIdling ? Input.IsActionJustPressed(Main.Aim) : false;
+			var cycleLeft = isIdling ? Input.IsActionJustPressed(Main.CycleLeft) : false;
+			var cycleRight = isIdling ? Input.IsActionJustPressed(Main.CycleRight) : false;
 			// Doing it a toggle, can imagine holding the button could be a pain and uneccesary. Toggle between combat and movement.
 			if (aim) {
 				_aimMode = !_aimMode;
@@ -179,32 +171,45 @@ public partial class Player : CharacterBody3D, Targettable
 			ProcessTankMove(d,Vector2.Zero,false,false);
 		}
 	}
-	private void ExecuteAttack() {
+	public override void _PhysicsProcess(double delta)
+	{
+		base._PhysicsProcess(delta);
+		CheckSurface();
+    }
+
+	private void ExecuteAttack()
+	{
 		var equip = Main.Instance.State.GetEquippedItemEntry();
 		var item = BaseItem.Get(equip.itemID);
-		if (item != null && item is WeaponItem) {
+		if (item != null && item is WeaponItem)
+		{
 			var wpn = item as WeaponItem;
 			// Set Fire state.
 			Graphic.StateMachine.ActionState = EActionState.ATTACK;
 			// Check for ammo.
-			if (equip.ammoQty > 0 && equip.ammoId.Length > 0) {
+			if (equip.ammoQty > 0 && equip.ammoId.Length > 0)
+			{
 				// Get ammo item
 				var ammo = BaseItem.Get(equip.ammoId) as AmmoItem;
 				// Muzzle in weapon.
 				Graphic.SetWeaponAnimation("muzzle");
 				// Check if should do hitscan or spawn projectile.
-				if (ammo.Projectile != null) {
+				if (ammo.Projectile != null)
+				{
 					// Spawn projectile.
 					// TODO.
-				} else
-                {
-                    // Execute hitscan.
-                    ExecuteHitscan(wpn, ammo);
-                }
-                // Spend ammo
-                equip.ammoQty -= 1;
+				}
+				else
+				{
+					// Execute hitscan.
+					ExecuteHitscan(wpn, ammo);
+				}
+				// Spend ammo
+				equip.ammoQty -= 1;
 				if (equip.ammoQty == 0) equip.ammoId = "";
-			} else {
+			}
+			else
+			{
 				// Attack for no ammo (if possible).
 				// TODO.
 			}
@@ -411,12 +416,14 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
+	//#DEPRECIATED MARK FOR DELETION
 	//Processing for when items are in range of the player
-	private void OnItemInRange(Node3D body) {
+	private void OnItemInRange(Node3D body)
+	{
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
 		GD.Print("List has ", _nearbyInteractables.Count, " elements");
-		
+
 		//Main function processing
 		if (body is Interactable)
 		{
@@ -426,7 +433,7 @@ public partial class Player : CharacterBody3D, Targettable
 			GD.Print("List has ", _nearbyInteractables.Count, " elements");
 		}
 	}
-
+	//#DEPRECIATED MARK FOR DELETION
 	private void OnItemOutOfRange(Node3D body) {
 		//Print to console for debugging
 		GD.Print(string.Format("Interactable {0} Left", body.ToString()));
@@ -470,11 +477,22 @@ public partial class Player : CharacterBody3D, Targettable
 		_closestInteractable.Active = true;
 	}
 
+	// Footstep based on surface
+	public void CheckSurface()
+	{
+		var collision = FloorChecker.GetCollider() as StaticBody3D;
+		if (collision != null)
+		{
+			//if (collision.IsInGroup("Concrete")) GD.Print("Walk on concrete.");
+			//if (collision.IsInGroup("Blood")) GD.Print("Walk on blood.");
+		}
+	}
+
 	// Reticle Processing
-    public Vector3 GetPivotPosition()
-    {
-        return GlobalPosition;
-    }
+	public Vector3 GetPivotPosition()
+	{
+		return GlobalPosition;
+	}
     public Vector3 GetReticlePosition()
     {
         return GlobalPosition + new Vector3(0, 2, 0);
@@ -529,11 +547,16 @@ public partial class Player : CharacterBody3D, Targettable
 	}
 
 	//Signal functions
-	public void FreezeStatus() {
-		if (_frozen) {
+	//This is kinda a dumb hacky thing that might need removing
+	public void FreezeStatus()
+	{
+		if (_frozen)
+		{
 			_frozen = false;
 			GD.Print("Player unfrozen");
-		} else {
+		}
+		else
+		{
 			_frozen = true;
 			GD.Print("Player frozen.");
 		}

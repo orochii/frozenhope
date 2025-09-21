@@ -5,15 +5,17 @@ public partial class Inventory : Control
 {
 	[Export] GridContainer inventoryGrid;
 	[Export] InvSlotButton invSlotTemplate;
-	[Export] InfoColumn InfoColumn;
+	[Export] public InfoColumn InfoColumn;
 	[Export] Control CombineObj;
 	[Export] TextureRect CombineIcon;
 	[Export] RichTextLabel InstructionsLabel;
+	[Export] public SubMenu SubMenu;
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
 	private InvSlotButton lastFocused;
 	public override void _Ready()
 	{
+		base._Ready();
 		Visible = false;
 		invSlotTemplate.Visible = false;
 	}
@@ -53,8 +55,9 @@ public partial class Inventory : Control
 			var entry = entries[idx];
 			var item = BaseItem.Get(entry.itemID);
 			for (int x = 0; x < item.SlotSize.X; x++) {
-				for (int y = 0; y < item.SlotSize.Y; y++) {
-					bool ignoreVisuals = !(x==0 && y==0); // Only top-left corner
+				for (int y = 0; y < item.SlotSize.Y; y++)
+				{
+					bool ignoreVisuals = !(x == 0 && y == 0); // Only top-left corner
 					var idxSlot = entry.posX + x + (entry.posY + y) * size.X;
 					_spawnedSlots[idxSlot].Setup(entry, ignoreVisuals);
 					_spawnedSlots[idxSlot].Index = idx;
@@ -77,7 +80,7 @@ public partial class Inventory : Control
 				CombineObj.GlobalPosition = slot.GlobalPosition;
 			}
 			// Get input for combine.
-			if (Input.IsActionJustPressed("aim")) {
+			if (Input.IsActionJustPressed(Main.Aim)) {
 				if(currentCombineSlot == null) {
 					SetCombine(slot);
 					AudioManager.PlaySystemSound("decision");
@@ -85,12 +88,15 @@ public partial class Inventory : Control
 			}
 		}
 		// Inputs.
-		if (Input.IsActionJustPressed("cancel")) {
-			if (currentCombineSlot != null) {
+		if (Input.IsActionJustPressed("cancel"))
+		{
+			if (currentCombineSlot != null)
+			{
 				SetCombine(null);
 				AudioManager.PlaySystemSound("cancel");
 			}
-			else {
+			else
+			{
 				Main.Instance.UI.Gameplay.CloseMenu();
 				AudioManager.PlaySystemSound("cancel");
 			}

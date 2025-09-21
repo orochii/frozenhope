@@ -1,6 +1,5 @@
-[gd_scene load_steps=20 format=4 uid="uid://dwe7fvqlc5ycu"]
+[gd_scene load_steps=17 format=4 uid="uid://dwe7fvqlc5ycu"]
 
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_06o4i"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_rumrj"]
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="2_d12ws"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_752fe"]
@@ -18,12 +17,6 @@ sky_material = SubResource("ProceduralSkyMaterial_kec8n")
 background_mode = 2
 sky = SubResource("Sky_7i0pj")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_38chs"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_spuna"]
-size = Vector3(2, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -117,30 +110,14 @@ environment = SubResource("Environment_y2nrf")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToMachinery" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToMachinery" parent="Doors" instance=ExtResource("2_d12ws")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, -7.9)
-collision_layer = 16
-script = ExtResource("1_06o4i")
-Interface = NodePath("Label3D")
 GoToScene = 21
 NewSceneXYZ = Vector3(-2, 0, 1.4)
 NewSceneRotate = Vector3(0, 180, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_38chs")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToMachinery"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_spuna")
+[node name="MeshInstance3D" parent="Doors/ToMachinery" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ToTunnel_A" parent="Doors" instance=ExtResource("2_d12ws")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, -7.5)
@@ -154,29 +131,13 @@ GoToScenAlt = "gameplay/GM024_1_Tunnel"
 NewSceneXYZ = Vector3(0.6, 0, 14.5)
 NewSceneRotate = Vector3(0, 90, 0)
 
-[node name="ToGenerator" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -1, 0, 7.9)
-collision_layer = 16
-script = ExtResource("1_06o4i")
-Interface = NodePath("Label3D")
+[node name="ToGenerator" parent="Doors" instance=ExtResource("2_d12ws")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -1, 0, 7.9)
 GoToScene = 25
 NewSceneXYZ = Vector3(-2, 0, -2.4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_38chs")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_spuna")
+[node name="MeshInstance3D" parent="Doors/ToGenerator" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -311,7 +272,5 @@ shape = SubResource("ConvexPolygonShape3D_2ta7m")
 [node name="Player" parent="." instance=ExtResource("3_752fe")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.14284, 0, -0.663566)
 
-[connection signal="body_entered" from="Doors/ToMachinery" to="Doors/ToMachinery" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToMachinery" to="Doors/ToMachinery" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerLeft"]
+[editable path="Doors/ToMachinery"]
+[editable path="Doors/ToGenerator"]

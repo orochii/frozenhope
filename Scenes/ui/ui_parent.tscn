@@ -1,31 +1,31 @@
 [gd_scene load_steps=52 format=3 uid="uid://cxn0isptwm3tq"]
 
-[ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
-[ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
+[ext_resource type="Script" uid="uid://byg1k1xps0da7" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
+[ext_resource type="Script" uid="uid://lpox11oi77ds" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="3_wyq5x"]
-[ext_resource type="Script" path="res://Source/UI/GameplayUI.cs" id="4_a1wao"]
+[ext_resource type="Script" uid="uid://dut6q8abmxvg" path="res://Source/UI/GameplayUI.cs" id="4_a1wao"]
 [ext_resource type="PackedScene" uid="uid://qrbmfvltjec" path="res://Scenes/ui/dmg_pop_up.tscn" id="5_7qiet"]
-[ext_resource type="Script" path="res://Source/UI/Crosshair.cs" id="5_q230o"]
+[ext_resource type="Script" uid="uid://bsv18b6qx65bb" path="res://Source/UI/Crosshair.cs" id="5_q230o"]
 [ext_resource type="Texture2D" uid="uid://dd8f6x356pdy5" path="res://Graphics/textures/crosshair2.png" id="6_uhwb1"]
 [ext_resource type="Texture2D" uid="uid://ca32g5oy71di5" path="res://Graphics/textures/crosshair.png" id="7_8hnj5"]
 [ext_resource type="FontFile" uid="uid://c31vqtlawalb4" path="res://Graphics/fonts/m3x6oz.ttf" id="8_hbpli"]
-[ext_resource type="Shader" path="res://Source/Shaders/menuOverlay.gdshader" id="9_lulmd"]
-[ext_resource type="Script" path="res://Source/UI/Inventory.cs" id="10_r4o41"]
+[ext_resource type="Shader" uid="uid://b1808h3splb22" path="res://Source/Shaders/menuOverlay.gdshader" id="9_lulmd"]
+[ext_resource type="Script" uid="uid://digu7hp6kdhom" path="res://Source/UI/Inventory.cs" id="10_r4o41"]
 [ext_resource type="Texture2D" uid="uid://doq7xs4ba48ms" path="res://Graphics/textures/panel_basic.png" id="11_lagi4"]
 [ext_resource type="Texture2D" uid="uid://dp7c10uedhinj" path="res://Graphics/textures/panel_basic_pressed.png" id="12_qa3t0"]
 [ext_resource type="Texture2D" uid="uid://cassrevogoc6b" path="res://Graphics/textures/panel_basic_hover.png" id="13_kxea5"]
-[ext_resource type="Script" path="res://Source/UI/InvSlotButton.cs" id="14_765hn"]
+[ext_resource type="Script" uid="uid://bq33wssmu0ush" path="res://Source/UI/InvSlotButton.cs" id="14_765hn"]
 [ext_resource type="Texture2D" uid="uid://cij6odl5wxwc1" path="res://Graphics/textures/panel_invslot.png" id="15_d0idt"]
 [ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="16_o5qi5"]
-[ext_resource type="Script" path="res://Source/UI/InfoColumn.cs" id="17_vsa1f"]
+[ext_resource type="Script" uid="uid://7yd2pl6aispo" path="res://Source/UI/InfoColumn.cs" id="17_vsa1f"]
 [ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="18_shj08"]
-[ext_resource type="Script" path="res://Source/UI/Stats.cs" id="19_1hcux"]
-[ext_resource type="Script" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
-[ext_resource type="Script" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
-[ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
-[ext_resource type="Script" path="res://Source/UI/Splash.cs" id="24_2h878"]
-[ext_resource type="Script" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
-[ext_resource type="PackedScene" uid="uid://c5smkeaw5o88r" path="res://Scenes/ui/screens/settings_screen.tscn" id="25_61jvm"]
+[ext_resource type="Script" uid="uid://cp8b2r52eix7f" path="res://Source/UI/Stats.cs" id="19_1hcux"]
+[ext_resource type="Script" uid="uid://btyiflv5kp1tu" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
+[ext_resource type="Script" uid="uid://i5rxq3egqyt2" path="res://Scenes/ui/SubMenu.cs" id="20_ut0hg"]
+[ext_resource type="Script" uid="uid://b042sidvevkln" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
+[ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
+[ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
+[ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -205,9 +205,9 @@ tracks/3/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_y83el"]
 _data = {
-"RESET": SubResource("Animation_58wg8"),
-"hideMenu": SubResource("Animation_sei3n"),
-"showMenu": SubResource("Animation_ud8fr")
+&"RESET": SubResource("Animation_58wg8"),
+&"hideMenu": SubResource("Animation_sei3n"),
+&"showMenu": SubResource("Animation_ud8fr")
 }
 
 [sub_resource type="ViewportTexture" id="ViewportTexture_vrf3q"]
@@ -221,8 +221,7 @@ colors = PackedColorArray(1, 0.0625926, 0.129982, 1, 0.75304, 0.575236, 3.85046e
 gradient = SubResource("Gradient_o0bmw")
 
 [sub_resource type="Curve" id="Curve_dn4g1"]
-min_value = -0.5
-max_value = 0.5
+_limits = [-0.5, 0.5, 0.0, 1.0]
 _data = [Vector2(0, 0), 0.0, 0.0, 0, 0, Vector2(0.0587393, 0.459152), 0.0, 0.0, 0, 0, Vector2(0.121776, -0.429301), 0.0, 0.0, 0, 0, Vector2(0.190544, 0.193637), 0.0, 0.0, 0, 0, Vector2(0.274, 0), 0.0, 0.0, 0, 0, Vector2(0.376791, -0.000392735), 0.0, 0.0, 0, 0, Vector2(1, 0.00981933), 0.0, 0.0, 0, 0]
 point_count = 7
 
@@ -259,8 +258,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_4aql7"]
 _data = {
-"RESET": SubResource("Animation_yvov0"),
-"default": SubResource("Animation_fsucn")
+&"RESET": SubResource("Animation_yvov0"),
+&"default": SubResource("Animation_fsucn")
 }
 
 [sub_resource type="Animation" id="Animation_tcf0y"]
@@ -346,8 +345,8 @@ tracks/2/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_o57qm"]
 _data = {
-"RESET": SubResource("Animation_tcf0y"),
-"new_animation": SubResource("Animation_dmkrl")
+&"RESET": SubResource("Animation_tcf0y"),
+&"new_animation": SubResource("Animation_dmkrl")
 }
 
 [sub_resource type="Animation" id="Animation_euauc"]
@@ -383,8 +382,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_61t2i"]
 _data = {
-"RESET": SubResource("Animation_euauc"),
-"show": SubResource("Animation_q5rm4")
+&"RESET": SubResource("Animation_euauc"),
+&"show": SubResource("Animation_q5rm4")
 }
 
 [sub_resource type="Animation" id="Animation_vbsm8"]
@@ -434,9 +433,9 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_dv4aa"]
 _data = {
-"RESET": SubResource("Animation_vbsm8"),
-"hide": SubResource("Animation_dntsk"),
-"show": SubResource("Animation_q138a")
+&"RESET": SubResource("Animation_vbsm8"),
+&"hide": SubResource("Animation_dntsk"),
+&"show": SubResource("Animation_q138a")
 }
 
 [node name="UIParent" type="Control" node_paths=PackedStringArray("UIs", "Loader")]
@@ -482,8 +481,8 @@ grow_horizontal = 2
 [node name="GPUParticles2D" type="GPUParticles2D" parent="TitleScreen/Control"]
 position = Vector2(0, -16)
 amount = 64
-process_material = SubResource("ParticleProcessMaterial_ufxf2")
 lifetime = 2.0
+process_material = SubResource("ParticleProcessMaterial_ufxf2")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="TitleScreen"]
 layout_mode = 1
@@ -602,7 +601,7 @@ grow_vertical = 2
 
 [node name="OverlayAnimation" type="AnimationPlayer" parent="Gameplay/Overlay"]
 libraries = {
-"": SubResource("AnimationLibrary_y83el")
+&"": SubResource("AnimationLibrary_y83el")
 }
 
 [node name="MarginContainer" type="MarginContainer" parent="Gameplay"]
@@ -621,7 +620,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
+[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel", "SubMenu")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_r4o41")
@@ -631,6 +630,7 @@ InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
 InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/RichTextLabel")
+SubMenu = NodePath("SubMenu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 layout_mode = 1
@@ -793,20 +793,23 @@ layout_mode = 2
 [node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 visible = false
 anchors_preset = 0
+offset_left = 1.0
 offset_top = 42.0
+offset_right = 1.0
 offset_bottom = 42.0
+script = ExtResource("20_ut0hg")
 
 [node name="Control" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu"]
 anchors_preset = 0
-offset_left = 24.0
+offset_left = 81.0
 offset_top = 8.0
-offset_right = 24.0
+offset_right = 81.0
 offset_bottom = 8.0
 
 [node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 45.0
-offset_bottom = 42.0
+offset_bottom = 54.0
 texture = ExtResource("18_shj08")
 patch_margin_left = 8
 patch_margin_top = 8
@@ -814,7 +817,7 @@ patch_margin_right = 8
 patch_margin_bottom = 8
 
 [node name="MarginContainer" type="MarginContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control"]
-layout_mode = 2
+layout_mode = 0
 offset_right = 45.0
 offset_bottom = 42.0
 theme_override_constants/margin_left = 4
@@ -836,6 +839,11 @@ layout_mode = 2
 theme = ExtResource("3_wyq5x")
 disabled = true
 text = "Combine"
+
+[node name="Check" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Check"
 
 [node name="Equip" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
@@ -959,7 +967,7 @@ transform = Transform3D(1, 0, -4.46638e-06, 0, 1, 0, 4.46638e-06, 0, 1, 0, 0, 0)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Gameplay/SubViewport/ItemContainer"]
 libraries = {
-"": SubResource("AnimationLibrary_4aql7")
+&"": SubResource("AnimationLibrary_4aql7")
 }
 autoplay = "default"
 speed_scale = 0.1
@@ -1086,7 +1094,7 @@ vertical_alignment = 1
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Splash"]
 libraries = {
-"": SubResource("AnimationLibrary_o57qm")
+&"": SubResource("AnimationLibrary_o57qm")
 }
 autoplay = "new_animation"
 
@@ -1102,7 +1110,7 @@ Animation = NodePath("AnimationPlayer")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="GameOver"]
 libraries = {
-"": SubResource("AnimationLibrary_61t2i")
+&"": SubResource("AnimationLibrary_61t2i")
 }
 
 [node name="Parent" type="Control" parent="GameOver"]
@@ -1165,7 +1173,7 @@ color = Color(0, 0, 0, 1)
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Loader"]
 libraries = {
-"": SubResource("AnimationLibrary_dv4aa")
+&"": SubResource("AnimationLibrary_dv4aa")
 }
 
 [connection signal="pressed" from="TitleScreen/VBoxContainer/Start" to="TitleScreen" method="StartGame"]

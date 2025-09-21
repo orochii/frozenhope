@@ -1,9 +1,8 @@
-[gd_scene load_steps=26 format=4 uid="uid://dkqubwoo4l5fo"]
+[gd_scene load_steps=19 format=4 uid="uid://dkqubwoo4l5fo"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_5df1t"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_7uuxo"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_jxl6b"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="2_xshm7"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_6aui1"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_sbje0"]
@@ -18,30 +17,6 @@ sky_material = SubResource("ProceduralSkyMaterial_sbje0")
 background_mode = 2
 sky = SubResource("Sky_jwc35")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yy50h"]
-size = Vector3(2, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_qkibf"]
-size = Vector3(7, 4, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_yrnm2"]
-size = Vector3(2, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_mtlng"]
-size = Vector3(7, 4, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_d66bt"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_uh0w2"]
-size = Vector3(2, 2, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_oen5m"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_rmjk8"]
-size = Vector3(2, 2, 0.1)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -128,6 +103,13 @@ shadow_mesh = SubResource("ArrayMesh_s4anq")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lka26"]
 points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_knjxv"]
+albedo_color = Color(0.143147, 0.61, 0.1098, 1)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_7qs42"]
+material = SubResource("StandardMaterial3D_knjxv")
+size = Vector2(3, 2)
+
 [node name="GM010_Prison" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -140,19 +122,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -19.9)
 GoToScene = 12
 NewSceneXYZ = Vector3(-0.5, 0, 2.4)
 NewSceneRotate = Vector3(0, 180, 0)
+FlavorText = "Its powered off and can't be opened."
 
 [node name="ToOffice" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -19.9)
 GoToScenAlt = "gameplay/GM012_B_Office"
 NewSceneXYZ = Vector3(-1, 0, 2.4)
 NewSceneRotate = Vector3(0, 180, 0)
+DoorLock = true
+FlavorText = "Its powered off and can't be opened."
 
 [node name="TempElevator" parent="Doors" instance=ExtResource("1_5df1t")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 9.5, 0, -18.5)
+transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.5, 0, -18.5)
 GoToScene = 21
 NewSceneXYZ = Vector3(3.5, 0, 0.5)
-MaintainRotation = true
 NewSceneRotate = Vector3(0, -90, 0)
+DoorLock = true
+FlavorText = "The elevator has no power."
 
 [node name="ToTram" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 3.5, 0, -17.1)
@@ -160,114 +146,56 @@ GoToScene = 14
 NewSceneXYZ = Vector3(-1.5, 0, -2.4)
 
 [node name="ToHallM1" parent="Doors" instance=ExtResource("1_5df1t")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, -14.5)
+transform = Transform3D(-0.010908135, 0, 0.9999405, 0, 1, 0, -0.9999405, 0, -0.010908135, -1.9, 0, -14.5)
 GoToScene = 4
 NewSceneXYZ = Vector3(18.4, 0, 2.5)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="ToCargoPlatform" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToCargoPlatform" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, -6.5)
-collision_layer = 16
-script = ExtResource("2_xshm7")
-Interface = NodePath("Label3D")
 GoToScene = 15
 NewSceneXYZ = Vector3(-5.4, 0, -0.5)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToCargoPlatform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_yy50h")
+[node name="MeshInstance3D" parent="Doors/ToCargoPlatform" index="2"]
+transform = Transform3D(7, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToCargoPlatform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToCargoPlatform"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("BoxMesh_qkibf")
-
-[node name="ToHangar1" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToHangar1" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, -6.5)
-collision_layer = 16
-script = ExtResource("2_xshm7")
-Interface = NodePath("Label3D")
 GoToScene = 6
 NewSceneXYZ = Vector3(12.4, 0, 2)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHangar1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_yrnm2")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToHangar1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHangar1"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 0)
-mesh = SubResource("BoxMesh_mtlng")
+[node name="MeshInstance3D" parent="Doors/ToHangar1" index="2"]
+transform = Transform3D(7, 0, 0, 0, 2, 0, 0, 0, 1, 0, 2, 0)
 
 [node name="ToBathroom" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, -0.5, 0, 19.9)
 GoToScene = 13
 NewSceneXYZ = Vector3(4.5, 0, -1.4)
 
-[node name="ToHangar2" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToHangar2" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, 15)
-collision_layer = 16
-script = ExtResource("2_xshm7")
-Interface = NodePath("Label3D")
 GoToScene = 8
 NewSceneXYZ = Vector3(5.4, 0, 5)
 NewSceneRotate = Vector3(0, -90, 0)
+DoorLock = true
+FlavorText = "Its powered off and can't be opened.
+"
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToHangar2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_d66bt")
+[node name="MeshInstance3D" parent="Doors/ToHangar2" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToHangar2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToHangar2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_uh0w2")
-
-[node name="ToArmory" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToMessHall" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 15)
-collision_layer = 16
-script = ExtResource("2_xshm7")
-Interface = NodePath("Label3D")
 GoToScene = 18
-NewSceneXYZ = Vector3(-3.4, 0, 0)
+NewSceneXYZ = Vector3(3.4, 0, 0)
+_maintainRotation = true
 NewSceneRotate = Vector3(0, 90, 0)
+DoorLock = true
+FlavorText = "Its powered off and can't be opened."
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToArmory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_oen5m")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToArmory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToArmory"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_rmjk8")
+[node name="MeshInstance3D" parent="Doors/ToMessHall" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ToGenerator" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 2.5)
@@ -280,78 +208,52 @@ transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0
 GoToScene = 17
 NewSceneXYZ = Vector3(-3.4, 0, 0.5)
 NewSceneRotate = Vector3(0, 90, 0)
+DoorLock = true
+FlavorText = "It won't budge."
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
-[node name="ToTempCam1_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, -3.07661)
-Camera = NodePath("../../Camera/TempCam1")
+[node name="ToHallwayCorner1_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, -14.5)
+Camera = NodePath("../../Camera/HallwayCorner1")
 
-[node name="ToTempCam1_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, -6.5)
-Camera = NodePath("../../Camera/TempCam1")
+[node name="ToHallwayCorner1_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(-2.1855694e-08, 0, -3, 0, 1, 0, 0.5, 0, -1.3113416e-07, -1.2, 0, -16.699999)
+Camera = NodePath("../../Camera/HallwayCorner1")
 
-[node name="ToTempCam2_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 3, -0.5, 0, -15.5)
-Camera = NodePath("../../Camera/TempCam2")
+[node name="ToHallwayCorner2_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 1.3, 0, -19.1)
+Camera = NodePath("../../Camera/HallwayCorner2")
 
-[node name="ToTempCam3_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 5.5, 0, -18.5)
-Camera = NodePath("../../Camera/TempCam3")
+[node name="ToHallwayCorner2_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(-8.742278e-08, 0, -3, 0, 1, 0, 2, 0, -1.3113416e-07, -0.50000006, 0, -19.000002)
+Camera = NodePath("../../Camera/HallwayCorner2")
 
-[node name="ToTempCam3_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(0.468449, 0, 1.04881, 0, 1, 0, -0.174801, 0, 2.81069, 1.45106, 0, -18.6049)
-Camera = NodePath("../../Camera/TempCam3")
+[node name="ToHallwayElevator_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 3, 5.2999997, 0, -18.5)
+Camera = NodePath("../../Camera/HallwayElevator")
 
-[node name="ToTempCam3_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 3.5, 0, -18.5)
-Camera = NodePath("../../Camera/TempCam3")
+[node name="ToHallwayElevator_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.9396926, 0, -1.0260605, 0, 1, 0, 0.34202015, 0, 2.819078, 3.2999995, 0, -18.3)
+Camera = NodePath("../../Camera/HallwayElevator")
 
-[node name="ToTempCam3_D" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 9.5, 0, -18.5)
-Camera = NodePath("../../Camera/TempCam3")
-
-[node name="ToTempCam4_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, -1.5)
-Camera = NodePath("../../Camera/TempCam4")
-
-[node name="ToTempCam4_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 2.5)
-Camera = NodePath("../../Camera/TempCam4")
-
-[node name="ToTempCam4_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 8.5)
-Camera = NodePath("../../Camera/TempCam4")
-
-[node name="ToTempCam5_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 15)
-Camera = NodePath("../../Camera/TempCam5")
-
-[node name="ToTempCam5_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 16.5)
-Camera = NodePath("../../Camera/TempCam5")
-
-[node name="ToTempCam6_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 0.5, -0.5, 0, 18)
-Camera = NodePath("../../Camera/TempCam6")
-
-[node name="ToTempCam6_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 19.5)
-Camera = NodePath("../../Camera/TempCam6")
+[node name="ToElevatorDoor" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 8.6, 0, -18.5)
+Camera = NodePath("../../Camera/ElevatorDoor")
 
 [node name="Camera" type="Node3D" parent="."]
 
-[node name="TempCam1" type="Camera3D" parent="Camera"]
-transform = Transform3D(1, 0, 0, 0, 0.901077, 0.433659, 0, -0.433659, 0.901077, -0.5, 4.033, -1.179)
+[node name="HallwayCorner1" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.9908659, -0.046122093, 0.1267185, 0, 0.9396917, 0.34202227, -0.13485111, -0.33889818, 0.9311085, 0.13020341, 2.2014952, -11.858309)
 
-[node name="TempCam2" type="Camera3D" parent="Camera"]
-transform = Transform3D(-0.877976, -0.396651, 0.268004, 0, 0.559852, 0.828592, -0.478705, 0.727484, -0.491537, -0.0594693, 4.16779, -18.0162)
+[node name="HallwayCorner2" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.34202012, -0.25112194, 0.90551645, -4.6808624e-16, 0.96363044, 0.26723838, -0.9396927, -0.0914009, 0.329581, 3.9, 1.787, -18.1)
 
-[node name="TempCam3" type="Camera3D" parent="Camera"]
-transform = Transform3D(-4.37114e-08, -0.414693, 0.909961, 0, 0.909961, 0.414693, -1, 1.81268e-08, -3.97757e-08, 10.745, 2.654, -18.5)
+[node name="HallwayElevator" type="Camera3D" parent="Camera"]
+transform = Transform3D(-4.371139e-08, 0.5948228, -0.80385685, 0, 0.80385685, 0.5948228, 1, 2.6000532e-08, -3.51377e-08, 1.241, 2.45, -18.5)
 
-[node name="TempCam4" type="Camera3D" parent="Camera"]
-transform = Transform3D(-1, 1.32236e-08, -8.64169e-08, 0, 0.988494, 0.151261, 8.74228e-08, 0.151261, -0.988494, -0.5, 1.541, -2.863)
+[node name="ElevatorDoor" type="Camera3D" parent="Camera"]
+transform = Transform3D(-4.371139e-08, 0.15643449, -0.9876885, 0, 0.9876885, 0.15643449, 1, 6.837969e-09, -4.3173234e-08, 6.798, 1.653, -18.5)
 
 [node name="TempCam5" type="Camera3D" parent="Camera"]
 transform = Transform3D(0.99336, 0.0613151, -0.0973502, 0, 0.846152, 0.532941, 0.11505, -0.529402, 0.840534, -0.781986, 2.71051, 17.4212)
@@ -383,6 +285,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="floor-small-square2" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -5)
@@ -395,6 +298,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square2"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="floor-small-square3" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, 15)
@@ -407,6 +311,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square3"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="floor-small-square5" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -15)
@@ -419,6 +324,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square5"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="floor-small-square4" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-1.31134e-07, 0, -8, 0, 1, 0, 3, 0, -3.49691e-07, 5, 0, -18.5)
@@ -431,6 +337,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square4"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="floor-small-square6" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-1.31134e-07, 0, -2, 0, 1, 0, 3, 0, -8.74228e-08, 10, 0, -18.5)
@@ -444,6 +351,7 @@ surface_material_override/0 = SubResource("StandardMaterial3D_10mi2")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square6"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
 
 [node name="wall" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 7, -2, 0, -16.5)
@@ -456,6 +364,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall9" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, -11, 0, 2.5, 0, 1, 0, -4.80825e-07, 3.5, 0, -20)
@@ -468,6 +377,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall9"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall10" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, -8, 0, 2.5, 0, 1, 0, -3.49691e-07, 5, 0, -17)
@@ -480,6 +390,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall10"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall12" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 1.06581e-14, 0, 2.5, 0, -3.55271e-15, 0, 3, 11, 0, -18.5)
@@ -492,6 +403,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall12"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall13" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, 10, 0, -20)
@@ -504,6 +416,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall13"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall14" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, 2, 0, 2.5, 0, -1, 0, -8.74228e-08, 10, 0, -17)
@@ -516,6 +429,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall14"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall5" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 5, 1, 0, -14.5)
@@ -528,6 +442,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall5"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall2" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 13, -2, 0, -6.5)
@@ -540,6 +455,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall2"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall3" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, -2, 0, 5)
@@ -552,6 +468,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall3"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall4" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, -2, 0, 15)
@@ -564,6 +481,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall4"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall11" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-4.37114e-08, 0, 3, 0, 2.5, 0, -1, 0, -1.31134e-07, -0.5, 0, 20)
@@ -576,6 +494,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall11"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall6" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 11, 1, 0, -6.5)
@@ -588,6 +507,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall6"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall7" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 11, 1, 0, 4.5)
@@ -600,6 +520,7 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall7"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
 
 [node name="wall8" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 2.84217e-14, 0, 2.5, 0, 0, 0, 10, 1, 0, 15)
@@ -612,15 +533,51 @@ skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
+
+[node name="FloorRails1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0.05, -6.5)
+mesh = SubResource("PlaneMesh_7qs42")
+
+[node name="Rubble" type="CSGCombiner3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.8, 0, -0.2)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
+
+[node name="CSGPolygon3D" type="CSGPolygon3D" parent="Prototype/Rubble"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.6, 0, 0, 0)
+polygon = PackedVector2Array(-0.33268547, 0.013432801, -0.36816072, 0.80099297, 0.13559389, 1.16994, 0.90186834, 1.0847985, 1.150198, 0.5313778, 1.0579615, -0.0078523755)
+
+[node name="CSGPolygon3D2" type="CSGPolygon3D" parent="Prototype/Rubble"]
+transform = Transform3D(1.5264937, 0.025228024, -0.06081196, -0.1431692, 0.98961127, -0.17916289, 0.19686434, 0.52407306, 0.3412419, 0.37966877, 1.0420331, -0.43610227)
+polygon = PackedVector2Array(-0.33268547, 0.013432801, -0.36816072, 0.80099297, 0.13559389, 1.16994, 0.90186834, 1.0847985, 1.150198, 0.5313778, 1.0579615, -0.0078523755)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.9360043, 0, -0.35198867, 0, 1, 0, 0.35198867, 0, 0.9360043, -0.72212785, 0.5, 0)
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.9797363, 0, 0.20029137, 0, 1, 0, -0.20029137, 0, 0.9797363, 1.3721533, 0.5, 0)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.9852051, 0, -0.1713789, 0, 1, 0, 0.1713789, 0, 0.9852051, 1.2796283, 0.5, -0.82969004)
+size = Vector3(0.7, 0.7, 0.7)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.95692015, 0, 0.29035148, 0.15109855, 0.8539234, -0.49798003, -0.24793792, 0.52039874, 0.81713647, -0.41238922, 0.5, -0.5969673)
+size = Vector3(0.7, 0.7, 0.7)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.95692015, 4.9699045e-09, 0.29035148, -0.062724784, 0.9763866, 0.20672399, -0.28349525, -0.21603066, 0.9343239, -0.16489923, 1.2439735, -0.25404936)
+size = Vector3(0.7, 0.7, 0.7)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Prototype/Rubble"]
+transform = Transform3D(0.89680797, 0.27866304, 0.34363127, -0.31539717, 0.9473724, 0.054864135, -0.3102582, -0.15758297, 0.9375007, 1.2796283, 1.0871624, -0.3551224)
+size = Vector3(0.7, 0.7, 0.7)
 
 [node name="Player" parent="." instance=ExtResource("3_6aui1")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.02966, 0, -13.3564)
 
-[connection signal="body_entered" from="Doors/ToCargoPlatform" to="Doors/ToCargoPlatform" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToCargoPlatform" to="Doors/ToCargoPlatform" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToHangar1" to="Doors/ToHangar1" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHangar1" to="Doors/ToHangar1" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToHangar2" to="Doors/ToHangar2" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToHangar2" to="Doors/ToHangar2" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToArmory" to="Doors/ToArmory" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToArmory" to="Doors/ToArmory" method="_onPlayerLeft"]
+[editable path="Doors/ToCargoPlatform"]
+[editable path="Doors/ToHangar1"]
+[editable path="Doors/ToHangar2"]
+[editable path="Doors/ToMessHall"]

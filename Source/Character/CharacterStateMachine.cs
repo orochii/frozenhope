@@ -4,6 +4,7 @@ using System;
 public partial class CharacterStateMachine : Node
 {
 	[Export] AnimationPlayer Animator;
+	[Export] AnimationPlayer SoundPlayer;
 	[Export] CharacterAnimState[] AnimStates;
 	[Export] public EMoveState MoveState;
 	[Export] public EModeState ModeState;
@@ -12,6 +13,7 @@ public partial class CharacterStateMachine : Node
 	CharacterAnimState _lastState = null;
     public override void _Ready()
     {
+		base._Ready();
 		if (Engine.IsEditorHint()) return;
         if (Animator != null) Animator.AnimationFinished += OnAnimationFinished;
     }

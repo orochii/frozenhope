@@ -9,8 +9,10 @@ public partial class WorldItem : Area3D, Interactable
     private Player _playerCharacter;
     public bool Active
         { get; set; }
-    public bool InterfaceVisible
+    public bool CanInteract
         { get; set; }
+    public bool InterfaceVisible
+    { get; set; }
     private string PickedUpFlag {
         get {
             string basePath = Main.Instance.WorldParent.GetPath();
@@ -22,6 +24,7 @@ public partial class WorldItem : Area3D, Interactable
     //Overriden Ready function
     public override void _Ready()
     {
+        base._Ready();
         if (Main.Instance.State.GetSwitch(PickedUpFlag))
         {
             QueueFree();
@@ -30,13 +33,13 @@ public partial class WorldItem : Area3D, Interactable
         Interface.NoDepthTest = true;
     }
     
-    public void _onPlayerEnter(Node3D body)
+    public void _on_player_entered(Node3D body)
     {
         _playerCharacter = (Player)body;
         _playerCharacter.NearbyInteractables.Add(this);
     }
 
-    public void _onPlayerLeft(Node3D body)
+    public void _on_player_left(Node3D body)
     {
         _playerCharacter.NearbyInteractables.Remove(this);
         Active = false;
@@ -65,7 +68,7 @@ public partial class WorldItem : Area3D, Interactable
         InterfaceVisible = false;
     }
 
-    public async void InteractItem() {
+    public async void InteractItem(string itemName = "empty") {
         if (!IsVisibleInTree()) return;
         // Stop game
         Main.Instance.Busy = true;
@@ -73,7 +76,17 @@ public partial class WorldItem : Area3D, Interactable
         Main.Instance.State.AddItem(Item);
         // Assign and display text
         await Main.Instance.UI.Message.SetBars(true, 0.1f);
-        string str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+        string str = "";
+        switch (Item.Item)
+        {
+            case AmmoItem:
+                str = string.Format("You found {0} {1}(s).", Item.Amount, Item.Item.DisplayName);
+                break;
+            case UseableItem:
+                var item = Item.Item as UseableItem;
+                str = string.Format("You found {0}.", item.FakeName);
+                break;
+        }
         await Main.Instance.UI.Message.SetText(str, false);
         // Call this on end of message, this just returns the UI mode back to whatever it was (usually gameplay).
         // Needed certain things from messages to stay, like the bars up/down for cool "in-level" cutscenes :vaccabayt:

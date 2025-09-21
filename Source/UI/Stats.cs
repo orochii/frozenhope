@@ -13,6 +13,7 @@ public partial class Stats : Control
 	private Image _cachedHealthGradient;
 	public override void _Ready()
 	{
+		base._Ready();
 		// This is a costly operation so we're doing it only once.
 		_cachedHealthGradient = HealthColorGradient.GetImage();
 	}

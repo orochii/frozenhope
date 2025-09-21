@@ -9,6 +9,7 @@ public partial class Crosshair : Control
 	public int Time;
 	public override void _Ready()
 	{
+		base._Ready();
 		EndAim.Visible = false;
 		Visible = false;
 	}

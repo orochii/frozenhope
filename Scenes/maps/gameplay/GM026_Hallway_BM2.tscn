@@ -1,7 +1,7 @@
-[gd_scene load_steps=25 format=4 uid="uid://dnch6u3aygsd5"]
+[gd_scene load_steps=21 format=4 uid="uid://dnch6u3aygsd5"]
 
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="1_mpoe0"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_oj6om"]
+[ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_t3b4v"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_aujx5"]
 [ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="3_pxhdb"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="4_ccbka"]
@@ -18,17 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_kec8n")
 background_mode = 2
 sky = SubResource("Sky_7i0pj")
 tonemap_mode = 2
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_612gi"]
-size = Vector3(1, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2cjf0"]
-size = Vector3(2, 2, 0.1)
-
-[sub_resource type="BoxMesh" id="BoxMesh_1wbp8"]
-size = Vector3(1, 2, 0.1)
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_1f6yr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -131,80 +120,25 @@ environment = SubResource("Environment_y2nrf")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToGenerator" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1.31135e-07, 0, -1, 0, 1, 0, 1, 0, 1.31135e-07, 0.9, 0, 1)
-collision_layer = 16
-script = ExtResource("1_oj6om")
-Interface = NodePath("Label3D")
+[node name="ToGenerator" parent="Doors" instance=ExtResource("1_t3b4v")]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, 1)
 GoToScene = 25
 NewSceneXYZ = Vector3(-5.4, 0, 1)
 NewSceneRotate = Vector3(0, 90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_612gi")
+[node name="MeshInstance3D" parent="Doors/ToGenerator" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGenerator"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_2cjf0")
-
-[node name="ToEngineer" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-1, 0, -8.74232e-08, 0, 1, 0, 8.74232e-08, 0, -1, -2.5, 0, 3.9)
-collision_layer = 16
-script = ExtResource("1_oj6om")
-Interface = NodePath("Label3D")
+[node name="ToEngineer" parent="Doors" instance=ExtResource("1_t3b4v")]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2.5, 0, 3.9)
 GoToScene = 27
 NewSceneXYZ = Vector3(-3.5, 0, -2.4)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_612gi")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToEngineer"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_1wbp8")
-
-[node name="ToSpares" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(-4.37118e-08, 0, 1, 0, 1, 0, -1, 0, -4.37118e-08, -15.5, 0, 5)
-collision_layer = 16
-script = ExtResource("1_oj6om")
-Interface = NodePath("Label3D")
+[node name="ToSpares" parent="Doors" instance=ExtResource("1_t3b4v")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -15.5, 0, 5)
 GoToScene = 7
 NewSceneXYZ = Vector3(1, 0, 4.5)
 MaintainRotation = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToSpares"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
-shape = SubResource("BoxShape3D_1f6yr")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToSpares"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToSpares"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-visible = false
-mesh = SubResource("BoxMesh_1wbp8")
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
@@ -236,6 +170,7 @@ transform = Transform3D(-0.99605, 0.0742773, -0.0486567, 0.0368698, 0.844457, 0.
 [node name="TempCam2" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.972814, 0.0778671, -0.218103, 0, 0.941779, 0.336233, 0.231586, 0.327093, -0.916176, -3.5, 2.328, -0.784)
 script = ExtResource("3_pxhdb")
+TrackPosition = true
 Follow_X = true
 X_offset = 1.0
 
@@ -425,9 +360,4 @@ shape = SubResource("ConvexPolygonShape3D_2ta7m")
 [node name="Player" parent="." instance=ExtResource("4_ccbka")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.960996, -2.38419e-07, 2.61279)
 
-[connection signal="body_entered" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToGenerator" to="Doors/ToGenerator" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToEngineer" to="Doors/ToEngineer" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToEngineer" to="Doors/ToEngineer" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToSpares" to="Doors/ToSpares" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToSpares" to="Doors/ToSpares" method="_onPlayerLeft"]
+[editable path="Doors/ToGenerator"]

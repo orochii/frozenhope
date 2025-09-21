@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=4 uid="uid://cr16mghylpih7"]
+[gd_scene load_steps=35 format=4 uid="uid://cr16mghylpih7"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_lb1c6"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_qowfp"]
@@ -101,13 +101,21 @@ shadow_mesh = SubResource("ArrayMesh_ew18r")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_knqyl"]
 points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6kkak"]
+albedo_color = Color(0.364706, 0.494118, 0.631373, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_2cf1u"]
+material = SubResource("StandardMaterial3D_6kkak")
 size = Vector3(0.5, 1.85, 11.7)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_x2lig"]
 points = PackedVector3Array(-0.25, -0.925, -5.85, 0.25, -0.925, -5.85, -0.25, -0.925, 5.85, -0.25, 0.925, -5.85, 0.25, 0.925, -5.85, 0.25, -0.925, 5.85, -0.25, 0.925, 5.85, 0.25, 0.925, 5.85)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kwxb2"]
+albedo_color = Color(0.364706, 0.494118, 0.631373, 1)
+
 [sub_resource type="BoxMesh" id="BoxMesh_5l3b3"]
+material = SubResource("StandardMaterial3D_kwxb2")
 size = Vector3(3.15, 1.85, 0.5)
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_07htt"]
@@ -126,6 +134,33 @@ size = Vector3(0.1, 2, 1.5)
 top_radius = 0.1
 bottom_radius = 0.3
 height = 1.0
+
+[sub_resource type="PrismMesh" id="PrismMesh_i4s1s"]
+left_to_right = 0.0
+size = Vector3(1, 0.8, 3.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3lq5"]
+size = Vector3(3.5, 1, 0.1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_pgglk"]
+size = Vector3(0.1, 1.8, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1ak7r"]
+points = PackedVector3Array(0.05, 0.9, 0.699863, -0.05, 0.9, 0.699863, 0.05, -0.9, 0.699863, 0.05, 0.9, -0.7, -0.05, 0.9, -0.7, -0.05, -0.9, 0.699863, 0.05, -0.9, -0.7, -0.05, -0.9, -0.7)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_saxhd"]
+top_radius = 0.02
+bottom_radius = 0.02
+height = 6.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_bt07k"]
+size = Vector3(0.8, 0.05, 0.2)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i83o5"]
+size = Vector2(2.5, 0.5)
+
+[sub_resource type="BoxMesh" id="BoxMesh_sbt54"]
+size = Vector3(6, 0.6, 0.8)
 
 [node name="GM013_Bathroom" type="Node3D"]
 
@@ -156,10 +191,9 @@ transform = Transform3D(0.279837, 0.469098, -0.837638, 0, 0.872497, 0.48862, 0.9
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="Prototype" type="Node3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 
 [node name="floor-small-square" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, 5)
+transform = Transform3D(-1.74846e-07, 0, -10, 0, 1, 0, 4, 0, -4.37114e-07, -5, 0, -2.18557e-07)
 collision_layer = 4
 collision_mask = 33
 
@@ -171,7 +205,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_lwhp3")
 
 [node name="floor-small-square2" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(4, 0, 0, 0, 1, 0, 0, 0, 10, 0, 0, -5)
+transform = Transform3D(-1.74846e-07, 0, -10, 0, 1, 0, 4, 0, -4.37114e-07, 5, 0, 2.18557e-07)
 collision_layer = 4
 collision_mask = 33
 
@@ -183,7 +217,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_lwhp3")
 
 [node name="floor-small-square3" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(6, 0, 0, 0, 1, 0, 0, 0, 14, 5, 0, 2)
+transform = Transform3D(-2.62268e-07, 0, -14, 0, 1, 0, 6, 0, -6.1196e-07, -2, 0, 5)
 collision_layer = 4
 collision_mask = 33
 
@@ -195,7 +229,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_lwhp3")
 
 [node name="floor-small-square4" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(5, 0, 0, 0, 1, 0, 0, 0, 5, 4.5, 0, -7.5)
+transform = Transform3D(-2.18557e-07, 0, -5, 0, 1, 0, 5, 0, -2.18557e-07, 7.5, 0, 4.5)
 collision_layer = 4
 collision_mask = 33
 
@@ -207,7 +241,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_lwhp3")
 
 [node name="wall" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 10, -2, 0, 5)
+transform = Transform3D(-4.37114e-08, 0, -10, 0, 2.5, 0, 1, 0, -4.37114e-07, -5, 0, -2)
 collision_layer = 8
 collision_mask = 33
 
@@ -219,7 +253,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall2" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 10, -2, 0, -5)
+transform = Transform3D(-4.37114e-08, 0, -10, 0, 2.5, 0, 1, 0, -4.37114e-07, 5, 0, -2)
 collision_layer = 8
 collision_mask = 33
 
@@ -231,7 +265,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall3" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(7.54979e-08, 0, -9, 0, 2.5, 0, 1, 0, 6.79481e-07, 2.5, 0, -10)
+transform = Transform3D(-1, 0, -2.86078e-07, 0, 2.5, 0, 3.17865e-08, 0, -9, 10, 0, 2.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -243,7 +277,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall4" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 7, 7, 0, -6.5)
+transform = Transform3D(-4.37114e-08, 0, -7, 0, 2.5, 0, 1, 0, -3.0598e-07, 6.5, 0, 7)
 collision_layer = 8
 collision_mask = 33
 
@@ -255,7 +289,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall5" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, 6, 0, 2.5, 0, -1, 0, -2.62268e-07, 4, 0, -5)
+transform = Transform3D(1, 0, -3.97904e-13, 0, 2.5, 0, 0, 0, 6, 5, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -267,7 +301,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall6" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 6, 8, 0, 7.93668e-09)
+transform = Transform3D(-4.37114e-08, 0, -6, 0, 2.5, 0, 1, 0, -2.62268e-07, -3.57628e-07, 0, 8)
 collision_layer = 8
 collision_mask = 33
 
@@ -279,7 +313,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall7" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 6, 8, 0, 6)
+transform = Transform3D(-4.37114e-08, 0, -6, 0, 2.5, 0, 1, 0, -2.62268e-07, -6, 0, 8)
 collision_layer = 8
 collision_mask = 33
 
@@ -291,7 +325,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall8" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, -6, 0, 2.5, 0, 1, 0, -2.62268e-07, 5, 0, 3)
+transform = Transform3D(-1, 0, 5.24536e-07, 0, 2.5, 0, -8.74228e-08, 0, -6, -3, 0, 5)
 collision_layer = 8
 collision_mask = 33
 
@@ -303,7 +337,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall9" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, -6, 0, 2.5, 0, 1, 0, -2.62268e-07, 5, 0, 9)
+transform = Transform3D(-1, 0, 5.24536e-07, 0, 2.5, 0, -8.74228e-08, 0, -6, -9, 0, 5)
 collision_layer = 8
 collision_mask = 33
 
@@ -315,7 +349,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall10" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 6, 0, -2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, 2, 0, 6)
 collision_layer = 8
 collision_mask = 33
 
@@ -327,7 +361,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall11" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 4, 0, -2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, 2, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -339,7 +373,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall12" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 2, 0, -2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, 2, 0, 2)
 collision_layer = 8
 collision_mask = 33
 
@@ -351,7 +385,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall13" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 6, 0, 2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -2, 0, 6)
 collision_layer = 8
 collision_mask = 33
 
@@ -363,7 +397,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall14" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 4, 0, 2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -2, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -375,7 +409,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall15" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 2, 0, 2)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -2, 0, 2)
 collision_layer = 8
 collision_mask = 33
 
@@ -387,7 +421,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall16" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 6, 0, 4)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -4, 0, 6)
 collision_layer = 8
 collision_mask = 33
 
@@ -399,7 +433,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall17" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 4, 0, 4)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -4, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -411,7 +445,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall18" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 2, 0, 4)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -4, 0, 2)
 collision_layer = 8
 collision_mask = 33
 
@@ -423,7 +457,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall19" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 6, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -8, 0, 6)
 collision_layer = 8
 collision_mask = 33
 
@@ -435,7 +469,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall20" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 4, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -8, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -447,7 +481,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall21" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 7.10543e-15, 0, 2.5, 0, -3.55271e-15, 0, 2, 2, 0, 8)
+transform = Transform3D(-4.37114e-08, 0, -2, 0, 2.5, 0, 1, 0, -8.74228e-08, -8, 0, 2)
 collision_layer = 8
 collision_mask = 33
 
@@ -459,7 +493,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall22" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 3.55271e-15, 0, 2.5, 0, -3.55271e-15, 0, 1, 2, 0, 9.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 2.5, 0, 1, 0, -4.37114e-08, -9.5, 0, 2)
 collision_layer = 8
 collision_mask = 33
 
@@ -471,7 +505,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall23" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, -4, 0, 2.5, 0, 1, 0, -1.74846e-07, -4.76837e-07, 0, 10)
+transform = Transform3D(-1, 0, 3.49692e-07, 0, 2.5, 0, -8.74228e-08, 0, -4, -10, 0, -9.13951e-07)
 collision_layer = 8
 collision_mask = 33
 
@@ -483,7 +517,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="wall24" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-4.37114e-08, 0, 7, 0, 2.5, 0, -1, 0, -3.0598e-07, 4.5, 0, -3)
+transform = Transform3D(1, 0, 1.98952e-13, 0, 2.5, 0, 0, 0, 7, 3, 0, 4.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -495,7 +529,7 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_knqyl")
 
 [node name="Lockers" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.645, 0, 3.5)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3.5, 0, -1.645)
 collision_layer = 8
 collision_mask = 33
 
@@ -508,7 +542,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
 shape = SubResource("ConvexPolygonShape3D_x2lig")
 
 [node name="Lockers2" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.2, 0, 9.645)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -9.645, 0, 0.2)
 collision_layer = 8
 collision_mask = 33
 
@@ -521,43 +555,43 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.925, 0)
 shape = SubResource("ConvexPolygonShape3D_07htt")
 
 [node name="pipe-corner2" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 3.1, 2.45, -2.924)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, 2.924, 2.45, 3.1)
 
 [node name="pipe-corner3" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 5.1, 2.45, -2.924)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, 2.924, 2.45, 5.1)
 
 [node name="pipe-corner4" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 7.1, 2.45, -2.924)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, 2.924, 2.45, 7.1)
 
 [node name="pipe-corner5" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 3.1, 2.45, 3.076)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, -3.076, 2.45, 3.1)
 
 [node name="pipe-corner6" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 5.1, 2.45, 3.076)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, -3.076, 2.45, 5.1)
 
 [node name="pipe-corner7" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -4.37114e-08, -1, -4.37114e-08, 1, -4.37114e-08, 7.1, 2.45, 3.076)
+transform = Transform3D(0, -1, 4.37114e-08, -4.37114e-08, -4.37114e-08, -1, 1, 0, -4.37114e-08, -3.076, 2.45, 7.1)
 
 [node name="pipe-corner8" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 3.1, 2.45, 8.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -8.876, 2.45, 3.1)
 
 [node name="pipe-corner9" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 5.1, 2.45, 8.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -8.876, 2.45, 5.1)
 
 [node name="pipe-corner10" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 7.1, 2.45, 8.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -8.876, 2.45, 7.1)
 
 [node name="pipe-corner11" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 3.1, 2.45, 2.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -2.876, 2.45, 3.1)
 
 [node name="pipe-corner12" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 5.1, 2.45, 2.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -2.876, 2.45, 5.1)
 
 [node name="pipe-corner13" parent="Prototype" instance=ExtResource("3_oxki3")]
-transform = Transform3D(-1, 4.37114e-08, -4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -4.37114e-08, -1, -4.37114e-08, 7.1, 2.45, 2.876)
+transform = Transform3D(8.74228e-08, 1, 4.37114e-08, 4.37114e-08, 4.37114e-08, -1, -1, 8.74228e-08, -4.37114e-08, -2.876, 2.45, 7.1)
 
 [node name="Stall" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -5.85)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.85, 0, 1)
 collision_layer = 8
 collision_mask = 33
 
@@ -578,7 +612,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall2" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -5.85)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.85, 0, 2.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -599,7 +633,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall3" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -5.85)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.85, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -620,7 +654,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall4" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -5.85)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.85, 0, 5.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -641,7 +675,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall5" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85, 0, -5.85)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 5.85, 0, 6.85)
 collision_layer = 8
 collision_mask = 33
 
@@ -662,7 +696,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall6" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -9.15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.15, 0, 1)
 collision_layer = 8
 collision_mask = 33
 
@@ -683,7 +717,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall7" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.5, 0, -9.15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.15, 0, 2.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -704,7 +738,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall8" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, -9.15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.15, 0, 4)
 collision_layer = 8
 collision_mask = 33
 
@@ -725,7 +759,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall9" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -9.15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.15, 0, 5.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -746,7 +780,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall10" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.85, 0, -9.15)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 9.15, 0, 6.85)
 collision_layer = 8
 collision_mask = 33
 
@@ -767,7 +801,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="Stall11" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(-1, 0, -6.03983e-08, 0, 1, 0, 1.50996e-07, 0, -0.4, 1, 0, -4.6)
+transform = Transform3D(-1.07285e-07, 0, 0.4, 0, 1, 0, -1, 0, -4.29137e-08, 4.6, 0, 1)
 collision_layer = 8
 collision_mask = 33
 
@@ -788,60 +822,290 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 shape = SubResource("BoxShape3D_6bbbj")
 
 [node name="pipe-half-section2" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 1.75, 0, -9.2)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 9.2, 0, 1.75)
 
 [node name="pipe-half-section3" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 4.75, 0, -9.2)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 9.2, 0, 4.75)
 
 [node name="pipe-half-section4" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 3.25, 0, -9.2)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 9.2, 0, 3.25)
 
 [node name="pipe-half-section5" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 6.25, 0, -9.2)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 9.2, 0, 6.25)
 
 [node name="pipe-half-section6" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 1.75, 0, -5.7)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 5.7, 0, 1.75)
 
 [node name="pipe-half-section7" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 4.75, 0, -5.7)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 5.7, 0, 4.75)
 
 [node name="pipe-half-section8" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 3.25, 0, -5.7)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 5.7, 0, 3.25)
 
 [node name="pipe-half-section9" parent="Prototype" instance=ExtResource("4_c21uj")]
-transform = Transform3D(-1.31134e-07, 0, 2, 0, 1, 0, -3, 0, -8.74228e-08, 6.25, 0, -5.7)
+transform = Transform3D(3, 0, 0, 0, 1, 0, 1.98952e-13, 0, 2, 5.7, 0, 6.25)
 
 [node name="Urinal" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.5, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 1.5)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal2" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.2, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 2.2)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal3" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2.9, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 2.9)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal4" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.6, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 3.6)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal5" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.3, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 4.3)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal6" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 5)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal7" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 5.7)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
 
 [node name="Urinal8" type="MeshInstance3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.4, 1, -4.8)
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 4.8, 1, 6.4)
 mesh = SubResource("CylinderMesh_5y7ev")
+skeleton = NodePath("")
+
+[node name="Washbin" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, -1, -1, -4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 0, 7.7, 0.5, -1.5)
+mesh = SubResource("PrismMesh_i4s1s")
+skeleton = NodePath("")
+
+[node name="Mirror" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 7.7, 1.6, -1.9)
+mesh = SubResource("BoxMesh_i3lq5")
+skeleton = NodePath("")
+
+[node name="StallDoor1" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.45, 1.1, 1.75)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor1"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor1"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor2" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.45, 1.1, 3.25)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor2"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor2"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor3" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.45, 1.1, 4.75)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor3"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor3"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor4" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.45, 1.1, 6.25)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor4"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor4"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor5" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6.55, 1.1, 1.75)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor5"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor5"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor6" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6.55, 1.1, 3.25)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor6"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor6"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor7" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 6.55, 1.1, 4.75)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor7"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor7"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="StallDoor8" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-0.88433, -0.412934, -0.217819, -0.423093, 0.906086, 0, 0.197363, 0.0921579, -0.975989, 5.97847, 0.800868, 6.22935)
+collision_layer = 8
+collision_mask = 33
+
+[node name="Mesh" type="MeshInstance3D" parent="Prototype/StallDoor8"]
+mesh = SubResource("BoxMesh_pgglk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/StallDoor8"]
+shape = SubResource("ConvexPolygonShape3D_1ak7r")
+
+[node name="CurtainPole" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 1.1, 2.4, 5)
+mesh = SubResource("CylinderMesh_saxhd")
+
+[node name="CurtainPole2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.1, 2.4, 5)
+mesh = SubResource("CylinderMesh_saxhd")
+
+[node name="CurtainPole3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -4.9, 2.4, 5)
+mesh = SubResource("CylinderMesh_saxhd")
+
+[node name="CurtainPole4" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -7.1, 2.4, 5)
+mesh = SubResource("CylinderMesh_saxhd")
+
+[node name="SoapHolder" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 3.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 5.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 2, 1.2, 7.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder4" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 1.2, 6.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder5" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 1.2, 4.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder6" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -2, 1.2, 2.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder7" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.2, 3.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder8" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.2, 5.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder9" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 1.2, 7.8)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder10" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 1.2, 6.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder11" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 1.2, 4.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="SoapHolder12" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, -8, 1.2, 2.2)
+mesh = SubResource("BoxMesh_bt07k")
+
+[node name="Curtain" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, 1.1, 1.25, 2.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, 1.1, 1.25, 4.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, 1.1, 1.25, 6.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain4" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08484e-16, -1.84732e-08, -0.422618, -0.906308, -1.1, 1.25, 7.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain5" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08484e-16, -1.84732e-08, -0.422618, -0.906308, -1.1, 1.25, 5.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain6" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08484e-16, -1.84732e-08, -0.422618, -0.906308, -1.1, 1.25, 3.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain7" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, -4.9, 1.25, 2.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain8" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, -4.9, 1.25, 4.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain9" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-3.9616e-08, -0.906308, 0.422618, 1, -4.37114e-08, 0, 1.84732e-08, 0.422618, 0.906308, -4.9, 1.25, 6.4)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain10" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08485e-16, -1.84732e-08, -0.422618, -0.906308, -7.1, 1.25, 7.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain11" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08485e-16, -1.84732e-08, -0.422618, -0.906308, -7.1, 1.25, 5.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="Curtain12" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(3.9616e-08, 0.906308, -0.422618, 1, -4.37114e-08, 1.08485e-16, -1.84732e-08, -0.422618, -0.906308, -7.1, 1.25, 3.6)
+mesh = SubResource("PlaneMesh_i83o5")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 0.3, 0)
+mesh = SubResource("BoxMesh_sbt54")
 
 [node name="Player" parent="." instance=ExtResource("1_qowfp")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.9849, 0, 0)

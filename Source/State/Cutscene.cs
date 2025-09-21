@@ -7,6 +7,7 @@ public partial class Cutscene : Node3D
 	[Export] string NextScene;
 	public override void _Ready()
 	{
+		base._Ready();
 		Animation.AnimationFinished += OnAnimationFinished;
 	}
 	public void Play(string animationId) {

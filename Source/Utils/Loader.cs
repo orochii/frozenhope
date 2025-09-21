@@ -26,6 +26,7 @@ public partial class Loader : Control
 	}
     public override void _Ready()
     {
+		base._Ready();
         Visible = false;
 		Animation.AnimationFinished += OnAnimationFinished;
     }

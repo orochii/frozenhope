@@ -19,6 +19,7 @@ public partial class DmgPopUp : Control
 	}
 	public override void _Ready()
 	{
+		base._Ready();
 		Animator.AnimationFinished += OnAnimationFinished;
 	}
 

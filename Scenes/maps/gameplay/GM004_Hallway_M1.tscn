@@ -1,11 +1,13 @@
-[gd_scene load_steps=24 format=4 uid="uid://dw2p3h5yec5om"]
+[gd_scene load_steps=40 format=4 uid="uid://dw2p3h5yec5om"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_ano30"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="1_el1ds"]
-[ext_resource type="Script" path="res://Source/Objects/Door.cs" id="1_v6aph"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_1jfpj"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_bohmx"]
-[ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="4_1t5di"]
+[ext_resource type="Script" uid="uid://cqweuem71bvew" path="res://Source/Objects/ChaseCamera3D.cs" id="4_1t5di"]
+[ext_resource type="PackedScene" uid="uid://bppgsn5k50r47" path="res://Scenes/objects/scenery_item.tscn" id="5_y4s5i"]
+[ext_resource type="PackedScene" uid="uid://d18dwumuoftye" path="res://Graphics/Models/items/temp_wheel.tscn" id="6_w4mrm"]
+[ext_resource type="Script" uid="uid://cco0nc67k8i54" path="res://Source/Events/EvtValveTurned.cs" id="7_t0gns"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_lmc7q"]
 sky_top_color = Color(0.0525557, 0.176422, 0.264432, 1)
@@ -20,23 +22,326 @@ background_mode = 2
 sky = SubResource("Sky_2g72d")
 tonemap_mode = 2
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_u64hx"]
-size = Vector3(2, 2, 0.5)
-
-[sub_resource type="BoxMesh" id="BoxMesh_cv6jr"]
+[sub_resource type="BoxMesh" id="BoxMesh_hi6px"]
 size = Vector3(2, 2, 0.1)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_eo1de"]
-size = Vector3(2, 2, 0.5)
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_mp5u4"]
+height = 0.5
 
-[sub_resource type="BoxMesh" id="BoxMesh_bk301"]
-size = Vector3(2, 2, 0.1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_rulxs"]
+size = Vector3(0.5, 1, 0.5)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_3wul2"]
-size = Vector3(2, 2, 0.5)
+[sub_resource type="BoxMesh" id="BoxMesh_q81se"]
+size = Vector3(0.4, 0.4, 0.1)
 
-[sub_resource type="BoxMesh" id="BoxMesh_24y4v"]
-size = Vector3(2, 2, 0.1)
+[sub_resource type="Animation" id="Animation_y5035"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("temp_wheel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../Cameras/ValveTurnCamera:current")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("temp_wheel:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Cameras/ValveTurnCamera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.217, 1.463, 3.043)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../Cameras/ValveTurnCamera:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.597774, -2.0025, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../Prototype/Steam:lifetime")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.7]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../Prototype/Steam:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SteamBlocker/CollisionShape3D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="Animation" id="Animation_x6g5k"]
+resource_name = "ValveTurnOff"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("temp_wheel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("temp_wheel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 3.14159), Vector3(0, 3.14159, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Cameras/ValveTurnCamera:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Cameras/ValveTurnCamera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(3.217, 1.463, 3.043), Vector3(6.47831, 1.67066, 2.66235)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../Cameras/ValveTurnCamera:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(-0.371755, -2.81871, 0), Vector3(-0.597774, -2.0025, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../Prototype/Steam:lifetime")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.5, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.7, 0.1]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../Prototype/Steam:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(4.6),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SteamBlocker/CollisionShape3D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(4.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+
+[sub_resource type="Animation" id="Animation_t2s6i"]
+resource_name = "ValveTurnOn"
+length = 5.5
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("temp_wheel:visible")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 5.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [true, false]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("temp_wheel:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.5, 2.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 3.14159, 0), Vector3(0, 3.14159, 3.14159)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("../../Cameras/ValveTurnCamera:current")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("../../Cameras/ValveTurnCamera:position")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(3.217, 1.463, 3.043), Vector3(6.47831, 1.67066, 2.66235)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("../../Cameras/ValveTurnCamera:rotation")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0, 3),
+"transitions": PackedFloat32Array(1, 1),
+"update": 1,
+"values": [Vector3(-0.371755, -2.81871, 0), Vector3(-0.597774, -2.0025, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("../../Prototype/Steam:lifetime")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(3.5, 4.5),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.1, 0.7]
+}
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("../../Prototype/Steam:emitting")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(3.46667),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [true]
+}
+tracks/7/type = "value"
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/path = NodePath("SteamBlocker/CollisionShape3D:disabled")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/keys = {
+"times": PackedFloat32Array(3.5),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [false]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_otqfm"]
+_data = {
+&"RESET": SubResource("Animation_y5035"),
+&"ValveTurnOff": SubResource("Animation_x6g5k"),
+&"ValveTurnOn": SubResource("Animation_t2s6i")
+}
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ras8o"]
+size = Vector3(0.2, 0.5, 3)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e2l3n"]
 resource_name = "colormap"
@@ -120,6 +425,52 @@ shadow_mesh = SubResource("ArrayMesh_x842g")
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_6km1l"]
 points = PackedVector3Array(0.1, 1, 0.5, -0.1, 1, 0.5, 0.1, 0, 0.5, 0.1, 1, -0.5, -0.1, 1, -0.5, -0.1, 0, 0.5, 0.1, 0, -0.5, -0.1, 0, -0.5)
 
+[sub_resource type="CylinderMesh" id="CylinderMesh_a7xak"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 4.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_4e0r4"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 9.5
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qurxt"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 6.0
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_kdw3l"]
+top_radius = 0.2
+bottom_radius = 0.2
+height = 1.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_6drpl"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_et5pe"]
+top_radius = 0.35
+bottom_radius = 0.35
+height = 1.2
+
+[sub_resource type="BoxMesh" id="BoxMesh_brnnh"]
+size = Vector3(1, 0.6, 0.2)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_d04l6"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.3
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_gh3e8"]
+gravity = Vector3(0, 0, -9.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hk7ff"]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.627451)
+
+[sub_resource type="BoxMesh" id="BoxMesh_nr88p"]
+material = SubResource("StandardMaterial3D_hk7ff")
+size = Vector3(0.1, 2, 0.1)
+
 [node name="GM004_HallwayM1" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -127,85 +478,43 @@ environment = SubResource("Environment_dw761")
 
 [node name="Doors" type="Node3D" parent="."]
 
-[node name="ToGuardroom" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1.31134e-07, 0, 1, 0, 1, 0, -1, 0, 1.31134e-07, -1.9, 0, -2)
-collision_layer = 16
-script = ExtResource("1_v6aph")
-Interface = NodePath("Label3D")
+[node name="ToGuardroom" parent="Doors" instance=ExtResource("1_ano30")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.9, 0, -2)
 GoToScene = 3
 NewSceneXYZ = Vector3(4.9, 0, 0)
 NewSceneRotate = Vector3(0, -90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToGuardroom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_u64hx")
+[node name="MeshInstance3D" parent="Doors/ToGuardroom" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
-[node name="Label3D" type="Label3D" parent="Doors/ToGuardroom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToGuardroom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_cv6jr")
-
-[node name="ToBedroom" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
+[node name="ToBedroom" parent="Doors" instance=ExtResource("1_ano30")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0.9, 0, -4)
-collision_layer = 16
-script = ExtResource("1_v6aph")
-Interface = NodePath("Label3D")
 GoToScene = 5
 NewSceneXYZ = Vector3(-1.4, 0, 2)
-NewSceneRotate = Vector3(0, 180, 0)
+NewSceneRotate = Vector3(0, 90, 0)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToBedroom"]
+[node name="MeshInstance3D" parent="Doors/ToBedroom" index="2"]
+visible = false
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="Doors/ToBedroom"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_eo1de")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToBedroom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToBedroom"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_bk301")
+mesh = SubResource("BoxMesh_hi6px")
 
 [node name="ToHangar1" parent="Doors" instance=ExtResource("1_ano30")]
 transform = Transform3D(-1, 0, 8.74228e-08, 0, 1, 0, -8.74228e-08, 0, -1, 8.5, 0, 3.9)
 GoToScene = 6
 NewSceneXYZ = Vector3(2.5, 0, -3.9)
 
-[node name="ToPrison" type="Area3D" parent="Doors" node_paths=PackedStringArray("Interface")]
-transform = Transform3D(1, 0, -2.13163e-14, 0, 1, 0, 2.13163e-14, 0, 1, 15, 0, 1.1)
-collision_layer = 16
-script = ExtResource("1_v6aph")
-Interface = NodePath("Label3D")
+[node name="ToPrison" parent="Doors" instance=ExtResource("1_ano30")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15, 0, 1.1)
 GoToScene = 10
 NewSceneXYZ = Vector3(0, 0, 4.4)
 NewSceneRotate = Vector3(0, 180, 0)
+DoorLock = true
+FlavorText = "It's electronically locked."
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="Doors/ToPrison"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-shape = SubResource("BoxShape3D_3wul2")
-
-[node name="Label3D" type="Label3D" parent="Doors/ToPrison"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.20001, 0.193883)
-billboard = 1
-fixed_size = true
-text = "Open"
-font_size = 22
-uppercase = true
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Doors/ToPrison"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
-mesh = SubResource("BoxMesh_24y4v")
+[node name="MeshInstance3D" parent="Doors/ToPrison" index="2"]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
 
 [node name="ToHallwayM2" parent="Doors" instance=ExtResource("1_ano30")]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 18.9, 0, 2.5)
@@ -235,38 +544,36 @@ Camera = NodePath("../../Cameras/HallHorzBed")
 transform = Transform3D(-1.31134e-08, 0, -3, 0, 1, 0, 0.3, 0, -1.31134e-07, -0.5, 0, 1)
 Camera = NodePath("../../Cameras/HallCorner")
 
-[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
+[node name="ToHallCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 1, 0, 2.5)
 Camera = NodePath("../../Cameras/HallCorner")
-ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
 
-[node name="ToHallVertFloor_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+[node name="ToSteamValve_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
 transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 2.13682, 0, 2.5)
+Camera = NodePath("../../Cameras/SteamValve")
+
+[node name="ToSteamValve_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 5.49964, 0, 2.5)
+Camera = NodePath("../../Cameras/SteamValve")
+
+[node name="ToSteamPipe" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.7, 0, 4.52987e-07, 0, 1, 0, -1.05697e-07, 0, -3, 6.79964, 0, 2.5)
+Camera = NodePath("../../Cameras/SteamPipe")
+
+[node name="ToHallVertHangar_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-1, 0, 4.17233e-07, 0, 1, 0, -1.49012e-07, 0, -3, 8.9, 0, 2.5)
+Camera = NodePath("../../Cameras/HallVertHangar")
+ShowBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
+
+[node name="ToChaseCamera_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-0.3, 0, 2.08616e-07, 0, 1, 0, -2.98023e-08, 0, -3, 10.6176, 0, 2.5)
 Camera = NodePath("../../Cameras/ChaseCamera")
-HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
+HideBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
 
-[node name="ToHallVertFloor_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 6.40012, 0, 2.5)
+[node name="ToChaseCamera_B" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
+transform = Transform3D(-5, 0, 4.52987e-07, 0, 1, 0, -7.54979e-07, 0, -3, 16.5, 0, 2.5)
 Camera = NodePath("../../Cameras/ChaseCamera")
-HideBodies = [NodePath("../../Prototype/wall4")]
-
-[node name="ToHallVertHangar" parent="ViewChangers" node_paths=PackedStringArray("Camera", "HideBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-2.46945, 0, 2.62268e-07, 0, 1, 0, -2.15886e-07, 0, -3, 8.8, 0, 2.5)
-Camera = NodePath("../../Cameras/ChaseCamera")
-HideBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
-
-[node name="ToHallVertLong_A" parent="ViewChangers" node_paths=PackedStringArray("Camera", "ShowBodies") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-0.3, 0, 2.62268e-07, 0, 1, 0, -2.62268e-08, 0, -3, 11.2176, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertLong")
-ShowBodies = [NodePath("../../Prototype/wall4"), NodePath("../../Prototype/wall5")]
-
-[node name="ToHallVertLong_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-1.22479, 0, 2.62268e-07, 0, 1, 0, -1.07075e-07, 0, -3, 15.3163, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertLong")
-
-[node name="ToHallVertEnd" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_bohmx")]
-transform = Transform3D(-2, 0, 4.52987e-07, 0, 1, 0, -3.01992e-07, 0, -3, 17.8833, 0, 2.5)
-Camera = NodePath("../../Cameras/HallVertEnd")
+HideBodies = [NodePath("../../Prototype/wall7"), NodePath("../../Prototype/wall6"), NodePath("../../Doors/ToHangar1")]
 
 [node name="Cameras" type="Node3D" parent="."]
 
@@ -278,28 +585,111 @@ current = true
 transform = Transform3D(-0.0628042, 0.904183, -0.422503, 0, 0.423339, 0.905971, 0.998026, 0.0568988, -0.0265875, -1.64544, 2.84872, -5.816)
 fov = 85.0
 
-[node name="HallVertFloor" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.0200411, 0.246875, 0.96884, 0, 0.969035, -0.246925, -0.999799, -0.00494863, -0.0194205, 10.2941, 0.100248, 2.50364)
-
 [node name="HallVertHangar" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-1, -6.07289e-08, 6.28867e-08, 0, 0.71934, 0.694658, -8.74228e-08, 0.694658, -0.71934, 8.5, 2.888, 1.135)
+transform = Transform3D(-0.346052, -0.584048, 0.734259, 0, 0.782612, 0.62251, -0.938215, 0.215421, -0.270824, 10.5225, 2.47786, 1.6129)
+
+[node name="HallVertHangar2" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-1, -6.0729e-08, 6.28867e-08, 0, 0.71934, 0.694658, -8.74228e-08, 0.694658, -0.71934, 8.5, 2.888, 1.135)
 
 [node name="HallCorner" type="Camera3D" parent="Cameras"]
 transform = Transform3D(0.683862, 0.615035, -0.39251, 0, 0.537971, 0.842963, 0.729611, -0.576471, 0.367898, -1.70749, 2.68223, 3.76179)
 
-[node name="HallVertLong" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.168008, 0.547021, -0.820086, 0, 0.831911, 0.554909, 0.985786, -0.093229, 0.139768, 10.1443, 2.02186, 3.3225)
-
-[node name="HallVertEnd" type="Camera3D" parent="Cameras"]
-transform = Transform3D(0.291597, 0.448396, -0.844933, 0, 0.883321, 0.468768, 0.956541, -0.136692, 0.257574, 15.2195, 1.84331, 3.56747)
-
 [node name="ChaseCamera" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.963784, 0.119845, -0.23824, 0, 0.893337, 0.449387, 0.266685, 0.433112, -0.860984, 2.80385, 2.19003, -1.06776)
+transform = Transform3D(1, 0, 0, 0, 0.889416, 0.457098, 0, -0.457098, 0.889416, 11.5, 2.2, 5.25)
 script = ExtResource("4_1t5di")
 TrackPosition = true
 Follow_X = true
-X_offset = -1.2
+X_offset = -0.6
 Z_offset = 3.0
+
+[node name="ValveCamera" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.948308, 0.11502, -0.295773, 0, 0.932008, 0.362439, 0.31735, 0.343704, -0.883831, 3.21691, 1.46348, 3.04265)
+
+[node name="ValveTurnCamera" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.41841877, 0.51116884, -0.7507541, 0, 0.8265902, 0.56280386, 0.9082541, 0.23548768, -0.34586096, 3.217, 1.463, 3.043)
+
+[node name="SteamPipe" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.642521, 0.613973, -0.458479, 0, 0.598328, 0.801252, 0.766268, 0.514821, -0.384438, 5.95811, 2.53084, 2.2996)
+
+[node name="SteamValve" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.279691, 0.629872, -0.724592, 0, 0.754713, 0.656055, 0.96009, 0.183493, -0.211086, 0.314465, 2.35152, 1.92643)
+
+[node name="Lights" type="Node3D" parent="."]
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 2.45, 2.5)
+shadow_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Lights"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.8, 2.45, 2.5)
+shadow_enabled = true
+
+[node name="Ineractabales" type="Node3D" parent="."]
+
+[node name="ValveInteract" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera", "TargetEvent") instance=ExtResource("5_y4s5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.5, 0.2, 3.8)
+SceneCamera = NodePath("../../Cameras/ValveCamera")
+EmitInteractedSignal = true
+FlavorText = "Looks like something can be inserted here.
+"
+TargetEvent = NodePath("../../Events/EvtValveTurned")
+RepeatEvent = true
+Keys = PackedStringArray("masterkey", "hexvalve")
+
+[node name="Interface" parent="Ineractabales/ValveInteract" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, -0.2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ineractabales/ValveInteract"]
+shape = SubResource("CylinderShape3D_mp5u4")
+
+[node name="Label3D" type="Label3D" parent="Ineractabales/ValveInteract"]
+transform = Transform3D(-1, 0, -8.74228e-08, 0, 1, 0, 8.74228e-08, 0, -1, 0, 1.2, 0.0899999)
+text = "Valve"
+
+[node name="Keypad" parent="Ineractabales" node_paths=PackedStringArray("SceneCamera") instance=ExtResource("5_y4s5i")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 16.5, 0, 1.3)
+SceneCamera = NodePath("Camera3D")
+FlavorText = "It's a keycard reader."
+
+[node name="Interface" parent="Ineractabales/Keypad" index="0"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.4, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.55, 0)
+shape = SubResource("BoxShape3D_rulxs")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.3, -0.2)
+mesh = SubResource("BoxMesh_q81se")
+
+[node name="Camera3D" type="Camera3D" parent="Ineractabales/Keypad"]
+transform = Transform3D(0.999959, 0.00437565, -0.00789404, 0, 0.874624, 0.484803, 0.00902564, -0.484783, 0.874588, 0, 1.65, 0.65)
+
+[node name="Events" type="Node3D" parent="."]
+
+[node name="EvtValveTurned" type="Node3D" parent="Events" node_paths=PackedStringArray("Animation", "Steam", "Blocker")]
+script = ExtResource("7_t0gns")
+Animation = NodePath("AnimateValve")
+Steam = NodePath("../../Prototype/Steam")
+Blocker = NodePath("SteamBlocker/CollisionShape3D")
+
+[node name="AnimateValve" type="AnimationPlayer" parent="Events/EvtValveTurned"]
+libraries = {
+&"": SubResource("AnimationLibrary_otqfm")
+}
+
+[node name="temp_wheel" parent="Events/EvtValveTurned" instance=ExtResource("6_w4mrm")]
+transform = Transform3D(-0.4, 0, 1.0140727e-06, 0, 0.4, 0, -1.0140727e-06, 0, -0.4, 3.5, 1, 3.6)
+visible = false
+
+[node name="SteamBlocker" type="StaticBody3D" parent="Events/EvtValveTurned"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.4, 0, 2.5)
+collision_layer = 8
+collision_mask = 33
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Events/EvtValveTurned/SteamBlocker"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+shape = SubResource("BoxShape3D_ras8o")
 
 [node name="Prototype" type="Node3D" parent="."]
 
@@ -447,12 +837,67 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall10"]
 shape = SubResource("ConvexPolygonShape3D_6km1l")
 
-[node name="Player" parent="." instance=ExtResource("1_el1ds")]
-transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1.4, 0, -2)
+[node name="Pipe" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -1.9, 1, 1.7)
+mesh = SubResource("CylinderMesh_a7xak")
 
-[connection signal="body_entered" from="Doors/ToGuardroom" to="Doors/ToGuardroom" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToGuardroom" to="Doors/ToGuardroom" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToBedroom" to="Doors/ToBedroom" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToBedroom" to="Doors/ToBedroom" method="_onPlayerLeft"]
-[connection signal="body_entered" from="Doors/ToPrison" to="Doors/ToPrison" method="_onPlayerEnter"]
-[connection signal="body_exited" from="Doors/ToPrison" to="Doors/ToPrison" method="_onPlayerLeft"]
+[node name="Pipe2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 2.75, 1, 3.9)
+mesh = SubResource("CylinderMesh_4e0r4")
+
+[node name="Pipe3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 1, -4.37114e-08, 0, -4.37114e-08, -1, -1, -4.37114e-08, 1.91069e-15, 10.5, 1, 1.1)
+mesh = SubResource("CylinderMesh_qurxt")
+
+[node name="Pipe5" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 7.5, 0.5, 1.1)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe6" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 7.5, 0.5, 3.9)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe7" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, 3.5, 0.5, 3.9)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Pipe8" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1.91069e-15, 7.30144e-30, 1, -4.37114e-08, 1, 1.59578e-37, -1, -4.37114e-08, 1.91069e-15, -1.9, 0.5, -0.525)
+mesh = SubResource("CylinderMesh_kdw3l")
+
+[node name="Crate1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7, 0.5, 1.6)
+mesh = SubResource("BoxMesh_6drpl")
+
+[node name="Crate2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(0.994318, 0, -0.106455, 0, 1, 0, 0.106455, 0, 0.994318, 6.61946, 1.5, 1.61962)
+mesh = SubResource("BoxMesh_6drpl")
+
+[node name="Barrel1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.7265, 0.5, 1.43501)
+mesh = SubResource("CylinderMesh_et5pe")
+
+[node name="WallCabinet" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 1.06581e-14, 0, 1, 0, -1.06581e-14, 0, 1, 3, 1.4, 1.2)
+mesh = SubResource("BoxMesh_brnnh")
+
+[node name="ValveTube" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 3.5, 1, 3.8)
+mesh = SubResource("CylinderMesh_d04l6")
+
+[node name="Steam" type="GPUParticles3D" parent="Prototype"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.5, 1.004, 3.7)
+lifetime = 0.7
+process_material = SubResource("ParticleProcessMaterial_gh3e8")
+draw_pass_1 = SubResource("BoxMesh_nr88p")
+
+[node name="Player" parent="." instance=ExtResource("1_el1ds")]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, -1, 0, -2)
+
+[connection signal="player_interacted" from="Ineractabales/ValveInteract" to="Events/EvtValveTurned" method="_on_player_interacted"]
+
+[editable path="Doors/ToGuardroom"]
+[editable path="Doors/ToBedroom"]
+[editable path="Doors/ToPrison"]
+[editable path="Ineractabales/ValveInteract"]
+[editable path="Ineractabales/Keypad"]

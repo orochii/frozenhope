@@ -17,6 +17,7 @@ public partial class EvtDeadguy : Area3D
 	[Signal] public delegate void InputReceivedEventHandler();
     public override void _Ready()
     {
+		base._Ready();
 		EndMessage.Visible = false;
         BodyEntered += OnBodyEntered;
     }

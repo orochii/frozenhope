@@ -10,6 +10,7 @@ public partial class UiParent : Control
 	public int Mode => _mode;
 	public override void _Ready()
 	{
+		base._Ready();
 		SetUIMode((int)EModes.SPLASH);
 	}
 	public void SetUIMode(EModes mode) {
