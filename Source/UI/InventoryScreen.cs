@@ -50,6 +50,10 @@ public partial class InventoryScreen : AInventoryScreen
 					SetCombine(slot);
 					AudioManager.PlaySystemSound("decision");
 				}
+				else
+				{
+					ItemSelected(slot);
+				}
 			}
 		}
 		// Inputs.
@@ -98,9 +102,9 @@ public partial class InventoryScreen : AInventoryScreen
 			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Place/Combine [color=#fd8](Back):[/color] Cancel";
 		}
 	}
-    public override void ItemSelected(InvSlotButton invSlotButton)
-    {
-        var combine = GetCombine();
+	public override void ItemSelected(InvSlotButton invSlotButton)
+	{
+		var combine = GetCombine();
 		// Use item
 		if (combine != null)
 		{
@@ -116,6 +120,11 @@ public partial class InventoryScreen : AInventoryScreen
 				{
 					AudioManager.PlaySystemSound("cancel");
 				}
+			}
+			else if (invSlotButton.Index == combine.Index)
+			{
+				RefreshSlots();
+				AudioManager.PlaySystemSound("decision");
 			}
 			else if (Main.Instance.State.CombineSlots(invSlotButton.Index, combine.Index))
 			{
@@ -151,13 +160,14 @@ public partial class InventoryScreen : AInventoryScreen
 					AudioManager.PlaySystemSound("decision");
 					//Check if use of item closes the menu to interact with the environment
 					var interactable = Player.Instance.CloestInteractable;
-                    if ((interactable is WorldScenery || interactable is Door) && interactable.CanInteract)
-                    {
-                        interactable.InteractItem(invSlotButton.Item.DisplayName);
-                        Main.Instance.UI.Gameplay.CloseMenu();
-                    }
+					if ((interactable is WorldScenery || interactable is Door) && interactable.CanInteract)
+					{
+						interactable.InteractItem(invSlotButton.Item.DisplayName);
+						Main.Instance.UI.Gameplay.CloseMenu();
+					}
 					break;
 			}
 		}
-    }
+		InfoColumn.Setup(invSlotButton.Item);
+	}
 }
