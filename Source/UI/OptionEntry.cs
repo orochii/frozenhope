@@ -216,6 +216,7 @@ public partial class OptionEntry : Button
 		await ToSignal(GetTree(), SceneTree.SignalName.ProcessFrame);
 		// load value
 		GetValueType();
+		if (_propertyType == null) return;
 		GetValue();
 		Pressed += OnPress;
 	}

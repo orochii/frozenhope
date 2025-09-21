@@ -21,6 +21,7 @@ public partial class UiParent : Control
 		for (int i = 0; i < UIs.Length; i++) {
 			// Set UI with right index as active. Hide the rest.
 			var ui = UIs[i];
+			if (ui == null) continue;
 			ui.Visible = idx == i;
 			if (ui.Visible) {
 				// Through reflection, we can call a method called Refresh with no parameters.
@@ -29,9 +30,22 @@ public partial class UiParent : Control
 			}
 		}
 	}
-	public MessageUI Message {
-		get {
-			foreach (var c in UIs) {
+	private EModes settingsReturnMode;
+	public void OpenSettings()
+	{
+		settingsReturnMode = (EModes)_mode;
+		SetUIMode((int)EModes.SETTINGS);
+	}
+	public void CloseSettings()
+	{
+		SetUIMode((int)settingsReturnMode);
+	}
+	public MessageUI Message
+	{
+		get
+		{
+			foreach (var c in UIs)
+			{
 				if (c is MessageUI) return c as MessageUI;
 			}
 			return null;

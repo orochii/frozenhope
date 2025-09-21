@@ -3,7 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://b44rysdoaf8gn" path="res://Graphics/textures/terrain/Snow010A_1K-JPG/Snow010A_1K-JPG_Color.jpg" id="1_tlaha"]
 [ext_resource type="Texture2D" uid="uid://b48bdj0ctockk" path="res://Graphics/textures/terrain/Snow010A_1K-JPG/Snow010A_1K-JPG_NormalGL.jpg" id="2_al7jf"]
 [ext_resource type="Texture2D" uid="uid://cwx11y5g0ws26" path="res://Graphics/textures/terrain/Snow010A_1K-JPG/Snow010A_1K-JPG_Roughness.jpg" id="3_6x886"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="4_bm60u"]
+[ext_resource type="Script" uid="uid://81qhvq1bhw21" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetResource.cs" id="4_bm60u"]
 [ext_resource type="Texture2D" uid="uid://dqteekaeru5ix" path="res://Graphics/textures/terrain/Rock030_1K-JPG/Rock030_1K-JPG_Color.jpg" id="5_4w4d3"]
 [ext_resource type="Texture2D" uid="uid://dkycx171pnb6x" path="res://Graphics/textures/terrain/Rock030_1K-JPG/Rock030_1K-JPG_NormalGL.jpg" id="6_ky0gv"]
 [ext_resource type="Texture2D" uid="uid://cu4rpldl71lhm" path="res://Graphics/textures/terrain/Rock030_1K-JPG/Rock030_1K-JPG_Roughness.jpg" id="7_hiab8"]
@@ -11,7 +11,7 @@
 [ext_resource type="Texture2D" uid="uid://hugqb7a1ejp2" path="res://Graphics/textures/terrain/Ground011_1K-JPG/Ground011_1K-JPG_NormalGL.jpg" id="9_ntv0x"]
 [ext_resource type="Texture2D" uid="uid://crubw6cao8k0g" path="res://Graphics/textures/terrain/Ground011_1K-JPG/Ground011_1K-JPG_Roughness.jpg" id="10_cnwdf"]
 [ext_resource type="Texture2D" uid="uid://8wslawkgktcb" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_Color.jpg" id="11_d7gkk"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetsResource.cs" id="11_qqg08"]
+[ext_resource type="Script" uid="uid://dp068ngfn7y01" path="res://addons/terrabrush/Scripts/EditorResources/TextureSetsResource.cs" id="11_qqg08"]
 [ext_resource type="Texture2D" uid="uid://rte3f0dboij2" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_NormalGL.jpg" id="12_g0uml"]
 [ext_resource type="Texture2D" uid="uid://j468f6umlb52" path="res://Graphics/textures/terrain/Ground048_1K-JPG/Ground048_1K-JPG_Roughness.jpg" id="13_qr3c8"]
 
@@ -21,7 +21,6 @@ Name = "Snow"
 AlbedoTexture = ExtResource("1_tlaha")
 NormalTexture = ExtResource("2_al7jf")
 RoughnessTexture = ExtResource("3_6x886")
-TextureDetail = -1
 
 [sub_resource type="Resource" id="Resource_03hih"]
 script = ExtResource("4_bm60u")
@@ -29,7 +28,6 @@ Name = "SnowCliff"
 AlbedoTexture = ExtResource("5_4w4d3")
 NormalTexture = ExtResource("6_ky0gv")
 RoughnessTexture = ExtResource("7_hiab8")
-TextureDetail = -1
 
 [sub_resource type="Resource" id="Resource_6si7d"]
 script = ExtResource("4_bm60u")
@@ -37,7 +35,6 @@ Name = "ForestGround"
 AlbedoTexture = ExtResource("8_uqaox")
 NormalTexture = ExtResource("9_ntv0x")
 RoughnessTexture = ExtResource("10_cnwdf")
-TextureDetail = -1
 
 [sub_resource type="Resource" id="Resource_iakh5"]
 script = ExtResource("4_bm60u")
@@ -45,7 +42,6 @@ Name = "Dirt"
 AlbedoTexture = ExtResource("11_d7gkk")
 NormalTexture = ExtResource("12_g0uml")
 RoughnessTexture = ExtResource("13_qr3c8")
-TextureDetail = -1
 
 [resource]
 script = ExtResource("11_qqg08")

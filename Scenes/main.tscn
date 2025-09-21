@@ -9,7 +9,6 @@ script = ExtResource("1_o1rfr")
 WorldParent = NodePath("WorldParent")
 UI = NodePath("CanvasLayer/UIParent")
 StartScene = 10
-SkipIntro = true
 
 [node name="WorldParent" type="Node" parent="."]
 
@@ -21,5 +20,4 @@ centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UIParent" parent="CanvasLayer" node_paths=PackedStringArray("UIs") instance=ExtResource("3_eiedn")]
-UIs = []
+[node name="UIParent" parent="CanvasLayer" instance=ExtResource("3_eiedn")]

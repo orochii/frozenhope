@@ -1,24 +1,24 @@
 [gd_scene load_steps=54 format=3 uid="uid://ccn55toql5a6v"]
 
 [ext_resource type="PackedScene" uid="uid://cvdgpuc2x1i1w" path="res://Graphics/Models/vehicles/RedTruckTM/redSUV.tscn" id="1_l1bfu"]
-[ext_resource type="Script" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
-[ext_resource type="Shader" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
+[ext_resource type="Script" uid="uid://b13jcppfbr1pq" path="res://Source/State/Cutscene.cs" id="1_x8eer"]
+[ext_resource type="Shader" uid="uid://rw7tyghux5f0" path="res://Source/Shaders/checkers.gdshader" id="2_klldf"]
 [ext_resource type="AudioStream" uid="uid://c2iymc8qnni4i" path="res://Audio/Music/Frozen_Hope_Title_ Screen_Short_JDY.wav" id="2_svwh4"]
 [ext_resource type="AudioStream" uid="uid://bg4pctxpob14g" path="res://Audio/Voice/01.wav" id="3_14hch"]
 [ext_resource type="PackedScene" uid="uid://08r46y4c31c7" path="res://Graphics/Lain/Lain.glb" id="3_ykbs4"]
-[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
+[ext_resource type="Shader" uid="uid://u5gkv4sjmcwv" path="res://Source/Shaders/psx_lit.gdshader" id="4_vpk3l"]
 [ext_resource type="AudioStream" uid="uid://c0oo14ke6b0md" path="res://Audio/Voice/02.wav" id="5_6sasq"]
 [ext_resource type="Texture2D" uid="uid://b113fpldi2ie1" path="res://Graphics/Lain/Lain_Untitled.png" id="5_cfdmu"]
 [ext_resource type="AudioStream" uid="uid://d1rmmchi04mjn" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit.wav" id="6_p8u00"]
 [ext_resource type="AudioStream" uid="uid://by67k7todn08c" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit2.wav" id="7_6ebk4"]
 [ext_resource type="AudioStream" uid="uid://2twd7dqrig25" path="res://Audio/Voice/03.wav" id="7_f5flu"]
-[ext_resource type="Script" path="res://Source/Character/MaterialSwitch.cs" id="8_gelcu"]
+[ext_resource type="Script" uid="uid://crowuyk35qx8n" path="res://Source/Character/MaterialSwitch.cs" id="8_gelcu"]
 [ext_resource type="AudioStream" uid="uid://d2v84xkqd0frv" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit3.wav" id="8_k3iyy"]
 [ext_resource type="Texture2D" uid="uid://bd2qm06kxa2ht" path="res://Graphics/Lain/Lain_Untitled_mouthOpen.png" id="9_di4ly"]
 [ext_resource type="AudioStream" uid="uid://ccj46bjppvrvw" path="res://Audio/Voice/OceansDream-George/2ndPassRadioEdit4.wav" id="9_ej8x5"]
 [ext_resource type="AudioStream" uid="uid://c5j7uj4sr53yk" path="res://Audio/Voice/04.wav" id="9_rx3xp"]
 [ext_resource type="Texture2D" uid="uid://bln84ym8y5h17" path="res://Graphics/Lain/Lain_Untitled_surprise.png" id="10_kgplf"]
-[ext_resource type="Script" path="res://addons/terrabrush/TerraBrush.cs" id="15_xtwcr"]
+[ext_resource type="Script" uid="uid://8xl871gy5vby" path="res://addons/terrabrush/TerraBrush.cs" id="15_xtwcr"]
 [ext_resource type="Resource" uid="uid://cc88dhndvd6ve" path="res://Data/terrain/TerrainTextures.tres" id="16_3srqo"]
 [ext_resource type="Resource" uid="uid://coj1bqevtjhyb" path="res://Data/terrain/TerrainTrees.tres" id="17_gxrvh"]
 [ext_resource type="Texture2D" uid="uid://droi1ixvfm0i2" path="res://Scenes/maps/cutscenes/intro/Heightmap_0_0.res" id="18_lrlub"]
@@ -26,10 +26,10 @@
 [ext_resource type="Texture2D" uid="uid://ufxiipjd3a0v" path="res://Scenes/maps/cutscenes/intro/Object_0_0_0.res" id="19_jx1xm"]
 [ext_resource type="Texture2D" uid="uid://w7hud3q40msf" path="res://Scenes/maps/cutscenes/intro/Splatmap_0_0_0.res" id="20_4krx5"]
 [ext_resource type="PackedScene" uid="uid://babtkorew36j3" path="res://Graphics/Models/scenery/materials_trees/tree1.glb" id="20_cmv1y"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZoneResource.cs" id="21_66ko3"]
+[ext_resource type="Script" uid="uid://dk3vtlm4jeh0s" path="res://addons/terrabrush/Scripts/EditorResources/ZoneResource.cs" id="21_66ko3"]
 [ext_resource type="PackedScene" uid="uid://lkvxlooxa6x" path="res://Graphics/Models/scenery/materials_trees/tree2.glb" id="21_mmq22"]
 [ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="22_ub1n4"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="22_un804"]
+[ext_resource type="Script" uid="uid://cwymaxyok4ff6" path="res://addons/terrabrush/Scripts/EditorResources/ZonesResource.cs" id="22_un804"]
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="23_y36gp"]
 [ext_resource type="PackedScene" uid="uid://byv536umv87bc" path="res://Graphics/Models/weapons/r_hunter_elite .tscn" id="31_1tnvv"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="31_f4j2i"]
@@ -579,8 +579,8 @@ tracks/20/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_rgc1v"]
 _data = {
-"RESET": SubResource("Animation_oinct"),
-"new_animation": SubResource("Animation_xj7n8")
+&"RESET": SubResource("Animation_oinct"),
+&"new_animation": SubResource("Animation_xj7n8")
 }
 
 [sub_resource type="Animation" id="Animation_yxi8j"]
@@ -617,8 +617,8 @@ tracks/0/keys = {
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_h0fy0"]
 _data = {
-"RESET": SubResource("Animation_yxi8j"),
-"new_animation": SubResource("Animation_mb5jv")
+&"RESET": SubResource("Animation_yxi8j"),
+&"new_animation": SubResource("Animation_mb5jv")
 }
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_g3fhg"]
@@ -626,7 +626,7 @@ render_priority = 0
 shader = ExtResource("2_klldf")
 shader_parameter/local = true
 shader_parameter/size = 5.0
-shader_parameter/color1 = null
+shader_parameter/color1 = Color(0, 0, 0, 1)
 shader_parameter/color2 = Color(0.245984, 0.245984, 0.245984, 1)
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_j6jht"]
@@ -635,7 +635,6 @@ size = Vector2(1000, 1000)
 
 [sub_resource type="Resource" id="Resource_p6rjf"]
 script = ExtResource("21_66ko3")
-ZonePosition = Vector2i(0, 0)
 HeightMapTexture = ExtResource("18_lrlub")
 SplatmapsTexture = [ExtResource("20_4krx5")]
 FoliagesTexture = []
@@ -648,7 +647,8 @@ Zones = [SubResource("Resource_p6rjf")]
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_qe421"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
-shader_parameter/vertex_color = null
+shader_parameter/albedo = ExtResource("5_cfdmu")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -658,12 +658,12 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("5_cfdmu")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_r3dyy"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
-shader_parameter/vertex_color = null
+shader_parameter/albedo = ExtResource("9_di4ly")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -673,12 +673,12 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("9_di4ly")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_14gni"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
-shader_parameter/vertex_color = null
+shader_parameter/albedo = ExtResource("10_kgplf")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -688,12 +688,12 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("10_kgplf")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_3gxto"]
 render_priority = 0
 shader = ExtResource("4_vpk3l")
-shader_parameter/vertex_color = null
+shader_parameter/albedo = ExtResource("19_cukto")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -703,7 +703,6 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("19_cukto")
 
 [node name="intro" type="Node3D" node_paths=PackedStringArray("Animation")]
 script = ExtResource("1_x8eer")
@@ -722,12 +721,12 @@ shadow_enabled = true
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_rgc1v")
+&"": SubResource("AnimationLibrary_rgc1v")
 }
 
 [node name="MovingGround" type="AnimationPlayer" parent="."]
 libraries = {
-"": SubResource("AnimationLibrary_h0fy0")
+&"": SubResource("AnimationLibrary_h0fy0")
 }
 
 [node name="ScenarioPivot" type="Node3D" parent="MovingGround"]
@@ -2659,37 +2658,37 @@ bus = &"SFX"
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.460924, 0, 0.496816)
 
 [node name="Skeleton3D" parent="Lain/Armature" index="0"]
-bones/0/position = Vector3(-3.88016e-17, 0.718004, -0.405773)
-bones/0/rotation = Quaternion(-0.256162, 1.36725e-16, 1.36494e-16, 0.966634)
-bones/1/rotation = Quaternion(0.1943, -1.74381e-16, -1.68267e-16, 0.980942)
-bones/2/rotation = Quaternion(0.103854, 5.83262e-17, -1.42947e-17, 0.994593)
-bones/3/rotation = Quaternion(0.177396, -1.18857e-07, -9.1567e-09, 0.98414)
-bones/4/rotation = Quaternion(0.0863994, 1.68157e-14, -2.05992e-08, 0.996261)
-bones/5/rotation = Quaternion(0.761178, 0.0216219, -0.590451, 0.26741)
-bones/6/rotation = Quaternion(-0.113596, -0.0244109, 0.638198, 0.761054)
+bones/0/position = Vector3(-3.8801623e-17, 0.7180042, -0.40577275)
+bones/0/rotation = Quaternion(-0.25616223, 1.3672528e-16, 1.3649396e-16, 0.9666338)
+bones/1/rotation = Quaternion(0.1943004, -1.7438098e-16, -1.6826704e-16, 0.9809421)
+bones/2/rotation = Quaternion(0.10385363, 5.8326226e-17, -1.429474e-17, 0.99459267)
+bones/3/rotation = Quaternion(0.1749714, -1.1737033e-07, -2.0858218e-08, 0.98457354)
+bones/4/rotation = Quaternion(0.09903755, -0.030452145, -0.041466497, 0.9937529)
+bones/5/rotation = Quaternion(0.79887575, -0.03664943, -0.5912911, 0.10406302)
+bones/6/rotation = Quaternion(0.07059605, -0.005684649, 0.9255428, 0.3719603)
 bones/6/scale = Vector3(1, 1, 1)
-bones/7/rotation = Quaternion(0.721346, 0.162045, 0.535668, 0.407996)
-bones/8/rotation = Quaternion(-0.0785896, 0.0344582, -0.63989, 0.76366)
-bones/8/scale = Vector3(0.999995, 1, 1)
-bones/9/rotation = Quaternion(0.200653, -0.521009, -0.697235, 0.449613)
-bones/9/scale = Vector3(0.999996, 1.00009, 1.00001)
-bones/10/rotation = Quaternion(-0.0852828, 0.0242935, -0.65639, 0.749192)
-bones/10/scale = Vector3(0.9999, 1.0001, 0.999998)
-bones/11/rotation = Quaternion(0.691488, -0.41845, -0.046406, 0.587018)
-bones/11/scale = Vector3(0.999999, 1.00007, 1.00002)
-bones/12/rotation = Quaternion(0.252872, 0.0072308, -0.60444, 0.755418)
-bones/12/scale = Vector3(0.99994, 1.00009, 0.999979)
-bones/13/position = Vector3(0.242567, 1.01512, -0.106698)
-bones/13/rotation = Quaternion(0.554216, -0.4759, -0.467211, 0.498075)
+bones/7/rotation = Quaternion(0.72134584, 0.16204526, 0.5356683, 0.40799642)
+bones/8/rotation = Quaternion(-0.078589596, 0.03445825, -0.6398904, 0.7636601)
+bones/8/scale = Vector3(0.99999547, 1.0000019, 1.000003)
+bones/9/rotation = Quaternion(0.20065337, -0.52100915, -0.6972346, 0.44961295)
+bones/9/scale = Vector3(0.9999961, 1.0000851, 1.0000117)
+bones/10/rotation = Quaternion(-0.08528285, 0.024293486, -0.6563903, 0.7491918)
+bones/10/scale = Vector3(0.99989957, 1.0000983, 0.99999785)
+bones/11/rotation = Quaternion(0.69148827, -0.4184496, -0.046405952, 0.5870183)
+bones/11/scale = Vector3(0.99999887, 1.0000731, 1.0000191)
+bones/12/rotation = Quaternion(0.2528716, 0.0072308024, -0.60443974, 0.75541794)
+bones/12/scale = Vector3(0.9999398, 1.0000856, 0.9999794)
+bones/13/position = Vector3(0.1049044, 1.1478993, -0.26742855)
+bones/13/rotation = Quaternion(0.276298, -0.91800153, -0.12701549, 0.25455776)
 bones/13/scale = Vector3(1, 1, 1)
-bones/14/position = Vector3(-0.171118, 1.17541, -0.0417157)
-bones/14/rotation = Quaternion(0.553005, 0.368224, 0.0204187, 0.747114)
+bones/14/position = Vector3(-0.17111823, 1.1754099, -0.04171569)
+bones/14/rotation = Quaternion(0.55300474, 0.36822444, 0.020418696, 0.7471142)
 bones/14/scale = Vector3(1, 1, 1)
-bones/15/position = Vector3(0.0953964, 0.592716, 0.172967)
-bones/15/rotation = Quaternion(0.814608, -0.0801812, -0.1161, 0.562588)
+bones/15/position = Vector3(0.095396355, 0.59271556, 0.17296681)
+bones/15/rotation = Quaternion(0.8146081, -0.08018117, -0.11609962, 0.56258816)
 bones/15/scale = Vector3(1, 1, 1)
-bones/16/position = Vector3(-0.146043, 0.665964, 0.187178)
-bones/16/rotation = Quaternion(0.622501, 0.152305, 0.180087, 0.746234)
+bones/16/position = Vector3(-0.14604276, 0.66596437, 0.18717818)
+bones/16/rotation = Quaternion(0.62250096, 0.15230474, 0.18008676, 0.74623364)
 bones/16/scale = Vector3(1, 1, 1)
 
 [node name="Cube" parent="Lain/Armature/Skeleton3D" index="0"]
@@ -2769,7 +2768,7 @@ bbcode_enabled = true
 [node name="SubtitleBackground" type="ColorRect" parent="Control/MarginContainer/Subtitles"]
 visible = false
 show_behind_parent = true
-layout_mode = 2
+layout_mode = 0
 offset_right = 200.0
 offset_bottom = 22.0
 color = Color(0, 0, 0, 0.705882)

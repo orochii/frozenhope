@@ -1,8 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://c5smkeaw5o88r"]
+[gd_scene load_steps=8 format=3 uid="uid://c5smkeaw5o88r"]
 
-[ext_resource type="Shader" path="res://Source/Shaders/menuOverlay.gdshader" id="1_xah6b"]
+[ext_resource type="Script" uid="uid://bvnivdt2c4ih4" path="res://Source/UI/SettingsScreen.cs" id="1_c0710"]
+[ext_resource type="Shader" uid="uid://b1808h3splb22" path="res://Source/Shaders/menuOverlay.gdshader" id="1_xah6b"]
 [ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="2_pss1w"]
-[ext_resource type="Script" path="res://Source/UI/OptionsCategoryContainer.cs" id="3_bvkg5"]
+[ext_resource type="Script" uid="uid://b70qwbre2iyn0" path="res://Source/UI/OptionsCategoryContainer.cs" id="3_bvkg5"]
 [ext_resource type="PackedScene" uid="uid://ull6k7y2rap8" path="res://Scenes/ui/options_category.tscn" id="4_skhfy"]
 [ext_resource type="PackedScene" uid="uid://d0sngssa07nl1" path="res://Scenes/ui/option_entry.tscn" id="5_6exu2"]
 
@@ -14,7 +15,7 @@ shader_parameter/blurAmountX = -0.1
 shader_parameter/blurAmountY = -0.1
 shader_parameter/blurIterations = 2
 
-[node name="Settings" type="Control"]
+[node name="Settings" type="Control" node_paths=PackedStringArray("FirstSelection")]
 z_index = 100
 layout_mode = 3
 anchors_preset = 15
@@ -22,6 +23,8 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_c0710")
+FirstSelection = NodePath("MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer/VolumeMaster")
 
 [node name="ColorRect" type="ColorRect" parent="."]
 material = SubResource("ShaderMaterial_djicq")
@@ -53,7 +56,6 @@ layout_mode = 2
 size_flags_vertical = 3
 theme = ExtResource("2_pss1w")
 follow_focus = true
-scroll_vertical = 35
 horizontal_scroll_mode = 0
 script = ExtResource("3_bvkg5")
 
@@ -103,6 +105,7 @@ ValueIcon = "||"
 NumberFormat = "[color=fff] {0:00}0%"
 
 [node name="LowHealthAlert" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+visible = false
 layout_mode = 2
 EntryName = "Low Health Alert"
 Options = PackedStringArray("Constant", "Once", "None")
@@ -141,6 +144,7 @@ ValueIcon = "||"
 NumberFormat = "[color=fff] {0:00}0%"
 
 [node name="Language" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+visible = false
 layout_mode = 2
 EntryName = "Language"
 Value = 0
@@ -149,6 +153,7 @@ ValueIcon = "||"
 NumberFormat = "[color=fff] {0:00}0%"
 
 [node name="Subtitles" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+visible = false
 layout_mode = 2
 EntryName = "Subtitles"
 Value = 0
@@ -166,6 +171,7 @@ ValueIcon = "||"
 NumberFormat = "[color=fff] {0:00}0%"
 
 [node name="Gameplay" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_skhfy")]
+visible = false
 layout_mode = 2
 CategoryName = "Gameplay"
 
@@ -206,6 +212,14 @@ MaxValue = 0
 ValueIcon = "||"
 NumberFormat = ""
 
+[node name="Close" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Close"
+Value = 0
+MaxValue = 0
+ValueIcon = "||"
+NumberFormat = ""
+
 [node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
@@ -215,3 +229,5 @@ custom_minimum_size = Vector2(0, 33)
 layout_mode = 2
 theme = ExtResource("2_pss1w")
 text = "Adjust game's overall volume."
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Close" to="." method="OnClose"]

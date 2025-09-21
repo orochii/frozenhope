@@ -151,4 +151,10 @@ public class GameSettings
                 break;
         }
     }
+
+    internal void Reset()
+    {
+        data = new SettingsData();
+        Refresh();
+    }
 }

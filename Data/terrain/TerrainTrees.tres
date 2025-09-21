@@ -4,23 +4,17 @@
 [ext_resource type="PackedScene" uid="uid://lkvxlooxa6x" path="res://Graphics/Models/scenery/materials_trees/tree2.glb" id="2_sk1p6"]
 [ext_resource type="PackedScene" uid="uid://dvn50kbg3hex0" path="res://Graphics/Models/scenery/materials_trees/tree3.glb" id="3_y7pq6"]
 [ext_resource type="PackedScene" uid="uid://ba6ddqol0bqtn" path="res://Graphics/Models/scenery/materials_trees/tree4.glb" id="4_6fp2y"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ObjectDefinitionResource.cs" id="5_katys"]
-[ext_resource type="Script" path="res://addons/terrabrush/Scripts/EditorResources/ObjectResource.cs" id="6_fscgu"]
+[ext_resource type="Script" uid="uid://dbd4262pkg5xg" path="res://addons/terrabrush/Scripts/EditorResources/ObjectDefinitionResource.cs" id="5_katys"]
+[ext_resource type="Script" uid="uid://id6n554hh8qk" path="res://addons/terrabrush/Scripts/EditorResources/ObjectResource.cs" id="6_fscgu"]
 
 [sub_resource type="Resource" id="Resource_ngorr"]
 script = ExtResource("5_katys")
-Strategy = 1
-ObjectFrequency = -1
 RandomRange = 3.0
 RandomYRotation = true
 ObjectScenes = [ExtResource("1_ix6rj"), ExtResource("2_sk1p6"), ExtResource("3_y7pq6"), ExtResource("4_6fp2y")]
 LODList = []
 LODMeshes = []
-UpdateDistanceThreshold = 1.0
-UpdateTimeFrequency = 0.1
-VisualInstanceLayers = 1
 
 [resource]
 script = ExtResource("6_fscgu")
 Definition = SubResource("Resource_ngorr")
-Hide = false

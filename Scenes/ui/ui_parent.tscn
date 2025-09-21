@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=53 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" uid="uid://byg1k1xps0da7" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" uid="uid://lpox11oi77ds" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -26,6 +26,7 @@
 [ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
 [ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
+[ext_resource type="PackedScene" uid="uid://c5smkeaw5o88r" path="res://Scenes/ui/screens/settings_screen.tscn" id="27_plhkh"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -459,7 +460,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_l8vhd")
-buttonList = []
+buttonList = [NodePath("VBoxContainer/Start"), NodePath("VBoxContainer/Continue"), NodePath("VBoxContainer/Settings"), NodePath("VBoxContainer/Exit")]
 
 [node name="TextureRect" type="TextureRect" parent="TitleScreen"]
 visible = false
@@ -512,6 +513,11 @@ layout_mode = 2
 theme = ExtResource("3_wyq5x")
 text = "Continue"
 
+[node name="Settings" type="Button" parent="TitleScreen/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Settings"
+
 [node name="Exit" type="Button" parent="TitleScreen/VBoxContainer"]
 layout_mode = 2
 theme = ExtResource("3_wyq5x")
@@ -532,6 +538,7 @@ horizontal_alignment = 1
 
 [node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
 process_mode = 3
+visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -620,7 +627,7 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel", "SubMenu")]
+[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_r4o41")
@@ -630,7 +637,6 @@ InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
 InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/RichTextLabel")
-SubMenu = NodePath("SubMenu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 layout_mode = 1
@@ -1054,7 +1060,6 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="Splash" type="Control" parent="."]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -1146,10 +1151,6 @@ grow_horizontal = 2
 grow_vertical = 2
 text = "GAME OVER"
 
-[node name="Settings" parent="." instance=ExtResource("25_61jvm")]
-visible = false
-layout_mode = 1
-
 [node name="Loader" type="Control" parent="." node_paths=PackedStringArray("Animation")]
 visible = false
 layout_mode = 1
@@ -1176,7 +1177,12 @@ libraries = {
 &"": SubResource("AnimationLibrary_dv4aa")
 }
 
+[node name="Settings" parent="." instance=ExtResource("27_plhkh")]
+visible = false
+layout_mode = 1
+
 [connection signal="pressed" from="TitleScreen/VBoxContainer/Start" to="TitleScreen" method="StartGame"]
 [connection signal="pressed" from="TitleScreen/VBoxContainer/Continue" to="TitleScreen" method="LoadGame"]
+[connection signal="pressed" from="TitleScreen/VBoxContainer/Settings" to="." method="OpenSettings"]
 [connection signal="pressed" from="TitleScreen/VBoxContainer/Exit" to="TitleScreen" method="EndGame"]
 [connection signal="animation_finished" from="Loader/AnimationPlayer" to="Loader" method="OnAnimationFinished"]

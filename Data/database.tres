@@ -1,9 +1,9 @@
 [gd_resource type="Resource" script_class="Database" load_steps=14 format=3 uid="uid://tidkq4ucvhge"]
 
 [ext_resource type="Resource" uid="uid://d2gmdj8i5534y" path="res://Data/items/glock.tres" id="1_8biv8"]
-[ext_resource type="Script" path="res://Source/Data/Database.cs" id="1_nmb2g"]
+[ext_resource type="Script" uid="uid://6kbu7g1lw1bk" path="res://Source/Data/Database.cs" id="1_nmb2g"]
 [ext_resource type="Resource" uid="uid://bkdfwh7x3ytds" path="res://Data/items/9mm_ammo.tres" id="2_dhkgy"]
-[ext_resource type="Script" path="res://Source/Data/ItemAddEntry.cs" id="2_mwwnc"]
+[ext_resource type="Script" uid="uid://rpcwyw6opyuf" path="res://Source/Data/ItemAddEntry.cs" id="2_mwwnc"]
 [ext_resource type="Resource" uid="uid://bgqsqi23jbqjc" path="res://Data/items/308_ammo.tres" id="4_5barp"]
 [ext_resource type="Resource" uid="uid://c8wu2brd3rtum" path="res://Data/items/rifle.tres" id="5_4xose"]
 [ext_resource type="Resource" uid="uid://tedv060pxv0f" path="res://Data/items/test_key.tres" id="6_4w0yi"]
@@ -20,7 +20,6 @@ AmmoQty = 17
 script = ExtResource("2_mwwnc")
 Item = ExtResource("2_dhkgy")
 Amount = 7
-AmmoQty = 0
 
 [sub_resource type="Resource" id="Resource_7h2s4"]
 script = ExtResource("2_mwwnc")
@@ -33,13 +32,11 @@ AmmoQty = 5
 script = ExtResource("2_mwwnc")
 Item = ExtResource("6_4w0yi")
 Amount = 1
-AmmoQty = 0
 
 [sub_resource type="Resource" id="Resource_4c88h"]
 script = ExtResource("2_mwwnc")
 Item = ExtResource("7_v513v")
 Amount = 1
-AmmoQty = 0
 
 [resource]
 script = ExtResource("1_nmb2g")

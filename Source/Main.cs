@@ -91,7 +91,7 @@ public partial class Main : Node
 	/// </summary>
 	/// <param name="MapName"></param>
 	/// <param name="Position"></param>
-	/// <param name="Rotaiton"></param>
+	/// <param name="Rotation"></param>
 	public async void ChangeMap(string MapName, Vector3 Position, Vector3 Rotation)
 	{
 		// Hide screen.
