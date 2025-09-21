@@ -1,6 +1,4 @@
 using Godot;
-using System;
-using System.Runtime.CompilerServices;
 
 public partial class WorldItem : Area3D, Interactable
 {
@@ -20,7 +18,7 @@ public partial class WorldItem : Area3D, Interactable
             return fullPath.Substr(basePath.Length, fullPath.Length-basePath.Length);
         }
     }
-    
+
     //Overriden Ready function
     public override void _Ready()
     {
@@ -29,6 +27,7 @@ public partial class WorldItem : Area3D, Interactable
             QueueFree();
         }
         HideInterface();
+        Interface.NoDepthTest = true;
     }
     
     public void _onPlayerEnter(Node3D body)

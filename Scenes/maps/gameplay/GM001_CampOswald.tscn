@@ -614,12 +614,10 @@ Camera = NodePath("../../Cameras/CampEntrance")
 transform = Transform3D(-0.36042, 0, -1.43563, 0, 1, 0, 0.93279, 0, -0.554712, -39.9421, 12.2166, -10.2426)
 Camera = NodePath("../../Cameras/CampEntrance")
 
-[node name="ViewCampEntranceC" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampEntranceC" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(3.60287, 0.0511242, -0.0334893, -0.211828, 0.886809, -0.00825852, 0.219377, 0.0166705, 0.542027, -41.2338, 12.0478, -11.6883)
 Camera = NodePath("../../Cameras/CampEntrance")
 Active = false
-Deactivate = [NodePath(".")]
-Activate = [NodePath("../ViewCampEntranceD")]
 
 [node name="ViewCampEntranceD" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(3.05651, 0, 0.129615, 0, 1, 0, -1.03772, 0, 0.381767, -40.7137, 11.9637, -16.1652)
@@ -629,39 +627,33 @@ Camera = NodePath("../../Cameras/CampEntrance")
 transform = Transform3D(0.595896, 0, -0.139822, 0, 1, 0, 0.0267364, 0, 3.11632, -43.2985, 12.0521, -13.5325)
 Camera = NodePath("../../Cameras/CampEntrance")
 
-[node name="ViewCampEntranceF" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampEntranceF" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.360855, 0, -2.93918, 0, 1, 0, 0.347999, 0, 3.04776, -44.9029, 12.1375, -10.613)
 Camera = NodePath("../../Cameras/CampEntrance")
-Deactivate = [NodePath(".")]
 
 [node name="ViewCampEntranceG" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(3.90771, 0, -0.373356, 0, 1, 0, 3.09477, 0, 0.47143, -44.6206, 12.4429, -8.00925)
 Camera = NodePath("../../Cameras/CampEntrance")
 
-[node name="ViewBrokenFence" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewBrokenFence" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.422064, 0, 0.220438, 0, 1, 0, -0.0233384, 0, 3.98651, -39.2198, 11.943, -14.252)
 Camera = NodePath("../../Cameras/CampBrokenFence")
-Deactivate = [NodePath("../ViewCampEntranceD")]
-Activate = [NodePath("../ViewCampEntranceC")]
 
-[node name="ViewCampSideA" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampSideA" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(3.05651, 0, 0.129615, 0, 1, 0, -1.03772, 0, 0.381767, -41.0108, 11.9637, -17.0402)
 Camera = NodePath("../../Cameras/CampSide")
-Activate = [NodePath("../ViewCampEntranceD")]
 
 [node name="ViewCampSideB" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(4.63573, 0, 0, 0, 1, 0, 0, 0, 0.436179, -47.1491, 12.0052, -16.6368)
 Camera = NodePath("../../Cameras/CampSide")
 
-[node name="ViewCampCenterA" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampCenterA" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.431684, 0, -2.00186, 0, 1, 0, 0.25489, 0, 3.39036, -45.905, 12.1375, -11.6726)
 Camera = NodePath("../../Cameras/CampCentre")
-Activate = [NodePath("../ViewCampEntranceF")]
 
-[node name="ViewCampCenterA2" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampCenterA2" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.482837, 0, -0.494586, 0, 1, 0, 0.134865, 0, 1.77069, -44.674, 12.1375, -14.2299)
 Camera = NodePath("../../Cameras/CampCentre")
-Activate = [NodePath("../ViewCampEntranceE")]
 
 [node name="ViewCampCenterB" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(4.63573, 0, 0, 0, 1, 0, 0, 0, 0.436179, -46.8842, 12.0052, -15.8065)
@@ -671,12 +663,10 @@ Camera = NodePath("../../Cameras/CampCentre")
 transform = Transform3D(2.20116, 0, -0.529334, 0, 1, 0, 3.90914, 0, 0.298058, -49.6183, 12.3601, -12.6882)
 Camera = NodePath("../../Cameras/CampCentre")
 
-[node name="ViewCampCenterD" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampCenterD" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.713759, 0, -0.227035, 0, 1, 0, 0.0505494, 0, 3.20574, -50.5007, 12.1612, -13.3985)
 Camera = NodePath("../../Cameras/CampCentre")
 Active = false
-Deactivate = [NodePath(".")]
-Activate = [NodePath("../ViewCampCorpseB")]
 
 [node name="ViewCampBack2A" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(3.38008, 0, -0.441996, 0, 1, 0, 3.66373, 0, 0.407776, -45.1296, 12.3608, -6.82097)
@@ -694,22 +684,17 @@ Camera = NodePath("../../Cameras/CampCorpse")
 transform = Transform3D(2.80613, 0, -0.411883, 0, 1, 0, 2.58842, 0, 0.446526, -50.1452, 12.3601, -11.2684)
 Camera = NodePath("../../Cameras/CampCorpse")
 
-[node name="ViewCampCorpseC" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampCorpseC" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(5.45715, 0.060958, 0.0964763, -0.409794, 0.997635, 0.00108192, -2.39928, -0.0317463, 0.21925, -53.8484, 12.8522, -10.4504)
 Camera = NodePath("../../Cameras/CampCorpse")
-Deactivate = [NodePath("../ViewCampCenterD")]
-Activate = [NodePath("../ViewCampCorpseB")]
 
-[node name="ViewCampBackA" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Deactivate", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampBackA" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(0.708272, 0, -0.481393, 0, 1, 0, 0.149218, 0, 2.28496, -51.8305, 12.1773, -13.9226)
 Camera = NodePath("../../Cameras/CampBack")
-Deactivate = [NodePath("../ViewCampCorpseB")]
-Activate = [NodePath("../ViewCampCenterD")]
 
-[node name="ViewCampBackB" parent="CameraChangers" node_paths=PackedStringArray("Camera", "Activate") instance=ExtResource("47_qp3oy")]
+[node name="ViewCampBackB" parent="CameraChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("47_qp3oy")]
 transform = Transform3D(5.35584, 0.060958, 0.0315846, -0.337436, 0.997635, 0.0144119, -0.31993, -0.0317463, 0.513546, -54.7971, 12.8388, -12.6929)
 Camera = NodePath("../../Cameras/CampBack")
-Activate = [NodePath("../ViewCampCorpseB")]
 
 [node name="Light-Flashlight" type="SpotLight3D" parent="."]
 transform = Transform3D(0.667833, 0.0298706, -0.743712, 2.56114e-09, 0.999195, 0.0401318, 0.744312, -0.0268013, 0.667295, -50.854, 12.6, -10.176)

@@ -1,0 +1,36 @@
+[gd_scene load_steps=3 format=3 uid="uid://d0sngssa07nl1"]
+
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="1_hcnn7"]
+[ext_resource type="Script" path="res://Source/UI/OptionEntry.cs" id="2_xledp"]
+
+[node name="OptionEntry" type="Button"]
+custom_minimum_size = Vector2(128, 0)
+theme = ExtResource("1_hcnn7")
+text = " "
+script = ExtResource("2_xledp")
+EntryName = "Master Volume"
+Value = 1
+MaxValue = 10
+ValueIcon = "|"
+NumberFormat = " {0:00}"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_bottom = 1.0
+offset_left = 8.0
+grow_vertical = 2
+text = "Master Volume"
+
+[node name="Value" type="RichTextLabel" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+bbcode_enabled = true
+text = "[right]|[color=333]||||||||| 01"
+fit_content = true

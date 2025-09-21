@@ -1,0 +1,217 @@
+[gd_scene load_steps=7 format=3 uid="uid://c5smkeaw5o88r"]
+
+[ext_resource type="Shader" path="res://Source/Shaders/menuOverlay.gdshader" id="1_xah6b"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="2_pss1w"]
+[ext_resource type="Script" path="res://Source/UI/OptionsCategoryContainer.cs" id="3_bvkg5"]
+[ext_resource type="PackedScene" uid="uid://ull6k7y2rap8" path="res://Scenes/ui/options_category.tscn" id="4_skhfy"]
+[ext_resource type="PackedScene" uid="uid://d0sngssa07nl1" path="res://Scenes/ui/option_entry.tscn" id="5_6exu2"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_djicq"]
+shader = ExtResource("1_xah6b")
+shader_parameter/colorTint = Color(0.0549597, 0.131146, 0.173246, 1)
+shader_parameter/mixAmount = 0.5
+shader_parameter/blurAmountX = -0.1
+shader_parameter/blurAmountY = -0.1
+shader_parameter/blurIterations = 2
+
+[node name="Settings" type="Control"]
+z_index = 100
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="ColorRect" type="ColorRect" parent="."]
+material = SubResource("ShaderMaterial_djicq")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.752941)
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme = ExtResource("2_pss1w")
+follow_focus = true
+scroll_vertical = 35
+horizontal_scroll_mode = 0
+script = ExtResource("3_bvkg5")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="Audio" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_skhfy")]
+layout_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="VolumeMaster" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+Value = 3
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="VolumeBGM" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Music Volume"
+Value = 3
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="VolumeAMB" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Ambient Volume"
+Value = 3
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="VolumeSFX" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Sound Effects Volume"
+Value = 3
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="VolumeVoice" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Voice Overs Volume"
+Value = 3
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="LowHealthAlert" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Audio/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Low Health Alert"
+Options = PackedStringArray("Constant", "Once", "None")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="Visuals" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_skhfy")]
+layout_mode = 2
+CategoryName = "Visuals"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ScreenResolution" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Screen Resolution"
+Value = 0
+Options = PackedStringArray("320x240", "640x480")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="ScreenMode" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Screen Mode"
+Value = 0
+Options = PackedStringArray("Windowed", "Borderless", "Fullscreen")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="ScreenScale" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Screen Scale"
+Options = PackedStringArray("1x", "2x", "3x")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="Language" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Language"
+Value = 0
+Options = PackedStringArray("English", "Spanish")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="Subtitles" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Subtitles"
+Value = 0
+Options = PackedStringArray("Enabled", "Disabled")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="Shadows" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Visuals/VBoxContainer" instance=ExtResource("5_6exu2")]
+visible = false
+layout_mode = 2
+EntryName = "Shadows"
+Value = 0
+Options = PackedStringArray("None", "Low", "High")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="Gameplay" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("4_skhfy")]
+layout_mode = 2
+CategoryName = "Gameplay"
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Gameplay"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="ControlScheme" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Gameplay/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Control Scheme"
+Value = 0
+Options = PackedStringArray("Classic", "Modern")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="AimMode" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Gameplay/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Aim Mode"
+Value = 0
+Options = PackedStringArray("Toggle", "Hold")
+ValueIcon = "||"
+NumberFormat = "[color=fff] {0:00}0%"
+
+[node name="ChangeBindings" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer/Gameplay/VBoxContainer" instance=ExtResource("5_6exu2")]
+visible = false
+layout_mode = 2
+EntryName = "Change Bindings"
+Value = 0
+MaxValue = 0
+ValueIcon = "||"
+NumberFormat = ""
+
+[node name="ResetDefaults" parent="MarginContainer/VBoxContainer/ScrollContainer/VBoxContainer" instance=ExtResource("5_6exu2")]
+layout_mode = 2
+EntryName = "Reset Defaults"
+Value = 0
+MaxValue = 0
+ValueIcon = "||"
+NumberFormat = ""
+
+[node name="ColorRect" type="ColorRect" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(0, 33)
+layout_mode = 2
+theme = ExtResource("2_pss1w")
+text = "Adjust game's overall volume."

@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=3 uid="uid://ull6k7y2rap8"]
+
+[ext_resource type="Script" path="res://Source/UI/OptionsCategory.cs" id="1_5b2i3"]
+[ext_resource type="Theme" uid="uid://5oo8t585v2ho" path="res://Graphics/themes/general_theme.tres" id="1_5ultd"]
+
+[node name="Category" type="HBoxContainer"]
+script = ExtResource("1_5b2i3")
+CategoryName = "Audio"
+
+[node name="Container" type="Control" parent="."]
+custom_minimum_size = Vector2(16, 48)
+layout_mode = 2
+
+[node name="ColorRect" type="ColorRect" parent="Container"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
+
+[node name="Label" type="Label" parent="Container"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_bottom = -4.0
+grow_vertical = 2
+rotation = -1.5708
+pivot_offset = Vector2(0, 5)
+theme = ExtResource("1_5ultd")
+text = "Audio"

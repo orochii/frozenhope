@@ -14,11 +14,12 @@ public partial class WorldScenery : Area3D, Interactable
     { get; set; }
     public bool InterfaceVisible
         { get; set; }
-    
+
     //Overriden Ready function
     public override void _Ready()
     {
         Interface.Visible = false;
+        Interface.NoDepthTest = true;
     }
     
     public void _onPlayerEnter(Node3D body)

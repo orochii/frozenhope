@@ -1,4 +1,4 @@
-[gd_scene load_steps=51 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=52 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -25,6 +25,7 @@
 [ext_resource type="Script" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" path="res://Source/UI/Splash.cs" id="24_2h878"]
 [ext_resource type="Script" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
+[ext_resource type="PackedScene" uid="uid://c5smkeaw5o88r" path="res://Scenes/ui/screens/settings_screen.tscn" id="25_61jvm"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -447,7 +448,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_sn55m")
-UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodePath("Cutscene"), NodePath("Splash"), NodePath("GameOver")]
+UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodePath("Cutscene"), NodePath("Splash"), NodePath("GameOver"), NodePath("Settings")]
 Loader = NodePath("Loader")
 
 [node name="TitleScreen" type="Control" parent="." node_paths=PackedStringArray("buttonList")]
@@ -459,7 +460,7 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("2_l8vhd")
-buttonList = [NodePath("VBoxContainer/Start"), NodePath("VBoxContainer/Continue"), NodePath("VBoxContainer/Exit")]
+buttonList = []
 
 [node name="TextureRect" type="TextureRect" parent="TitleScreen"]
 visible = false
@@ -1136,6 +1137,10 @@ offset_bottom = 11.5
 grow_horizontal = 2
 grow_vertical = 2
 text = "GAME OVER"
+
+[node name="Settings" parent="." instance=ExtResource("25_61jvm")]
+visible = false
+layout_mode = 1
 
 [node name="Loader" type="Control" parent="." node_paths=PackedStringArray("Animation")]
 visible = false

@@ -4,6 +4,7 @@ using System;
 public partial class Main : Node
 {
 	public static Main Instance;
+	public static GameSettings Settings;
 	[Export] public Node WorldParent;
 	[Export] public UiParent UI;
 	[Export] public int StartScene = 0;
@@ -21,6 +22,7 @@ public partial class Main : Node
 	public override void _Ready()
 	{
 		Instance = this;
+		Settings = new GameSettings();
 		AudioManager.Init();
 		DirAccess.MakeDirRecursiveAbsolute(SnapPath());
 		Database = Database.Get();

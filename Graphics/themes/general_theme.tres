@@ -1,4 +1,4 @@
-[gd_resource type="Theme" load_steps=9 format=3 uid="uid://5oo8t585v2ho"]
+[gd_resource type="Theme" load_steps=14 format=3 uid="uid://5oo8t585v2ho"]
 
 [ext_resource type="FontFile" uid="uid://b5hpj2hganr0y" path="res://Graphics/fonts/m3x6-italic.ttf" id="1_u1aan"]
 [ext_resource type="FontFile" uid="uid://c31vqtlawalb4" path="res://Graphics/fonts/m3x6oz.ttf" id="2_o64cv"]
@@ -49,6 +49,51 @@ anti_aliasing = false
 base_font = ExtResource("2_o64cv")
 variation_embolden = 0.2
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gf25s"]
+content_margin_left = 0.0
+content_margin_right = 0.0
+bg_color = Color(0.739342, 0.829167, 0.951726, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4mh2d"]
+content_margin_left = 0.0
+content_margin_right = 0.0
+bg_color = Color(0.739342, 0.829167, 0.951726, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p7l3l"]
+content_margin_left = 0.0
+content_margin_right = 0.0
+bg_color = Color(0.739342, 0.829167, 0.951726, 1)
+border_width_left = 3
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.8, 0.8, 0.8, 0)
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8qmb"]
+content_margin_left = 8.0
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7sv67"]
+content_margin_left = 8.0
+bg_color = Color(0, 0, 0, 0.501961)
+border_width_left = 2
+border_color = Color(0.8, 0.8, 0.8, 0)
+
 [resource]
 Button/font_sizes/font_size = 10
 Button/fonts/font = ExtResource("2_o64cv")
@@ -67,3 +112,8 @@ RichTextLabel/font_sizes/normal_font_size = 10
 RichTextLabel/fonts/bold_font = SubResource("FontVariation_bnsv1")
 RichTextLabel/fonts/italics_font = ExtResource("1_u1aan")
 RichTextLabel/fonts/normal_font = ExtResource("2_o64cv")
+VScrollBar/styles/grabber = SubResource("StyleBoxFlat_gf25s")
+VScrollBar/styles/grabber_highlight = SubResource("StyleBoxFlat_4mh2d")
+VScrollBar/styles/grabber_pressed = SubResource("StyleBoxFlat_p7l3l")
+VScrollBar/styles/scroll = SubResource("StyleBoxFlat_c8qmb")
+VScrollBar/styles/scroll_focus = SubResource("StyleBoxFlat_7sv67")

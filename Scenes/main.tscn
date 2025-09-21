@@ -21,4 +21,5 @@ centered = false
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
-[node name="UIParent" parent="CanvasLayer" instance=ExtResource("3_eiedn")]
+[node name="UIParent" parent="CanvasLayer" node_paths=PackedStringArray("UIs") instance=ExtResource("3_eiedn")]
+UIs = []

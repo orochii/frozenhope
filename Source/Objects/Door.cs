@@ -22,6 +22,7 @@ public partial class Door : Area3D, Interactable
     public override void _Ready()
     {
         Interface.Visible = false;
+        Interface.NoDepthTest = true;
         _data = Database.Get();
     }
 
