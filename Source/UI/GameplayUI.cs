@@ -4,7 +4,7 @@ using System;
 public partial class GameplayUI : Control
 {
 	[Export] AnimationPlayer OverlayEffect;
-	[Export] Inventory Inventory;
+	[Export] InventoryScreen Inventory;
 	[Export] Control DmgPopupParent;
 	[Export] PackedScene DamagePopupTemplate;
 	[Signal]

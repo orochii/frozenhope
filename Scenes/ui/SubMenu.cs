@@ -4,10 +4,10 @@ using System;
 public partial class SubMenu : Control
 {
     public Vector2I GridPosition;
-    public Inventory ParentInventory;
+    public InventoryScreen ParentInventory;
     private BaseItem _item;
     private int _index;
-    private Inventory _parentInvetory;
+    private InventoryScreen _parentInvetory;
     [Signal]
     public delegate void sub_menu_closedEventHandler();
 
@@ -48,7 +48,7 @@ public partial class SubMenu : Control
     }
 
 
-    public void MakeVisible(BaseItem item, int index, Inventory parentInventory)
+    public void MakeVisible(BaseItem item, int index, InventoryScreen parentInventory)
     {
         _item = item;
         _index = index;

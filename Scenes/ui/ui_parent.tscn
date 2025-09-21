@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=55 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" uid="uid://byg1k1xps0da7" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" uid="uid://lpox11oi77ds" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -10,8 +10,9 @@
 [ext_resource type="Texture2D" uid="uid://ca32g5oy71di5" path="res://Graphics/textures/crosshair.png" id="7_8hnj5"]
 [ext_resource type="FontFile" uid="uid://c31vqtlawalb4" path="res://Graphics/fonts/m3x6oz.ttf" id="8_hbpli"]
 [ext_resource type="Shader" uid="uid://b1808h3splb22" path="res://Source/Shaders/menuOverlay.gdshader" id="9_lulmd"]
-[ext_resource type="Script" uid="uid://digu7hp6kdhom" path="res://Source/UI/Inventory.cs" id="10_r4o41"]
+[ext_resource type="Script" uid="uid://digu7hp6kdhom" path="res://Source/UI/InventoryScreen.cs" id="10_r4o41"]
 [ext_resource type="Texture2D" uid="uid://doq7xs4ba48ms" path="res://Graphics/textures/panel_basic.png" id="11_lagi4"]
+[ext_resource type="Script" uid="uid://bawnlc6n8drqq" path="res://Source/UI/InventoryGrid.cs" id="12_4xu5y"]
 [ext_resource type="Texture2D" uid="uid://dp7c10uedhinj" path="res://Graphics/textures/panel_basic_pressed.png" id="12_qa3t0"]
 [ext_resource type="Texture2D" uid="uid://cassrevogoc6b" path="res://Graphics/textures/panel_basic_hover.png" id="13_kxea5"]
 [ext_resource type="Script" uid="uid://bq33wssmu0ush" path="res://Source/UI/InvSlotButton.cs" id="14_765hn"]
@@ -23,6 +24,7 @@
 [ext_resource type="Script" uid="uid://btyiflv5kp1tu" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
 [ext_resource type="Script" uid="uid://i5rxq3egqyt2" path="res://Scenes/ui/SubMenu.cs" id="20_ut0hg"]
 [ext_resource type="Script" uid="uid://b042sidvevkln" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
+[ext_resource type="Script" uid="uid://bsxbvod3dvw2s" path="res://Source/UI/ItemBoxScreen.cs" id="22_khbty"]
 [ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
 [ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
@@ -452,7 +454,6 @@ UIs = [NodePath("TitleScreen"), NodePath("Gameplay"), NodePath("Message"), NodeP
 Loader = NodePath("Loader")
 
 [node name="TitleScreen" type="Control" parent="." node_paths=PackedStringArray("buttonList")]
-visible = false
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -538,7 +539,6 @@ horizontal_alignment = 1
 
 [node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
 process_mode = 3
-visible = false
 texture_filter = 1
 layout_mode = 1
 anchors_preset = 15
@@ -627,12 +627,12 @@ theme_override_constants/margin_bottom = 8
 layout_mode = 2
 alignment = 2
 
-[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
+[node name="Inventory" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("InventoryGrid", "InfoColumn", "CombineObj", "CombineIcon", "InstructionsLabel")]
+visible = false
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("10_r4o41")
-inventoryGrid = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid")
-invSlotTemplate = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot")
+InventoryGrid = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid")
 InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
@@ -654,11 +654,15 @@ layout_mode = 2
 layout_mode = 2
 alignment = 2
 
-[node name="InventoryGrid" type="GridContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn"]
+[node name="InventoryGrid" type="GridContainer" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "ParentInventory")]
 layout_mode = 2
 theme_override_constants/h_separation = 0
 theme_override_constants/v_separation = 0
 columns = 2
+script = ExtResource("12_4xu5y")
+inventoryGrid = NodePath(".")
+invSlotTemplate = NodePath("Slot")
+ParentInventory = NodePath("../../../..")
 
 [node name="Slot" type="TextureButton" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
 self_modulate = Color(1, 1, 1, 0.752941)
@@ -865,6 +869,342 @@ offset_right = 30.0
 offset_bottom = 116.0
 
 [node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/CombineObject"]
+z_index = 10
+layout_mode = 1
+offset_top = -4.0
+offset_right = 32.0
+offset_bottom = 28.0
+texture = ExtResource("16_o5qi5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="ItemBox" type="Control" parent="Gameplay/MarginContainer/VBoxContainer" node_paths=PackedStringArray("InventoryGrid", "InfoColumn")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("22_khbty")
+InventoryGrid = NodePath("VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid")
+InfoColumn = NodePath("VBoxContainer/HBoxContainer/InfoColumn")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer"]
+layout_mode = 2
+
+[node name="ItemBoxScroll" type="ScrollContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
+
+[node name="ItemBox" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll"]
+layout_mode = 2
+alignment = 2
+
+[node name="Slot" type="TextureButton" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("11_lagi4")
+texture_pressed = ExtResource("12_qa3t0")
+texture_hover = ExtResource("13_kxea5")
+texture_focused = ExtResource("13_kxea5")
+script = ExtResource("14_765hn")
+Container = NodePath("NinePatchRect")
+Icon = NodePath("NinePatchRect/TextureRect")
+Ammo = NodePath("NinePatchRect/HBoxContainer/Ammo")
+Quantity = NodePath("NinePatchRect/Quantity")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox/Slot"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("15_d0idt")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_o5qi5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ammo" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox/Slot/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]1"
+fit_content = true
+scroll_active = false
+
+[node name="Quantity" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/ItemBoxScroll/ItemBox/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="InfoColumn" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer" node_paths=PackedStringArray("ModelParent", "Description")]
+layout_mode = 2
+size_flags_horizontal = 3
+alignment = 2
+script = ExtResource("17_vsa1f")
+ModelParent = NodePath("../../../../../../SubViewport/ItemContainer")
+Description = NodePath("TextBox/MarginContainer/RichTextLabel")
+DescriptionFormat = "[color=#ee8]{0}[/color]
+{1}"
+
+[node name="ModelView" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InfoColumn"]
+layout_mode = 2
+texture = SubResource("ViewportTexture_vrf3q")
+stretch_mode = 3
+
+[node name="TextBox" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InfoColumn"]
+self_modulate = Color(1, 1, 1, 0.501961)
+custom_minimum_size = Vector2(0, 40)
+layout_mode = 2
+texture = ExtResource("18_shj08")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InfoColumn/TextBox"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InfoColumn/TextBox/MarginContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+bbcode_enabled = true
+text = "[color=#ee8]Glock G3[/color]
+Oh yeah Wesker
+third line"
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InfoColumn"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+bbcode_enabled = true
+text = "[color=#fd8](Ok):[/color] Use/Equip [color=#fd8](Aim):[/color] Move/Combine [color=#fd8](Back):[/color] Close menu"
+fit_content = true
+
+[node name="InventoryColumn" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer"]
+layout_mode = 2
+alignment = 2
+
+[node name="InventoryGrid" type="GridContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn" node_paths=PackedStringArray("inventoryGrid", "invSlotTemplate", "ParentInventory")]
+layout_mode = 2
+theme_override_constants/h_separation = 0
+theme_override_constants/v_separation = 0
+columns = 2
+script = ExtResource("12_4xu5y")
+inventoryGrid = NodePath(".")
+invSlotTemplate = NodePath("Slot")
+ParentInventory = NodePath("../../../..")
+
+[node name="Slot" type="TextureButton" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(32, 32)
+layout_mode = 2
+texture_normal = ExtResource("11_lagi4")
+texture_pressed = ExtResource("12_qa3t0")
+texture_hover = ExtResource("13_kxea5")
+texture_focused = ExtResource("13_kxea5")
+script = ExtResource("14_765hn")
+Container = NodePath("NinePatchRect")
+Icon = NodePath("NinePatchRect/TextureRect")
+Ammo = NodePath("NinePatchRect/HBoxContainer/Ammo")
+Quantity = NodePath("NinePatchRect/Quantity")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid/Slot"]
+show_behind_parent = true
+layout_mode = 0
+offset_right = 32.0
+offset_bottom = 32.0
+texture = ExtResource("15_d0idt")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_o5qi5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ammo" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]1"
+fit_content = true
+scroll_active = false
+
+[node name="Quantity" type="Label" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer/HBoxContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="Divisor" type="ColorRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/VBoxContainer"]
+custom_minimum_size = Vector2(0, 2)
+layout_mode = 2
+
+[node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox"]
+visible = false
+anchors_preset = 0
+offset_left = 1.0
+offset_top = 42.0
+offset_right = 1.0
+offset_bottom = 42.0
+script = ExtResource("20_ut0hg")
+
+[node name="Control" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu"]
+anchors_preset = 0
+offset_left = 81.0
+offset_top = 8.0
+offset_right = 81.0
+offset_bottom = 8.0
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control"]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 54.0
+texture = ExtResource("18_shj08")
+patch_margin_left = 8
+patch_margin_top = 8
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="MarginContainer" type="MarginContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control"]
+layout_mode = 0
+offset_right = 45.0
+offset_bottom = 42.0
+theme_override_constants/margin_left = 4
+theme_override_constants/margin_top = 4
+theme_override_constants/margin_right = 4
+theme_override_constants/margin_bottom = 4
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 2
+
+[node name="Use" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Use"
+
+[node name="Combine" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+disabled = true
+text = "Combine"
+
+[node name="Check" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Check"
+
+[node name="Equip" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/SubMenu/Control/MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+text = "Equip"
+
+[node name="CombineObject" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox"]
+visible = false
+anchors_preset = 0
+offset_left = -2.0
+offset_top = 84.0
+offset_right = 30.0
+offset_bottom = 116.0
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer/ItemBox/CombineObject"]
 z_index = 10
 layout_mode = 1
 offset_top = -4.0
