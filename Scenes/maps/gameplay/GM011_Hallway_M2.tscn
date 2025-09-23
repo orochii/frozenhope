@@ -122,6 +122,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.5, 0, -19.9)
 GoToScene = 12
 NewSceneXYZ = Vector3(-0.5, 0, 2.4)
 NewSceneRotate = Vector3(0, 180, 0)
+DoorLock = true
 FlavorText = "Its powered off and can't be opened."
 
 [node name="ToOffice" parent="Doors" instance=ExtResource("1_5df1t")]
@@ -130,7 +131,7 @@ GoToScenAlt = "gameplay/GM012_B_Office"
 NewSceneXYZ = Vector3(-1, 0, 2.4)
 NewSceneRotate = Vector3(0, 180, 0)
 DoorLock = true
-FlavorText = "Its powered off and can't be opened."
+FlavorText = "Its frozen shut and won't budge."
 
 [node name="TempElevator" parent="Doors" instance=ExtResource("1_5df1t")]
 transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 9.5, 0, -18.5)
@@ -287,6 +288,19 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_i4aad")
 debug_fill = false
 
+[node name="floor-small-square11" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 2.5, 5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square11"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square11"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
 [node name="floor-small-square2" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -5)
 collision_layer = 4
@@ -297,6 +311,19 @@ mesh = SubResource("ArrayMesh_431jk")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square2"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
+[node name="floor-small-square10" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 13, -0.5, 4, -6.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square10"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square10"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
 debug_fill = false
 
@@ -313,6 +340,19 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_i4aad")
 debug_fill = false
 
+[node name="floor-small-square12" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 2.5, 15)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square12"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square12"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
 [node name="floor-small-square5" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 10, -0.5, 0, -15)
 collision_layer = 4
@@ -326,6 +366,19 @@ skeleton = NodePath("")
 shape = SubResource("ConvexPolygonShape3D_i4aad")
 debug_fill = false
 
+[node name="floor-small-square7" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 7.2, -0.5, 2.5, -16.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square7"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square7"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
 [node name="floor-small-square4" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(-1.31134e-07, 0, -8, 0, 1, 0, 3, 0, -3.49691e-07, 5, 0, -18.5)
 collision_layer = 4
@@ -336,6 +389,32 @@ mesh = SubResource("ArrayMesh_431jk")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square4"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
+[node name="floor-small-square8" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.31134e-07, 0, -8, 0, 1, 0, 3, 0, -3.49691e-07, 5, 2.5000002, -18.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square8"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square8"]
+shape = SubResource("ConvexPolygonShape3D_i4aad")
+debug_fill = false
+
+[node name="floor-small-square9" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-1.3113416e-07, 0, -2, 0, 1, 0, 3, 0, -8.742278e-08, 10, 2.5000002, -18.5)
+collision_layer = 4
+collision_mask = 33
+
+[node name="floor-small-square" type="MeshInstance3D" parent="Prototype/floor-small-square9"]
+mesh = SubResource("ArrayMesh_431jk")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square9"]
 shape = SubResource("ConvexPolygonShape3D_i4aad")
 debug_fill = false
 
@@ -432,7 +511,7 @@ shape = SubResource("ConvexPolygonShape3D_lka26")
 debug_fill = false
 
 [node name="wall5" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 5, 1, 0, -14.5)
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 4, 1, 0, -15)
 collision_layer = 8
 collision_mask = 33
 
@@ -497,7 +576,7 @@ shape = SubResource("ConvexPolygonShape3D_lka26")
 debug_fill = false
 
 [node name="wall6" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 11, 1, 0, -6.5)
+transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 13, 1, 0, -6.5)
 collision_layer = 8
 collision_mask = 33
 
@@ -510,7 +589,7 @@ shape = SubResource("ConvexPolygonShape3D_lka26")
 debug_fill = false
 
 [node name="wall7" type="StaticBody3D" parent="Prototype"]
-transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 11, 1, 0, 4.5)
+transform = Transform3D(1, 0, 0, 0, 2.5, 0, 0, 0, 10, 1, 0, 5)
 collision_layer = 8
 collision_mask = 33
 
@@ -532,6 +611,32 @@ mesh = SubResource("ArrayMesh_ppql6")
 skeleton = NodePath("")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
+
+[node name="wall15" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.371139e-08, 0, 3, 0, 1.5, 0, -1, 0, -1.3113416e-07, -0.5, 2.5, -13)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall15"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall15"]
+shape = SubResource("ConvexPolygonShape3D_lka26")
+debug_fill = false
+
+[node name="wall16" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.371139e-08, 0, 3, 0, 1.5, 0, -1, 0, -1.3113416e-07, -0.5, 2.5, 0)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall16"]
+mesh = SubResource("ArrayMesh_ppql6")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall16"]
 shape = SubResource("ConvexPolygonShape3D_lka26")
 debug_fill = false
 
@@ -576,6 +681,7 @@ transform = Transform3D(0.89680797, 0.27866304, 0.34363127, -0.31539717, 0.94737
 size = Vector3(0.7, 0.7, 0.7)
 
 [node name="Player" parent="." instance=ExtResource("3_6aui1")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -5)
 
 [editable path="Doors/ToCargoPlatform"]
 [editable path="Doors/ToHangar1"]

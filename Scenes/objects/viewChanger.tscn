@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://bxkjfcblra3fq"]
 
-[ext_resource type="Script" path="res://Source/Objects/ViewChanger.cs" id="1_rc6d8"]
+[ext_resource type="Script" uid="uid://beug5bnorh0mn" path="res://Source/Objects/ViewChanger.cs" id="1_rc6d8"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_5wurr"]
 
@@ -11,5 +11,6 @@ script = ExtResource("1_rc6d8")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
 shape = SubResource("BoxShape3D_5wurr")
+debug_color = Color(1, 0, 0.16666698, 0.627451)
 
 [connection signal="body_entered" from="." to="." method="_OnPlayerEnter"]

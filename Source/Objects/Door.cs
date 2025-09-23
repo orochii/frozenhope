@@ -14,6 +14,7 @@ public partial class Door : Area3D, Interactable
     [Export] private bool _maintainRotation;
     [Export(PropertyHint.Range, "-360,360,5")] public Vector3 NewSceneRotate;
     [Export] public bool DoorLock = false;
+    [Export] public bool EmitInteractedSignal = false;
     [Export] public string[] Keys = new string[0];
     [Export(PropertyHint.MultilineText)] private string FlavorText;
     [Export(PropertyHint.MultilineText)] private string UnlockText;
@@ -56,6 +57,7 @@ public partial class Door : Area3D, Interactable
 
     public override void _Process(double delta)
     {
+        if (Main.Instance.Busy) return;
         float fDelta = (float)delta;
         if (Active)
         {
@@ -70,11 +72,6 @@ public partial class Door : Area3D, Interactable
                 ShowInterface();
             }
             else HideInterface();
-        }
-        if (Input.IsActionJustPressed("interact") && Main.Instance.Busy && Active)
-        {
-            GD.Print("Door Interact Signal Emited");
-            EmitSignal(SignalName.Interacted);
         }
         if (DoorCamera != null && DoorCamera.Current == true) MoveCamera(fDelta);
     }
@@ -106,6 +103,12 @@ public partial class Door : Area3D, Interactable
         //Pause the game
         Main.Instance.Busy = true;
         if (itemName != "empty") _rightKey = ItemChecker(itemName);
+        //Emit Interacted signal if it is enabled in this event
+        if (Active && EmitInteractedSignal)
+        {
+            GD.Print("Door Interact Signal Emited");
+            EmitSignal(SignalName.Interacted);
+        }
         //Check if the door is locked, if yes, allow watching through the window if it has a camera assigned
         if (DoorLock)
         {
