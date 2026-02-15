@@ -238,9 +238,29 @@ Camera = NodePath("../../Camera/HallwayElevator")
 transform = Transform3D(0.9396926, 0, -1.0260605, 0, 1, 0, 0.34202015, 0, 2.819078, 3.2999995, 0, -18.3)
 Camera = NodePath("../../Camera/HallwayElevator")
 
+[node name="ToHangarGates_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.59999996, 0, -6.5)
+Camera = NodePath("../../Camera/HangarGates")
+
+[node name="ToHangarGates_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.59999996, 0, -4.3)
+Camera = NodePath("../../Camera/HangarGates")
+
+[node name="ToRubbleViewA" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 1, -0.59999996, 0, -2.3000002)
+Camera = NodePath("../../Camera/RubbleViewA")
+
 [node name="ToElevatorDoor" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
 transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 8.6, 0, -18.5)
 Camera = NodePath("../../Camera/ElevatorDoor")
+
+[node name="ToDoubleDoors" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 4, -0.49999958, 0, 15)
+Camera = NodePath("../../Camera/TempCam5")
+
+[node name="ToBathroomDoor" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_jxl6b")]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 2, -0.49999958, 0, 19)
+Camera = NodePath("../../Camera/TempCam6")
 
 [node name="Camera" type="Node3D" parent="."]
 
@@ -257,10 +277,19 @@ transform = Transform3D(-4.371139e-08, 0.5948228, -0.80385685, 0, 0.80385685, 0.
 transform = Transform3D(-4.371139e-08, 0.15643449, -0.9876885, 0, 0.9876885, 0.15643449, 1, 6.837969e-09, -4.3173234e-08, 6.798, 1.653, -18.5)
 
 [node name="TempCam5" type="Camera3D" parent="Camera"]
-transform = Transform3D(0.99336, 0.0613151, -0.0973502, 0, 0.846152, 0.532941, 0.11505, -0.529402, 0.840534, -0.781986, 2.71051, 17.4212)
+transform = Transform3D(0.99335974, 0.06131486, -0.09734979, 0, 0.8461523, 0.53294116, 0.11504997, -0.52940226, 0.8405337, -0.781986, 2.4823933, 17.4212)
 
 [node name="TempCam6" type="Camera3D" parent="Camera"]
-transform = Transform3D(-0.711491, 0.481067, -0.512206, 0, 0.728917, 0.684602, 0.702695, 0.487089, -0.518618, -1.47738, 2.56434, 17.5971)
+transform = Transform3D(-0.7114911, 0.48106688, -0.5122062, 0, 0.72891665, 0.68460256, 0.70269513, 0.4870886, -0.5186177, -1.47738, 2.4479315, 17.5971)
+
+[node name="RubbleViewA" type="Camera3D" parent="Camera"]
+transform = Transform3D(-0.9303814, 0.22672616, -0.28807232, 0, 0.78580964, 0.61846846, 0.366593, 0.57541156, -0.7311028, -1.4314647, 2.7351062, -3.168936)
+
+[node name="HangarGates" type="Camera3D" parent="Camera"]
+transform = Transform3D(-1, -6.95425e-08, 5.2977185e-08, 0, 0.6059884, 0.7954735, -8.742278e-08, 0.7954735, -0.6059884, -0.5, 3.541, -9.107)
+
+[node name="HangarToCorner" type="Camera3D" parent="Camera"]
+transform = Transform3D(0.025645507, -0.87814623, 0.4777044, 0, 0.47786155, 0.8784352, -0.9996711, -0.022527914, 0.012255003, 0.703475, 3.9030685, -10.38892)
 
 [node name="Lights" type="Node3D" parent="."]
 

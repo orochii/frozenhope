@@ -152,7 +152,6 @@ Interface = NodePath("Label3D")
 DoorCamera = NodePath("Camera3D")
 GoToScene = 1
 NewSceneXYZ = Vector3(-39.185, 12.59, -6.252)
-DoorLock = true
 FlavorText = "The door seems to be locked from the other side."
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="WindowDoor"]

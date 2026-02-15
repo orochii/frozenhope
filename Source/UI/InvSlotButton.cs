@@ -12,6 +12,12 @@ public partial class InvSlotButton : TextureButton
 	public Vector2I GridPosition;
 	public BaseItem Item = null;
 	public Inventory ParentInventory;
+	/// <summary>
+	/// Receives an entry of type ItemEntry and a bool
+	/// It then loads the reference to the entry into Item and does work on it.
+	/// </summary>
+	/// <param name="entry"></param>
+	/// <param name="ignoreVisuals"></param>
 	public void Setup(GameState.ItemEntry entry, bool ignoreVisuals=false) {
 		CurrentEntry = entry;
 		Item = (entry==null) ? null : BaseItem.Get(entry.itemID);
@@ -51,6 +57,7 @@ public partial class InvSlotButton : TextureButton
     }
 	private void OnInventorySelected()
 	{
+		ParentInventory.SubMenu.MakeVisible(Item, Index, ParentInventory, this);
 		var combine = ParentInventory.GetCombine();
 		// Use item
 		if (combine != null)

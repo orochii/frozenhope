@@ -1,7 +1,7 @@
 [gd_scene load_steps=19 format=4 uid="uid://wrurjt6tlkf1"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_8phr0"]
-[ext_resource type="Script" path="res://Source/Objects/ChaseCamera3D.cs" id="2_3ahe6"]
+[ext_resource type="Script" uid="uid://cqweuem71bvew" path="res://Source/Objects/ChaseCamera3D.cs" id="2_3ahe6"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_c2bks"]
 [ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_xcm6k"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_4ryqp"]
@@ -173,7 +173,7 @@ ShowBodies = [NodePath("../../Prototype/wall2")]
 [node name="TempCam1" type="Camera3D" parent="Cameras"]
 transform = Transform3D(-0.955547, 0.174151, -0.237909, 0, 0.806916, 0.590666, 0.294838, 0.56441, -0.771046, -2.5, 2.942, -3.119)
 script = ExtResource("2_3ahe6")
-Tracking = true
+TrackPosition = true
 Follow_X = true
 X_offset = 0.9
 

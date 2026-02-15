@@ -1,19 +1,36 @@
 using Godot;
 using System;
+using System.Transactions;
 
 public partial class SubMenu : Control
 {
+    [Export] public Button UseButton;
+    [Export] public Button CombineButton;
+    [Export] public Button CheckButton;
+    [Export] public Button MoveButton;
+    public bool Active = false;
     public Vector2I GridPosition;
     public Inventory ParentInventory;
     private BaseItem _item;
     private int _index;
     private Inventory _parentInvetory;
+    public InvSlotButton _lastFocus;
     [Signal]
     public delegate void sub_menu_closedEventHandler();
 
+    public override void _Ready()
+    {
+        base._Ready();
+        UseButton.Pressed += () => _on_use_button();
+        CombineButton.Pressed += () => _on_combine_button();
+        CheckButton.Pressed += () => _on_check_button();
+        MoveButton.Pressed += () => _on_move_button();
+    }
+
     public override void _Process(double delta)
     {
-        if (Visible)
+
+        /*if (Visible)
         {
             switch (_item)
             {
@@ -44,17 +61,49 @@ public partial class SubMenu : Control
                     }
                     break;
             }
-        }
+        }*/
     }
 
 
-    public void MakeVisible(BaseItem item, int index, Inventory parentInventory)
+    public void MakeVisible(BaseItem item, int index, Inventory parentInventory, InvSlotButton slot)
     {
         _item = item;
         _index = index;
         _parentInvetory = parentInventory;
+        _lastFocus = slot;
+        if (_item is WeaponItem) UseButton.Text = "Equip";
+        else UseButton.Text = "Use";
         FocusMode = FocusModeEnum.All;
         Visible = true;
+        Active = true;
+        UseButton.GrabFocus();
+    }
+
+    public void CloseSubMenu()
+    {
+        Visible = false;
+        Active = false;
+        _lastFocus.GrabFocus();
+    }
+
+    public void _on_use_button()
+    {
+        GD.Print("Use Button pressed");
+    }
+
+    public void _on_combine_button()
+    {
+        GD.Print("Combine Button pressed");
+    }
+
+    public void _on_check_button()
+    {
+        GD.Print("Use Check pressed");
+    }
+
+    public void _on_move_button()
+    {
+        GD.Print("Use Move pressed");
     }
 
 }

@@ -173,7 +173,7 @@ transform = Transform3D(-2.1855694e-08, 0, -1.5, 0, 1, 0, 0.5, 0, -6.556708e-08,
 Camera = NodePath("../../Cameras/HallEntrance")
 
 [node name="ToHallEntrance_Ramp" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("4_u0ta6")]
-transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 2.6, -0.1000001, 0, -0.39999998)
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 2.6, -0.1000001, 0, -0.39999998)
 Camera = NodePath("../../Cameras/HallEntrance")
 
 [node name="ToServiceHall_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("4_u0ta6")]
@@ -197,7 +197,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5000001, 0, 1.5)
 Camera = NodePath("../../Cameras/CargoDoor")
 
 [node name="ToCargoDoor_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("4_u0ta6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.5, 0, 0.85)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7, 0, 0.85)
 Camera = NodePath("../../Cameras/CargoDoor")
 
 [node name="Cameras" type="Node3D" parent="."]

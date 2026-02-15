@@ -97,7 +97,8 @@ public partial class Inventory : Control
 			}
 			else
 			{
-				Main.Instance.UI.Gameplay.CloseMenu();
+				if (SubMenu.Active) SubMenu.CloseSubMenu();
+				else Main.Instance.UI.Gameplay.CloseMenu();
 				AudioManager.PlaySystemSound("cancel");
 			}
 		}

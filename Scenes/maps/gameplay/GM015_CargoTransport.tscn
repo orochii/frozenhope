@@ -1,11 +1,12 @@
-[gd_scene load_steps=29 format=4 uid="uid://dbwa8ri53330x"]
+[gd_scene load_steps=31 format=4 uid="uid://dbwa8ri53330x"]
 
 [ext_resource type="PackedScene" uid="uid://ddoq3ly1gal7p" path="res://Scenes/objects/door.tscn" id="1_x0usd"]
 [ext_resource type="Texture2D" uid="uid://c3xwbflrkkekw" path="res://Graphics/Models/scenery/Kenney-Prototype/Textures/colormap.png" id="2_coscm"]
+[ext_resource type="PackedScene" uid="uid://bxkjfcblra3fq" path="res://Scenes/objects/viewChanger.tscn" id="2_m5wnj"]
 [ext_resource type="Material" uid="uid://dxm3rh1g5qxv2" path="res://Graphics/textures/emissive.tres" id="3_6bopa"]
 [ext_resource type="PackedScene" uid="uid://bwuhe8d2c7xau" path="res://Scenes/objects/player.tscn" id="3_f0wci"]
 [ext_resource type="ArrayMesh" uid="uid://cy83thqg8n7bi" path="res://Graphics/Models/vehicles/Car8/Car8.obj" id="5_a4saj"]
-[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="6_ed7nf"]
+[ext_resource type="Shader" uid="uid://u5gkv4sjmcwv" path="res://Source/Shaders/psx_lit.gdshader" id="6_ed7nf"]
 [ext_resource type="Texture2D" uid="uid://b1k343c3gqabf" path="res://Graphics/Models/vehicles/Car8/Car8_grey.png" id="7_0t2x5"]
 
 [sub_resource type="Environment" id="Environment_cnwpa"]
@@ -114,7 +115,8 @@ size = Vector2(8, 2)
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_dkl1u"]
 render_priority = 0
 shader = ExtResource("6_ed7nf")
-shader_parameter/vertex_color = null
+shader_parameter/albedo = ExtResource("7_0t2x5")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -124,10 +126,12 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("7_0t2x5")
 
-[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_prr41"]
-points = PackedVector3Array(-1.26741, -0.038836, -1.97079, -1.58325, 2.10372, 1.74514, -1.30987, 0.482317, -3.71001, -1.01944, 0.482317, -3.76736, 1.2671, -0.038836, -1.97079, -1.26741, -0.038836, 1.95967, -1.38023, 0.482317, 2.88798, -1.58325, 2.43648, 1.74514, -1.58325, 2.10372, 1.84093, -1.30987, 0.642525, -3.71001, 1.01913, 0.482317, -3.76736, -1.01944, 0.642525, -3.76736, 1.30956, 0.482317, -3.71001, 1.58294, 2.10372, 1.74514, 1.37992, 0.482317, 2.88798, 1.2671, -0.038836, 1.95967, -1.26741, 0.122956, 2.36108, -1.35884, 0.482317, 3.0735, -1.30987, 3.04787, -3.57171, -1.58325, 2.43648, 1.84093, -1.50793, 2.83637, 1.77819, 1.01913, 0.642525, -3.76736, -1.18744, 3.19541, -3.57171, 1.30956, 0.642525, -3.71001, 1.58325, 2.43648, 1.74514, 1.58294, 2.10372, 1.84093, 1.35853, 0.482317, 3.0735, 1.2671, 0.122956, 2.36108, -1.17783, 0.482317, 3.12478, -1.35884, 0.742893, 3.0735, -1.30987, 1.50024, 2.96016, -1.50793, 2.83637, 1.81395, 1.18713, 3.19541, -3.57171, 1.30956, 3.04787, -3.57171, -1.18744, 3.19541, 1.77819, 1.50762, 2.83637, 1.77819, 1.58325, 2.43648, 1.84093, 1.35853, 0.742893, 3.0735, 1.17752, 0.482317, 3.12478, -1.17783, 0.742893, 3.12478, -1.30987, 3.04787, 1.82474, 1.30956, 1.50024, 2.96016, 1.18713, 3.19541, 1.77819, 1.50762, 2.83637, 1.81395, 1.17752, 0.742893, 3.12478, 1.30956, 3.04787, 1.82474)
+[sub_resource type="BoxShape3D" id="BoxShape3D_m5wnj"]
+size = Vector3(2.5912476, 1.4935303, 6.681717)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lvcxw"]
+size = Vector3(2.612732, 1.6468506, 5.622589)
 
 [sub_resource type="BoxMesh" id="BoxMesh_xled8"]
 size = Vector3(0.7, 0.8, 0.7)
@@ -175,15 +179,104 @@ NewSceneRotate = Vector3(0, 90, 0)
 
 [node name="ViewChangers" type="Node3D" parent="."]
 
+[node name="ToTruckRight_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.5, 0, -5.5)
+Camera = NodePath("../../Cameras/TruckRight")
+
+[node name="ToTruckRight_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, -5, 0, -3.8)
+Camera = NodePath("../../Cameras/TruckRight")
+
+[node name="ToTruckRight_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, -0.75, 0, -4.3)
+Camera = NodePath("../../Cameras/TruckRight")
+
+[node name="ToCargoExit_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, -5, 0, -2.5)
+Camera = NodePath("../../Cameras/CargoExit")
+
+[node name="ToCargoExit_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, -5, 0, -1.5)
+Camera = NodePath("../../Cameras/CargoExit")
+
+[node name="ToSpookyCorner_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, -5, 0, -0.19999999)
+Camera = NodePath("../../Cameras/SpookyCorner")
+
+[node name="ToSpookyCorner_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 3, -4.1, 0, 1.4)
+Camera = NodePath("../../Cameras/SpookyCorner")
+
+[node name="ToTruckFront_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.5, 0, 0, 0, 1, 0, 0, 0, 3, 0.85, 0, -4.3)
+Camera = NodePath("../../Cameras/TruckFront")
+
+[node name="ToTruckFront_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.55, 0, -4.1000004)
+Camera = NodePath("../../Cameras/TruckFront")
+
+[node name="ToTruckFront_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.55, 0, -2.8000004)
+Camera = NodePath("../../Cameras/TruckFront")
+
+[node name="ToPlatform1_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 0.5, 1.4499999, 0, -1.3000004)
+Camera = NodePath("../../Cameras/Platform1")
+
+[node name="ToPlatform1_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.9499999, 0, 2.3999996)
+Camera = NodePath("../../Cameras/Platform1")
+
+[node name="ToPlatform1_C" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 3.7, 0.10000017, 0, 0.8)
+Camera = NodePath("../../Cameras/Platform1")
+
+[node name="ToPlatformControls" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 0.5, 0.9499999, 0, 3.8999996)
+Camera = NodePath("../../Cameras/PlatformControls")
+
+[node name="ToServiceHall" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(2, 0, 0, 0, 1, 0, 0, 0, 1, 3, 0, -5.5)
+Camera = NodePath("../../Cameras/ServiceHall")
+
+[node name="ToOffice_A" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 4, -2.6, 0, 1)
+Camera = NodePath("../../Cameras/Office")
+
+[node name="ToOffice_B" parent="ViewChangers" node_paths=PackedStringArray("Camera") instance=ExtResource("2_m5wnj")]
+transform = Transform3D(0.4, 0, 0, 0, 1, 0, 0, 0, 4, -1.2999998, 0, 1)
+Camera = NodePath("../../Cameras/Office")
+
 [node name="Cameras" type="Node3D" parent="."]
 
-[node name="Camera3D" type="Camera3D" parent="Cameras"]
-transform = Transform3D(-0.340384, -0.783679, 0.519603, 0, 0.552601, 0.833447, -0.940287, 0.283692, -0.188096, 3.70993, 6.79981, -5.55596)
+[node name="TruckRight" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.36241055, -0.38582623, 0.848409, 0, 0.910292, 0.4139684, -0.9320191, 0.15002638, -0.32989913, 1.7056551, 2.3098438, -4.9841785)
+
+[node name="CargoExit" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.9702996, -0.13158979, 0.20298485, 0, 0.83910483, 0.54396975, -0.24190645, 0.5278136, -0.81418306, -4.297453, 3.0588567, -4.998744)
+
+[node name="ServiceHall" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.17366591, 0.14053366, -0.97472584, 0, 0.9897657, 0.14270206, 0.98480463, -0.024782484, 0.17188856, 0.71544147, 1.3574578, -5.128149)
+
+[node name="TruckFront" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.89296865, -0.16097246, 0.42035094, 0, 0.93386644, 0.3576221, -0.45011896, -0.3193453, 0.8339134, 1.875975, 2.147945, -0.6412158)
+
+[node name="Platform1" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.09158116, 0.5951712, -0.79836345, 0, 0.8017326, 0.59768295, 0.99579763, -0.05473649, 0.0734236, -1.9934683, 3.8292599, 0.57395947)
+
+[node name="PlatformControls" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.84799933, 0.2402356, -0.4724236, 0, 0.89136976, 0.45327696, 0.5299974, 0.38437855, -0.7558809, 0.563216, 1.9046279, 2.1735668)
+
+[node name="Office" type="Camera3D" parent="Cameras"]
+transform = Transform3D(-0.9986376, -0.03734875, 0.036441877, 0, 0.69836384, 0.71574295, -0.052181795, 0.7147678, -0.6974124, -1.9518696, 3.497483, -1.1139178)
+
+[node name="SpookyCorner" type="Camera3D" parent="Cameras"]
+transform = Transform3D(0.87466466, 0.3409802, -0.3445203, 0, 0.710749, 0.70344573, 0.48472852, -0.61527914, 0.621667, -5.601141, 2.4822361, 3.2335024)
 
 [node name="Lights" type="Node3D" parent="."]
 
 [node name="HatchLight" type="MeshInstance3D" parent="Lights"]
-transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3.9, 2.1, -5.5)
+transform = Transform3D(1.91069e-15, 4.37114e-08, 1, 1, -4.37114e-08, 0, 4.37114e-08, 1, -4.37114e-08, 3.9, 2.1, -5.45)
 material_override = ExtResource("3_6bopa")
 mesh = SubResource("CapsuleMesh_7gbfg")
 skeleton = NodePath("../..")
@@ -320,6 +413,16 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/floor-small-square"]
 shape = SubResource("BoxShape3D_f6tp8")
 
+[node name="roof1" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(10, 0, 0, 0, 1, 0, 0, 0, 11, -1, 4, -0.5)
+mesh = SubResource("ArrayMesh_0st3s")
+skeleton = NodePath("")
+
+[node name="roof2" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 9, 7.5, 4, -0.5)
+mesh = SubResource("ArrayMesh_0st3s")
+skeleton = NodePath("")
+
 [node name="wall" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 4, 0, 0, 0, 11, -6, 0, -0.5)
 collision_layer = 8
@@ -404,6 +507,64 @@ skeleton = NodePath("")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall7"]
 shape = SubResource("ConvexPolygonShape3D_wf7t2")
 
+[node name="roof3" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 9, 14.5, 4, -0.5)
+mesh = SubResource("ArrayMesh_0st3s")
+skeleton = NodePath("")
+
+[node name="wall8" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.371139e-08, 0, 7, 0, 4, 0, -1, 0, -3.059797e-07, 14.5, 0, -4.9)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall8"]
+mesh = SubResource("ArrayMesh_0ngkb")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall8"]
+shape = SubResource("ConvexPolygonShape3D_wf7t2")
+
+[node name="wall9" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, 7, 0, 4, 0, -1, 0, -3.0598e-07, 14.5, 0, 3.9)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall9"]
+mesh = SubResource("ArrayMesh_0ngkb")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall9"]
+shape = SubResource("ConvexPolygonShape3D_wf7t2")
+
+[node name="roof4" type="MeshInstance3D" parent="Prototype"]
+transform = Transform3D(7, 0, 0, 0, 1, 0, 0, 0, 9, 21.5, 4, -0.5)
+mesh = SubResource("ArrayMesh_0st3s")
+skeleton = NodePath("")
+
+[node name="wall10" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.371139e-08, 0, 7, 0, 4, 0, -1, 0, -3.059797e-07, 21.5, 0, -4.9)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall10"]
+mesh = SubResource("ArrayMesh_0ngkb")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall10"]
+shape = SubResource("ConvexPolygonShape3D_wf7t2")
+
+[node name="wall11" type="StaticBody3D" parent="Prototype"]
+transform = Transform3D(-4.37114e-08, 0, 7, 0, 4, 0, -1, 0, -3.0598e-07, 21.5, 0, 3.9)
+collision_layer = 8
+collision_mask = 33
+
+[node name="wall" type="MeshInstance3D" parent="Prototype/wall11"]
+mesh = SubResource("ArrayMesh_0ngkb")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/wall11"]
+shape = SubResource("ConvexPolygonShape3D_wf7t2")
+
 [node name="CargoPlatform" type="StaticBody3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.5, -0.2, -0.5)
 collision_layer = 8
@@ -431,7 +592,12 @@ skeleton = NodePath("../../../../Cameras")
 surface_material_override/0 = SubResource("ShaderMaterial_dkl1u")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Prototype/Van1"]
-shape = SubResource("ConvexPolygonShape3D_prr41")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.76737916, -0.25016057)
+shape = SubResource("BoxShape3D_m5wnj")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="Prototype/Van1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.006011963, 2.335294, -0.7591175)
+shape = SubResource("BoxShape3D_lvcxw")
 
 [node name="Railing" type="CSGCombiner3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.8, 0, 3.9)
@@ -481,6 +647,9 @@ skeleton = NodePath("../..")
 
 [node name="Office" type="CSGCombiner3D" parent="Prototype"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2, 0, 4)
+use_collision = true
+collision_layer = 8
+collision_mask = 33
 
 [node name="CSGBox3D" type="CSGBox3D" parent="Prototype/Office"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)

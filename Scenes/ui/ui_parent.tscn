@@ -790,7 +790,7 @@ fit_content = true
 custom_minimum_size = Vector2(0, 2)
 layout_mode = 2
 
-[node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
+[node name="SubMenu" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory" node_paths=PackedStringArray("UseButton", "CombineButton", "CheckButton", "MoveButton")]
 visible = false
 anchors_preset = 0
 offset_left = 1.0
@@ -798,6 +798,10 @@ offset_top = 42.0
 offset_right = 1.0
 offset_bottom = 42.0
 script = ExtResource("20_ut0hg")
+UseButton = NodePath("Control/MarginContainer/VBoxContainer/Use")
+CombineButton = NodePath("Control/MarginContainer/VBoxContainer/Combine")
+CheckButton = NodePath("Control/MarginContainer/VBoxContainer/Check")
+MoveButton = NodePath("Control/MarginContainer/VBoxContainer/Move")
 
 [node name="Control" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu"]
 anchors_preset = 0
@@ -831,24 +835,39 @@ theme_override_constants/separation = 2
 
 [node name="Use" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath(".")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Combine")
 theme = ExtResource("3_wyq5x")
 text = "Use"
 
 [node name="Combine" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Use")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Check")
 theme = ExtResource("3_wyq5x")
-disabled = true
 text = "Combine"
 
 [node name="Check" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Combine")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath("../Move")
 theme = ExtResource("3_wyq5x")
 text = "Check"
 
-[node name="Equip" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
+[node name="Move" type="Button" parent="Gameplay/MarginContainer/VBoxContainer/Inventory/SubMenu/Control/MarginContainer/VBoxContainer"]
 layout_mode = 2
+focus_neighbor_left = NodePath(".")
+focus_neighbor_top = NodePath("../Check")
+focus_neighbor_right = NodePath(".")
+focus_neighbor_bottom = NodePath(".")
 theme = ExtResource("3_wyq5x")
-text = "Equip"
+text = "Move"
 
 [node name="CombineObject" type="Control" parent="Gameplay/MarginContainer/VBoxContainer/Inventory"]
 visible = false
