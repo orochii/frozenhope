@@ -42,12 +42,23 @@ public partial class Door : Area3D, Interactable
         _data = Database.Get();
     }
 
+    /// <summary>
+    /// Signal invoced method:
+    /// Receives a 3D body and adds it to the list of nearby interactables from the player node.
+    /// </summary>
+    /// <param name="body"></param>
     public void _on_player_entered(Node3D body)
     {
         _playerCharacter = (Player)body;
         _playerCharacter.NearbyInteractables.Add(this);
     }
 
+    /// <summary>
+    /// Signal invoced method:
+    /// Receives a 3D body and removes it from the list of nearby interactables from the player node.
+    /// It then hides the visible interface of the interactable in question.
+    /// </summary>
+    /// <param name="body"></param>
     public void _on_player_left(Node3D body)
     {
         _playerCharacter.NearbyInteractables.Remove(this);
@@ -55,6 +66,7 @@ public partial class Door : Area3D, Interactable
         HideInterface();
     }
 
+    // Override Process method
     public override void _Process(double delta)
     {
         if (Main.Instance.Busy) return;

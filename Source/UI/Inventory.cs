@@ -13,18 +13,21 @@ public partial class Inventory : Control
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
 	private InvSlotButton lastFocused;
+
 	public override void _Ready()
 	{
 		base._Ready();
 		Visible = false;
 		invSlotTemplate.Visible = false;
 	}
+
 	public void Refresh() {
 		RefreshGrid();
 		RefreshSlots();
 		InfoColumn.Setup(null);
 		_spawnedSlots[0].GrabFocus();
 	}
+
 	public void RefreshGrid() {
 		var size = Main.Instance.State.InventorySize;
 		inventoryGrid.Columns = size.X;
@@ -41,6 +44,7 @@ public partial class Inventory : Control
 		}
 		UIUtils.SetupGridList(_spawnedSlots, size.X);
 	}
+
 	public void RefreshSlots() {
 		var size = Main.Instance.State.InventorySize;
 		// Clear all slots
@@ -65,6 +69,7 @@ public partial class Inventory : Control
 			}
 		}
 	}
+
 	public override void _Process(double delta)
 	{
 		if (!IsVisibleInTree()) return;
@@ -80,7 +85,7 @@ public partial class Inventory : Control
 				CombineObj.GlobalPosition = slot.GlobalPosition;
 			}
 			// Get input for combine.
-			if (Input.IsActionJustPressed(Main.Aim)) {
+			if (Input.IsActionJustPressed(Main.Aim) && !SubMenu.GetSubMenuStatus()) {
 				if(currentCombineSlot == null) {
 					SetCombine(slot);
 					AudioManager.PlaySystemSound("decision");
@@ -93,25 +98,34 @@ public partial class Inventory : Control
 			if (currentCombineSlot != null)
 			{
 				SetCombine(null);
+				if (SubMenu.GetSubMenuStatus())
+				{
+					SubMenu.DeactivateSubMenu();
+					SubMenu.ResetCursor();
+				}
 				AudioManager.PlaySystemSound("cancel");
 			}
 			else
 			{
-				if (SubMenu.Active) SubMenu.CloseSubMenu();
+				if (SubMenu.GetSubMenuStatus()){
+					SubMenu.CloseSubMenu();
+					SubMenu.DeactivateSubMenu();
+					SubMenu.ResetCursor();
+				}
 				else Main.Instance.UI.Gameplay.CloseMenu();
 				AudioManager.PlaySystemSound("cancel");
 			}
 		}
 	}
 	public void SetCombine(InvSlotButton button) {
-		if (currentCombineSlot != null) currentCombineSlot.SetCombine(false);
+		if (currentCombineSlot != null) currentCombineSlot.IsCombining(false);
 		currentCombineSlot = button;
 		if (button == null || button.Item==null) {
 			CombineObj.Visible = false;
 			currentCombineSlot = null;
 		}
 		else {
-			button.SetCombine(true);
+			button.IsCombining(true);
 			CombineObj.Visible = true;
 			// Set icon
 			CombineIcon.Texture = button.Item.Icon;
@@ -121,11 +135,16 @@ public partial class Inventory : Control
 			// Set position
 			CombineObj.GlobalPosition = button.GlobalPosition;
 		}
-		RefreshInstructions();
+		//RefreshInstructions();
 	}
 	public InvSlotButton GetCombine() {
 		return currentCombineSlot;
 	}
+
+	/// <summary>
+	/// Refresh the control instructions displayed at the bottom of the screen
+	/// This function by be depreciated.
+	/// </summary>
 	private void RefreshInstructions() {
 		if (currentCombineSlot == null) {
 			InstructionsLabel.Text = "[color=#fd8](Ok):[/color] Use/Equip [color=#fd8](Aim):[/color] Move/Combine [color=#fd8](Back):[/color] Close menu";

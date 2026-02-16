@@ -2,7 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://b4d3v1w8t1cu0" path="res://Graphics/textures/icons/glock_render.png" id="1_0r2ju"]
 [ext_resource type="PackedScene" uid="uid://cg2r5xf7ubfeb" path="res://Graphics/Models/weapons/equip_p_glock_g3.tscn" id="1_qrxqs"]
-[ext_resource type="Script" path="res://Source/Data/WeaponItem.cs" id="1_ymyrp"]
+[ext_resource type="Script" uid="uid://bg7yypsksnmc7" path="res://Source/Data/WeaponItem.cs" id="1_ymyrp"]
 [ext_resource type="PackedScene" uid="uid://bf4swyx1qpan5" path="res://Graphics/Models/weapons/p_glock_g3.tscn" id="2_yiciy"]
 
 [resource]
@@ -10,15 +10,10 @@ script = ExtResource("1_ymyrp")
 CompatibleAmmo = PackedStringArray("9mm_ammo")
 AmmoMax = 17
 AimTime = 200
-FocusAngle = 45.0
-DamageBaseVariance = 15
 EquippedModel = ExtResource("1_qrxqs")
-WeaponBoneIdx = 0
 AnimationSet = "pistol"
 DisplayName = "Gl 17"
 DisplayDescription = "Polymer frame pistol, light and reliable.
 Chambered in 9mm."
 Icon = ExtResource("1_0r2ju")
 Model = ExtResource("2_yiciy")
-SlotSize = Vector2i(1, 1)
-MaxStack = 1

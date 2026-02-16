@@ -30,7 +30,7 @@ public partial class Player : CharacterBody3D, Targettable
 		set { _nearbyInteractables = value; }
 	}
 	private Interactable _closestInteractable;
-	public Interactable CloestInteractable { get { return _closestInteractable; } }
+	public Interactable ClosestInteractable { get { return _closestInteractable; } }
 	private float previousTargetRotation;
 	public bool Dead => Main.Instance.State.GetHealth() <= 0;
 	private uint OriginalCollisionLayer;
@@ -257,7 +257,14 @@ public partial class Player : CharacterBody3D, Targettable
 		GetParent().AddChild(hitSpark);
 		hitSpark.GlobalPosition = pos;
 	}
-	//Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
+	
+	/// <summary>
+	/// Tank Move Processing where move = ("move_left","move_right","move_up","move_down")
+	/// </summary>
+	/// <param name="d"></param>
+	/// <param name="move"></param>
+	/// <param name="run"></param>
+	/// <param name="aiming"></param>
 	private void ProcessTankMove(float d, Vector2 move, bool run, bool aiming)
 	{
 		if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false) RefreshInteractables();
@@ -276,12 +283,12 @@ public partial class Player : CharacterBody3D, Targettable
 		{
 			// Set character visuals
 			Graphic.StateMachine.MoveState = (run && move.Y < 0) ? EMoveState.RUN : EMoveState.WALK;
-			var targetVelocity = (Transform.Basis.Z * -move.Y);
+			var targetVelocity = Transform.Basis.Z * -move.Y;
 			// Are we in aim mode?
 			if (aiming && _currentTarget != null)
 			{
 				// When aiming and locked on a target, left/right strafe the character around the target instead.
-				targetVelocity += (Transform.Basis.X * -move.X);
+				targetVelocity += Transform.Basis.X * -move.X;
 			}
 			else
 			{
@@ -416,42 +423,10 @@ public partial class Player : CharacterBody3D, Targettable
 		}
 	}
 	
-	//#DEPRECIATED MARK FOR DELETION
-	//Processing for when items are in range of the player
-	private void OnItemInRange(Node3D body)
-	{
-		//Print to console for debugging
-		GD.Print(string.Format("Interactable {0} Entered", body.ToString()));
-		GD.Print("List has ", _nearbyInteractables.Count, " elements");
-
-		//Main function processing
-		if (body is Interactable)
-		{
-			var item = body as Interactable;
-			if (!_nearbyInteractables.Contains(item)) _nearbyInteractables.Add(item);
-			if (Main.Instance.Busy == false) RefreshInteractables();
-			GD.Print("List has ", _nearbyInteractables.Count, " elements");
-		}
-	}
-	//#DEPRECIATED MARK FOR DELETION
-	private void OnItemOutOfRange(Node3D body) {
-		//Print to console for debugging
-		GD.Print(string.Format("Interactable {0} Left", body.ToString()));
-		/*START Temp Code*/
-		if (body is Interactable) {
-			var item = body as Interactable;
-			item.Active = false;
-			if (_nearbyInteractables.Contains(item)) _nearbyInteractables.Remove(item);
-			if (_nearbyInteractables.Count > 0 && Main.Instance.Busy == false)  RefreshInteractables();
-			else { 
-				item.Active = false;
-				item.HideInterface();
-				_closestInteractable = null;
-			}
-		}
-	}
-
-	//Iterates over the Interactable inside of the _nearbyInteractables list and returns the closest one.
+	/// <summary>
+	/// Iterates over the Interactable in _nearbyInteractables and returns the Interactable that is closest to the player.
+	/// </summary>
+	/// <returns>The closest Interactable to the player.</returns>
 	public Interactable GetClosestInteract() {
 		Interactable closest = null;
 		float closestDst = 0;
@@ -469,7 +444,9 @@ public partial class Player : CharacterBody3D, Targettable
 		return closest;
 	}
 
-	// Refresh nearest Interactable items
+	/// <summary>
+	/// Refresh nearest Interactable items
+	/// </summary>
 	public void RefreshInteractables()
 	{
 		_closestInteractable = GetClosestInteract();
