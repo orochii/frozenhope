@@ -1,12 +1,14 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0sl55f8lsja"]
 
 [ext_resource type="PackedScene" uid="uid://veht4f35p2n5" path="res://Graphics/Models/items/9mm_ammo2.glb" id="1_3bt3y"]
-[ext_resource type="Shader" path="res://Source/Shaders/psx_lit.gdshader" id="2_2k4be"]
+[ext_resource type="Shader" uid="uid://u5gkv4sjmcwv" path="res://Source/Shaders/psx_lit.gdshader" id="2_2k4be"]
 [ext_resource type="Texture2D" uid="uid://cv2uuq4sl7rvo" path="res://Graphics/Models/items/9mm_ammo2_9mmLugerAmmoTexturePS1.png" id="3_vvidu"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_pf7rk"]
 render_priority = 0
 shader = ExtResource("2_2k4be")
+shader_parameter/albedo = ExtResource("3_vvidu")
+shader_parameter/vertex_color = false
 shader_parameter/jitter = 0.5
 shader_parameter/jitter_z_coordinate = true
 shader_parameter/jitter_depth_independent = true
@@ -16,7 +18,6 @@ shader_parameter/alpha_scissor = 1.0
 shader_parameter/albedo_color = Color(1, 1, 1, 1)
 shader_parameter/emission_color = Color(1, 1, 1, 1)
 shader_parameter/texture_size = Vector2(1, 1)
-shader_parameter/albedo = ExtResource("3_vvidu")
 
 [node name="9mm_ammo2" instance=ExtResource("1_3bt3y")]
 transform = Transform3D(0.939693, 0.34202, 0, -0.34202, 0.939693, 0, 0, 0, 1, 0, 0, 0)

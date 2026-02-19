@@ -42,13 +42,14 @@ public partial class SubMenu : Control
     /// <param name="index"></param>
     /// <param name="parentInventory"></param>
     /// <param name="slot"></param>
-    public void MakeVisible(BaseItem item, Inventory parentInventory, InvSlotButton slot)
+    public void OpenSubMenu(BaseItem item, Inventory parentInventory, InvSlotButton slot, string contextText)
     {
         _item = item;
         _parentInventory = parentInventory;
         _currentSlot = slot;
-        if (_item is WeaponItem) UseButton.Text = "Equip";
-        else UseButton.Text = "Use";
+        /*if (_item is WeaponItem) UseButton.Text = "Equip";
+        else UseButton.Text = "Use";*/
+        UseButton.Text = contextText;
         FocusMode = FocusModeEnum.All;
         Visible = true;
         Active = true;

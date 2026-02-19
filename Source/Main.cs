@@ -71,10 +71,16 @@ public partial class Main : Node
 	}
     public void StartGame() {
 		State = new GameState();
+		//Fill player Inventory
 		foreach(var e in Database.StartingItems) {
 			State.AddItem(e);
 		}
 		State.SetEquippedItem(0);
+		//Fill Itme Box
+		foreach(var b in Database.BoxItems)
+		{
+			State.AddBoxItem(b);
+		}
 		// Go to scene in position [StartScene]
 		ChangeMap(Database.StartingScene[StartScene], TransferVector, TransferRotate);
 	}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=52 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=53 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" uid="uid://byg1k1xps0da7" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" uid="uid://lpox11oi77ds" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -23,6 +23,7 @@
 [ext_resource type="Script" uid="uid://btyiflv5kp1tu" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
 [ext_resource type="Script" uid="uid://i5rxq3egqyt2" path="res://Scenes/ui/SubMenu.cs" id="20_ut0hg"]
 [ext_resource type="Script" uid="uid://b042sidvevkln" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
+[ext_resource type="Script" uid="uid://vh1q026xi12y" path="res://Scenes/ui/ItemBoxUI.cs" id="23_4xu5y"]
 [ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
 [ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
@@ -530,7 +531,7 @@ theme = ExtResource("3_wyq5x")
 text = "Spanish Inquisition Software 2024"
 horizontal_alignment = 1
 
-[node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "DmgPopupParent")]
+[node name="Gameplay" type="Control" parent="." node_paths=PackedStringArray("OverlayEffect", "Inventory", "itemBoxScreen", "DmgPopupParent")]
 process_mode = 3
 texture_filter = 1
 layout_mode = 1
@@ -542,6 +543,7 @@ grow_vertical = 2
 script = ExtResource("4_a1wao")
 OverlayEffect = NodePath("Overlay/OverlayAnimation")
 Inventory = NodePath("MarginContainer/VBoxContainer/Inventory")
+itemBoxScreen = NodePath("MarginContainer/VItemBoxContainer/ItemBox")
 DmgPopupParent = NodePath("DmgPopupParent")
 DamagePopupTemplate = ExtResource("5_7qiet")
 
@@ -975,6 +977,129 @@ text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]17
 "
 fit_content = true
 scroll_active = false
+
+[node name="VItemBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer"]
+layout_mode = 2
+
+[node name="ItemBox" type="Control" parent="Gameplay/MarginContainer/VItemBoxContainer" node_paths=PackedStringArray("verticalSlots", "slotTemplate")]
+layout_mode = 2
+size_flags_vertical = 3
+script = ExtResource("23_4xu5y")
+verticalSlots = NodePath("HBoxContainer/SlotContainer")
+slotTemplate = NodePath("HBoxContainer/SlotContainer/BoxSlot")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox"]
+layout_mode = 1
+anchors_preset = 11
+anchor_left = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+grow_horizontal = 0
+grow_vertical = 2
+
+[node name="VScrollBar" type="VScrollBar" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="SlotContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer"]
+layout_mode = 2
+
+[node name="BoxSlot" type="TextureButton" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
+self_modulate = Color(1, 1, 1, 0.752941)
+custom_minimum_size = Vector2(64, 32)
+layout_mode = 2
+mouse_filter = 2
+button_mask = 0
+texture_normal = ExtResource("11_lagi4")
+texture_pressed = ExtResource("12_qa3t0")
+texture_hover = ExtResource("13_kxea5")
+texture_focused = ExtResource("13_kxea5")
+stretch_mode = 3
+script = ExtResource("14_765hn")
+Container = NodePath("NinePatchRect")
+Icon = NodePath("NinePatchRect/TextureRect")
+Ammo = NodePath("NinePatchRect/HBoxContainer/Ammo")
+Quantity = NodePath("NinePatchRect/Quantity")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer/BoxSlot"]
+show_behind_parent = true
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -16.0
+offset_top = -16.0
+offset_right = 16.0
+offset_bottom = 16.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("15_d0idt")
+patch_margin_left = 12
+patch_margin_top = 12
+patch_margin_right = 12
+patch_margin_bottom = 12
+axis_stretch_horizontal = 1
+axis_stretch_vertical = 1
+
+[node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("16_o5qi5")
+expand_mode = 3
+stretch_mode = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_right = -4.0
+offset_bottom = -4.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Ammo" type="RichTextLabel" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect/HBoxContainer"]
+custom_minimum_size = Vector2(16, 8)
+layout_mode = 2
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+bbcode_enabled = true
+text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]1"
+fit_content = true
+scroll_active = false
+
+[node name="Quantity" type="Label" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+z_index = 10
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -10.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme = ExtResource("3_wyq5x")
+theme_override_constants/outline_size = 2
+text = "1"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="ColorRect" type="ColorRect" parent="Gameplay/MarginContainer/VItemBoxContainer"]
+custom_minimum_size = Vector2(0, 95)
+layout_mode = 2
+color = Color(1, 1, 1, 0)
 
 [node name="SubViewport" type="SubViewport" parent="Gameplay"]
 own_world_3d = true

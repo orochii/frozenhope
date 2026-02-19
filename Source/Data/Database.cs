@@ -3,6 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class Database : Resource {
     [Export] public ItemAddEntry[] StartingItems;
+    [Export] public ItemAddEntry[] BoxItems;
     [Export] public string[] StartingScene;
     [Export] public string IntroScene;
     public static Database Get() {

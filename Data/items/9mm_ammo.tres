@@ -1,6 +1,6 @@
 [gd_resource type="Resource" script_class="AmmoItem" load_steps=7 format=3 uid="uid://bkdfwh7x3ytds"]
 
-[ext_resource type="Script" path="res://Source/Data/AmmoItem.cs" id="1_1v5np"]
+[ext_resource type="Script" uid="uid://bjfkg3p630u1n" path="res://Source/Data/AmmoItem.cs" id="1_1v5np"]
 [ext_resource type="Texture2D" uid="uid://cwornwt81ljbc" path="res://Graphics/textures/icons/ammo_bullet.png" id="1_rxbti"]
 [ext_resource type="Texture2D" uid="uid://b2dkwytqgf2y8" path="res://Graphics/Models/items/9mm_ammo_render.png" id="2_7ok15"]
 [ext_resource type="PackedScene" uid="uid://bvedlftr3otom" path="res://Scenes/objects/hitspark_blood.tscn" id="2_12gt6"]
@@ -14,12 +14,10 @@ HitscanDamage = 40
 DamagePartial = 25
 HitscanDamageType = 1
 HitscanShots = 1
-HitscanSpread = 0.0
 HitSparkObject = ExtResource("3_82b5h")
 HitSparkBlood = ExtResource("2_12gt6")
 DisplayName = "9mm Bullets"
 DisplayDescription = "Ammo for 9mm pistols. {0}"
 Icon = ExtResource("2_7ok15")
 Model = ExtResource("2_qtjth")
-SlotSize = Vector2i(1, 1)
 MaxStack = 30

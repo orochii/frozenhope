@@ -83,7 +83,7 @@ public partial class ItemBox : Area3D, Interactable
         //Animate Box!
         BoxAnimation.Play("Lid_Open");
         await ToSignal(BoxAnimation, AnimationPlayer.SignalName.AnimationFinished);
-        Main.Instance.UI.Gameplay.OpenMenu();
+        Main.Instance.UI.Gameplay.OpenMenu(true);
         await ToSignal(Main.Instance.UI.Gameplay, "menu_closed");
         BoxAnimation.Play("Lid_Close");
         await ToSignal(BoxAnimation, AnimationPlayer.SignalName.AnimationFinished);

@@ -169,7 +169,7 @@ public class GameState {
         if (item.Item==null) return false;
         if (item.AmmoInside != null)
             return AddItem(item.Item,item.Amount, item.AmmoInside.ID, item.AmmoQty);
-        return AddItem(item.Item,item.Amount);
+        return AddItem(item.Item, item.Amount);
     }
     public bool AddItem(BaseItem item, int amount, string ammoId="", int ammo=0) {
         // First, look for existing stacks
@@ -305,34 +305,76 @@ public class GameState {
             return true;
         }
         // Step2: Try reload (one must be a weapon, the other must be valid ammo).
-        var wpn = item1 is WeaponItem ? (item1 as WeaponItem) : (item2 is WeaponItem ? item2 as WeaponItem : null);
-        var wpE = wpn==item1 ? itemEntry1 : wpn==item2 ? itemEntry2 : null;
-        var amm = item1 is AmmoItem ? (item1 as AmmoItem) : (item2 is AmmoItem ? item2 as AmmoItem : null);
-        var amE = amm==item1 ? itemEntry1 : amm==item2 ? itemEntry2 : null;
-        if (wpn != null && amm != null && wpn.IsCompatibleWithAmmo(amE.itemID)) {
-            return ReloadWithAmmo(wpn,wpE,amm,amE);
+        var weapon = item1 is WeaponItem ? (item1 as WeaponItem) : (item2 is WeaponItem ? item2 as WeaponItem : null);
+        var weaponEntry = weapon==item1 ? itemEntry1 : weapon==item2 ? itemEntry2 : null;
+        var ammo = item1 is AmmoItem ? (item1 as AmmoItem) : (item2 is AmmoItem ? item2 as AmmoItem : null);
+        var ammoEntry = ammo==item1 ? itemEntry1 : ammo==item2 ? itemEntry2 : null;
+        if (weapon != null && ammo != null && weapon.IsCompatibleWithAmmo(ammoEntry.itemID)) {
+            return ReloadWithAmmo(weapon,weaponEntry,ammo,ammoEntry);
         }
         // Step3: Try combining (check if can do). --not for now.
         // TODO.
         // Else: no can't do :(.
         return false;
     }
-    private bool ReloadWithAmmo(WeaponItem wpn, ItemEntry wpE, AmmoItem amm, ItemEntry amE) {
-        if (wpn.IsCompatibleWithAmmo(amE.itemID)) {
-            if (wpE.ammoId != amE.itemID) {
-                AddItem(amm, wpE.ammoQty);
-                wpE.ammoId = "";
-                wpE.ammoQty = 0;
+    private bool ReloadWithAmmo(WeaponItem weapon, ItemEntry weaponEntry, AmmoItem ammo, ItemEntry ammoEntry) {
+        GD.Print("Ammo stacka amount is: " + ammoEntry.ammoQty);
+        if (weapon.IsCompatibleWithAmmo(ammoEntry.itemID)) {
+            if (weaponEntry.ammoId != ammoEntry.itemID) {
+                AddItem(ammo, weaponEntry.ammoQty);
+                weaponEntry.ammoId = "";
+                weaponEntry.ammoQty = 0;
             } 
-            wpE.ammoId = amE.itemID;
-            var remainingSpace = wpn.AmmoMax - wpE.ammoQty;
-            var addAmmo = Math.Min(remainingSpace, wpE.ammoQty);
+            weaponEntry.ammoId = ammoEntry.itemID;
+            var remainingSpace = weapon.AmmoMax - weaponEntry.ammoQty;
+            GD.Print("Available reload space is: " + remainingSpace + "\nWeapon Ammo is: " + weaponEntry.ammoQty);
+            
+            var addAmmo = Math.Min(remainingSpace, ammoEntry.stackSize);
             if (addAmmo <= 0) return false;
-            RemoveFromSlot(new Vector2I(amE.posX, amE.posY), addAmmo);
-            wpE.ammoQty += addAmmo;
+            RemoveFromSlot(new Vector2I(ammoEntry.posX, ammoEntry.posY), addAmmo);
+            weaponEntry.ammoQty += addAmmo;
             return true;
         }
         return false;
+    }
+    #endregion
+
+    #region Itembox
+    public bool AddBoxItem(ItemAddEntry item) {
+        if (item==null) return false;
+        if (item.Item==null) return false;
+        if (item.AmmoInside != null)
+            return AddBoxItem(item.Item,item.Amount, item.AmmoInside.ID, item.AmmoQty);
+        return AddBoxItem(item.Item, item.Amount);
+    }
+    public bool AddBoxItem(BaseItem item, int amount, string ammoId="", int ammo=0) {
+        if (amount <= 0) return false;
+        ItemEntry boxEntry = new ItemEntry();
+        boxEntry.itemID = item.ID;
+        boxEntry.stackSize = Math.Min(amount, item.MaxStack);
+        if (item is WeaponItem && ammo > 0)
+        {
+            var weapon = item as WeaponItem;
+            if (weapon.IsCompatibleWithAmmo(ammoId))
+            {
+                boxEntry.ammoId = ammoId;
+                boxEntry.ammoQty = ammo;
+            }
+        }
+        persistentData.boxInventory.Add(boxEntry);
+        return true;
+    }
+    public string ListBoxItems() {
+        string returnValue = "";
+        foreach (var entry in persistentData.boxInventory) {
+            var data = BaseItem.Get(entry.itemID);
+            if (returnValue.Length > 0) returnValue += ", ";
+            returnValue += data.GetItemName();
+        }
+        return returnValue;
+    }
+    public List<ItemEntry> GetBoxEntries() {
+        return persistentData.boxInventory;
     }
     #endregion
 }

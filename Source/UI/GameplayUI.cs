@@ -5,6 +5,7 @@ public partial class GameplayUI : Control
 {
 	[Export] AnimationPlayer OverlayEffect;
 	[Export] Inventory Inventory;
+	[Export] ItemBoxUI itemBoxScreen;
 	[Export] Control DmgPopupParent;
 	[Export] PackedScene DamagePopupTemplate;
 	[Signal]
@@ -14,16 +15,21 @@ public partial class GameplayUI : Control
 		// Run when UI mode is set to this.
 		OverlayEffect.Play("RESET");
 	}
-	public void OpenMenu() {
+	public void OpenMenu(bool itemBox = false) {
 		OverlayEffect.Play("showMenu");
 		Inventory.Visible = true;
 		Inventory.Refresh();
+		if (itemBox) {
+			itemBoxScreen.Visible = true;
+			itemBoxScreen.RefreshBoxSlots();
+		}
 		GetTree().Paused = true;
 	}
 	public void CloseMenu()
 	{
 		OverlayEffect.Play("hideMenu");
 		Inventory.Visible = false;
+		if (itemBoxScreen.Visible) itemBoxScreen.Visible = false;
 		GetTree().Paused = false;
 		EmitSignal(SignalName.menu_closed);
 	}

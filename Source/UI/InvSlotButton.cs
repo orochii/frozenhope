@@ -36,7 +36,8 @@ public partial class InvSlotButton : TextureButton
 			Container.Size = new Vector2(sizeX, sizeY);
 			Container.Visible = true;
 			// Show amount only if over 1
-			if (CurrentEntry.stackSize > 1) Quantity.Text = CurrentEntry.stackSize.ToString();
+			var item = BaseItem.Get(CurrentEntry.itemID);
+			if (item.MaxStack > 1) Quantity.Text = CurrentEntry.stackSize.ToString();
 			else Quantity.Text = "";
 			// Show ammo if there's any (might want to show the ammo's icon or something)
 			if (CurrentEntry.ammoId.Length > 0) {
@@ -52,6 +53,7 @@ public partial class InvSlotButton : TextureButton
 			}
 		}
 	}
+
     public override void _Ready()
     {
 		base._Ready();
@@ -69,7 +71,11 @@ public partial class InvSlotButton : TextureButton
 		var combine = ParentInventory.GetCombine();
 		if (!subMenu.Combining && !subMenu.Moving && combine == null && Index != -1)
 		{
-			ParentInventory.SubMenu.MakeVisible(Item, ParentInventory, this);
+			string context;
+			if (Item is WeaponItem) context = "Equip";
+			else context = "Use";
+			
+			ParentInventory.SubMenu.OpenSubMenu(Item, ParentInventory, this, context);
 			return;
 		}
 
