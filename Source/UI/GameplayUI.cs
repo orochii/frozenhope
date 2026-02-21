@@ -5,11 +5,19 @@ public partial class GameplayUI : Control
 {
 	[Export] AnimationPlayer OverlayEffect;
 	[Export] Inventory Inventory;
-	[Export] ItemBoxUI itemBoxScreen;
+	[Export] BoxInventory itemBoxScreen;
 	[Export] Control DmgPopupParent;
 	[Export] PackedScene DamagePopupTemplate;
 	[Signal]
 	public delegate void menu_closedEventHandler();
+
+    public override void _Ready()
+    {
+        base._Ready();
+		PassSibling();
+    }
+
+	
 	public void Refresh()
 	{
 		// Run when UI mode is set to this.
@@ -19,9 +27,11 @@ public partial class GameplayUI : Control
 		OverlayEffect.Play("showMenu");
 		Inventory.Visible = true;
 		Inventory.Refresh();
+		//Open item box if the menu is opened from an Item Box
 		if (itemBox) {
 			itemBoxScreen.Visible = true;
-			itemBoxScreen.RefreshBoxSlots();
+			itemBoxScreen.Refresh();
+			Main.Instance.UI.boxOpen = true;
 		}
 		GetTree().Paused = true;
 	}
@@ -29,7 +39,10 @@ public partial class GameplayUI : Control
 	{
 		OverlayEffect.Play("hideMenu");
 		Inventory.Visible = false;
-		if (itemBoxScreen.Visible) itemBoxScreen.Visible = false;
+		if (itemBoxScreen.Visible) {
+			itemBoxScreen.Visible = false;
+			Main.Instance.UI.boxOpen = false;
+		}
 		GetTree().Paused = false;
 		EmitSignal(SignalName.menu_closed);
 	}
@@ -38,7 +51,7 @@ public partial class GameplayUI : Control
     {
         if (!IsVisibleInTree()) return;
 		// Open menu.
-		if (Input.IsActionJustPressed("menu")) {
+		if (Input.IsActionJustPressed(Main.Menu)) {
 			if (!Inventory.Visible) OpenMenu();
 		}
     }
@@ -52,5 +65,11 @@ public partial class GameplayUI : Control
 			popup.Setup(obj as Node3D, offset, damage);
 			DmgPopupParent.AddChild(popup);
 		}
+	}
+
+	public void PassSibling()
+	{
+		Inventory.boxSibling = itemBoxScreen;
+		itemBoxScreen.inventorySibling = Inventory;
 	}
 }

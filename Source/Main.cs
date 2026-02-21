@@ -18,6 +18,7 @@ public partial class Main : Node
 	public Vector3 TransferRotate = Vector3.Zero;
 
 	//Cache the inputs in order to save on memory by avoiding constant conversions from String to StringName
+	public static StringName Menu { get; private set; } = "menu";
 	public static StringName MoveLeft { get; private set; } = "move_left";
 	public static StringName MoveRight { get; private set; } = "move_right";
 	public static StringName MoveUp { get; private set; } = "move_up";

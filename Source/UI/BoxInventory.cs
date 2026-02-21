@@ -1,22 +1,29 @@
 using Godot;
 using System;
 
-public partial class ItemBoxUI : Control
+public partial class BoxInventory : Control
 {
     [Export] VBoxContainer verticalSlots = null;
     [Export] int itemBoxSize = 3;
     [Export] InvSlotButton slotTemplate = null;
     public InvSlotButton[] boxSlots;
+    public Inventory inventorySibling;
 
     public override void _Ready()
     {
         base._Ready();
         Visible = false;
         slotTemplate.Visible = false;
-        CreateSlots();
+        RefreshBoxGrid();
     }
 
-    public void CreateSlots()
+    public void Refresh()
+    {
+        RefreshBoxGrid();
+        RefreshBoxSlots();
+    }
+
+    public void RefreshBoxGrid()
     {
         if (boxSlots != null) foreach(var s in boxSlots) s.QueueFree();
         boxSlots = new InvSlotButton[itemBoxSize];
@@ -27,6 +34,7 @@ public partial class ItemBoxUI : Control
             boxSlots[i].Setup(null);
             boxSlots[i].Index = -1;
             boxSlots[i].GridPosition.Y = i;
+            boxSlots[i].ParentBox = this;
             verticalSlots.AddChild(boxSlots[i]);
         }
     }
@@ -41,5 +49,10 @@ public partial class ItemBoxUI : Control
             var entry = boxEntries[i];
             boxSlots[i].Setup(entry);
         }
+    }
+
+    public bool GetActiveState()
+    {
+        return Visible;
     }
 }

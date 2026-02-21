@@ -36,19 +36,17 @@ public partial class SubMenu : Control
 
     /// <summary>
     /// Make the sub menu visible and grant it focus. Pass it the item, index, parentinventory as well as the slot
-    /// that called it.
+    /// that called it. Also state in what context in the menu will be used in: Equip, Use, Store
     /// </summary>
     /// <param name="item"></param>
-    /// <param name="index"></param>
     /// <param name="parentInventory"></param>
     /// <param name="slot"></param>
+    /// <param name="contextText"></param>
     public void OpenSubMenu(BaseItem item, Inventory parentInventory, InvSlotButton slot, string contextText)
     {
         _item = item;
         _parentInventory = parentInventory;
         _currentSlot = slot;
-        /*if (_item is WeaponItem) UseButton.Text = "Equip";
-        else UseButton.Text = "Use";*/
         UseButton.Text = contextText;
         FocusMode = FocusModeEnum.All;
         Visible = true;
@@ -97,6 +95,12 @@ public partial class SubMenu : Control
     public void _on_use_button()
     {
         GD.Print("Use Button pressed");
+        if (Main.Instance.UI.boxOpen)
+        {
+            _currentSlot.StoreItem();
+            CloseSubMenu();
+            return;
+        }
         switch (_item)
         {
             case WeaponItem:

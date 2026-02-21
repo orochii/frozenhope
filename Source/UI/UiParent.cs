@@ -6,6 +6,7 @@ public partial class UiParent : Control
 	public enum EModes { TITLE, GAMEPLAY, MESSAGE, CUTSCENE, SPLASH, GAMEOVER }
 	[Export] Control[] UIs;
 	[Export] public Loader Loader;
+	public bool boxOpen;
 	private int _mode;
 	public int Mode => _mode;
 	public override void _Ready()

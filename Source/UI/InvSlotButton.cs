@@ -12,7 +12,10 @@ public partial class InvSlotButton : TextureButton
 	public Vector2I GridPosition;
 	public BaseItem Item = null;
 	public Inventory ParentInventory;
+	public BoxInventory ParentBox;
 	public bool SubMenuProcess = false;
+	[Signal]
+	public delegate void item_storedEventHandler();
 
 	/// <summary>
 	/// Receives an entry of type ItemEntry and a bool
@@ -35,6 +38,8 @@ public partial class InvSlotButton : TextureButton
 			float sizeY = Math.Max(32, Item.SlotSize.Y * 32);
 			Container.Size = new Vector2(sizeX, sizeY);
 			Container.Visible = true;
+			// Connect Signal
+			item_stored += () => ParentBox.RefreshBoxSlots();
 			// Show amount only if over 1
 			var item = BaseItem.Get(CurrentEntry.itemID);
 			if (item.MaxStack > 1) Quantity.Text = CurrentEntry.stackSize.ToString();
@@ -61,7 +66,7 @@ public partial class InvSlotButton : TextureButton
     }
 
 	/// <summary>
-	/// Signal invoced method:
+	/// Signal invoked method:
 	/// Open the submenu or finish submenu processing
 	/// </summary>
 	private void OnInventorySelected()
@@ -72,7 +77,8 @@ public partial class InvSlotButton : TextureButton
 		if (!subMenu.Combining && !subMenu.Moving && combine == null && Index != -1)
 		{
 			string context;
-			if (Item is WeaponItem) context = "Equip";
+			if (Main.Instance.UI.boxOpen) context = "Store";
+			else if (Item is WeaponItem) context = "Equip";
 			else context = "Use";
 			
 			ParentInventory.SubMenu.OpenSubMenu(Item, ParentInventory, this, context);
@@ -159,6 +165,21 @@ public partial class InvSlotButton : TextureButton
 		}
 		AudioManager.PlaySystemSound("cancel");
 		return false;
+	}
+
+	public void StoreItem()
+	{
+		var entry = CurrentEntry;
+		var item = BaseItem.Get(CurrentEntry.itemID);
+		//GD.Print("entry: " + item.DisplayName + "\nStack: " + entry.stackSize + "\nAmmo ID: "+ entry.ammoId + "\nAmmo quant: " + entry.ammoQty);
+		var state = Main.Instance.State;
+		Main.Instance.State.AddBoxItem(item, entry.stackSize, entry.ammoId, entry.ammoQty);
+		GD.Print("Item Position " + GridPosition.X, GridPosition.Y);
+		state.RemoveFromSlot(GridPosition, entry.stackSize);
+		ParentInventory.RefreshSlots();
+		ParentInventory.InfoColumn.Setup(null);
+		EmitSignal(SignalName.item_stored);
+		AudioManager.PlaySystemSound("decision");
 	}
 
 	public void CombineItem()

@@ -21,10 +21,10 @@
 [ext_resource type="Texture2D" uid="uid://d1c2613gfpkue" path="res://Graphics/textures/health_back.png" id="18_shj08"]
 [ext_resource type="Script" uid="uid://cp8b2r52eix7f" path="res://Source/UI/Stats.cs" id="19_1hcux"]
 [ext_resource type="Script" uid="uid://btyiflv5kp1tu" path="res://Source/UI/HealthIndicator.cs" id="20_ulqvk"]
-[ext_resource type="Script" uid="uid://i5rxq3egqyt2" path="res://Scenes/ui/SubMenu.cs" id="20_ut0hg"]
+[ext_resource type="Script" uid="uid://i5rxq3egqyt2" path="res://Source/UI/SubMenu.cs" id="20_ut0hg"]
 [ext_resource type="Script" uid="uid://b042sidvevkln" path="res://Source/UI/MessageUI.cs" id="21_suu8w"]
-[ext_resource type="Script" uid="uid://vh1q026xi12y" path="res://Scenes/ui/ItemBoxUI.cs" id="23_4xu5y"]
 [ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
+[ext_resource type="Script" uid="uid://vh1q026xi12y" path="res://Source/UI/BoxInventory.cs" id="23_plhkh"]
 [ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
 [ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
 
@@ -980,11 +980,13 @@ scroll_active = false
 
 [node name="VItemBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 4
 
 [node name="ItemBox" type="Control" parent="Gameplay/MarginContainer/VItemBoxContainer" node_paths=PackedStringArray("verticalSlots", "slotTemplate")]
+clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
-script = ExtResource("23_4xu5y")
+script = ExtResource("23_plhkh")
 verticalSlots = NodePath("HBoxContainer/SlotContainer")
 slotTemplate = NodePath("HBoxContainer/SlotContainer/BoxSlot")
 
@@ -1002,6 +1004,7 @@ grow_vertical = 2
 layout_mode = 2
 
 [node name="SlotContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer"]
+clip_contents = true
 layout_mode = 2
 
 [node name="BoxSlot" type="TextureButton" parent="Gameplay/MarginContainer/VItemBoxContainer/ItemBox/HBoxContainer/SlotContainer" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]

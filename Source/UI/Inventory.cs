@@ -13,6 +13,7 @@ public partial class Inventory : Control
 	InvSlotButton[] _spawnedSlots;
 	private InvSlotButton currentCombineSlot;
 	private InvSlotButton lastFocused;
+	public BoxInventory boxSibling;
 
 	public override void _Ready()
 	{
@@ -40,6 +41,7 @@ public partial class Inventory : Control
 			_spawnedSlots[i].Index = -1;
 			_spawnedSlots[i].GridPosition = new Vector2I(i%size.X, i/size.X);
 			_spawnedSlots[i].ParentInventory = this;
+			_spawnedSlots[i].ParentBox = boxSibling;
 			inventoryGrid.AddChild(_spawnedSlots[i]);
 		}
 		UIUtils.SetupGridList(_spawnedSlots, size.X);

@@ -364,6 +364,11 @@ public class GameState {
         persistentData.boxInventory.Add(boxEntry);
         return true;
     }
+    public bool StoreBoxItem()
+    {
+        
+        return true;
+    }
     public string ListBoxItems() {
         string returnValue = "";
         foreach (var entry in persistentData.boxInventory) {
