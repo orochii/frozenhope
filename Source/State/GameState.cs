@@ -209,6 +209,8 @@ public class GameState {
         }
         return true;
     }
+
+    //This method is unused.
     public void RemoveItem(BaseItem item, int amount) {
         List<ItemEntry> _toDelete = new List<ItemEntry>();
         // Remove amounts from stacks that correspond.
@@ -224,6 +226,11 @@ public class GameState {
         // Remove empty stacks.
         foreach (var e in _toDelete) persistentData.inventory.Remove(e);
     }
+    /// <summary>
+    /// Remove item in the position given by the Vector2I pos by a quanity of amount.
+    /// </summary>
+    /// <param name="pos"></param>
+    /// <param name="amount"></param>
     public void RemoveFromSlot(Vector2I pos, int amount) {
         // Invalid positions.
         if (pos.X < 0 || pos.X >= persistentData.inventorySizeX) return;
@@ -327,8 +334,6 @@ public class GameState {
             } 
             weaponEntry.ammoId = ammoEntry.itemID;
             var remainingSpace = weapon.AmmoMax - weaponEntry.ammoQty;
-            GD.Print("Available reload space is: " + remainingSpace + "\nWeapon Ammo is: " + weaponEntry.ammoQty);
-            
             var addAmmo = Math.Min(remainingSpace, ammoEntry.stackSize);
             if (addAmmo <= 0) return false;
             RemoveFromSlot(new Vector2I(ammoEntry.posX, ammoEntry.posY), addAmmo);

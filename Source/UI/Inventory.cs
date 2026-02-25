@@ -143,6 +143,7 @@ public partial class Inventory : Control
 		return currentCombineSlot;
 	}
 
+	// Marked either for deletion or major rewrite
 	/// <summary>
 	/// Refresh the control instructions displayed at the bottom of the screen
 	/// This function by be depreciated.

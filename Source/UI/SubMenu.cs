@@ -57,11 +57,11 @@ public partial class SubMenu : Control
     /// <summary>
     /// Close the SubMenu and return focus to the last slot that was selected before calling the SubMenu.
     /// </summary>
-    public void CloseSubMenu()
+    public void CloseSubMenu(bool lastFocus = true)
     {
         Visible = false;
         Active = false;
-        _currentSlot.GrabFocus();
+        if (lastFocus) _currentSlot.GrabFocus();
     }
 
     public void DeactivateSubMenu()
@@ -95,7 +95,7 @@ public partial class SubMenu : Control
     public void _on_use_button()
     {
         GD.Print("Use Button pressed");
-        if (Main.Instance.UI.boxOpen)
+        if (Main.Instance.UI.GetMenuState() == UiParent.EMenus.BOX)
         {
             _currentSlot.StoreItem();
             CloseSubMenu();

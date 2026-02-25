@@ -8,6 +8,11 @@ public partial class BoxInventory : Control
     [Export] InvSlotButton slotTemplate = null;
     public InvSlotButton[] boxSlots;
     public Inventory inventorySibling;
+    public Control BoxCombineObj;
+    public TextureRect BoxCombineIcon;
+    public InvSlotButton currentBoxCombineSlot;
+    private InvSlotButton _transitCombine;
+    public bool boxNavigate;
 
     public override void _Ready()
     {
@@ -39,16 +44,63 @@ public partial class BoxInventory : Control
         }
     }
 
+    //Currently unused, slated for deletion
+    public void SetupNeighbors()
+    {
+        var size = itemBoxSize;
+        for (int i = 0; i<size; i++)
+        {
+            boxSlots[i].FocusNeighborLeft = boxSlots[i].GetPath();
+            boxSlots[i].FocusNeighborRight = boxSlots[i].GetPath();
+            if (i > 0) boxSlots[i].FocusNeighborTop = boxSlots[i-1].GetPath();
+            if (i < size-1) boxSlots[i].FocusNeighborBottom = boxSlots[i+1].GetPath();
+        }
+        boxSlots[0].FocusNeighborTop = boxSlots[size-1].GetPath();
+        boxSlots[size-1].FocusNeighborBottom = boxSlots[0].GetPath();
+    }
+
     public void RefreshBoxSlots()
     {
         var boxEntries = Main.Instance.State.GetBoxEntries();
         var size = Math.Min(itemBoxSize, boxEntries.Count);
-        GD.Print("Box list size: " + size);
         for (int i = 0; i<size; i++)
         {
             var entry = boxEntries[i];
             boxSlots[i].Setup(entry);
         }
+    }
+
+    public void SetCombine(InvSlotButton button) {
+		if (currentBoxCombineSlot != null) currentBoxCombineSlot.IsCombining(false);
+		currentBoxCombineSlot = button;
+		if (button == null || button.Item==null) {
+			BoxCombineObj.Visible = false;
+			currentBoxCombineSlot = null;
+		}
+		else {
+			button.IsCombining(true);
+			BoxCombineObj.Visible = true;
+			// Set icon
+			BoxCombineIcon.Texture = button.Item.Icon;
+			// Resize container
+			float sizeX = Math.Max(32, button.Item.SlotSize.X * 32);
+			float sizeY = Math.Max(32, button.Item.SlotSize.Y * 32);
+			// Set position
+			BoxCombineObj.GlobalPosition = button.GlobalPosition;
+		}
+	}
+	public InvSlotButton GetCombine() {
+		return currentBoxCombineSlot;
+	}
+
+    public void FocusFirstSlot()
+    {
+        boxSlots[0].GrabFocus();
+    }
+
+    public void SetBoxNavigation(bool navigating)
+    {
+        boxNavigate = navigating;
     }
 
     public bool GetActiveState()

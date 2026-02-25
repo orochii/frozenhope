@@ -72,17 +72,24 @@ public partial class InvSlotButton : TextureButton
 	private void OnInventorySelected()
 	{
 		// Call SubMenu
-		var subMenu = ParentInventory.SubMenu;
-		var combine = ParentInventory.GetCombine();
+		var subMenu = GetSubMenu();
+		//var subMenu = ParentInventory.SubMenu;
+		InvSlotButton combine = null;
+		if (ParentInventory != null) combine = ParentInventory.GetCombine();
+		else combine = ParentBox.GetCombine();
 		if (!subMenu.Combining && !subMenu.Moving && combine == null && Index != -1)
 		{
 			string context;
-			if (Main.Instance.UI.boxOpen) context = "Store";
+			if (Main.Instance.UI.GetMenuState() == UiParent.EMenus.BOX) context = "Store";
 			else if (Item is WeaponItem) context = "Equip";
 			else context = "Use";
 			
 			ParentInventory.SubMenu.OpenSubMenu(Item, ParentInventory, this, context);
 			return;
+		}
+		if (Main.Instance.UI.GetMenuState() == UiParent.EMenus.BOX)
+		{
+			ParentInventory.boxSibling.FocusFirstSlot();
 		}
 
 		// Use item
@@ -171,15 +178,23 @@ public partial class InvSlotButton : TextureButton
 	{
 		var entry = CurrentEntry;
 		var item = BaseItem.Get(CurrentEntry.itemID);
-		//GD.Print("entry: " + item.DisplayName + "\nStack: " + entry.stackSize + "\nAmmo ID: "+ entry.ammoId + "\nAmmo quant: " + entry.ammoQty);
 		var state = Main.Instance.State;
 		Main.Instance.State.AddBoxItem(item, entry.stackSize, entry.ammoId, entry.ammoQty);
-		GD.Print("Item Position " + GridPosition.X, GridPosition.Y);
 		state.RemoveFromSlot(GridPosition, entry.stackSize);
 		ParentInventory.RefreshSlots();
 		ParentInventory.InfoColumn.Setup(null);
 		EmitSignal(SignalName.item_stored);
 		AudioManager.PlaySystemSound("decision");
+	}
+
+	public void StoreItemz()
+	{
+		var entry = CurrentEntry;
+		var item = BaseItem.Get(CurrentEntry.itemID);
+		var position = GridPosition;
+		ParentInventory.boxSibling.SetCombine(this);
+		ParentInventory.boxSibling.FocusFirstSlot();
+		ParentInventory.boxSibling.SetBoxNavigation(true);
 	}
 
 	public void CombineItem()
@@ -204,6 +219,16 @@ public partial class InvSlotButton : TextureButton
 	{
 		ParentInventory.SetCombine(this);
 		AudioManager.PlaySystemSound("decision");
+	}
+
+	/// <summary>
+	/// Very stupid interim solution to pass the SubMenu around, should probably make the SubMenu not a child of Inventory
+	/// </summary>
+	/// <returns>The inventory SubMenu</returns>
+	public SubMenu GetSubMenu()
+	{
+		if (ParentInventory != null) return ParentInventory.SubMenu;
+		else return ParentBox.inventorySibling.SubMenu;
 	}
 
 	/// <summary>

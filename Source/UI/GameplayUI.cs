@@ -23,25 +23,25 @@ public partial class GameplayUI : Control
 		// Run when UI mode is set to this.
 		OverlayEffect.Play("RESET");
 	}
-	public void OpenMenu(bool itemBox = false) {
+	public void OpenMenu(UiParent.EMenus mode = UiParent.EMenus.INVENTORY) {
 		OverlayEffect.Play("showMenu");
+		Main.Instance.UI.SetMenuState(mode);
 		Inventory.Visible = true;
 		Inventory.Refresh();
 		//Open item box if the menu is opened from an Item Box
-		if (itemBox) {
+		if (mode == UiParent.EMenus.BOX) {
 			itemBoxScreen.Visible = true;
 			itemBoxScreen.Refresh();
-			Main.Instance.UI.boxOpen = true;
 		}
 		GetTree().Paused = true;
 	}
 	public void CloseMenu()
 	{
 		OverlayEffect.Play("hideMenu");
+		Main.Instance.UI.SetMenuState(UiParent.EMenus.INVENTORY);
 		Inventory.Visible = false;
 		if (itemBoxScreen.Visible) {
 			itemBoxScreen.Visible = false;
-			Main.Instance.UI.boxOpen = false;
 		}
 		GetTree().Paused = false;
 		EmitSignal(SignalName.menu_closed);
