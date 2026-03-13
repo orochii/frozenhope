@@ -6,7 +6,6 @@ public partial class InvSlotBoxButton : InvSlotButton
 	[Export] Control Container;
 	[Export] TextureRect Icon;
 	[Export] RichTextLabel Ammo;
-	[Export] Label Quantity;
 	GameState.ItemEntry CurrentEntry;
 
     public override void _Ready()
@@ -35,6 +34,7 @@ public partial class InvSlotBoxButton : InvSlotButton
 			ParentInventory.SubMenu.OpenSubMenu(Item, ParentInventory, this, context);
 			return;
 		}
+		//Move over to item box if the box is open and the slot is empty
 		if (Main.Instance.UI.GetMenuState() == UiParent.EMenus.BOX)
 		{
 			ParentInventory.boxSibling.FocusFirstSlot();

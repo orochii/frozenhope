@@ -6,7 +6,7 @@ public partial class InvSlotButton : TextureButton
 	[Export] Control Container;
 	[Export] TextureRect Icon;
 	[Export] RichTextLabel Ammo;
-	[Export] Label Quantity;
+	[Export] public Label Quantity;
 	GameState.ItemEntry CurrentEntry;
 	public int Index;
 	public Vector2I GridPosition;
@@ -44,6 +44,7 @@ public partial class InvSlotButton : TextureButton
 			var item = BaseItem.Get(CurrentEntry.itemID);
 			if (item.MaxStack > 1) Quantity.Text = CurrentEntry.stackSize.ToString();
 			else Quantity.Text = "";
+			GD.Print("Quantity is: " + Quantity.Text);
 			// Show ammo if there's any (might want to show the ammo's icon or something)
 			if (CurrentEntry.ammoId.Length > 0) {
 				var iconLine = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]";
@@ -74,7 +75,7 @@ public partial class InvSlotButton : TextureButton
 		// Call SubMenu
 		var subMenu = GetSubMenu();
 		//var subMenu = ParentInventory.SubMenu;
-		InvSlotButton combine = null;
+		InvSlotButton combine;
 		if (ParentInventory != null) combine = ParentInventory.GetCombine();
 		else combine = ParentBox.GetCombine();
 		if (!subMenu.Combining && !subMenu.Moving && combine == null && Index != -1)
@@ -87,6 +88,7 @@ public partial class InvSlotButton : TextureButton
 			ParentInventory.SubMenu.OpenSubMenu(Item, ParentInventory, this, context);
 			return;
 		}
+		//Move over to item box if the box is open and the slot is empty
 		if (Main.Instance.UI.GetMenuState() == UiParent.EMenus.BOX)
 		{
 			ParentInventory.boxSibling.FocusFirstSlot();
@@ -98,6 +100,7 @@ public partial class InvSlotButton : TextureButton
 			// If target is empty.
 			if (Index == -1)
 			{
+				// Move item to slot and refresh grid visuals
 				if (Main.Instance.State.MoveToSlot(combine.Index, GridPosition))
 				{
 					ParentInventory.RefreshSlots();
@@ -106,9 +109,11 @@ public partial class InvSlotButton : TextureButton
 				}
 				else
 				{
+					// Play Buzzer
 					AudioManager.PlaySystemSound("cancel");
 				}
 			}
+			// Combine item to slot and refresh grid visuals
 			else if (Main.Instance.State.CombineSlots(Index, combine.Index))
 			{
 				Player.Instance.RefreshEquippedModel();
@@ -182,6 +187,7 @@ public partial class InvSlotButton : TextureButton
 		Main.Instance.State.AddBoxItem(item, entry.stackSize, entry.ammoId, entry.ammoQty);
 		state.RemoveFromSlot(GridPosition, entry.stackSize);
 		ParentInventory.RefreshSlots();
+		ParentInventory.boxSibling.RefreshBoxGrid();
 		ParentInventory.InfoColumn.Setup(null);
 		EmitSignal(SignalName.item_stored);
 		AudioManager.PlaySystemSound("decision");

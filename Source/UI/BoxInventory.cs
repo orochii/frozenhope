@@ -42,31 +42,37 @@ public partial class BoxInventory : Control
             boxSlots[i].ParentBox = this;
             verticalSlots.AddChild(boxSlots[i]);
         }
+        SetupLoopNeighbors();
     }
 
     //Currently unused, slated for deletion
-    public void SetupNeighbors()
+    public void SetupLoopNeighbors()
     {
         var size = itemBoxSize;
-        for (int i = 0; i<size; i++)
-        {
-            boxSlots[i].FocusNeighborLeft = boxSlots[i].GetPath();
-            boxSlots[i].FocusNeighborRight = boxSlots[i].GetPath();
-            if (i > 0) boxSlots[i].FocusNeighborTop = boxSlots[i-1].GetPath();
-            if (i < size-1) boxSlots[i].FocusNeighborBottom = boxSlots[i+1].GetPath();
-        }
         boxSlots[0].FocusNeighborTop = boxSlots[size-1].GetPath();
         boxSlots[size-1].FocusNeighborBottom = boxSlots[0].GetPath();
     }
 
     public void RefreshBoxSlots()
     {
+        
         var boxEntries = Main.Instance.State.GetBoxEntries();
+        // Clear all slots
+		foreach (var slot in boxSlots) {
+			slot.Index = -1;
+			slot.Setup(null);
+		}
+
         var size = Math.Min(itemBoxSize, boxEntries.Count);
         for (int i = 0; i<size; i++)
         {
             var entry = boxEntries[i];
+            GD.Print("Setup Box slot " + i+1);
+            GD.Print("Entry is: " +  entry.itemID);
+            GD.Print("Entry stack size is: " + entry.stackSize);
             boxSlots[i].Setup(entry);
+            var str = boxSlots[i].Quantity.Text;
+            GD.Print("Quantity in box: " + str);
         }
     }
 

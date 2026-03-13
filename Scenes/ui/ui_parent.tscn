@@ -1,4 +1,4 @@
-[gd_scene load_steps=53 format=3 uid="uid://cxn0isptwm3tq"]
+[gd_scene load_steps=56 format=3 uid="uid://cxn0isptwm3tq"]
 
 [ext_resource type="Script" uid="uid://byg1k1xps0da7" path="res://Source/UI/UiParent.cs" id="1_sn55m"]
 [ext_resource type="Script" uid="uid://lpox11oi77ds" path="res://Source/UI/TitleScreen.cs" id="2_l8vhd"]
@@ -26,7 +26,10 @@
 [ext_resource type="Script" uid="uid://xplj6cbuxlci" path="res://Source/Utils/Loader.cs" id="23_awnjo"]
 [ext_resource type="Script" uid="uid://vh1q026xi12y" path="res://Source/UI/BoxInventory.cs" id="23_plhkh"]
 [ext_resource type="Script" uid="uid://y5tjkoh4kwi0" path="res://Source/UI/Splash.cs" id="24_2h878"]
+[ext_resource type="Texture2D" uid="uid://cela8nyhqk5rq" path="res://Graphics/textures/panel_basic_long.png" id="24_nmyjw"]
 [ext_resource type="Script" uid="uid://c3cp0q7aykp53" path="res://Source/UI/GameOver.cs" id="24_vr4ey"]
+[ext_resource type="Texture2D" uid="uid://bnm31f3k6gpjy" path="res://Graphics/textures/panel_basic_pressed_long.png" id="25_vlo3l"]
+[ext_resource type="Texture2D" uid="uid://cjyeb41bkoeb7" path="res://Graphics/textures/panel_basic_hover_long.png" id="26_gmcoe"]
 
 [sub_resource type="Gradient" id="Gradient_l1iem"]
 colors = PackedColorArray(0.000929074, 0.000892451, 0.00618243, 1, 0.046669, 0.0739716, 0.0954343, 1)
@@ -631,7 +634,7 @@ invSlotTemplate = NodePath("VBoxContainer/InventoryContainer/InventoryColumn/Inv
 InfoColumn = NodePath("VBoxContainer/InventoryContainer/InfoColumn")
 CombineObj = NodePath("CombineObject")
 CombineIcon = NodePath("CombineObject/TextureRect")
-InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/RichTextLabel")
+InstructionsLabel = NodePath("VBoxContainer/InventoryContainer/InfoColumn/MenuInstructions")
 SubMenu = NodePath("SubMenu")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_Inventory/Inventory"]
@@ -742,7 +745,7 @@ size_flags_horizontal = 3
 alignment = 2
 script = ExtResource("17_vsa1f")
 ModelParent = NodePath("../../../../../../SubViewport/ItemContainer")
-Description = NodePath("TextBox/MarginContainer/RichTextLabel")
+Description = NodePath("TextBox/MarginContainer/ItemDescription")
 DescriptionFormat = "[color=#ee8]{0}[/color]
 {1}"
 
@@ -773,7 +776,7 @@ theme_override_constants/margin_top = 4
 theme_override_constants/margin_right = 4
 theme_override_constants/margin_bottom = 4
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_Inventory/Inventory/VBoxContainer/InventoryContainer/InfoColumn/TextBox/MarginContainer"]
+[node name="ItemDescription" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_Inventory/Inventory/VBoxContainer/InventoryContainer/InfoColumn/TextBox/MarginContainer"]
 layout_mode = 2
 theme = ExtResource("3_wyq5x")
 bbcode_enabled = true
@@ -781,7 +784,7 @@ text = "[color=#ee8]Glock G3[/color]
 Oh yeah Wesker
 third line"
 
-[node name="RichTextLabel" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_Inventory/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
+[node name="MenuInstructions" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_Inventory/Inventory/VBoxContainer/InventoryContainer/InfoColumn"]
 layout_mode = 2
 theme = ExtResource("3_wyq5x")
 bbcode_enabled = true
@@ -987,8 +990,9 @@ clip_contents = true
 layout_mode = 2
 size_flags_vertical = 3
 script = ExtResource("23_plhkh")
-verticalSlots = NodePath("HBoxContainer/SlotContainer")
-slotTemplate = NodePath("HBoxContainer/SlotContainer/BoxSlot")
+verticalSlots = NodePath("HBoxContainer/ScrollContainer/SlotContainer")
+itemBoxSize = 6
+slotTemplate = NodePath("HBoxContainer/ScrollContainer/SlotContainer/BoxSlot")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox"]
 clip_contents = true
@@ -1001,45 +1005,39 @@ offset_left = -44.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="VScrollBar" type="VScrollBar" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer"]
-visible = false
+[node name="ScrollContainer" type="ScrollContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer"]
 layout_mode = 2
+follow_focus = true
+horizontal_scroll_mode = 0
 
-[node name="SlotContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer"]
+[node name="SlotContainer" type="VBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer"]
 clip_contents = true
 layout_mode = 2
+size_flags_vertical = 3
 
-[node name="BoxSlot" type="TextureButton" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
+[node name="BoxSlot" type="TextureButton" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer" node_paths=PackedStringArray("Container", "Icon", "Ammo", "Quantity")]
 self_modulate = Color(1, 1, 1, 0.752941)
 custom_minimum_size = Vector2(64, 32)
 layout_mode = 2
 mouse_filter = 2
 button_mask = 0
-texture_normal = ExtResource("11_lagi4")
-texture_pressed = ExtResource("12_qa3t0")
-texture_hover = ExtResource("13_kxea5")
-texture_focused = ExtResource("13_kxea5")
+texture_normal = ExtResource("24_nmyjw")
+texture_pressed = ExtResource("25_vlo3l")
+texture_hover = ExtResource("26_gmcoe")
+texture_focused = ExtResource("26_gmcoe")
 stretch_mode = 3
 script = ExtResource("14_765hn")
 Container = NodePath("NinePatchRect")
-Icon = NodePath("NinePatchRect/TextureRect")
+Icon = NodePath("NinePatchRect/ItemIcon")
 Ammo = NodePath("NinePatchRect/HBoxContainer/Ammo")
-Quantity = NodePath("NinePatchRect/Quantity")
+Quantity = NodePath("../../../../../../VBoxContainer_Inventory/Inventory/VBoxContainer/InventoryContainer/InventoryColumn/InventoryGrid/Slot/NinePatchRect/Quantity")
 
-[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer/BoxSlot"]
+[node name="NinePatchRect" type="NinePatchRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer/BoxSlot"]
 show_behind_parent = true
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -16.0
-offset_top = -16.0
-offset_right = 16.0
-offset_bottom = 16.0
-grow_horizontal = 2
-grow_vertical = 2
+custom_minimum_size = Vector2(64, 0)
+layout_mode = 0
+offset_right = 64.0
+offset_bottom = 32.0
 texture = ExtResource("15_d0idt")
 patch_margin_left = 12
 patch_margin_top = 12
@@ -1048,7 +1046,7 @@ patch_margin_bottom = 12
 axis_stretch_horizontal = 1
 axis_stretch_vertical = 1
 
-[node name="TextureRect" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+[node name="ItemIcon" type="TextureRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer/BoxSlot/NinePatchRect"]
 z_index = 10
 layout_mode = 1
 anchors_preset = 15
@@ -1060,7 +1058,7 @@ texture = ExtResource("16_o5qi5")
 expand_mode = 3
 stretch_mode = 5
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+[node name="HBoxContainer" type="HBoxContainer" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer/BoxSlot/NinePatchRect"]
 z_index = 10
 layout_mode = 1
 anchors_preset = -1
@@ -1073,7 +1071,7 @@ offset_bottom = -4.0
 grow_horizontal = 2
 grow_vertical = 0
 
-[node name="Ammo" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect/HBoxContainer"]
+[node name="Ammo" type="RichTextLabel" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer/BoxSlot/NinePatchRect/HBoxContainer"]
 custom_minimum_size = Vector2(16, 8)
 layout_mode = 2
 theme = ExtResource("3_wyq5x")
@@ -1083,7 +1081,7 @@ text = "[img]res://Graphics/textures/icons/ammo_bullet.png[/img]1"
 fit_content = true
 scroll_active = false
 
-[node name="Quantity" type="Label" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/SlotContainer/BoxSlot/NinePatchRect"]
+[node name="Quantity" type="Label" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox/ItemBox/HBoxContainer/ScrollContainer/SlotContainer/BoxSlot/NinePatchRect"]
 z_index = 10
 layout_mode = 1
 anchors_preset = -1
@@ -1098,10 +1096,10 @@ grow_vertical = 0
 theme = ExtResource("3_wyq5x")
 theme_override_constants/outline_size = 2
 text = "1"
-horizontal_alignment = 2
+horizontal_alignment = 1
 vertical_alignment = 2
 
-[node name="ColorRect" type="ColorRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox"]
+[node name="Margin" type="ColorRect" parent="Gameplay/MarginContainer/VBoxContainer_ItemBox"]
 custom_minimum_size = Vector2(0, 95)
 layout_mode = 2
 color = Color(1, 1, 1, 0)
